@@ -46,7 +46,7 @@ class NavigationScreen extends GetView<HomeController> {
       case 0:
         return 'assets/logos/home.png';
       case 1:
-        return 'assets/logos/Medical Kit.png';
+        return 'assets/logos/Stethoscope.png';
       case 2:
         return 'assets/logos/Medical Kit.png';
       case 3:
@@ -61,11 +61,11 @@ class NavigationScreen extends GetView<HomeController> {
       case 0:
         return 'Home';
       case 1:
-        return 'Service';
+        return 'Services';
       case 2:
-        return 'Visit';
+        return 'Specialists';
       case 3:
-        return 'Order';
+        return 'My Profile';
       default:
         return '';
     }
