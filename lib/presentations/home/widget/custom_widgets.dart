@@ -20,7 +20,7 @@ Widget customSearchTextField() {
         children: [
           Row(
             children: [
-              Image.asset("assets/images/Stethoscope.png", scale: 1),
+              Image.asset("assets/logos/Stethoscope.png", scale: 1),
               IconButton(
                   onPressed: () {}, icon: const Icon(Icons.arrow_drop_down))
             ],

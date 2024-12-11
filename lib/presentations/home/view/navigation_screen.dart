@@ -2,6 +2,7 @@ import 'package:doc_booking_app/presentations/home/controller/home_controller.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../util/app_color.dart';
+import '../../../widgets/customer_app_bar.dart';
 
 class NavigationScreen extends GetView<HomeController> {
   const NavigationScreen({super.key});
@@ -11,53 +12,58 @@ class NavigationScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Scaffold(
-       /* appBar: CustomAppBar(
-          title: controller.appBarTitle[controller.selectedIndex.value],
-          back: false,
-        ),*/
+          () => Scaffold(
         body: controller.pages[controller.selectedIndex.value],
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: AppColors.primary,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
+          items: List.generate(controller.pages.length, (index) {
+            final bool isSelected = controller.selectedIndex.value == index;
+            return BottomNavigationBarItem(
               backgroundColor: AppColors.white,
-              icon: Image.asset(
-                'assets/images/user.png',
-                width: 20,
-                color: AppColors.primary,
+              icon: Center(
+                child: Image.asset(
+                  _getIconPath(index),
+                  width: 20,
+                  color: isSelected ? AppColors.primary : AppColors.grey,
+                ),
               ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: AppColors.white,
-              icon: Image.asset(
-                'assets/images/Medical Kit.png',
-                width: 20,
-                color: AppColors.primary,
-              ),
-              label: 'Service',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: AppColors.white,
-              icon: Image.asset(
-                'assets/images/Medical Kit.png',
-                width: 20,
-                color: AppColors.primary,
-              ),
-              label: 'Visit',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: AppColors.white,
-              icon: Image.asset('assets/images/user.png',
-                  width: 20, color: AppColors.primary),
-              label: 'Order',
-            ),
-          ],
+              label: _getLabel(index),
+            );
+          }),
           currentIndex: controller.selectedIndex.value,
           onTap: controller.onItemTapped,
         ),
       ),
     );
+  }
+
+  String _getIconPath(int index) {
+    switch (index) {
+      case 0:
+        return 'assets/logos/home.png';
+      case 1:
+        return 'assets/logos/Medical Kit.png';
+      case 2:
+        return 'assets/logos/Medical Kit.png';
+      case 3:
+        return 'assets/logos/user.png';
+      default:
+        return '';
+    }
+  }
+
+  String _getLabel(int index) {
+    switch (index) {
+      case 0:
+        return 'Home';
+      case 1:
+        return 'Service';
+      case 2:
+        return 'Visit';
+      case 3:
+        return 'Order';
+      default:
+        return '';
+    }
   }
 }

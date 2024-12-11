@@ -9,11 +9,15 @@ class HomeController extends GetxController {
   final List<Widget> pages = const [
     HomeScreen(),
     ServiceScreen(),
+    ServiceScreen(),
+    ServiceScreen()
   ];
 
   final List<String> appBarTitle = const [
     'Home',
     'Service',
+    'Specialists',
+    'My Profile',
   ];
   void onItemTapped(int index) {
     selectedIndex.value = index;

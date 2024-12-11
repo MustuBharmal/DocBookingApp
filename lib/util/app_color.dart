@@ -18,6 +18,7 @@ abstract class AppColors {
   static const Color blue = Color(0xFF3C6EE0);
   static const Color darkBlue = Color(0xFF2554C2);
   static Color gray600 = fromHex('#717171');
+  static Color gray=const Color.fromRGBO(137, 156, 168, 1);
   static Color whiteA700 = fromHex('#ffffff');
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();

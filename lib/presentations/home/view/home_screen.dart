@@ -17,32 +17,16 @@ class HomeScreen extends StatelessWidget {
   ];
 
   static const imagePathList = [
-    "assets/images/Phlebotomy.png",
-    "assets/images/Vitamin_IV.png",
-    "assets/images/Vitamin Booster.png",
-    "assets/images/Vitamin_IV.png",
-    "assets/images/Vitamin_IV.png",
+    "assets/logos/Phlebotomy.png",
+    "assets/logos/Vitamin_IV.png",
+    "assets/logos/Vitamin Booster.png",
+    "assets/logos/Vitamin_IV.png",
+    "assets/logos/Vitamin_IV.png",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: CircleAvatar(
-              backgroundColor: Colors.white10,
-              radius: 20,
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.notifications)),
-            ),
-          )
-        ],
-        title: const Text("Home"),
-        centerTitle: true,
-      ),
       backgroundColor: AppColors.white,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),

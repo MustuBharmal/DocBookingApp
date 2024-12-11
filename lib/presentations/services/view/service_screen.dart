@@ -1,6 +1,6 @@
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
-import '../../../util/app_color.dart';
 import '../../../widgets/global_widget.dart';
 
 class ServiceScreen extends StatelessWidget {
@@ -11,22 +11,7 @@ class ServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: CircleAvatar(
-              backgroundColor: Colors.white10,
-              radius: 20,
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.notifications)),
-            ),
-          )
-        ],
-        title: const Text("Service"),
-        centerTitle: true,
-      ),
+      backgroundColor: AppColors.white,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
