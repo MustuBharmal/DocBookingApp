@@ -71,7 +71,7 @@ class ServiceScreen extends StatelessWidget {
                         height: 175,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("assets/images/doctor.png"),
+                            image: AssetImage("assets/images/male_doctor.png"),
                             fit: BoxFit.contain,
                           ),
                         ),
