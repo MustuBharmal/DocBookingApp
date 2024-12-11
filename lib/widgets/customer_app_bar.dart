@@ -15,32 +15,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Builder(
-        builder: (BuildContext context) {
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: Get.width * 0.06,
-                  letterSpacing: 2,
-                  color: AppColors.black,
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-      leadingWidth: Get.width, // Default value, but can be adjusted if needed
+      title: Text(title),
+      centerTitle: true,
+      actions: [
+        IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+      ],
       backgroundColor: AppColors.white,
       iconTheme: IconThemeData(color: AppColors.black),
     );
