@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
+import '../../../widgets/global_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
