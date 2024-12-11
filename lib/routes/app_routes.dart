@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';

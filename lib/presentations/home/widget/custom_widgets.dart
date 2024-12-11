@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget customSearchTextfield() {
+Widget customSearchTextField() {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -94,7 +94,7 @@ Widget customSpecialistContainer() {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(15),
-      boxShadow: [
+      boxShadow: const[
         BoxShadow(
           color: Colors.black12,
           offset: Offset(0, 4),

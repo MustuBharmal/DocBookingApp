@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               myHeaderText(text: 'Hello, John Doe', fontSize: 20),
-              customSearchTextfield(),
+              customSearchTextField(),
               const SizedBox(
                 height: 10,
               ),
