@@ -100,7 +100,8 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.home, color: Colors.white, size: 20),
+                                  Icon(Icons.home,
+                                      color: Colors.white, size: 20),
                                   SizedBox(width: 8),
                                   Text(
                                     'Home Visit',
@@ -185,12 +186,20 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     containerWithImage(
-                        imagePath: "assets/images/Phlebotomy.png", text: "Phlebotomy"),
-                    containerWithImage(imagePath: "assets/images/Vitamin_IV.png", text:"Vitamin IV"),
-                    containerWithImage(imagePath: "assets/images/Vitamin Booster.png", text:"Vitamin IV"),
-                    containerWithImage(imagePath: "assets/images/Vitamin_IV.png", text:"Vitamin IV"),
-                    containerWithImage(imagePath: "assets/images/Vitamin_IV.png", text:"Vitamin IV"),
-          
+                        imagePath: "assets/images/Phlebotomy.png",
+                        text: "Phlebotomy"),
+                    containerWithImage(
+                        imagePath: "assets/images/Vitamin_IV.png",
+                        text: "Vitamin IV"),
+                    containerWithImage(
+                        imagePath: "assets/images/Vitamin Booster.png",
+                        text: "Vitamin IV"),
+                    containerWithImage(
+                        imagePath: "assets/images/Vitamin_IV.png",
+                        text: "Vitamin IV"),
+                    containerWithImage(
+                        imagePath: "assets/images/Vitamin_IV.png",
+                        text: "Vitamin IV"),
                   ],
                 ),
               ),
@@ -198,9 +207,10 @@ class HomeScreen extends StatelessWidget {
                 height: 10,
               ),
               myHeaderText(text: "Top Rated Specialist"),
+              const SizedBox(
+                height: 10,
+              ),
               customSpecialistContainer()
-
-
             ],
           ),
         ),
