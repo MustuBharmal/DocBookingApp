@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,12 +14,12 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Doctor Booking App',
       debugShowCheckedModeBanner: false,
+      initialBinding: HomeBinding(),
       getPages: AppRoutes.pages,
       // initialBinding: AuthBinding(),
       themeMode: ThemeMode.system,

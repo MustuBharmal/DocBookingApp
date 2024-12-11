@@ -1,0 +1,21 @@
+import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class HomeController extends GetxController {
+  static HomeController get instance => Get.find<HomeController>();
+  RxInt selectedIndex = RxInt(0);
+  final List<Widget> pages = const [
+    HomeScreen(),
+    ServiceScreen(),
+  ];
+
+  final List<String> appBarTitle = const [
+    'Home',
+    'Service',
+  ];
+  void onItemTapped(int index) {
+    selectedIndex.value = index;
+  }
+}

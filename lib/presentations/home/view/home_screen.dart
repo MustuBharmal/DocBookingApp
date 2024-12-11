@@ -1,11 +1,28 @@
 import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
 import 'package:doc_booking_app/util/app_color.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
+import '../../../widgets/global_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   static const routeName = '/home-screen';
+  static const textList = [
+    "Phlebotomy",
+    "Vitamin IV",
+    "Vitamin Booster",
+    "TRT Administration",
+    "Flu Shots"
+  ];
+
+  static const imagePathList = [
+    "assets/images/Phlebotomy.png",
+    "assets/images/Vitamin_IV.png",
+    "assets/images/Vitamin Booster.png",
+    "assets/images/Vitamin_IV.png",
+    "assets/images/Vitamin_IV.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +52,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               myHeaderText(text: 'Hello, John Doe', fontSize: 20),
-              customSearchTextfield(),
+              customSearchTextField(),
               const SizedBox(
                 height: 10,
               ),
@@ -100,7 +117,8 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.home, color: Colors.white, size: 20),
+                                  Icon(Icons.home,
+                                      color: Colors.white, size: 20),
                                   SizedBox(width: 8),
                                   Text(
                                     'Home Visit',
@@ -184,23 +202,65 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    containerWithImage(
-                        imagePath: "assets/images/Phlebotomy.png", text: "Phlebotomy"),
-                    containerWithImage(imagePath: "assets/images/Vitamin_IV.png", text:"Vitamin IV"),
-                    containerWithImage(imagePath: "assets/images/Vitamin Booster.png", text:"Vitamin IV"),
-                    containerWithImage(imagePath: "assets/images/Vitamin_IV.png", text:"Vitamin IV"),
-                    containerWithImage(imagePath: "assets/images/Vitamin_IV.png", text:"Vitamin IV"),
-          
+                    SizedBox(
+                      width: 330,
+                      height: 122,
+                      child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return containerWithImage(
+                              onTap: (){
+                                LogUtil.debug("press");
+                              },
+                                imagePath: imagePathList[index],
+                                text: textList[index]);
+                          },
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 10),
+                          itemCount: textList.length),
+                    ),
                   ],
                 ),
               ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [
+              //       containerWithImage(
+              //           imagePath: "assets/images/Phlebotomy.png",
+              //           text: "Phlebotomy"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin_IV.png",
+              //           text: "Vitamin IV"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin Booster.png",
+              //           text: "Vitamin Booster"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin_IV.png",
+              //           text: "TRT Administration"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin_IV.png",
+              //           text: "Flu Shots"),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(
                 height: 10,
               ),
               myHeaderText(text: "Top Rated Specialist"),
-              customSpecialistContainer()
-
-
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: 340,
+                height: 400,
+                child: ListView.separated(
+                    itemBuilder: (context, index) => customSpecialistContainer(),
+                    separatorBuilder: (context, index) => const SizedBox(
+                          height: 10,
+                        ),
+                    itemCount: 3),
+              )
             ],
           ),
         ),
