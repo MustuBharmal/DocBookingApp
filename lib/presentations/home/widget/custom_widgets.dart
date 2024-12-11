@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget customTextfield() {
+Widget customSearchTextfield() {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -121,3 +121,17 @@ Widget containerWithImage({required String imagePath, required String text}) {
   );
 }
 
+Widget customSpecialistContainer() {
+  return Container(
+    width: Get.width * 1,
+    height: Get.height * 0.130,
+    clipBehavior: Clip.antiAlias,
+    decoration: ShapeDecoration(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(width: 1, color: Color(0xFFF5F1FE)),
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+  );
+}

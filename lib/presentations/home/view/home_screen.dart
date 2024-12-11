@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: CircleAvatar(
-              backgroundColor: AppColors.white,
+              backgroundColor: Colors.white10,
               radius: 20,
               child: IconButton(
                   onPressed: () {}, icon: const Icon(Icons.notifications)),
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               myHeaderText(text: 'Hello, John Doe', fontSize: 20),
-              customTextfield(),
+              customSearchTextfield(),
               const SizedBox(
                 height: 10,
               ),
@@ -198,6 +198,7 @@ class HomeScreen extends StatelessWidget {
                 height: 10,
               ),
               myHeaderText(text: "Top Rated Specialist"),
+              customSpecialistContainer()
 
 
             ],
