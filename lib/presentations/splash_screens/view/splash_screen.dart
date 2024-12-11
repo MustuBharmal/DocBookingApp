@@ -1,8 +1,9 @@
 import 'dart:async';
-
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../authentication/views/login_welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/';
@@ -17,12 +18,38 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 3),
-        (timer) => Get.offNamed(HomeScreen.routeName));
+    Future.delayed(const Duration(seconds: 2),
+        () => Get.offNamed(LoginWelcomeScreen.routeName),);
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SizedBox(
+        height: Get.height,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset('assets/logos/company_logo.png'),
+              SizedBox(
+                height: Get.height * 0.065,
+              ),
+              Text(
+                "Doctor's Booking",
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 26,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w500,
+                  height: 0.12,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

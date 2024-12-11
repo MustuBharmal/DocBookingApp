@@ -6,7 +6,6 @@ abstract class AppColors {
   static Color black = const Color(0xff262628);
   static Color white = const Color(0xffFFFFFF);
   static Color blackSecColor = Colors.amber;
-
   // static Color blue = const Color(0xff274560);
   static Color textFieldBackground = const Color(0xffE5E5E5);
   static Color genderTextColor = const Color(0xffA6A6A6);
@@ -20,7 +19,6 @@ abstract class AppColors {
   static const Color darkBlue = Color(0xFF2554C2);
   static Color gray600 = fromHex('#717171');
   static Color whiteA700 = fromHex('#ffffff');
-
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
