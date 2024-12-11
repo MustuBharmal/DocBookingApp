@@ -6,6 +6,21 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   static const routeName = '/home-screen';
+  static const textList = [
+    "Phlebotomy",
+    "Vitamin IV",
+    "Vitamin Booster",
+    "TRT Administration",
+    "Flu Shots"
+  ];
+
+  static const imagePathList = [
+    "assets/images/Phlebotomy.png",
+    "assets/images/Vitamin_IV.png",
+    "assets/images/Vitamin Booster.png",
+    "assets/images/Vitamin_IV.png",
+    "assets/images/Vitamin_IV.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -185,24 +200,45 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    containerWithImage(
-                        imagePath: "assets/images/Phlebotomy.png",
-                        text: "Phlebotomy"),
-                    containerWithImage(
-                        imagePath: "assets/images/Vitamin_IV.png",
-                        text: "Vitamin IV"),
-                    containerWithImage(
-                        imagePath: "assets/images/Vitamin Booster.png",
-                        text: "Vitamin IV"),
-                    containerWithImage(
-                        imagePath: "assets/images/Vitamin_IV.png",
-                        text: "Vitamin IV"),
-                    containerWithImage(
-                        imagePath: "assets/images/Vitamin_IV.png",
-                        text: "Vitamin IV"),
+                    SizedBox(
+                      width: 330,
+                      height: 122,
+                      child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return containerWithImage(
+                                imagePath: imagePathList[index],
+                                text: textList[index]);
+                          },
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 10),
+                          itemCount: textList.length),
+                    ),
                   ],
                 ),
               ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     children: [
+              //       containerWithImage(
+              //           imagePath: "assets/images/Phlebotomy.png",
+              //           text: "Phlebotomy"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin_IV.png",
+              //           text: "Vitamin IV"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin Booster.png",
+              //           text: "Vitamin Booster"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin_IV.png",
+              //           text: "TRT Administration"),
+              //       containerWithImage(
+              //           imagePath: "assets/images/Vitamin_IV.png",
+              //           text: "Flu Shots"),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(
                 height: 10,
               ),
@@ -210,7 +246,16 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              customSpecialistContainer()
+              SizedBox(
+                width: 340,
+                height: 400,
+                child: ListView.separated(
+                    itemBuilder: (context, index) => customSpecialistContainer(),
+                    separatorBuilder: (context, index) => const SizedBox(
+                          height: 10,
+                        ),
+                    itemCount: 3),
+              )
             ],
           ),
         ),
