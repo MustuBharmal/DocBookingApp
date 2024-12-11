@@ -1,4 +1,4 @@
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,7 +52,7 @@ class LoginWelcomeScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (){
-                Get.offNamed(HomeScreen.routeName);
+                Get.offNamed(NavigationScreen.routeName);
               },
               child: Container(
                   width: 343,
@@ -89,7 +89,7 @@ class LoginWelcomeScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (){
-                Get.offNamed(HomeScreen.routeName);
+                Get.offNamed(NavigationScreen.routeName);
               },
               child: Container(
                 width: 343,
