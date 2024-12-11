@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
 import 'package:doc_booking_app/util/app_color.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/global_widget.dart';
 
@@ -208,6 +209,9 @@ class HomeScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return containerWithImage(
+                              onTap: (){
+                                LogUtil.debug("press");
+                              },
                                 imagePath: imagePathList[index],
                                 text: textList[index]);
                           },

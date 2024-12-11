@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer.periodic(const Duration(seconds: 3),
-        (timer) => Get.offNamed(ServiceScreen.routeName));
+        (timer) => Get.offNamed(NavigationScreen.routeName));
   }
 
   @override

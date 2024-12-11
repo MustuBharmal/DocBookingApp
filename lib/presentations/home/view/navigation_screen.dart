@@ -24,7 +24,7 @@ class NavigationScreen extends GetView<HomeController> {
             BottomNavigationBarItem(
               backgroundColor: AppColors.white,
               icon: Image.asset(
-                'assets/icons/home.png',
+                'assets/images/user.png',
                 width: 20,
                 color: AppColors.primary,
               ),
@@ -50,15 +50,9 @@ class NavigationScreen extends GetView<HomeController> {
             ),
             BottomNavigationBarItem(
               backgroundColor: AppColors.white,
-              icon: Image.asset('assets/icons/order.png',
+              icon: Image.asset('assets/images/user.png',
                   width: 20, color: AppColors.primary),
               label: 'Order',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: AppColors.white,
-              icon: Image.asset('assets/icons/expenses.png',
-                  width: 20, color: AppColors.primary),
-              label: 'Expense',
             ),
           ],
           currentIndex: controller.selectedIndex.value,
