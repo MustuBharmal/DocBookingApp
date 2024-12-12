@@ -1,30 +1,16 @@
+import 'package:doc_booking_app/global/constant_string.dart';
+import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
 import 'package:doc_booking_app/util/app_color.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
+import '../../../global/constant_list.dart';
+import '../../../util/styles.dart';
 import '../../../widgets/custom_container_with_logo.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   static const routeName = '/home-screen';
-  static const textList = [
-    "Phlebotomy",
-    "Vitamin IV",
-    "Vitamin Booster",
-    "TRT Administration",
-    "Bloodletting",
-    "Flu Shots"
-  ];
-
-  static const imagePathList = [
-    "assets/logos/Phlebotomy.png",
-    "assets/logos/Vitamin_IV.png",
-    "assets/logos/Vitamin Booster.png",
-    "assets/logos/bloodletting.png",
-    "assets/logos/trtadministration.png",
-    "assets/logos/flushots.png",
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +24,11 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               myHeaderText(text: 'Hello, John Doe', fontSize: 20),
-              customSearchTextField(),
+              customSearchTextField(HomeController.instance),
               const SizedBox(
                 height: 10,
               ),
-              myHeaderText(text: 'Upcoming Appointments'),
+              myHeaderText(text: ConstantString.upcomingAppointments),
               const SizedBox(
                 height: 20,
               ),
@@ -155,32 +141,42 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              myHeaderText(text: 'Book Now'),
+              myHeaderText(
+                  text: ConstantString.bookNow,
+                  button: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "See All",
+                        style: subtitleStyle1,
+                      ))),
               const SizedBox(
                 height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: customContainer(text: "Visit a Local Clinic"),
+                child: customContainer(text: ConstantString.visitLocalClinic),
               ),
               const SizedBox(
                 height: 10,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: customContainer(text: "Arrange Home Visit"),
+                child: customContainer(text: ConstantString.arrHomeVisit),
               ),
               const SizedBox(
                 height: 10,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: customContainer(text: "Chat With a Specialist"),
+                child: customContainer(text: ConstantString.chatWSpeciaList),
               ),
               const SizedBox(
                 height: 15,
               ),
-              myHeaderText(text: "Top Services"),
+              myHeaderText(
+                  text: ConstantString.topServices,
+                  button: TextButton(
+                      onPressed: () {}, child:  Text("See All",style: subtitleStyle1,))),
               const SizedBox(
                 height: 15,
               ),
@@ -196,42 +192,20 @@ class HomeScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return containerWithLogo1(
                                 onTap: () {},
-                                imagePath: imagePathList[index],
-                                text: textList[index]);
+                                imagePath: ConstantList.imagePathList[index],
+                                text: ConstantList.textList[index]);
                           },
                           separatorBuilder: (context, index) =>
                               const SizedBox(width: 10),
-                          itemCount: textList.length),
+                          itemCount: ConstantList.textList.length),
                     ),
                   ],
                 ),
               ),
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Row(
-              //     children: [
-              //       containerWithImage(
-              //           imagePath: "assets/images/Phlebotomy.png",
-              //           text: "Phlebotomy"),
-              //       containerWithImage(
-              //           imagePath: "assets/images/Vitamin_IV.png",
-              //           text: "Vitamin IV"),
-              //       containerWithImage(
-              //           imagePath: "assets/images/Vitamin Booster.png",
-              //           text: "Vitamin Booster"),
-              //       containerWithImage(
-              //           imagePath: "assets/images/Vitamin_IV.png",
-              //           text: "TRT Administration"),
-              //       containerWithImage(
-              //           imagePath: "assets/images/Vitamin_IV.png",
-              //           text: "Flu Shots"),
-              //     ],
-              //   ),
-              // ),
               const SizedBox(
                 height: 10,
               ),
-              myHeaderText(text: "Top Rated Specialist"),
+              myHeaderText(text: ConstantString.topRatedSpecialist),
               const SizedBox(
                 height: 10,
               ),
@@ -239,6 +213,8 @@ class HomeScreen extends StatelessWidget {
                 width: 340,
                 height: 400,
                 child: ListView.separated(
+                    physics: const ScrollPhysics(),
+                    primary: true,
                     itemBuilder: (context, index) =>
                         customSpecialistContainer(onTap: () {}),
                     separatorBuilder: (context, index) => const SizedBox(

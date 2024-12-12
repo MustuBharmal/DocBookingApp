@@ -1,7 +1,8 @@
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/global/constant_list.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
+import '../../../util/images.dart';
 import '../../../widgets/custom_container_with_logo.dart';
 
 class ServiceScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class ServiceScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              customIntoContainer(imgPath: "assets/images/male_doctor.png"),
+              customIntoContainer(imgPath: Images.maleDoctor),
               const SizedBox(
                 height: 20,
               ),
@@ -26,16 +27,18 @@ class ServiceScreen extends StatelessWidget {
                 width: 340,
                 height: 500,
                 child: GridView.builder(
+                  physics:  const ScrollPhysics(),
+                  primary: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: HomeScreen.textList.length,
+                  itemCount: ConstantList.textList.length,
                   itemBuilder: (context, index) {
                     return containerWithLogo1(
-                      imagePath: HomeScreen.imagePathList[index],
-                      text: HomeScreen.textList[index],
+                      imagePath: ConstantList.imagePathList[index],
+                      text: ConstantList.textList[index],
                     );
                   },
                 ),

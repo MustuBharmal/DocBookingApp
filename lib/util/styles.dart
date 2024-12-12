@@ -35,6 +35,12 @@ TextStyle subtitleStyle2 = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
 );
+TextStyle subtitleStyle1 = TextStyle(
+  color: AppColors.grey,
+  overflow: TextOverflow.fade,
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+);
 TextStyle appBarStyle = GoogleFonts.poppins(
   color: AppColors.black,
   fontSize: 24,

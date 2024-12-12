@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
+import '../../../global/constant_list.dart';
 import '../../../util/app_color.dart';
+import '../../../util/images.dart';
 import '../../../widgets/custom_container_with_logo.dart';
 import '../../../widgets/custom_intro_container.dart';
-import '../../home/view/home_screen.dart';
 
 class SpecialistScreen extends StatelessWidget {
   const SpecialistScreen({super.key});
@@ -19,7 +19,7 @@ class SpecialistScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              customIntoContainer(imgPath: "assets/images/female_doctor.png"),
+              customIntoContainer(imgPath: Images.femaleDoctor),
               const SizedBox(
                 height: 20,
               ),
@@ -27,16 +27,18 @@ class SpecialistScreen extends StatelessWidget {
                 width: 340,
                 height: 500,
                 child: GridView.builder(
+                  physics:  const ScrollPhysics(),
+                  primary: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: HomeScreen.textList.length,
+                  itemCount: ConstantList.textList.length,
                   itemBuilder: (context, index) {
                     return containerWithLogo1(
-                      imagePath: HomeScreen.imagePathList[index],
-                      text: HomeScreen.textList[index],
+                      imagePath: ConstantList.imagePathList[index],
+                      text: ConstantList.textList[index],
                     );
                   },
                 ),

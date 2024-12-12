@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../util/app_color.dart';
 import '../util/styles.dart';
 
-Widget containerWithLogo1({required String imagePath, required String text,void Function()? onTap}) {
+Widget containerWithLogo1(
+    {required String imagePath, required String text, void Function()? onTap}) {
   return InkWell(
     onTap: onTap,
     child: Container(
@@ -19,11 +20,15 @@ Widget containerWithLogo1({required String imagePath, required String text,void 
         ),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(imagePath,scale:2),
+          SizedBox(
+            width: 30,
+            height: 30,
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.contain,
+            ),
+          ),
           const SizedBox(height: 16),
           Text(
             text,
@@ -32,7 +37,6 @@ Widget containerWithLogo1({required String imagePath, required String text,void 
               fontSize: 12,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w600,
-              height: 0.12,
             ),
           ),
         ],
@@ -59,8 +63,8 @@ Widget customContainerWithLogo2({String? text, String? iconPath}) {
         iconPath == null ? const SizedBox.shrink() : Image.asset(iconPath),
         const SizedBox(width: 10),
         Text(
-          text!,style: txtInterMedium13,
-
+          text!,
+          style: txtInterMedium13,
         ),
       ],
     ),

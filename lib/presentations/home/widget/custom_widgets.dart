@@ -1,7 +1,11 @@
+import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
+import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget customSearchTextField() {
+import '../../../widgets/custom_dialogbox.dart';
+
+Widget customSearchTextField(HomeController controller) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -18,13 +22,23 @@ Widget customSearchTextField() {
       ),
       child: Row(
         children: [
-          Row(
-            children: [
-              Image.asset("assets/logos/Stethoscope.png", scale: 1),
-              IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.arrow_drop_down))
-            ],
-          ), // Replace with the stethoscope icon
+          Obx(() => Row(
+                children: [
+                  customIconSizeBox(
+                      iconPath: controller.selectedImagePath.value),
+                  IconButton(
+                    onPressed: () {
+                      TypeOfDialogs.showBottomSheetDialog(
+                        Get.context!,
+                        "Select Service",
+                        controller.serviceImages.keys.toList(),
+                        controller.searchController,
+                      );
+                    },
+                    icon: const Icon(Icons.arrow_drop_down),
+                  ),
+                ],
+              )),
           const SizedBox(width: 8),
           VerticalDivider(
             color: Colors.grey.shade300,
@@ -34,6 +48,7 @@ Widget customSearchTextField() {
           const SizedBox(width: 8),
           Expanded(
             child: TextField(
+              controller: controller.searchController,
               decoration: InputDecoration(
                 hintText: 'Search by service or location',
                 hintStyle: TextStyle(color: Colors.grey.shade500),
@@ -41,22 +56,28 @@ Widget customSearchTextField() {
               ),
             ),
           ),
-          // Dropdown arrow
         ],
       ),
     ),
   );
 }
 
-Widget myHeaderText({required String text, double? fontSize}) {
-  return Text(
-    text,
-    style: TextStyle(
-      color: const Color(0xFF363636),
-      fontSize: fontSize ?? 16,
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w600,
-    ),
+Widget myHeaderText(
+    {required String text, double? fontSize, TextButton? button}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+          color: const Color(0xFF363636),
+          fontSize: fontSize ?? 16,
+          fontFamily: 'Inter',
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      button ?? const SizedBox.shrink()
+    ],
   );
 }
 

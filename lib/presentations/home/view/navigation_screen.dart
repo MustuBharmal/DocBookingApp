@@ -2,6 +2,7 @@ import 'package:doc_booking_app/presentations/home/controller/home_controller.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../util/app_color.dart';
+import '../../../util/images.dart';
 import '../../../widgets/customer_app_bar.dart';
 
 class NavigationScreen extends GetView<HomeController> {
@@ -12,7 +13,7 @@ class NavigationScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => Scaffold(
+      () => Scaffold(
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
@@ -44,13 +45,13 @@ class NavigationScreen extends GetView<HomeController> {
   String _getIconPath(int index) {
     switch (index) {
       case 0:
-        return 'assets/logos/home.png';
+        return Images.home;
       case 1:
-        return 'assets/logos/Stethoscope.png';
+        return Images.stethoscope;
       case 2:
-        return 'assets/logos/Medical Kit.png';
+        return Images.medicalKit;
       case 3:
-        return 'assets/logos/user.png';
+        return Images.user;
       default:
         return '';
     }
