@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:doc_booking_app/util/app_color.dart';
+
+import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../authentication/views/login_welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/';
@@ -18,8 +18,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2),
-        () => Get.offNamed(LoginWelcomeScreen.routeName),);
+    Future.delayed(
+      const Duration(seconds: 2),
+      () => Get.offNamed(OnboardingScreen.routeName),
+    );
   }
 
   @override

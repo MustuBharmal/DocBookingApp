@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../util/app_color.dart';
+import '../../../global/app_color.dart';
 import '../../../widgets/custom_container_with_logo.dart';
 import '../../../widgets/custom_intro_container.dart';
 import '../../home/view/home_screen.dart';

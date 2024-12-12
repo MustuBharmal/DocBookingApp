@@ -2,7 +2,7 @@ import 'package:doc_booking_app/presentations/home/controller/home_controller.da
 import 'package:doc_booking_app/widgets/customer_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../util/app_color.dart';
+import '../../../global/app_color.dart';
 
 class NavigationScreen extends GetView<HomeController> {
   const NavigationScreen({super.key});

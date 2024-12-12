@@ -20,6 +20,8 @@ abstract class AppColors {
   static Color gray600 = fromHex('#717171');
   static Color gray=const Color.fromRGBO(137, 156, 168, 1);
   static Color whiteA700 = fromHex('#ffffff');
+  static const Color blueGradient1 = Color(0xFFABE2FC);
+  static const Color blueGradient2 = Color(0xFF2267FF);
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');

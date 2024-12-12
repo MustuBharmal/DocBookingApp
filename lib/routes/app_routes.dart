@@ -1,6 +1,6 @@
-
-import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
+import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
+import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
@@ -10,10 +10,11 @@ import '../presentations/splash_screens/view/splash_screen.dart';
 
 class AppRoutes {
   static List<GetPage> pages = [
-    GetPage(name: NavigationScreen.routeName, page: ()=>const NavigationScreen()),
+    GetPage(name: NavigationScreen.routeName, page: () => const NavigationScreen()),
     GetPage(name: SplashScreen.routeName, page: () => const SplashScreen()),
+    GetPage(name: OnboardingScreen.routeName, page: () => OnboardingScreen()),
     GetPage(name: LoginWelcomeScreen.routeName, page: () => const LoginWelcomeScreen()),
-    GetPage(name: HomeScreen.routeName, page: () => const HomeScreen(),binding: HomeBinding()),
+    GetPage(name: HomeScreen.routeName, page: () => const HomeScreen(), binding: HomeBinding()),
     GetPage(name: ServiceScreen.routeName, page: () => const ServiceScreen()),
   ];
 }

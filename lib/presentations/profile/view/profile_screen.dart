@@ -1,4 +1,4 @@
-import 'package:doc_booking_app/util/app_color.dart';
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_logo.dart';
 import 'package:flutter/material.dart';
 

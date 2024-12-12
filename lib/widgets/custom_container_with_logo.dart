@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../util/app_color.dart';
-import '../util/styles.dart';
+import '../global/app_color.dart';
+import '../global/styles.dart';
 
 Widget containerWithLogo1({required String imagePath, required String text,void Function()? onTap}) {
   return InkWell(

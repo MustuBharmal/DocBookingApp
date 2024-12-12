@@ -1,5 +1,5 @@
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
-import 'package:doc_booking_app/util/app_color.dart';
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
 import '../../../widgets/custom_container_with_logo.dart';

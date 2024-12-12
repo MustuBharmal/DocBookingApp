@@ -1,10 +1,11 @@
+import 'package:doc_booking_app/global/theme.dart';
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-void main() async{
+void main() async {
   // await Firebase.initializeApp();
   await GetStorage.init();
   // HttpService.initialize();
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       initialBinding: HomeBinding(),
       getPages: AppRoutes.pages,
       // initialBinding: AuthBinding(),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
+      theme: AppThemes.lightTheme,
     );
   }
 }
