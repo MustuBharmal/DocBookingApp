@@ -1,13 +1,14 @@
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
-import 'package:doc_booking_app/util/app_color.dart';
-import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
+
+import '../../../util/app_color.dart';
 import '../../../widgets/custom_container_with_logo.dart';
+import '../../../widgets/custom_intro_container.dart';
+import '../../home/view/home_screen.dart';
 
-class ServiceScreen extends StatelessWidget {
-  const ServiceScreen({super.key});
+class SpecialistScreen extends StatelessWidget {
+  const SpecialistScreen({super.key});
 
-  static const routeName = '/service-screen';
+  static const routeName = '/specialist-screen';
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class ServiceScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              customIntoContainer(imgPath: "assets/images/male_doctor.png"),
+              customIntoContainer(imgPath: "assets/images/female_doctor.png"),
               const SizedBox(
                 height: 20,
               ),

@@ -1,5 +1,5 @@
 import 'package:doc_booking_app/util/app_color.dart';
-import 'package:doc_booking_app/widgets/custom_container.dart';
+import 'package:doc_booking_app/widgets/custom_container_with_logo.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 15),
           child: ListView.separated(
               itemBuilder: (context, index) =>
-                  customContainerWithLogo(text: detailList[index]),
+                  customContainerWithLogo2(text: detailList[index]),
               separatorBuilder: (context, index) => const SizedBox(
                     height: 10,
                   ),

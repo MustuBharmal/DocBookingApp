@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
+import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +11,7 @@ class HomeController extends GetxController {
   final List<Widget> pages = const [
     HomeScreen(),
     ServiceScreen(),
-    ServiceScreen(),
+    SpecialistScreen(),
     ProfileScreen()
   ];
 
