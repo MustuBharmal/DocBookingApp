@@ -1,10 +1,14 @@
+import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
 import 'package:flutter/material.dart';
 
 import '../util/app_color.dart';
 import '../util/styles.dart';
 
-Widget containerWithLogo1(
-    {required String imagePath, required String text, void Function()? onTap}) {
+Widget containerWithIcon1(
+    {required String imagePath,
+    required String text,
+    double? heightWidth,
+    void Function()? onTap}) {
   return InkWell(
     onTap: onTap,
     child: Container(
@@ -21,14 +25,7 @@ Widget containerWithLogo1(
       ),
       child: Column(
         children: [
-          SizedBox(
-            width: 30,
-            height: 30,
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.contain,
-            ),
-          ),
+          customIconSizeBox(iconPath: imagePath, heightWidth: heightWidth),
           const SizedBox(height: 16),
           Text(
             text,
@@ -45,7 +42,7 @@ Widget containerWithLogo1(
   );
 }
 
-Widget customContainerWithLogo2({String? text, String? iconPath}) {
+Widget customContainerWithIcon2({String? text, String? iconPath}) {
   return Container(
     width: 343,
     height: 56,

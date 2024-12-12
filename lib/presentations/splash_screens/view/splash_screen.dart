@@ -3,6 +3,7 @@ import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../util/images.dart';
 import '../../authentication/views/login_welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,8 +19,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2),
-        () => Get.offNamed(LoginWelcomeScreen.routeName),);
+    Future.delayed(
+      const Duration(seconds: 2),
+      () => Get.offNamed(LoginWelcomeScreen.routeName),
+    );
   }
 
   @override
@@ -32,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('assets/logos/company_logo.png'),
+              Image.asset(Images.companyLogo),
               SizedBox(
                 height: Get.height * 0.065,
               ),

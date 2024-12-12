@@ -69,7 +69,7 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                         width: 30,
                         height: 30,
                         child: Image.asset(
-                          ConstantList.imagePathList[index],
+                          ConstantList.imagePathListForServices[index],
                           fit: BoxFit.contain,
                         ),
                       ),

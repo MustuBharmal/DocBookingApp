@@ -1,8 +1,10 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
+import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../global/constant_list.dart';
 import '../../../util/styles.dart';
 import '../../../widgets/custom_container_with_logo.dart';
@@ -176,7 +178,11 @@ class HomeScreen extends StatelessWidget {
               myHeaderText(
                   text: ConstantString.topServices,
                   button: TextButton(
-                      onPressed: () {}, child:  Text("See All",style: subtitleStyle1,))),
+                      onPressed: () {},
+                      child: Text(
+                        "See All",
+                        style: subtitleStyle1,
+                      ))),
               const SizedBox(
                 height: 15,
               ),
@@ -190,14 +196,14 @@ class HomeScreen extends StatelessWidget {
                       child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return containerWithLogo1(
+                            return containerWithIcon1(
                                 onTap: () {},
-                                imagePath: ConstantList.imagePathList[index],
-                                text: ConstantList.textList[index]);
+                                imagePath: ConstantList.imagePathListForServices[index],
+                                text: ConstantList.textListForServices[index]);
                           },
                           separatorBuilder: (context, index) =>
                               const SizedBox(width: 10),
-                          itemCount: ConstantList.textList.length),
+                          itemCount: ConstantList.textListForServices.length),
                     ),
                   ],
                 ),

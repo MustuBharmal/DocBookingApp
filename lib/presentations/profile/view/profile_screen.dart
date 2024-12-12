@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 15),
           child: ListView.separated(
               itemBuilder: (context, index) =>
-                  customContainerWithLogo2(text: detailList[index]),
+                  customContainerWithIcon2(text: detailList[index]),
               separatorBuilder: (context, index) => const SizedBox(
                     height: 10,
                   ),

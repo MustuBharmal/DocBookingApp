@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:flutter/material.dart';
 import '../../../global/constant_list.dart';
 import '../../../util/app_color.dart';
@@ -19,7 +20,13 @@ class SpecialistScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              customIntoContainer(imgPath: Images.femaleDoctor),
+              const SizedBox(
+                height: 30,
+              ),
+              customBannerContainer(
+                  imgPath: Images.femaleDoctor,
+                  headerText: ConstantString.headerTextForSpecialist,
+                  subText: ConstantString.subTextForSpecialist),
               const SizedBox(
                 height: 20,
               ),
@@ -27,18 +34,20 @@ class SpecialistScreen extends StatelessWidget {
                 width: 340,
                 height: 500,
                 child: GridView.builder(
-                  physics:  const ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   primary: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: ConstantList.textList.length,
+                  itemCount: ConstantList.textListForSpecialist.length,
                   itemBuilder: (context, index) {
-                    return containerWithLogo1(
-                      imagePath: ConstantList.imagePathList[index],
-                      text: ConstantList.textList[index],
+                    return containerWithIcon1(
+                      onTap: () {},
+                      heightWidth: 60,
+                      imagePath: ConstantList.imagePathListForSpecialist[index],
+                      text: ConstantList.textListForServices[index],
                     );
                   },
                 ),

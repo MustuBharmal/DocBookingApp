@@ -19,17 +19,23 @@ class Images {
   static String get user=>'user'.iconPng;
   static String get vitaminBooster=>'vitamin_booster'.iconPng;
   static String get vitaminIv=>'vitamin_iv'.iconPng;
-
-
+  static String get mentalHealth=>'mental_health'.iconPng;
+  static String get doctor=>'doctor'.iconPng;
+  static String get fitnessCoach=>'fitness_coach'.iconPng;
+  static String get hrtTreatment=>'hrt_treatment'.iconPng;
+  static String get trtTreatment=>'trt_treatment'.iconPng;
+  static String get nutritionalist=>'nutritionalist'.iconPng;
 
 
 }
 
 extension on String {
+
+  ///for image folder
   String get imagePng => 'assets/images/$this.png';
-
+  ///for icon folder
   String get iconPng => 'assets/icons/$this.png';
-
+  ///for logo folder
   String get logoPng => 'assets/logos/$this.png';
 
   String get jpg => 'assets/images/$this.jpg';

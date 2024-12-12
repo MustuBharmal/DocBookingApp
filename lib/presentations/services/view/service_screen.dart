@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/global/constant_list.dart';
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,15 @@ class ServiceScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              customIntoContainer(imgPath: Images.maleDoctor),
+              const SizedBox(
+                height: 30,
+              ),
+              customBannerContainer(
+                  imgPath: Images.maleDoctor,
+                  headerText: ConstantString.headerTextForServices,
+                  subText: ConstantString.subTextForServices),
               const SizedBox(
                 height: 20,
               ),
@@ -27,18 +35,20 @@ class ServiceScreen extends StatelessWidget {
                 width: 340,
                 height: 500,
                 child: GridView.builder(
-                  physics:  const ScrollPhysics(),
+                  physics: const ScrollPhysics(),
                   primary: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: ConstantList.textList.length,
+                  itemCount: ConstantList.textListForServices.length,
                   itemBuilder: (context, index) {
-                    return containerWithLogo1(
-                      imagePath: ConstantList.imagePathList[index],
-                      text: ConstantList.textList[index],
+                    return containerWithIcon1(
+                      onTap: () {},
+                      heightWidth: 60,
+                      imagePath: ConstantList.imagePathListForServices[index],
+                      text: ConstantList.textListForServices[index],
                     );
                   },
                 ),

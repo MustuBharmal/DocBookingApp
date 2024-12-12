@@ -21,7 +21,7 @@ class HomeController extends GetxController {
   RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
-    'Service',
+    'Services',
     'Specialists',
     'My Profile',
   ];

@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
 
-Widget customIntoContainer({String? imgPath}) {
+Widget customBannerContainer(
+    {String? imgPath, String? headerText, String? subText}) {
   return Container(
     width: 343,
-    height: 170,
-    decoration: ShapeDecoration(
+    height: 150,
+    decoration: BoxDecoration(
       gradient: const LinearGradient(
         begin: Alignment(-0.92, 0.38),
         end: Alignment(0.92, -0.38),
         colors: [Color(0xFF2267FF), Color(0xFFABC4FC)],
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
+      borderRadius: BorderRadius.circular(24),
     ),
     child: Stack(
       clipBehavior: Clip.none,
       children: [
-        const Padding(
-          padding:
-          EdgeInsets.symmetric(horizontal: 30, vertical: 35),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Choose the best \nservice!',
-                style: TextStyle(
+                headerText!,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'Inter',
@@ -33,10 +31,10 @@ Widget customIntoContainer({String? imgPath}) {
                   height: 1.5,
                 ),
               ),
-              SizedBox(height: 9),
+              const SizedBox(height: 9),
               Text(
-                'Select your service and the \nlocations according to it.',
-                style: TextStyle(
+                subText!,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 10,
                   fontFamily: 'Inter',
@@ -56,6 +54,7 @@ Widget customIntoContainer({String? imgPath}) {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(imgPath!),
+                scale: 1,
                 fit: BoxFit.contain,
               ),
             ),
