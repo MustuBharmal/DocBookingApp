@@ -2,7 +2,6 @@ import 'package:doc_booking_app/presentations/home/controller/home_controller.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../util/app_color.dart';
-import '../../../widgets/customer_app_bar.dart';
 
 class NavigationScreen extends GetView<HomeController> {
   const NavigationScreen({super.key});
@@ -13,10 +12,10 @@ class NavigationScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        appBar: CustomAppBar(
+       /* appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
-        ),
+        ),*/
         body: controller.pages[controller.selectedIndex.value],
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: AppColors.primary,
