@@ -2,7 +2,7 @@ import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/global_widget.dart';
+import '../../../widgets/custom_container_with_logo.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
     "Vitamin IV",
     "Vitamin Booster",
     "TRT Administration",
+    "Bloodletting",
     "Flu Shots"
   ];
 
@@ -20,8 +21,9 @@ class HomeScreen extends StatelessWidget {
     "assets/logos/Phlebotomy.png",
     "assets/logos/Vitamin_IV.png",
     "assets/logos/Vitamin Booster.png",
-    "assets/logos/Vitamin_IV.png",
-    "assets/logos/Vitamin_IV.png",
+    "assets/logos/bloodletting.png",
+    "assets/logos/trtadministration.png",
+    "assets/logos/flushots.png",
   ];
 
   @override
@@ -192,10 +194,8 @@ class HomeScreen extends StatelessWidget {
                       child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return containerWithImage(
-                              onTap: (){
-                                LogUtil.debug("press");
-                              },
+                            return containerWithLogo1(
+                                onTap: () {},
                                 imagePath: imagePathList[index],
                                 text: textList[index]);
                           },
@@ -239,7 +239,8 @@ class HomeScreen extends StatelessWidget {
                 width: 340,
                 height: 400,
                 child: ListView.separated(
-                    itemBuilder: (context, index) => customSpecialistContainer(),
+                    itemBuilder: (context, index) =>
+                        customSpecialistContainer(onTap: () {}),
                     separatorBuilder: (context, index) => const SizedBox(
                           height: 10,
                         ),
