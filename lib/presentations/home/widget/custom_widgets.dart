@@ -1,8 +1,8 @@
+import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../widgets/custom_dialogbox.dart';
 
 Widget customSearchTextField(HomeController controller) {
@@ -22,22 +22,29 @@ Widget customSearchTextField(HomeController controller) {
       ),
       child: Row(
         children: [
-          Obx(() => Row(
-                children: [
-                  customIconSizeBox(
-                      iconPath: controller.selectedImagePath.value),
-                  IconButton(
-                    onPressed: () {
-                      TypeOfDialogs.showBottomSheetDialog(
-                        Get.context!,
-                        "Select Service",
-                        controller.serviceImages.keys.toList(),
-                        controller.searchController,
-                      );
-                    },
-                    icon: const Icon(Icons.arrow_drop_down),
-                  ),
-                ],
+          Obx(() => SizedBox(
+                width: ConstantValue.width * 0.125,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: customIconSizeBox(
+                          iconPath: controller.selectedImagePath.value),
+                    ),
+                    Expanded(
+                      child: IconButton(
+                        onPressed: () {
+                          TypeOfDialogs.showBottomSheetDialog(
+                            Get.context!,
+                            "Select Service",
+                            controller.serviceImages.keys.toList(),
+                            controller.searchController,
+                          );
+                        },
+                        icon: const Icon(Icons.arrow_drop_down),
+                      ),
+                    ),
+                  ],
+                ),
               )),
           const SizedBox(width: 8),
           VerticalDivider(

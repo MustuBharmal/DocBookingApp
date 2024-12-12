@@ -11,6 +11,7 @@ class LoginWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

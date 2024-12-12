@@ -12,7 +12,7 @@ Widget containerWithIcon1(
   return InkWell(
     onTap: onTap,
     child: Container(
-      width: 108.67,
+      width: 100,
       height: 122,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       clipBehavior: Clip.antiAlias,

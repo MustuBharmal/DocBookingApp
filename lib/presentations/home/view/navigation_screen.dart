@@ -47,8 +47,8 @@ class NavigationScreen extends GetView<HomeController> {
                     children: [
                       if (isSelected)
                         Container(
-                          width: 48,
-                          height: 48,
+                          width: 35,
+                          height: 35,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             gradient: LinearGradient(
@@ -60,8 +60,8 @@ class NavigationScreen extends GetView<HomeController> {
                         ),
                       Image.asset(
                         _getIconPath(index),
-                        width: 24,
-                        height: 24,
+                        width: 20,
+                        height: 20,
                         color: isSelected ? Colors.white : AppColors.grey,
                       ),
                     ],
@@ -83,7 +83,7 @@ class NavigationScreen extends GetView<HomeController> {
       case 0:
         return Images.home;
       case 1:
-        return Images.stethoscope;
+        return Images.bloodletting;
       case 2:
         return Images.medicalKit;
       case 3:

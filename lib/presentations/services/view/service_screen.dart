@@ -1,4 +1,4 @@
-import 'package:doc_booking_app/global/constant_list.dart';
+import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
@@ -42,13 +42,13 @@ class ServiceScreen extends StatelessWidget {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: ConstantList.textListForServices.length,
+                  itemCount: ConstantValue.textListForServices.length,
                   itemBuilder: (context, index) {
                     return containerWithIcon1(
                       onTap: () {},
                       heightWidth: 60,
-                      imagePath: ConstantList.imagePathListForServices[index],
-                      text: ConstantList.textListForServices[index],
+                      imagePath: ConstantValue.imagePathListForServices[index],
+                      text: ConstantValue.textListForServices[index],
                     );
                   },
                 ),

@@ -1,7 +1,9 @@
+import 'package:get/get.dart';
+
 import '../util/images.dart';
 import 'constant_string.dart';
 
-class ConstantList {
+class ConstantValue {
   static const textListForServices = [
     ConstantString.phlebotomy,
     ConstantString.vitaminIv,
@@ -37,4 +39,7 @@ class ConstantList {
     Images.hrtTreatment,
     Images.mentalHealth,
   ];
+
+  static double height = Get.height;
+  static double width = Get.width;
 }

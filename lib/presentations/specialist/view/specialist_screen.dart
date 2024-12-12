@@ -1,6 +1,6 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:flutter/material.dart';
-import '../../../global/constant_list.dart';
+import '../../../global/constant_values.dart';
 import '../../../util/app_color.dart';
 import '../../../util/images.dart';
 import '../../../widgets/custom_container_with_logo.dart';
@@ -41,13 +41,13 @@ class SpecialistScreen extends StatelessWidget {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: ConstantList.textListForSpecialist.length,
+                  itemCount: ConstantValue.textListForSpecialist.length,
                   itemBuilder: (context, index) {
                     return containerWithIcon1(
                       onTap: () {},
                       heightWidth: 60,
-                      imagePath: ConstantList.imagePathListForSpecialist[index],
-                      text: ConstantList.textListForServices[index],
+                      imagePath: ConstantValue.imagePathListForSpecialist[index],
+                      text: ConstantValue.textListForServices[index],
                     );
                   },
                 ),

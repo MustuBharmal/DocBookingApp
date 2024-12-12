@@ -1,4 +1,4 @@
-import 'package:doc_booking_app/global/constant_list.dart';
+import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +69,7 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                         width: 30,
                         height: 30,
                         child: Image.asset(
-                          ConstantList.imagePathListForServices[index],
+                          ConstantValue.imagePathListForServices[index],
                           fit: BoxFit.contain,
                         ),
                       ),

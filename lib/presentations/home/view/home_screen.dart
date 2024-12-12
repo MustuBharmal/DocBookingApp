@@ -1,11 +1,9 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
-import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../global/constant_list.dart';
+import '../../../global/constant_values.dart';
 import '../../../util/styles.dart';
 import '../../../widgets/custom_container_with_logo.dart';
 
@@ -143,14 +141,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              myHeaderText(
-                  text: ConstantString.bookNow,
-                  button: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "See All",
-                        style: subtitleStyle1,
-                      ))),
+              myHeaderText(text: ConstantString.bookNow),
               const SizedBox(
                 height: 15,
               ),
@@ -186,32 +177,38 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 330,
-                      height: 122,
-                      child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return containerWithIcon1(
-                                onTap: () {},
-                                imagePath: ConstantList.imagePathListForServices[index],
-                                text: ConstantList.textListForServices[index]);
-                          },
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(width: 10),
-                          itemCount: ConstantList.textListForServices.length),
-                    ),
-                  ],
-                ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 330,
+                    height: 122,
+                    child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return containerWithIcon1(
+                              onTap: () {},
+                              imagePath:
+                                  ConstantValue.imagePathListForServices[index],
+                              text: ConstantValue.textListForServices[index]);
+                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(width: 10),
+                        itemCount: 3),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              myHeaderText(text: ConstantString.topRatedSpecialist),
+              myHeaderText(
+                  text: ConstantString.topRatedSpecialist,
+                  button: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "See All",
+                        style: subtitleStyle1,
+                      ))),
               const SizedBox(
                 height: 10,
               ),
