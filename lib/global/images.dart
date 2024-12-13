@@ -4,7 +4,8 @@ abstract class AppImage {
 
   ///images
   static String get maleDoctor => 'male_doctor'.imagePng;
-  static String get femaleDoctor => 'female_doctor'.imagePng;
+  static String get femaleDoctor1 => 'female_doctor1'.imagePng;
+  static String get femaleDoctor2=>'female_doctor2'.imagePng;
 
   ///icons
   static String get bloodletting => 'bloodletting'.iconPng;

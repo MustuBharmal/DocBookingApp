@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
+import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
@@ -63,7 +64,9 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                           charges: specialist.charges,
                           rating: specialist.rating,
                           review: specialist.review,
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(SpecialistDetailScreen.routeName);
+                          },
                         );
                       },
                       separatorBuilder: (context, index) => const SizedBox(
