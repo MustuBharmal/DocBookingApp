@@ -26,6 +26,10 @@ abstract class AppImage {
   static String get hrtTreatment=>'hrt_treatment'.iconPng;
   static String get trtTreatment=>'trt_treatment'.iconPng;
   static String get nutritionalist=>'nutritionalist'.iconPng;
+  static String get map=>'map'.iconPng;
+  static String get search=>'search'.iconPng;
+
+
 
 
   //Folder Location
