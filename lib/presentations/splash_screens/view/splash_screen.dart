@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset('assets/logos/company_logo.png'),
+              Image.asset(AppImage.appLogo),
               SizedBox(
                 height: Get.height * 0.065,
               ),

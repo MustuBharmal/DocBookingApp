@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
+import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -298,7 +298,9 @@ class SpecialistListView extends StatelessWidget {
             charges: specialist.charges,
             rating: specialist.rating,
             review: specialist.review,
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(SpecialistDetailScreen.routeName);
+            },
           );
         },
         separatorBuilder: (context, index) => const SizedBox(height: 10),
