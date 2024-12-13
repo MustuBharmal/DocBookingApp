@@ -42,6 +42,6 @@ class HomeController extends GetxController {
 
   void updateSelectedImage(String service) {
     selectedImagePath.value =
-        serviceImages[service] ?? "assets/logos/stethoscope.png";
+        serviceImages[service] ?? AppImage.stethoscope;
   }
 }
