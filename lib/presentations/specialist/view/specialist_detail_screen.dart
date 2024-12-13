@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:doc_booking_app/widgets/customer_header_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:doc_booking_app/global/app_color.dart';

@@ -15,6 +15,7 @@ dependencies:
   google_fonts: ^6.2.1
   logger: ^2.5.0
   curved_navigation_bar:
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:

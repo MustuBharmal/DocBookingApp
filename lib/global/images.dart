@@ -54,4 +54,5 @@ extension on String {
   String get iconPng => 'assets/icons/$this.png';
   ///for logo folder
   String get logoPng => 'assets/logos/$this.png';
+
 }
