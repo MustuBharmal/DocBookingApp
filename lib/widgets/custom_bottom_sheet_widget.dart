@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
-import 'package:doc_booking_app/main.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,13 +7,13 @@ import 'package:get/get.dart';
 class CustomBottomSheetWidget extends GetView<HomeController> {
   final String header;
   final List<String> listOfItems;
-  final TextEditingController searchControllers;
+  final TextEditingController controllers;
 
   const CustomBottomSheetWidget({
     super.key,
     required this.header,
     required this.listOfItems,
-    required this.searchControllers,
+    required this.controllers,
   });
 
   @override
@@ -82,19 +81,17 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                       ),
                       trailing: Radio(
                         value: item,
-                        groupValue: HomeController.instance.selectedService.value,
+                        groupValue: controller.selectedService.value,
                         activeColor: Colors.blue,
                         onChanged: (String? value) {
                           controller.updateSelectedImage(value!);
                           controller.selectedService.value = value;
-                          searchControllers.text=value;
                           Navigator.pop(context);
                         },
                       ),
                       onTap: () {
                         controller.updateSelectedImage(item);
                         controller.selectedService.value = item;
-                        searchControllers.text=item;
                         Navigator.pop(context);
                       },
                     );

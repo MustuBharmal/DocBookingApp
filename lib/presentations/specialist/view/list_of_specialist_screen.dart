@@ -1,7 +1,8 @@
 import 'package:doc_booking_app/presentations/specialist/widget/custom_widget.dart';
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import '../../../global/app_color.dart';
+
 import '../../../widgets/custom_specialist_container.dart';
 
 class ListOfSpecialistScreen extends StatelessWidget {
@@ -18,8 +19,7 @@ class ListOfSpecialistScreen extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Column(
-            children: [
-              customSearchTextField(),
+            children: [customSearchTextField(),
               SizedBox(
                 width: 340,
                 height: 400,
@@ -55,8 +55,8 @@ class ListOfSpecialistScreen extends StatelessWidget {
                       }
                     },
                     separatorBuilder: (context, index) => const SizedBox(
-                          height: 10,
-                        ),
+                      height: 10,
+                    ),
                     itemCount: 3),
               )
             ],

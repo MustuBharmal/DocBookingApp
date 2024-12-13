@@ -25,11 +25,4 @@ class ConstantString {
   static const headerTextForSpecialist = "Choose the best \nspecialist!";
   static const subTextForSpecialist =
       "Select your specialist and book \nyour appointment now.";
-  static const userInfo = "User Info";
-  static const paymentMng = "Payment Management";
-  static const faq = "FAQ";
-  static const contactUs = "Contact Us";
-  static const aboutUs = "About Us";
-  static const howTobBePartner = "How to be Partner";
-  static const prescription = "Prescription";
 }

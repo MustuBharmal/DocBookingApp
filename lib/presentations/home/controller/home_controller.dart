@@ -1,4 +1,3 @@
-import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
@@ -6,9 +5,11 @@ import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../util/images.dart';
+
 class HomeController extends GetxController {
   static HomeController get instance => Get.find<HomeController>();
-  Rx<TextEditingController> searchController = TextEditingController().obs;
+  TextEditingController searchController = TextEditingController();
   RxInt selectedIndex = RxInt(0);
 
   final List<Widget> pages = const [
@@ -28,20 +29,18 @@ class HomeController extends GetxController {
   void onItemTapped(int index) {
     selectedIndex.value = index;
   }
-
-  RxString selectedImagePath = AppImage.stethoscope.obs;
+  RxString selectedImagePath = Images.stethoscope.obs;
 
   final Map<String, String> serviceImages = {
-    "Phlebotomy": AppImage.phlebotomy,
-    "Vitamin IV": AppImage.vitaminIv,
-    "Vitamin Booster": AppImage.vitaminBooster,
-    "TRT Administration": AppImage.bloodletting,
-    "Bloodletting": AppImage.trtAdministration,
-    "Flu Shots": AppImage.flushots,
+    "Phlebotomy": Images.phlebotomy,
+    "Vitamin IV": Images.vitaminIv,
+    "Vitamin Booster": Images.vitaminBooster,
+    "TRT Administration": Images.bloodletting,
+    "Bloodletting": Images.trtAdministration,
+    "Flu Shots": Images.flushots,
   };
 
   void updateSelectedImage(String service) {
-    selectedImagePath.value =
-        serviceImages[service] ?? AppImage.stethoscope;
+    selectedImagePath.value = serviceImages[service] ?? "assets/logos/Stethoscope.png";
   }
 }

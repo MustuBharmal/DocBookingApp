@@ -1,5 +1,6 @@
-import 'package:doc_booking_app/global/images.dart';
+import 'package:get/get.dart';
 
+import '../util/images.dart';
 import 'constant_string.dart';
 
 class ConstantValue {
@@ -13,21 +14,12 @@ class ConstantValue {
   ];
 
   static List imagePathListForServices = [
-    AppImage.phlebotomy,
-    AppImage.vitaminIv,
-    AppImage.vitaminBooster,
-    AppImage.bloodletting,
-    AppImage.trtAdministration,
-    AppImage.flushots,
-  ];
-  static const detailList = [
-    ConstantString.userInfo,
-    ConstantString.paymentMng,
-    ConstantString.faq,
-    ConstantString.contactUs,
-    ConstantString.aboutUs,
-    ConstantString.howTobBePartner,
-    ConstantString.prescription
+    Images.phlebotomy,
+    Images.vitaminIv,
+    Images.vitaminBooster,
+    Images.bloodletting,
+    Images.trtAdministration,
+    Images.flushots,
   ];
 
   static const textListForSpecialist = [
@@ -40,11 +32,14 @@ class ConstantValue {
   ];
 
   static List imagePathListForSpecialist = [
-    AppImage.doctor,
-    AppImage.nutritionalist,
-    AppImage.fitnessCoach,
-    AppImage.trtTreatment,
-    AppImage.hrtTreatment,
-    AppImage.mentalHealth,
+    Images.doctor,
+    Images.nutritionalist,
+    Images.fitnessCoach,
+    Images.trtTreatment,
+    Images.hrtTreatment,
+    Images.mentalHealth,
   ];
+
+  static double height = Get.height;
+  static double width = Get.width;
 }

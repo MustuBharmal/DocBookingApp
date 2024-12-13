@@ -2,7 +2,7 @@ import 'package:doc_booking_app/presentations/home/controller/home_controller.da
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/custom_dialogbox.dart';
-import '../../../widgets/custom_icon_sizebox.dart';
+import '../../../widgets/custom_icon_sized_box.dart';
 
 class CustomSearchTextField extends StatelessWidget {
   const CustomSearchTextField({super.key, required this.hintText});
@@ -41,7 +41,7 @@ class CustomSearchTextField extends StatelessWidget {
                             Get.context!,
                             "Select Service",
                             HomeController.instance.serviceImages.keys.toList(),
-                            HomeController.instance.searchController.value,
+                            HomeController.instance.searchController,
                           );
                         },
                         icon: const Icon(Icons.arrow_drop_down),
@@ -60,7 +60,7 @@ class CustomSearchTextField extends StatelessWidget {
           Obx(
             () => Expanded(
               child: TextField(
-                controller: HomeController.instance.searchController.value,
+                controller: HomeController.instance.searchController,
                 decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.grey.shade500),

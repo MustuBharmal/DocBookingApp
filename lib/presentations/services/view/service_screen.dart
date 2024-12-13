@@ -1,10 +1,10 @@
 import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
-import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
-import '../../../global/app_color.dart';
-import '../../../widgets/custom_container_with_logo1.dart';
+import '../../../util/images.dart';
+import '../../../widgets/custom_container_with_logo.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({super.key});
@@ -25,7 +25,7 @@ class ServiceScreen extends StatelessWidget {
                 height: 30,
               ),
               CustomBannerContainer(
-                  imgPath: AppImage.maleDoctor,
+                  imgPath: Images.maleDoctor,
                   headerText: ConstantString.headerTextForServices,
                   subText: ConstantString.subTextForServices),
               const SizedBox(
@@ -44,10 +44,10 @@ class ServiceScreen extends StatelessWidget {
                   ),
                   itemCount: ConstantValue.textListForServices.length,
                   itemBuilder: (context, index) {
-                    return ContainerWithIcon1(
-                      onPressed: () {},
+                    return containerWithIcon1(
+                      onTap: () {},
                       heightWidth: 60,
-                      iconPath: ConstantValue.imagePathListForServices[index],
+                      imagePath: ConstantValue.imagePathListForServices[index],
                       text: ConstantValue.textListForServices[index],
                     );
                   },
