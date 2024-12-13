@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
 
 class CustomSpecialistContainer extends StatelessWidget {
@@ -24,16 +25,9 @@ class CustomSpecialistContainer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0, 4),
-              blurRadius: 10,
-            ),
-          ],
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: AppColors.borderColor)),
         child: Row(
           children: [
             Container(
