@@ -11,6 +11,36 @@ abstract class AppImage {
 
   ///icons
   static String get bloodletting => 'bloodletting'.iconPng;
+<<<<<<< HEAD
+=======
+  static String get flushots => 'flushots'.iconPng;
+  static String get home => 'home'.iconPng;
+  static String get homeVisit => 'home_visit'.iconPng;
+  static String get medicalKit=>'medical_kit'.iconPng;
+  static String get notification=>'notification'.iconPng;
+  static String get phlebotomy=>'phlebotomy'.iconPng;
+  static String get stethoscope=>'stethoscope'.iconPng;
+  static String get stethoscopeWhite=>'stethoscope_white'.iconPng;
+  static String get trtAdministration=>'trt_administration'.iconPng;
+  static String get user=>'user'.iconPng;
+  static String get vitaminBooster=>'vitamin_booster'.iconPng;
+  static String get vitaminIv=>'vitamin_iv'.iconPng;
+  static String get mentalHealth=>'mental_health'.iconPng;
+  static String get doctor=>'doctor'.iconPng;
+  static String get fitnessCoach=>'fitness_coach'.iconPng;
+  static String get hrtTreatment=>'hrt_treatment'.iconPng;
+  static String get trtTreatment=>'trt_treatment'.iconPng;
+  static String get nutritionalist=>'nutritionalist'.iconPng;
+  static String get aboutUs=> 'about_us'.iconPng;
+  static String get contactUs=> 'contact_us'.iconPng;
+  static String get paymentCard=> 'payment_card'.iconPng;
+  static String get prescription=> 'prescription'.iconPng;
+  static String get profile2User=> 'profile_2_user'.iconPng;
+  static String get faq=> 'faq'.iconPng;
+  static String get userMyProfile=> 'user_my_profile'.iconPng;
+  static String get arrowLeft => 'arrow_left'.iconPng;
+  static String get editProfile => 'edit_profile'.iconPng;
+>>>>>>> 897a6bb (assets of profile screen added, made custom widgets, and did user info screen)
 
   static String get mapOutline => 'map_icon'.iconPng;
 

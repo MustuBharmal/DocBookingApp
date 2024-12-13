@@ -15,13 +15,14 @@ dependencies:
   google_fonts: ^6.2.1
   logger: ^2.5.0
   curved_navigation_bar:
+  country_picker: ^2.0.27
   flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -32,7 +33,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/icons/
     - assets/images/
     - assets/logos/
-    - assets/icons/
     - assets/svgs/
