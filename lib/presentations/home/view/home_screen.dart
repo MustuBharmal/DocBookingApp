@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
+import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -124,8 +125,8 @@ class AppointmentCard extends StatelessWidget {
           Positioned(
             top: 10,
             child: Container(
-              width: Get.width*0.890,
-              height: Get.height*0.215,
+              width: Get.width * 0.890,
+              height: Get.height * 0.215,
               decoration: BoxDecoration(
                 color: Colors.blue[100],
                 borderRadius: BorderRadius.circular(20),
@@ -133,8 +134,8 @@ class AppointmentCard extends StatelessWidget {
             ),
           ),
           Container(
-            width: Get.width*0.890,
-            height: Get.height*0.210,
+            width: Get.width * 0.890,
+            height: Get.height * 0.210,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.blue,
@@ -228,13 +229,25 @@ class BookingOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        CustomerContainerWithText(text: "Visit Local Clinic"),
-        SizedBox(height: 10),
-        CustomerContainerWithText(text: "Arrange Home Visit"),
-        SizedBox(height: 10),
-        CustomerContainerWithText(text: "Chat with Specialist"),
+        CustomerContainerWithText(
+          text: "Visit Local Clinic",
+          width: Get.height * 1,
+          height: Get.height * 0.06,
+        ),
+        const SizedBox(height: 10),
+        CustomerContainerWithText(
+          text: "Arrange Home Visit",
+          width: Get.height * 1,
+          height: Get.height * 0.06,
+        ),
+        const SizedBox(height: 10),
+        CustomerContainerWithText(
+          text: "Chat with Specialist",
+          width: Get.height * 1,
+          height: Get.height * 0.06,
+        ),
       ],
     );
   }
@@ -277,12 +290,14 @@ class SpecialistListView extends StatelessWidget {
         physics: const ScrollPhysics(),
         primary: true,
         itemBuilder: (context, index) {
+          final specialist =
+              SpecialistController.instance.filteredSpecialists[index];
           return CustomSpecialistContainer(
-            name: "Specialist $index",
-            specialist: "Specialization",
-            charges: 10,
-            rating: 5,
-            review: 25,
+            name: specialist.name,
+            specialist: specialist.specialist,
+            charges: specialist.charges,
+            rating: specialist.rating,
+            review: specialist.review,
             onPressed: () {},
           );
         },

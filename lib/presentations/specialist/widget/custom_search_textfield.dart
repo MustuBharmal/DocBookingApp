@@ -7,7 +7,7 @@ class CustomSearchTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
       child: SizedBox(
         width: Get.width * 0.95,
         height: 50,

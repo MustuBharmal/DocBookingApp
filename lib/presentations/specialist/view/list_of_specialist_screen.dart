@@ -1,12 +1,13 @@
-import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
+import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../global/app_color.dart';
 import '../../../widgets/custom_specialist_container.dart';
 
-class ListOfSpecialistScreen extends StatelessWidget {
+class ListOfSpecialistScreen extends GetView<SpecialistController> {
   const ListOfSpecialistScreen({super.key});
 
   static const routeName = '/listOfSpecialist-screen';
@@ -21,54 +22,58 @@ class ListOfSpecialistScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CustomSearchTextfield(
-                hintText: "Search by name",
-                controller:
-                    SpecialistController.instance.searchController.value,
+              Obx(
+                () => CustomSearchTextfield(
+                  hintText: "Search by name",
+                  controller:
+                      SpecialistController.instance.searchController.value,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomerContainerWithText(
+                    text: "Home",
+                    width: Get.height * 0.210,
+                    height: Get.height * 0.06,
+                  ),
+                  CustomerContainerWithText(
+                    text: "Clinic",
+                    width: Get.height * 0.210,
+                    height: Get.height * 0.06,
+                  )
+                ],
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                 child: SizedBox(
                   width: 340,
                   height: 400,
-                  child: ListView.separated(
+                  child: Obx(() {
+                    return ListView.separated(
                       physics: const ScrollPhysics(),
                       primary: true,
                       itemBuilder: (context, index) {
-                        switch (index) {
-                          case 0:
-                            return CustomSpecialistContainer(
-                                name: "Divyesh",
-                                specialist: "specialist",
-                                charges: 10,
-                                rating: 5,
-                                review: 25,
-                                onPressed: () {});
-                          case 1:
-                            return CustomSpecialistContainer(
-                                name: "Mustafa",
-                                specialist: "specialist",
-                                charges: 10,
-                                rating: 5,
-                                review: 25,
-                                onPressed: () {});
-                          default:
-                            return CustomSpecialistContainer(
-                                name: "default",
-                                specialist: "specialist",
-                                charges: 10,
-                                rating: 5,
-                                review: 25,
-                                onPressed: () {});
-                        }
+                        final specialist =
+                            controller.filteredSpecialists[index];
+                        return CustomSpecialistContainer(
+                          name: specialist.name,
+                          specialist: specialist.specialist,
+                          charges: specialist.charges,
+                          rating: specialist.rating,
+                          review: specialist.review,
+                          onPressed: () {},
+                        );
                       },
                       separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
-                          ),
-                      itemCount: 3),
+                        height: 10,
+                      ),
+                      itemCount: controller.filteredSpecialists.length,
+                    );
+                  }),
                 ),
               ),
-
             ],
           ),
         ),
