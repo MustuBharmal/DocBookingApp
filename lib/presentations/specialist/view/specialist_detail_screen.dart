@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../global/images.dart';
-import '../../home/widget/customer_header_text.dart';
+import '../../../widgets/customer_header_text.dart';
 
 class SpecialistDetailScreen extends StatelessWidget {
   const SpecialistDetailScreen({super.key});
@@ -23,7 +23,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   heightFactor: 0.76,
                   child: Image.asset(
-                    AppImage.femaleDoctor2,
+                    AppImage.femaleDoctor,
                     fit: BoxFit.cover,
                   ),
                 ),

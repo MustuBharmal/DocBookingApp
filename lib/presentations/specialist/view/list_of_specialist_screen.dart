@@ -1,12 +1,13 @@
+
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
+import 'package:doc_booking_app/presentations/specialist/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
 import '../../../widgets/custom_specialist_container.dart';
-import '../widget/custom_search_textfield.dart';
 
 class ListOfSpecialistScreen extends GetView<SpecialistController> {
   const ListOfSpecialistScreen({super.key});
