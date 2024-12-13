@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
-import 'package:doc_booking_app/main.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

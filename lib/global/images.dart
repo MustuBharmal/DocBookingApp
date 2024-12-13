@@ -26,6 +26,15 @@ abstract class AppImage {
   static String get hrtTreatment=>'hrt_treatment'.iconPng;
   static String get trtTreatment=>'trt_treatment'.iconPng;
   static String get nutritionalist=>'nutritionalist'.iconPng;
+  static String get aboutUs=> 'about_us'.iconPng;
+  static String get contactUs=> 'contact_us'.iconPng;
+  static String get paymentCard=> 'payment_card'.iconPng;
+  static String get prescription=> 'prescription'.iconPng;
+  static String get profile2User=> 'profile_2_user'.iconPng;
+  static String get faq=> 'faq'.iconPng;
+  static String get userMyProfile=> 'user_my_profile'.iconPng;
+  static String get arrowLeft => 'arrow_left'.iconPng;
+  static String get editProfile => 'edit_profile'.iconPng;
 
 
   //Folder Location
