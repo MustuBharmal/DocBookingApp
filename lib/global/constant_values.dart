@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-
-import '../util/images.dart';
 import 'constant_string.dart';
+import 'images.dart';
 
 class ConstantValue {
   static const textListForServices = [
@@ -14,12 +13,12 @@ class ConstantValue {
   ];
 
   static List imagePathListForServices = [
-    Images.phlebotomy,
-    Images.vitaminIv,
-    Images.vitaminBooster,
-    Images.bloodletting,
-    Images.trtAdministration,
-    Images.flushots,
+    AppImage.phlebotomy,
+    AppImage.vitaminIv,
+    AppImage.vitaminBooster,
+    AppImage.bloodletting,
+    AppImage.trtAdministration,
+    AppImage.flushots,
   ];
 
   static const textListForSpecialist = [
@@ -32,12 +31,12 @@ class ConstantValue {
   ];
 
   static List imagePathListForSpecialist = [
-    Images.doctor,
-    Images.nutritionalist,
-    Images.fitnessCoach,
-    Images.trtTreatment,
-    Images.hrtTreatment,
-    Images.mentalHealth,
+    AppImage.doctor,
+    AppImage.nutritionalist,
+    AppImage.fitnessCoach,
+    AppImage.trtTreatment,
+    AppImage.hrtTreatment,
+    AppImage.mentalHealth,
   ];
 
   static double height = Get.height;

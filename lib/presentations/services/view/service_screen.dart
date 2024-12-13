@@ -3,7 +3,7 @@ import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
-import '../../../util/images.dart';
+import '../../../global/images.dart';
 import '../../../widgets/custom_container_with_logo.dart';
 
 class ServiceScreen extends StatelessWidget {
@@ -25,7 +25,7 @@ class ServiceScreen extends StatelessWidget {
                 height: 30,
               ),
               CustomBannerContainer(
-                  imgPath: Images.maleDoctor,
+                  imgPath: AppImage.maleDoctor,
                   headerText: ConstantString.headerTextForServices,
                   subText: ConstantString.subTextForServices),
               const SizedBox(

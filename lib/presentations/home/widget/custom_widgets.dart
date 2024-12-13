@@ -36,7 +36,7 @@ Widget customSearchTextField(HomeController controller) {
                           TypeOfDialogs.showBottomSheetDialog(
                             Get.context!,
                             "Select Service",
-                            controller.serviceImages.keys.toList(),
+                            controller.serviceAppImage.keys.toList(),
                             controller.searchController,
                           );
                         },

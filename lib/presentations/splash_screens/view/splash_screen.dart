@@ -1,12 +1,8 @@
 import 'dart:async';
-
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/images.dart';
-import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../util/images.dart';
 import '../../authentication/views/login_welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {

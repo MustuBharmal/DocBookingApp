@@ -40,7 +40,7 @@ class CustomSearchTextField extends StatelessWidget {
                           TypeOfDialogs.showBottomSheetDialog(
                             Get.context!,
                             "Select Service",
-                            HomeController.instance.serviceImages.keys.toList(),
+                            HomeController.instance.serviceAppImage.keys.toList(),
                             HomeController.instance.searchController,
                           );
                         },

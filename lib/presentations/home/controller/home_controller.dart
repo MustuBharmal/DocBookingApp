@@ -5,7 +5,7 @@ import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../util/images.dart';
+import '../../../global/images.dart';
 
 class HomeController extends GetxController {
   static HomeController get instance => Get.find<HomeController>();
@@ -29,18 +29,18 @@ class HomeController extends GetxController {
   void onItemTapped(int index) {
     selectedIndex.value = index;
   }
-  RxString selectedImagePath = Images.stethoscope.obs;
+  RxString selectedImagePath = AppImage.stethoscope.obs;
 
-  final Map<String, String> serviceImages = {
-    "Phlebotomy": Images.phlebotomy,
-    "Vitamin IV": Images.vitaminIv,
-    "Vitamin Booster": Images.vitaminBooster,
-    "TRT Administration": Images.bloodletting,
-    "Bloodletting": Images.trtAdministration,
-    "Flu Shots": Images.flushots,
+  final Map<String, String> serviceAppImage = {
+    "Phlebotomy": AppImage.phlebotomy,
+    "Vitamin IV": AppImage.vitaminIv,
+    "Vitamin Booster": AppImage.vitaminBooster,
+    "TRT Administration": AppImage.bloodletting,
+    "Bloodletting": AppImage.trtAdministration,
+    "Flu Shots": AppImage.flushots,
   };
 
   void updateSelectedImage(String service) {
-    selectedImagePath.value = serviceImages[service] ?? "assets/logos/Stethoscope.png";
+    selectedImagePath.value = serviceAppImage[service] ?? "assets/logos/Stethoscope.png";
   }
 }

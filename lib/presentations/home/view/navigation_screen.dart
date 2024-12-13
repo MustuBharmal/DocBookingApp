@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
-import '../../../util/images.dart';
+import '../../../global/images.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../controller/home_controller.dart';
 
@@ -97,13 +97,13 @@ class NavigationScreen extends GetView<HomeController> {
   String _getIconPath(int index) {
     switch (index) {
       case 0:
-        return Images.home;
+        return AppImage.home;
       case 1:
-        return Images.bloodletting;
+        return AppImage.bloodletting;
       case 2:
-        return Images.medicalKit;
+        return AppImage.medicalKit;
       case 3:
-        return Images.user;
+        return AppImage.user;
       default:
         return '';
     }
