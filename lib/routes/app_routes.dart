@@ -32,9 +32,14 @@ class AppRoutes {
           SpecialistBinding(),
           ProfileBinding(),
         ]),
-    GetPage(name: SplashScreen.routeName, page: () => const SplashScreen()),
     GetPage(
-        name: OnboardingScreen.routeName, page: () => const OnboardingScreen()),
+      name: SplashScreen.routeName,
+      page: () => const SplashScreen(),
+    ),
+    GetPage(
+      name: OnboardingScreen.routeName,
+      page: () => OnboardingScreen(),
+    ),
     GetPage(
         name: LoginWelcomeScreen.routeName,
         page: () => const LoginWelcomeScreen()),
@@ -42,22 +47,54 @@ class AppRoutes {
         name: HomeScreen.routeName,
         page: () => const HomeScreen(),
         binding: HomeBinding()),
-    GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
-    GetPage(name: SpecialistDetailScreen.routeName, page: () => SpecialistDetailScreen()),
     GetPage(
-        name: SpecialistDetailScreen.routeName,
-        page: () => SpecialistDetailScreen()),
-    GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen(),),
-    GetPage(name: UserInfoScreen.routeName, page: () => UserInfoScreen(),),
-    GetPage(name: PaymentManagementScreen.routeName, page: () => PaymentManagementScreen(),),
-    GetPage(name: FAQScreen.routeName, page: () => FAQScreen(),),
-    GetPage(name: ContactUsScreen.routeName, page: () => ContactUsScreen(),),
-    GetPage(name: AboutUsScreen.routeName, page: () => AboutUsScreen(),),
-    GetPage(name: HowToBePartnerScreen.routeName, page: () => HowToBePartnerScreen(),),
-    GetPage(name: PrescriptionScreen.routeName, page: () => PrescriptionScreen(),),
-    GetPage(name: SpecialistScreen.routeName, page: () => SpecialistScreen()),
-    GetPage(name: ServiceScreen.routeName, page: () => const ServiceScreen()),
-    GetPage(name: ReviewsScreen.routeName, page: () => const ReviewsScreen()),
+      name: ProfileScreen.routeName,
+      page: () => const ProfileScreen(),
+    ),
+    GetPage(
+      name: UserInfoScreen.routeName,
+      page: () => const UserInfoScreen(),
+    ),
+    GetPage(
+      name: PaymentManagementScreen.routeName,
+      page: () => const PaymentManagementScreen(),
+    ),
+    GetPage(
+      name: FAQScreen.routeName,
+      page: () => const FAQScreen(),
+    ),
+    GetPage(
+      name: ContactUsScreen.routeName,
+      page: () => const ContactUsScreen(),
+    ),
+    GetPage(
+      name: AboutUsScreen.routeName,
+      page: () => const AboutUsScreen(),
+    ),
+    GetPage(
+      name: HowToBePartnerScreen.routeName,
+      page: () => const HowToBePartnerScreen(),
+    ),
+    GetPage(
+      name: PrescriptionScreen.routeName,
+      page: () => const PrescriptionScreen(),
+    ),
+    GetPage(
+      name: SpecialistScreen.routeName,
+      page: () => const SpecialistScreen(),
+    ),
+    GetPage(
+      name: ServiceScreen.routeName,
+      page: () => const ServiceScreen(),
+    ),
+    GetPage(
+      name: ReviewsScreen.routeName,
+      page: () => const ReviewsScreen(),
+    ),
+    GetPage(
+      name: SpecialistDetailScreen.routeName,
+      page: () => const SpecialistDetailScreen(),
+    ),
     GetPage(
         name: ListOfSpecialistScreen.routeName,
         page: () => const ListOfSpecialistScreen(),

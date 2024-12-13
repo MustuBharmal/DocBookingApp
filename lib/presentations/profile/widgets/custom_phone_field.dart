@@ -6,12 +6,15 @@ import '../controller/profile_controller.dart';
 
 class CustomPhoneField extends StatelessWidget {
   final TextEditingController controller;
+  final String initialCountryCode;
   final ValueChanged<String>? onChanged;
 
   const CustomPhoneField({
     super.key,
     required this.controller,
+    this.initialCountryCode = '+1', // Default to USA
     this.onChanged,
+
   });
 
   @override
@@ -71,11 +74,11 @@ class CustomPhoneField extends StatelessWidget {
                   ),
                 ),
 
-                Container(
-                  width: 1,
-                  height: 30,
-                  color: Colors.grey.shade300,
-                ),
+          Container(
+            width: 1,
+            height: 30,
+            color: Colors.grey.shade300,
+          ),
 
                 Expanded(
                   child: TextFormField(
