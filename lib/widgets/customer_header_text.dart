@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../global/styles.dart';
+
 class CustomerHeaderText extends StatelessWidget {
   const CustomerHeaderText({super.key, required this.text, this.button});
 
@@ -11,7 +13,7 @@ class CustomerHeaderText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(text),
+        Text(text, style: headerStyle),
         button ?? const SizedBox.shrink()
       ],
     );
