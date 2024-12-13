@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../util/app_color.dart';
 import '../../../util/images.dart';
-import '../../../widgets/customer_app_bar.dart';
+import '../../../widgets/custom_app_bar.dart';
 import '../controller/home_controller.dart';
 
 class NavigationScreen extends GetView<HomeController> {
@@ -13,12 +13,26 @@ class NavigationScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Scaffold(
+          () => Scaffold(
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
         ),
-        body: controller.pages[controller.selectedIndex.value],
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          switchInCurve: Curves.easeIn,
+          switchOutCurve: Curves.easeOut,
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          child: KeyedSubtree(
+            key: ValueKey<int>(controller.selectedIndex.value),
+            child: controller.pages[controller.selectedIndex.value],
+          ),
+        ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
@@ -71,7 +85,9 @@ class NavigationScreen extends GetView<HomeController> {
               );
             }),
             currentIndex: controller.selectedIndex.value,
-            onTap: controller.onItemTapped,
+            onTap: (index) {
+              controller.selectedIndex.value = index;
+            },
           ),
         ),
       ),

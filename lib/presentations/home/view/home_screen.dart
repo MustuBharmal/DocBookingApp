@@ -1,11 +1,14 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_widgets.dart';
+import 'package:doc_booking_app/presentations/specialist/view/list_of_specialist_screen.dart';
 import 'package:doc_booking_app/util/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../global/constant_values.dart';
 import '../../../util/styles.dart';
 import '../../../widgets/custom_container_with_logo.dart';
+import '../../../widgets/custom_specialist_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -204,7 +207,9 @@ class HomeScreen extends StatelessWidget {
               myHeaderText(
                   text: ConstantString.topRatedSpecialist,
                   button: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => const ListOfSpecialistScreen());
+                      },
                       child: Text(
                         "See All",
                         style: subtitleStyle1,
@@ -218,8 +223,34 @@ class HomeScreen extends StatelessWidget {
                 child: ListView.separated(
                     physics: const ScrollPhysics(),
                     primary: true,
-                    itemBuilder: (context, index) =>
-                        customSpecialistContainer(onTap: () {}),
+                    itemBuilder: (context, index) {
+                      switch (index) {
+                        case 0:
+                          return customSpecialistContainer(
+                              name: "Divyesh",
+                              specialist: "specialist",
+                              charges: 10,
+                              rating: 5,
+                              review: 25,
+                              onTap: () {});
+                        case 1:
+                          return customSpecialistContainer(
+                              name: "Mustafa",
+                              specialist: "specialist",
+                              charges: 10,
+                              rating: 5,
+                              review: 25,
+                              onTap: () {});
+                        default:
+                          return customSpecialistContainer(
+                              name: "default",
+                              specialist: "specialist",
+                              charges: 10,
+                              rating: 5,
+                              review: 25,
+                              onTap: () {});
+                      }
+                    },
                     separatorBuilder: (context, index) => const SizedBox(
                           height: 10,
                         ),
