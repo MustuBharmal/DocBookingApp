@@ -1,20 +1,12 @@
-import 'package:doc_booking_app/global/app_color.dart';
-import 'package:doc_booking_app/widgets/custom_container_with_logo.dart';
+import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:flutter/material.dart';
+import '../../../global/app_color.dart';
+import '../../../widgets/custom_container_with_logo2.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  static const routeName = 'profile-screen';
-  static const List detailList = [
-    "User Info",
-    "Payment Management",
-    "FAQ",
-    "Contact Us",
-    "About Us",
-    "How to be Partner",
-    "Prescription"
-  ];
+  static const routeName = '/profile-screen';
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +15,12 @@ class ProfileScreen extends StatelessWidget {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15),
           child: ListView.separated(
-              itemBuilder: (context, index) =>
-                  customContainerWithLogo2(text: detailList[index]),
+              itemBuilder: (context, index) => CustomContainerWithIcon2(
+                  text: ConstantValue.detailList[index]),
               separatorBuilder: (context, index) => const SizedBox(
                     height: 10,
                   ),
-              itemCount: detailList.length),
+              itemCount: ConstantValue.detailList.length),
         ));
   }
 }

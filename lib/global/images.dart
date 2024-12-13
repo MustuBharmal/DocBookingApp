@@ -14,8 +14,9 @@ abstract class AppImage {
   static String get medicalKit=>'medical_kit'.iconPng;
   static String get notification=>'notification'.iconPng;
   static String get phlebotomy=>'phlebotomy'.iconPng;
-  static String get stethoscope=>'Stethoscope'.iconPng;
-  static String get trtAdministration=>'trtadministration'.iconPng;
+  static String get stethoscope=>'stethoscope'.iconPng;
+  static String get stethoscopeWhite=>'stethoscope_white'.iconPng;
+  static String get trtAdministration=>'trt_administration'.iconPng;
   static String get user=>'user'.iconPng;
   static String get vitaminBooster=>'vitamin_booster'.iconPng;
   static String get vitaminIv=>'vitamin_iv'.iconPng;
@@ -25,7 +26,6 @@ abstract class AppImage {
   static String get hrtTreatment=>'hrt_treatment'.iconPng;
   static String get trtTreatment=>'trt_treatment'.iconPng;
   static String get nutritionalist=>'nutritionalist'.iconPng;
-
 
 
   //Folder Location
@@ -53,5 +53,4 @@ extension on String {
   ///for logo folder
   String get logoPng => 'assets/logos/$this.png';
 
-  String get jpg => 'assets/images/$this.jpg';
 }

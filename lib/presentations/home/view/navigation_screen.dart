@@ -1,8 +1,9 @@
-import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
-import 'package:doc_booking_app/widgets/customer_app_bar.dart';
+import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
+import '../../../widgets/custom_app_bar.dart';
+import '../controller/home_controller.dart';
 
 class NavigationScreen extends GetView<HomeController> {
   const NavigationScreen({super.key});
@@ -12,30 +13,82 @@ class NavigationScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Scaffold(
+          () => Scaffold(
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
         ),
-        body: controller.pages[controller.selectedIndex.value],
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: AppColors.primary,
-          items: List.generate(controller.pages.length, (index) {
-            final bool isSelected = controller.selectedIndex.value == index;
-            return BottomNavigationBarItem(
-              backgroundColor: AppColors.white,
-              icon: Center(
-                child: Image.asset(
-                  _getIconPath(index),
-                  width: 20,
-                  color: isSelected ? AppColors.primary : AppColors.grey,
-                ),
-              ),
-              label: _getLabel(index),
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          switchInCurve: Curves.easeIn,
+          switchOutCurve: Curves.easeOut,
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
             );
-          }),
-          currentIndex: controller.selectedIndex.value,
-          onTap: controller.onItemTapped,
+          },
+          child: KeyedSubtree(
+            key: ValueKey<int>(controller.selectedIndex.value),
+            child: controller.pages[controller.selectedIndex.value],
+          ),
+        ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 8,
+                spreadRadius: 1,
+                offset: const Offset(0, -2),
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            elevation: 0,
+            selectedItemColor: AppColors.primary,
+            unselectedItemColor: AppColors.grey,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.transparent,
+            items: List.generate(controller.pages.length, (index) {
+              final bool isSelected = controller.selectedIndex.value == index;
+              return BottomNavigationBarItem(
+                icon: Center(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      if (isSelected)
+                        Container(
+                          width: 35,
+                          height: 35,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              colors: [Color(0xFFABE2FC), Color(0xFF2267FF)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
+                        ),
+                      Image.asset(
+                        _getIconPath(index),
+                        width: 20,
+                        height: 20,
+                        color: isSelected ? Colors.white : AppColors.grey,
+                      ),
+                    ],
+                  ),
+                ),
+                label: _getLabel(index),
+              );
+            }),
+            currentIndex: controller.selectedIndex.value,
+            onTap: (index) {
+              controller.selectedIndex.value = index;
+            },
+          ),
         ),
       ),
     );
@@ -44,13 +97,13 @@ class NavigationScreen extends GetView<HomeController> {
   String _getIconPath(int index) {
     switch (index) {
       case 0:
-        return 'assets/logos/home.png';
+        return AppImage.home;
       case 1:
-        return 'assets/logos/Stethoscope.png';
+        return AppImage.stethoscopeWhite;
       case 2:
-        return 'assets/logos/Medical Kit.png';
+        return AppImage.medicalKit;
       case 3:
-        return 'assets/logos/user.png';
+        return AppImage.user;
       default:
         return '';
     }

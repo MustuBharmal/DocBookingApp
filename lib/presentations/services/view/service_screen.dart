@@ -1,8 +1,10 @@
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
-import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/global/constant_values.dart';
+import 'package:doc_booking_app/global/constant_string.dart';
+import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/custom_container_with_logo.dart';
+import '../../../global/app_color.dart';
+import '../../../widgets/custom_container_with_logo1.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({super.key});
@@ -17,8 +19,15 @@ class ServiceScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              customIntoContainer(imgPath: "assets/images/male_doctor.png"),
+              const SizedBox(
+                height: 30,
+              ),
+              CustomBannerContainer(
+                  imgPath: AppImage.maleDoctor,
+                  headerText: ConstantString.headerTextForServices,
+                  subText: ConstantString.subTextForServices),
               const SizedBox(
                 height: 20,
               ),
@@ -26,16 +35,20 @@ class ServiceScreen extends StatelessWidget {
                 width: 340,
                 height: 500,
                 child: GridView.builder(
+                  physics: const ScrollPhysics(),
+                  primary: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: HomeScreen.textList.length,
+                  itemCount: ConstantValue.textListForServices.length,
                   itemBuilder: (context, index) {
-                    return containerWithLogo1(
-                      imagePath: HomeScreen.imagePathList[index],
-                      text: HomeScreen.textList[index],
+                    return ContainerWithIcon1(
+                      onPressed: () {},
+                      heightWidth: 60,
+                      iconPath: ConstantValue.imagePathListForServices[index],
+                      text: ConstantValue.textListForServices[index],
                     );
                   },
                 ),

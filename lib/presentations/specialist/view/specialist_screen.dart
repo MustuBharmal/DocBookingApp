@@ -1,9 +1,10 @@
+import 'package:doc_booking_app/global/constant_string.dart';
+import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
-
 import '../../../global/app_color.dart';
-import '../../../widgets/custom_container_with_logo.dart';
+import '../../../global/constant_values.dart';
+import '../../../widgets/custom_container_with_logo1.dart';
 import '../../../widgets/custom_intro_container.dart';
-import '../../home/view/home_screen.dart';
 
 class SpecialistScreen extends StatelessWidget {
   const SpecialistScreen({super.key});
@@ -19,7 +20,13 @@ class SpecialistScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              customIntoContainer(imgPath: "assets/images/female_doctor.png"),
+              const SizedBox(
+                height: 30,
+              ),
+              CustomBannerContainer(
+                  imgPath: AppImage.femaleDoctor,
+                  headerText: ConstantString.headerTextForSpecialist,
+                  subText: ConstantString.subTextForSpecialist),
               const SizedBox(
                 height: 20,
               ),
@@ -27,16 +34,20 @@ class SpecialistScreen extends StatelessWidget {
                 width: 340,
                 height: 500,
                 child: GridView.builder(
+                  physics: const ScrollPhysics(),
+                  primary: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: HomeScreen.textList.length,
+                  itemCount: ConstantValue.textListForSpecialist.length,
                   itemBuilder: (context, index) {
-                    return containerWithLogo1(
-                      imagePath: HomeScreen.imagePathList[index],
-                      text: HomeScreen.textList[index],
+                    return ContainerWithIcon1(
+                      onPressed: () {},
+                      heightWidth: 60,
+                      iconPath: ConstantValue.imagePathListForSpecialist[index],
+                      text: ConstantValue.textListForSpecialist[index],
                     );
                   },
                 ),

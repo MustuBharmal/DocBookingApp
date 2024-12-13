@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
@@ -7,21 +8,40 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   static HomeController get instance => Get.find<HomeController>();
+  Rx<TextEditingController> searchController = TextEditingController().obs;
   RxInt selectedIndex = RxInt(0);
+
   final List<Widget> pages = const [
     HomeScreen(),
     ServiceScreen(),
     SpecialistScreen(),
     ProfileScreen()
   ];
-
+  RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
-    'Service',
+    'Services',
     'Specialists',
     'My Profile',
   ];
+
   void onItemTapped(int index) {
     selectedIndex.value = index;
+  }
+
+  RxString selectedImagePath = AppImage.stethoscope.obs;
+
+  final Map<String, String> serviceImages = {
+    "Phlebotomy": AppImage.phlebotomy,
+    "Vitamin IV": AppImage.vitaminIv,
+    "Vitamin Booster": AppImage.vitaminBooster,
+    "TRT Administration": AppImage.bloodletting,
+    "Bloodletting": AppImage.trtAdministration,
+    "Flu Shots": AppImage.flushots,
+  };
+
+  void updateSelectedImage(String service) {
+    selectedImagePath.value =
+        serviceImages[service] ?? "assets/logos/stethoscope.png";
   }
 }

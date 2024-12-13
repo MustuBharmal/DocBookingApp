@@ -20,6 +20,15 @@ class ConstantValue {
     AppImage.trtAdministration,
     AppImage.flushots,
   ];
+  static const detailList = [
+    ConstantString.userInfo,
+    ConstantString.paymentMng,
+    ConstantString.faq,
+    ConstantString.contactUs,
+    ConstantString.aboutUs,
+    ConstantString.howTobBePartner,
+    ConstantString.prescription
+  ];
 
   static const textListForSpecialist = [
     ConstantString.doctor,
