@@ -1,11 +1,12 @@
 import 'package:doc_booking_app/global/app_color.dart';
-import 'package:doc_booking_app/widgets/custom_container_with_logo.dart';
 import 'package:flutter/material.dart';
+
+import '../../../widgets/custom_container_with_logo2.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  static const routeName = 'profile-screen';
+  static const routeName = '/profile-screen';
   static const List detailList = [
     "User Info",
     "Payment Management",
@@ -24,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 15),
           child: ListView.separated(
               itemBuilder: (context, index) =>
-                  customContainerWithIcon2(text: detailList[index]),
+                  CustomContainerWithIcon2(text: detailList[index]),
               separatorBuilder: (context, index) => const SizedBox(
                     height: 10,
                   ),

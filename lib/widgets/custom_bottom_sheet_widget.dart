@@ -7,13 +7,13 @@ import 'package:get/get.dart';
 class CustomBottomSheetWidget extends GetView<HomeController> {
   final String header;
   final List<String> listOfItems;
-  final TextEditingController controllers;
+  final TextEditingController searchControllers;
 
   const CustomBottomSheetWidget({
     super.key,
     required this.header,
     required this.listOfItems,
-    required this.controllers,
+    required this.searchControllers,
   });
 
   @override
@@ -81,17 +81,19 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                       ),
                       trailing: Radio(
                         value: item,
-                        groupValue: controller.selectedService.value,
+                        groupValue: HomeController.instance.selectedService.value,
                         activeColor: Colors.blue,
                         onChanged: (String? value) {
                           controller.updateSelectedImage(value!);
                           controller.selectedService.value = value;
+                          searchControllers.text=value;
                           Navigator.pop(context);
                         },
                       ),
                       onTap: () {
                         controller.updateSelectedImage(item);
                         controller.selectedService.value = item;
+                        searchControllers.text=item;
                         Navigator.pop(context);
                       },
                     );

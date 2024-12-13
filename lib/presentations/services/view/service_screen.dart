@@ -4,7 +4,7 @@ import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
 import '../../../global/images.dart';
-import '../../../widgets/custom_container_with_logo.dart';
+import '../../../widgets/custom_container_with_logo1.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({super.key});
@@ -44,10 +44,10 @@ class ServiceScreen extends StatelessWidget {
                   ),
                   itemCount: ConstantValue.textListForServices.length,
                   itemBuilder: (context, index) {
-                    return containerWithIcon1(
-                      onTap: () {},
+                    return ContainerWithIcon1(
+                      onPressed: () {},
                       heightWidth: 60,
-                      imagePath: ConstantValue.imagePathListForServices[index],
+                      iconPath: ConstantValue.imagePathListForServices[index],
                       text: ConstantValue.textListForServices[index],
                     );
                   },

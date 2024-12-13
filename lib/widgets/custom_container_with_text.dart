@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 class CustomerContainerWithText extends StatelessWidget {
-  const CustomerContainerWithText({super.key, required this.text});
+  const CustomerContainerWithText(
+      {super.key,
+        required this.text,
+        required this.height,
+        required this.width});
 
   final String text;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 1,
-      height: Get.height * 0.06,
+      width: width,//Get.width * 1,
+      height: height,//Get.height * 0.06,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(

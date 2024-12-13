@@ -42,19 +42,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               decoration: BoxDecoration(
                   color: AppColors.white,
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(42))),
-              padding: EdgeInsets.all(16),
+                      const BorderRadius.vertical(top: Radius.circular(42))),
+              padding: const EdgeInsets.all(16),
               child: Padding(
                 padding: const EdgeInsets.all(22.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
+                    const Text(
                       'Let us Come to You',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
-                    Text(
+                    const Text(
                       'Cant get to a clinic, let us come to you, book a Home visit appointment today.',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
@@ -64,10 +64,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: List.generate(
                         3,
                         (index) => Container(
-                          margin: EdgeInsets.all(6),
+                          margin: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                               gradient: activeIndex == index
-                                  ? LinearGradient(
+                                  ? const LinearGradient(
                                       colors: [
                                         AppColors.blueGradient1,
                                         AppColors.blueGradient2
@@ -81,7 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ),
                     ),
-                    BlueButton(label: 'Next'),
+                    const BlueButton(label: 'Next'),
                   ],
                 ),
               ),

@@ -9,7 +9,7 @@ class TypeOfDialogs {
       CustomBottomSheetWidget(
         header: header,
         listOfItems: listOfItems,
-        controllers: controller,
+        searchControllers: controller,
       ),
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(

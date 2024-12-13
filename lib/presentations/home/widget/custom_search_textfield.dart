@@ -26,30 +26,30 @@ class CustomSearchTextField extends StatelessWidget {
       child: Row(
         children: [
           Obx(() => SizedBox(
-                width: Get.width * 0.125,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CustomIconSizeBox(
-                          iconPath:
-                              HomeController.instance.selectedImagePath.value),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        onPressed: () {
-                          TypeOfDialogs.showBottomSheetDialog(
-                            Get.context!,
-                            "Select Service",
-                            HomeController.instance.serviceAppImage.keys.toList(),
-                            HomeController.instance.searchController,
-                          );
-                        },
-                        icon: const Icon(Icons.arrow_drop_down),
-                      ),
-                    ),
-                  ],
+            width: Get.width * 0.125,
+            child: Row(
+              children: [
+                Expanded(
+                  child: CustomIconSizeBox(
+                      iconPath:
+                      HomeController.instance.selectedImagePath.value),
                 ),
-              )),
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {
+                      TypeOfDialogs.showBottomSheetDialog(
+                        Get.context!,
+                        "Select Service",
+                        HomeController.instance.serviceImages.keys.toList(),
+                        HomeController.instance.searchController.value,
+                      );
+                    },
+                    icon: const Icon(Icons.arrow_drop_down),
+                  ),
+                ),
+              ],
+            ),
+          )),
           const SizedBox(width: 8),
           VerticalDivider(
             color: Colors.grey.shade300,
@@ -58,9 +58,9 @@ class CustomSearchTextField extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Obx(
-            () => Expanded(
+                () => Expanded(
               child: TextField(
-                controller: HomeController.instance.searchController,
+                controller: HomeController.instance.searchController.value,
                 decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: TextStyle(color: Colors.grey.shade500),
