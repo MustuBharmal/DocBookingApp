@@ -5,8 +5,6 @@ abstract class AppColors {
   static Color secondary = const Color(0xff262628);
   static Color black = const Color(0xff262628);
   static Color white = const Color(0xffFFFFFF);
-  static Color blackSecColor = Colors.amber;
-  // static Color blue = const Color(0xff274560);
   static Color textFieldBackground = const Color(0xffE5E5E5);
   static Color genderTextColor = const Color(0xffA6A6A6);
   static Color border = const Color(0xffC4C4C4);
