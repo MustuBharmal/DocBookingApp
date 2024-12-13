@@ -31,12 +31,8 @@ class AppRoutes {
         name: HomeScreen.routeName,
         page: () => const HomeScreen(),
         binding: HomeBinding()),
-    GetPage(name: ProfileScreen.routeName, page: () => const ProfileScreen()),
-    GetPage(
-        name: SpecialistDetailScreen.routeName,
-        page: () => const SpecialistDetailScreen()),
-    GetPage(
-        name: SpecialistScreen.routeName, page: () => const SpecialistScreen()),
+    GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
+    GetPage(name: SpecialistScreen.routeName, page: () => SpecialistScreen()),
     GetPage(name: ServiceScreen.routeName, page: () => const ServiceScreen()),
     GetPage(
         name: ListOfSpecialistScreen.routeName,

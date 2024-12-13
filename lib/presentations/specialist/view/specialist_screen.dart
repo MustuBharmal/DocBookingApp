@@ -1,6 +1,8 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../global/app_color.dart';
 import '../../../global/constant_values.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
@@ -24,7 +26,7 @@ class SpecialistScreen extends StatelessWidget {
                 height: 30,
               ),
               CustomBannerContainer(
-                  imgPath: AppImage.femaleDoctor,
+                  imgPath: AppImage.femaleDoctor1,
                   headerText: ConstantString.headerTextForSpecialist,
                   subText: ConstantString.subTextForSpecialist),
               const SizedBox(
@@ -44,7 +46,9 @@ class SpecialistScreen extends StatelessWidget {
                   itemCount: ConstantValue.textListForSpecialist.length,
                   itemBuilder: (context, index) {
                     return ContainerWithIcon1(
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                       heightWidth: 60,
                       iconPath: ConstantValue.imagePathListForSpecialist[index],
                       text: ConstantValue.textListForSpecialist[index],
