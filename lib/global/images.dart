@@ -35,6 +35,8 @@ abstract class AppImage {
   static String get userMyProfile=> 'user_my_profile'.iconPng;
   static String get arrowLeft => 'arrow_left'.iconPng;
   static String get editProfile => 'edit_profile'.iconPng;
+  static String get camera => 'camera'.iconPng;
+  static String get arrowDown => 'arrow_down'.iconPng;
 
 
   //Folder Location

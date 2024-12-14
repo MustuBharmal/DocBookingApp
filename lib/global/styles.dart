@@ -18,6 +18,24 @@ TextStyle txtInterRegular15Gray600 = TextStyle(
   fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
 );
+TextStyle txtInterTextField = TextStyle(
+  color: AppColors.gray600,
+  fontSize: 16,
+  fontFamily: 'Inter',
+  fontWeight: FontWeight.w400,
+);
+TextStyle txtInterTextFieldHint = TextStyle(
+  color: AppColors.grey,
+  fontSize: 14,
+  fontFamily: 'Inter',
+  fontWeight: FontWeight.w400,
+);
+TextStyle txtInterDropDownValue = TextStyle(
+  color: AppColors.black,
+  fontSize: 14,
+  fontFamily: 'Inter',
+  fontWeight: FontWeight.w400,
+);
 TextStyle txtInterMedium13 = TextStyle(
   color: AppColors.black,
   fontSize: 15,
@@ -46,3 +64,4 @@ TextStyle appBarStyle = GoogleFonts.poppins(
   fontSize: 24,
   fontWeight: FontWeight.w600,
 );
+
