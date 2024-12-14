@@ -77,3 +77,4 @@ TextStyle normalTextStyle = TextStyle(
   color: Colors.grey,
 );
 
+
