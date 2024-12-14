@@ -4,12 +4,12 @@ import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/specialist/widget/custom_review_card.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
+import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
 import 'package:doc_booking_app/widgets/customer_header_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../global/styles.dart';
 
 import '../../../global/images.dart';
@@ -28,16 +28,18 @@ class SpecialistDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             Stack(children: [
+              //Doctor Image
               ClipRect(
                 child: Align(
                   alignment: Alignment.topCenter,
                   heightFactor: 0.76,
                   child: Image.asset(
-                    AppImage.femaleDoctor,
+                    AppImage.femaleDoctor2,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
+              //Back Icon Button
               Positioned(
                   top: Get.width * 0.14,
                   left: Get.width * 0.05,
@@ -51,7 +53,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ))
             ]),
             Container(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -92,171 +94,167 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ///for rating
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  blurRadius: 5,
-                                  spreadRadius: 2,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                              size: 24,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            padding: const EdgeInsets.only(left: 12.33),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Rating"),
-                                Text(
-                                  "4.8 out of 5.0",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      //for person
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  blurRadius: 5,
-                                  spreadRadius: 2,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.person,
-                              color: Colors.green,
-                              size: 24,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                            padding: const EdgeInsets.only(left: 12.33),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Patient"),
-                                Text(
-                                  "500+",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  const CustomerHeaderText(text: "About"),
-                  const SizedBox(height: 8),
-                  RichText(
-                    text: TextSpan(
-                      text:
-                      "Physical Medicine and Rehabilitation (PM&R) physicians, also known as physiatrists, treat a wide variety of medical conditions... ",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        WidgetSpan(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Stack(
-                              alignment: Alignment.bottomLeft,
-                              children: [
-                                const Text(
-                                  "Read More",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
+                        ///for rating
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    blurRadius: 5,
+                                    spreadRadius: 2,
+                                    offset: const Offset(0, 3),
                                   ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  child: Container(
-                                    height: 1.5,
-                                    color: Colors.black,
-                                    width: 65,
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 24,
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: const EdgeInsets.only(left: 12.33),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Rating"),
+                                  Text(
+                                    "4.8 out of 5.0",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        //for person
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    blurRadius: 5,
+                                    spreadRadius: 2,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.person,
+                                color: Colors.green,
+                                size: 24,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: const EdgeInsets.only(left: 12.33),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Patient"),
+                                  Text(
+                                    "500+",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const CustomerHeaderText(text: "Location"),
-                  const SizedBox(height: 8),
-                  const Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        color: Colors.blue,
+                  const CustomerHeaderText(text: "About"),
+                  Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 16),
+                    child: RichText(
+                      text: TextSpan(
+                        text:
+                            "Physical Medicine and Rehabilitation (PM&R) physicians, also known as physiatrists, treat a wide variety of medical conditions... ",
+                        style: normalTextStyle,
+                        children: [
+                          WidgetSpan(
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Stack(
+                                alignment: Alignment.bottomLeft,
+                                children: [
+                                  const Text(
+                                    "Read More",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    child: Container(
+                                      height: 1.5,
+                                      color: Colors.black,
+                                      width: 65,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 8),
+                    ),
+                  ),
+                  const CustomerHeaderText(
+                    text: "Location",
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomIconSizeBox(
+                          iconPath: AppImage.mapOutline,
+                          iconWidth: 25,
+                          iconHeight: 25),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Expanded(
                         child: Text(
                           "4517 Washington Ave. Manchester, Kentucky 39495",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
+                          style: normalTextStyle,
                         ),
                       ),
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: CustomerHeaderText(text: "Review"),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: CustomerHeaderText(
-                      text: "Review",
-                      button: TextButton(
-                          onPressed: () {},
-                          child: Text("See all", style: subtitleStyle1)),
-                    ),
+                  CustomerHeaderText(
+                    text: "Review",
+                    button: TextButton(
+                        onPressed: () {},
+                        child: Text("See all", style: subtitleStyle1)),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
