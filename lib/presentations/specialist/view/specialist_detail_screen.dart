@@ -1,6 +1,8 @@
 import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/specialist/widget/custom_review_card.dart';
+import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -243,12 +245,19 @@ class SpecialistDetailScreen extends StatelessWidget {
                           child: Text("See all", style: subtitleStyle1)),
                     ),
                   ),
-                  CustomReviewCard(
-                      name: "Virat Kohli",
-                      imagePath: AppImage.doctor,
-                      day: "2 d",
-                      rating: 4,
-                      review: "Nice it is very Useful for me.")
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: CustomReviewCard(
+                        name: "Virat Kohli",
+                        imagePath: AppImage.doctor,
+                        day: "2 d",
+                        rating: 4,
+                        review: "Nice it is very Useful for me."),
+                  ),
+                  BlueButton(
+                    label: ConstantString.bookAppointment,
+                    onPressed: () {},
+                  )
                 ],
               ),
             ),

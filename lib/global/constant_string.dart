@@ -32,4 +32,6 @@ class ConstantString {
   static const aboutUs = "About Us";
   static const howTobBePartner = "How to be Partner";
   static const prescription = "Prescription";
+  static const bookAppointment = "Book Appointment";
+
 }
