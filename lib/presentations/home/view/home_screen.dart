@@ -1,7 +1,9 @@
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
+import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
@@ -20,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,11 +31,12 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 20,
-                fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(
+              height: 10,
+            ),
             const CustomSearchTextField(
               hintText: 'Search by service or location',
             ),
@@ -41,7 +44,7 @@ class HomeScreen extends StatelessWidget {
               height: 20,
             ),
             const SectionHeader(
-              title: "Upcoming Appointments",
+              title: ConstantString.upcomingAppointments,
               spacing: 20,
               child: AppointmentCard(),
             ),
@@ -49,28 +52,28 @@ class HomeScreen extends StatelessWidget {
               height: 20,
             ),
             const SectionHeader(
-              title: "Book Now",
-              spacing: 12,
+              title: ConstantString.bookNow,
+              spacing: 0,
               child: BookingOptions(),
             ),
             SectionHeader(
-              title: "Top Services",
+              title: ConstantString.topServices,
               button: TextButton(
                 onPressed: () {},
                 child: Text("See All", style: subtitleStyle1),
               ),
-              spacing: 15,
+              spacing: 20,
               child: const ServiceListView(),
             ),
             SectionHeader(
-              title: "Top Rated Specialists",
+              title: ConstantString.topRatedSpecialist,
               button: TextButton(
                 onPressed: () {
                   Get.toNamed(ListOfSpecialistScreen.routeName);
                 },
                 child: Text("See All", style: subtitleStyle1),
               ),
-              spacing: 10,
+              spacing: 0,
               child: const SpecialistListView(),
             ),
           ],
@@ -102,7 +105,7 @@ class SectionHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title),
+            CustomerHeaderText(text: title),
             if (button != null) button!,
           ],
         ),
@@ -229,26 +232,29 @@ class BookingOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomerContainerWithText(
-          text: "Visit Local Clinic",
-          width: Get.height * 1,
-          height: Get.height * 0.06,
-        ),
-        const SizedBox(height: 10),
-        CustomerContainerWithText(
-          text: "Arrange Home Visit",
-          width: Get.height * 1,
-          height: Get.height * 0.06,
-        ),
-        const SizedBox(height: 10),
-        CustomerContainerWithText(
-          text: "Chat with Specialist",
-          width: Get.height * 1,
-          height: Get.height * 0.06,
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.only(top: 12),
+      child: Column(
+        children: [
+          CustomerContainerWithText(
+            text: "Visit Local Clinic",
+            width: Get.height * 1,
+            height: Get.height * 0.06,
+          ),
+          const SizedBox(height: 10),
+          CustomerContainerWithText(
+            text: "Arrange Home Visit",
+            width: Get.height * 1,
+            height: Get.height * 0.06,
+          ),
+          const SizedBox(height: 10),
+          CustomerContainerWithText(
+            text: "Chat with Specialist",
+            width: Get.height * 1,
+            height: Get.height * 0.06,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -260,15 +266,19 @@ class ServiceListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 122,
+      height: Get.height * 0.18,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return ContainerWithIcon1(
-            onPressed: () {},
-            iconPath: ConstantValue.imagePathListForServices[index],
-            text: ConstantValue.textListForServices[index],
+          return Expanded(
+            child: ContainerWithIcon1(
+              onPressed: () {},
+              iconPath: ConstantValue.imagePathListForServices[index],
+              text: ConstantValue.textListForServices[index],
+              height: Get.height * 0.055,
+              width: Get.height * 0.055,
+            ),
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 10),
@@ -283,9 +293,10 @@ class SpecialistListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.only(top: 10),
       width: double.infinity,
-      height: 400,
+      height: Get.height * 0.45,
       child: ListView.separated(
         physics: const ScrollPhysics(),
         primary: true,

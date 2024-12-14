@@ -13,7 +13,7 @@ class CustomerHeaderText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(text, style: headerStyle),
+        Text(text, style: subHeaderStyle),
         button ?? const SizedBox.shrink()
       ],
     );

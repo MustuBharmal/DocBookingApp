@@ -44,9 +44,12 @@ class CustomReviewCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: AppColors.borderColor)),
                     child: CustomIconSizeBox(
+                      iconWidth: 30,
+                      iconHeight: 30,
                       iconPath: imagePath,
                     )),
                 const SizedBox(width: 12),
+
                 ///Name and day
                 Expanded(
                   child: Column(

@@ -2,21 +2,22 @@ import 'package:flutter/cupertino.dart';
 
 class CustomIconSizeBox extends StatelessWidget {
   const CustomIconSizeBox(
-      {super.key, required this.iconPath, this.heightWidth});
+      {super.key,
+      required this.iconPath,
+      required this.iconWidth,
+      required this.iconHeight});
 
   final String iconPath;
-  final double? heightWidth;
+  final double iconWidth;
+  final double iconHeight;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: heightWidth ?? 30,
-      height: heightWidth ?? 30,
-      child: Image.asset(
-        iconPath,
-        fit: BoxFit.contain,
-      ),
+    return Image.asset(
+      width: iconWidth,
+      height: iconHeight,
+      iconPath,
+      fit: BoxFit.contain,
     );
   }
 }
-

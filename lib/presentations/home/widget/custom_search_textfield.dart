@@ -31,6 +31,8 @@ class CustomSearchTextField extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CustomIconSizeBox(
+                        iconHeight: 30,
+                          iconWidth: 30,
                           iconPath:
                               HomeController.instance.selectedImagePath.value),
                     ),
