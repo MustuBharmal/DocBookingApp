@@ -6,15 +6,9 @@ import 'package:doc_booking_app/presentations/specialist/widget/custom_review_ca
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
-import 'package:doc_booking_app/widgets/customer_header_text.dart';
-import 'package:flutter/gestures.dart';
-import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/styles.dart';
-
-import '../../../global/images.dart';
-import '../../../widgets/customer_header_text.dart';
 
 class SpecialistDetailScreen extends StatelessWidget {
   const SpecialistDetailScreen({super.key});
