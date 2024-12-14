@@ -1,10 +1,14 @@
 import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/specialist/widget/custom_review_card.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:doc_booking_app/widgets/customer_header_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../global/styles.dart';
 
 import '../../../global/images.dart';
 import '../../../widgets/customer_header_text.dart';
@@ -200,7 +204,6 @@ class SpecialistDetailScreen extends StatelessWidget {
                                   "Read More",
                                   style: TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                     decoration: TextDecoration.none,
                                   ),
@@ -209,11 +212,8 @@ class SpecialistDetailScreen extends StatelessWidget {
                                   bottom: 0,
                                   child: Container(
                                     height: 1.5,
-                                    // Thickness of the underline
                                     color: Colors.black,
-                                    // Custom underline color
-                                    width:
-                                    65, // Adjust width based on text length
+                                    width: 65,
                                   ),
                                 ),
                               ],
@@ -247,7 +247,21 @@ class SpecialistDetailScreen extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: CustomerHeaderText(text: "Review"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: CustomerHeaderText(
+                      text: "Review",
+                      button: TextButton(
+                          onPressed: () {},
+                          child: Text("See all", style: subtitleStyle1)),
+                    ),
                   ),
+                  CustomReviewCard(
+                      name: "Virat Kohli",
+                      imagePath: AppImage.doctor,
+                      day: "2 d",
+                      rating: 4,
+                      review: "Nice it is very Useful for me.")
                 ],
               ),
             ),
