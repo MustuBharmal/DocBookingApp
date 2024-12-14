@@ -1,7 +1,11 @@
 import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/specialist/widget/custom_review_card.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../global/styles.dart';
 
 class SpecialistDetailScreen extends StatelessWidget {
   const SpecialistDetailScreen({super.key});
@@ -35,7 +39,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                         onPressed: () {
                           Get.back();
                         },
-                        icon: Icon(Icons.arrow_back_ios_new)),
+                        icon: const Icon(Icons.arrow_back_ios_new)),
                   ))
             ]),
             Container(
@@ -47,12 +51,12 @@ class SpecialistDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             "Peater Parker",
                             style: TextStyle(
@@ -70,7 +74,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Text(
+                      Text(
                         "\$10/hr",
                         style: TextStyle(
                           fontSize: 18,
@@ -109,13 +113,13 @@ class SpecialistDetailScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Container(
-                            padding: EdgeInsets.only(left: 12.33),
-                            child: Column(
+                            padding: const EdgeInsets.only(left: 12.33),
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Rating"),
-                                const Text(
+                                Text(
                                   "4.8 out of 5.0",
                                   style: TextStyle(
                                     fontSize: 14,
@@ -152,13 +156,13 @@ class SpecialistDetailScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Container(
-                            padding: EdgeInsets.only(left: 12.33),
-                            child: Column(
+                            padding: const EdgeInsets.only(left: 12.33),
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Patient"),
-                                const Text(
+                                Text(
                                   "500+",
                                   style: TextStyle(
                                     fontSize: 14,
@@ -173,16 +177,13 @@ class SpecialistDetailScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  CustomerHeaderText(text: "About"),
+                  const CustomerHeaderText(text: "About"),
                   const SizedBox(height: 8),
                   RichText(
                     text: TextSpan(
                       text:
                           "Physical Medicine and Rehabilitation (PM&R) physicians, also known as physiatrists, treat a wide variety of medical conditions... ",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                      style: normalTextStyle,
                       children: [
                         WidgetSpan(
                           child: GestureDetector(
@@ -190,11 +191,10 @@ class SpecialistDetailScreen extends StatelessWidget {
                             child: Stack(
                               alignment: Alignment.bottomLeft,
                               children: [
-                                Text(
+                                const Text(
                                   "Read More",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                     decoration: TextDecoration.none,
                                   ),
@@ -203,11 +203,8 @@ class SpecialistDetailScreen extends StatelessWidget {
                                   bottom: 0,
                                   child: Container(
                                     height: 1.5,
-                                    // Thickness of the underline
                                     color: Colors.black,
-                                    // Custom underline color
-                                    width:
-                                        65, // Adjust width based on text length
+                                    width: 65,
                                   ),
                                 ),
                               ],
@@ -218,30 +215,40 @@ class SpecialistDetailScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  CustomerHeaderText(text: "Location"),
+                  const CustomerHeaderText(
+                    text: "Location",
+                  ),
                   const SizedBox(height: 8),
                   Row(
-                    children: const [
-                      Icon(
+                    children: [
+                      const Icon(
                         Icons.location_on,
                         color: Colors.blue,
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           "4517 Washington Ave. Manchester, Kentucky 39495",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
+                          style: normalTextStyle,
                         ),
                       ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: CustomerHeaderText(text: "Review"),
+                    padding: const EdgeInsets.only(top: 5),
+                    child: CustomerHeaderText(
+                      text: "Review",
+                      button: TextButton(
+                          onPressed: () {},
+                          child: Text("See all", style: subtitleStyle1)),
+                    ),
                   ),
+                  CustomReviewCard(
+                      name: "Virat Kohli",
+                      imagePath: AppImage.doctor,
+                      day: "2 d",
+                      rating: 4,
+                      review: "Nice it is very Useful for me.")
                 ],
               ),
             ),

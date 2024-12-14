@@ -46,3 +46,7 @@ TextStyle appBarStyle = GoogleFonts.poppins(
   fontSize: 24,
   fontWeight: FontWeight.w600,
 );
+ TextStyle normalTextStyle=TextStyle(
+   fontSize: 14,
+   color: Colors.grey,
+ );
