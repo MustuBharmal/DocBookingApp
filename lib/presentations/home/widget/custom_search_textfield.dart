@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,9 +13,7 @@ class CustomSearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 0.95,
-      height: Get.height * 0.07,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
@@ -24,51 +23,58 @@ class CustomSearchTextField extends StatelessWidget {
         ),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Obx(() => SizedBox(
-            width: Get.width * 0.125,
-            child: Row(
+          Obx(
+            () => Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Expanded(
-                  child: CustomIconSizeBox(
-                      iconPath:
-                      HomeController.instance.selectedImagePath.value),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      TypeOfDialogs.showBottomSheetDialog(
-                        Get.context!,
-                        "Select Service",
-                        HomeController.instance.serviceImages.keys.toList(),
-                        HomeController.instance.searchController.value,
-                      );
-                    },
-                    icon: const Icon(Icons.arrow_drop_down),
-                  ),
+                // search for home screen
+                CustomIconSizeBox(
+                    iconPath:
+                        HomeController.instance.selectedImagePath.value),
+                IconButton(
+                  onPressed: () {
+                    TypeOfDialogs.showBottomSheetDialog(
+                      Get.context!,
+                      "Select Service",
+                      HomeController.instance.serviceImages.keys.toList(),
+                      HomeController.instance.searchController.value,
+                    );
+                  },
+                  icon: const Icon(Icons.arrow_drop_down),
                 ),
               ],
             ),
-          )),
-          const SizedBox(width: 8),
-          VerticalDivider(
-            color: Colors.grey.shade300,
-            thickness: 1,
-            width: 1,
           ),
-          const SizedBox(width: 8),
-          Obx(
-                () => Expanded(
-              child: TextField(
-                controller: HomeController.instance.searchController.value,
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: TextStyle(color: Colors.grey.shade500),
-                  border: InputBorder.none,
+          Expanded(
+            flex: 4,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+                child: VerticalDivider(
+                  color: AppColors.border,
+                  thickness: 1,
+                  width: 2,
                 ),
               ),
-            ),
-          )
+              const SizedBox(width: 11,),
+              Expanded(
+                child: Obx(
+                  () => TextField(
+                    controller: HomeController.instance.searchController.value,
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      hintStyle: TextStyle(color: Colors.grey.shade500),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ))
         ],
       ),
     );

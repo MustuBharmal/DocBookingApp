@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,11 +29,12 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                 color: AppColors.black,
                 fontSize: 20,
-                fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(
+              height: 10,
+            ),
             const CustomSearchTextField(
               hintText: 'Search by service or location',
             ),
@@ -44,9 +45,6 @@ class HomeScreen extends StatelessWidget {
               title: "Upcoming Appointments",
               spacing: 20,
               child: AppointmentCard(),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             const SectionHeader(
               title: "Book Now",
@@ -102,7 +100,13 @@ class SectionHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title),
+            Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+            ),
             if (button != null) button!,
           ],
         ),
@@ -291,7 +295,7 @@ class SpecialistListView extends StatelessWidget {
         primary: true,
         itemBuilder: (context, index) {
           final specialist =
-          SpecialistController.instance.filteredSpecialists[index];
+              SpecialistController.instance.filteredSpecialists[index];
           return CustomSpecialistContainer(
             name: specialist.name,
             specialist: specialist.specialist,

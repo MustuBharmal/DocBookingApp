@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,12 +53,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     const Text(
                       'Let us Come to You',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                     const Text(
                       'Cant get to a clinic, let us come to you, book a Home visit appointment today.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -74,14 +77,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       ],
                                     )
                                   : null,
-                              color: activeIndex != index ? AppColors.gray : null,
+                              color: activeIndex != index
+                                  ? AppColors.gray
+                                  : null,
                               shape: BoxShape.circle),
                           height: 10,
                           width: 10,
                         ),
                       ),
                     ),
-                    const BlueButton(label: 'Next'),
+                    BlueButton(
+                      label: 'Next',
+                      onPressed: () {
+                        if (activeIndex < 2) {
+                          activeIndex++;
+                        }else{
+                          Get.offAllNamed(LoginWelcomeScreen.routeName);
+                        }
+                        setState(() {});
+                      },
+                    ),
                   ],
                 ),
               ),

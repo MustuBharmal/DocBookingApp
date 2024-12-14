@@ -1,8 +1,7 @@
-import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-class CustomSearchTextfield extends StatelessWidget {
-  const CustomSearchTextfield({super.key,required this.hintText,required this.controller});
+class CustomSearchTextField extends StatelessWidget {
+  const CustomSearchTextField({super.key,required this.hintText,required this.controller});
   final String hintText;
   final TextEditingController controller;
   @override

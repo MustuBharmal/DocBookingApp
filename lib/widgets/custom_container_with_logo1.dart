@@ -33,7 +33,7 @@ class ContainerWithIcon1 extends StatelessWidget {
         ),
         child: Column(
           children: [
-            CustomIconSizeBox(iconPath: iconPath,heightWidth: heightWidth),
+            CustomIconSizeBox(iconPath: iconPath,iconWidth: heightWidth),
             const SizedBox(height: 16),
             Text(
               text,

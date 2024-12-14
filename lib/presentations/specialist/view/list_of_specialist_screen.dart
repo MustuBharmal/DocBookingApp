@@ -24,7 +24,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
           child: Column(
             children: [
               Obx(
-                () => CustomSearchTextfield(
+                () => CustomSearchTextField(
                   hintText: "Search by name",
                   controller:
                       SpecialistController.instance.searchController.value,
