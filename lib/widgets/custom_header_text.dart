@@ -3,6 +3,8 @@ import '../../../global/styles.dart';
 
 import '../global/styles.dart';
 
+import '../global/styles.dart';
+
 class CustomerHeaderText extends StatelessWidget {
   const CustomerHeaderText({super.key, required this.text, this.button});
 
