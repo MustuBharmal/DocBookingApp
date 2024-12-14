@@ -1,38 +1,31 @@
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-class CustomSearchTextField extends StatelessWidget {
-  const CustomSearchTextField({super.key,required this.hintText,required this.controller});
+class CustomSearchTextfield extends StatelessWidget {
+  const  CustomSearchTextfield({super.key,required this.hintText,required this.controller});
   final String hintText;
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
-      child: SizedBox(
-        width: Get.width * 0.95,
-        height: 50,
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(Icons.search),
-            hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey.shade500),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50),
-              borderSide: const BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50),
-              borderSide: const BorderSide(color: Colors.grey, width: 2),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(50),
-              borderSide: const BorderSide(color: Colors.grey),
-            ),
-            isCollapsed: true,
-            contentPadding: const EdgeInsets.symmetric(vertical: 12),
-          ),
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.search),
+        hintText: hintText,
+        hintStyle: TextStyle(color: AppColors.gray600),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: const BorderSide(color:AppColors.borderColor),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: BorderSide(color: AppColors.grey, width: 2),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: const BorderSide(color: AppColors.borderColor),
+        ),
+        isCollapsed: true,
+        contentPadding: const EdgeInsets.symmetric(vertical: 12),
       ),
     );
   }
