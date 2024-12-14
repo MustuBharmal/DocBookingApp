@@ -270,8 +270,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   BlueButton(
                     label: ConstantString.bookAppointment,
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   )
                 ],
               ),
