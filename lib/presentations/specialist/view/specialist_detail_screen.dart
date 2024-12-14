@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/review/view/reviews_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/widget/custom_review_card.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
@@ -247,7 +248,9 @@ class SpecialistDetailScreen extends StatelessWidget {
                   CustomerHeaderText(
                     text: "Review",
                     button: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(ReviewsScreen.routeName);
+                        },
                         child: Text("See all", style: subtitleStyle1)),
                   ),
                   Padding(
@@ -261,7 +264,8 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   BlueButton(
                     label: ConstantString.bookAppointment,
-                    onPressed: () {},
+                    onPressed: () {
+                    },
                   )
                 ],
               ),
