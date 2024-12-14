@@ -4,6 +4,7 @@ import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
+import 'package:doc_booking_app/presentations/review/view/reviews_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
@@ -32,8 +33,10 @@ class AppRoutes {
         page: () => const HomeScreen(),
         binding: HomeBinding()),
     GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
+    GetPage(name: SpecialistDetailScreen.routeName, page: () => SpecialistDetailScreen()),
     GetPage(name: SpecialistScreen.routeName, page: () => SpecialistScreen()),
     GetPage(name: ServiceScreen.routeName, page: () => const ServiceScreen()),
+    GetPage(name: ReviewsScreen.routeName, page: () => const ReviewsScreen()),
     GetPage(
         name: ListOfSpecialistScreen.routeName,
         page: () => const ListOfSpecialistScreen(),

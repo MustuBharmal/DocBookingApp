@@ -275,6 +275,10 @@ class ServiceListView extends StatelessWidget {
             onPressed: () {},
             iconPath: ConstantValue.imagePathListForServices[index],
             text: ConstantValue.textListForServices[index],
+            containerHeight: Get.height * 0.18,
+            containerWidth: Get.width * 0.275,
+            iconHeight: Get.height * 0.055,
+            iconWidth: Get.height * 0.055,
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 10),
