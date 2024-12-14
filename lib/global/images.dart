@@ -11,8 +11,6 @@ abstract class AppImage {
 
   ///icons
   static String get bloodletting => 'bloodletting'.iconPng;
-<<<<<<< HEAD
-=======
   static String get flushots => 'flushots'.iconPng;
   static String get home => 'home'.iconPng;
   static String get homeVisit => 'home_visit'.iconPng;
@@ -40,8 +38,6 @@ abstract class AppImage {
   static String get userMyProfile=> 'user_my_profile'.iconPng;
   static String get arrowLeft => 'arrow_left'.iconPng;
   static String get editProfile => 'edit_profile'.iconPng;
->>>>>>> 897a6bb (assets of profile screen added, made custom widgets, and did user info screen)
-
   static String get mapOutline => 'map_icon'.iconPng;
 
   static String get flushots => 'flushots'.iconPng;
@@ -73,6 +69,8 @@ abstract class AppImage {
   static String get doctor => 'doctor'.iconPng;
 
   static String get fitnessCoach => 'fitness_coach'.iconPng;
+  static String get camera => 'camera'.iconPng;
+  static String get arrowDown => 'arrow_down'.iconPng;
 
   static String get hrtTreatment => 'hrt_treatment'.iconPng;
 
@@ -97,9 +95,11 @@ abstract class AppImage {
   static const String intro3 = '$imageFolderLocation/iv_intro_3.png';
 
 //Icons
+
 }
 
 extension on String {
+
   ///for image folder
   String get imagePng => 'assets/images/$this.png';
 

@@ -19,6 +19,7 @@ import 'package:doc_booking_app/presentations/services/view/service_screen.dart'
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:get/get.dart';
+import '../presentations/profile/binding/profile_binding.dart';
 import '../presentations/specialist/binding/specialist_binding.dart';
 import '../presentations/specialist/view/list_of_specialist_screen.dart';
 import '../presentations/splash_screens/view/splash_screen.dart';
@@ -31,6 +32,7 @@ class AppRoutes {
         bindings: [
           HomeBinding(),
           SpecialistBinding(),
+          ProfileBinding(),
         ]),
     GetPage(name: SplashScreen.routeName, page: () => const SplashScreen()),
     GetPage(

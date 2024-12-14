@@ -1,36 +1,67 @@
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
+
+import '../../../global/styles.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
   final bool showAsterisk;
   final TextEditingController controller;
+  final TextStyle hintStyle;
+  final String hintText;
 
-  const CustomTextField({super.key,
+  const CustomTextField({
+    super.key,
     required this.label,
     required this.showAsterisk,
     required this.controller,
+    required this.hintStyle,
+    required this.hintText,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 343,
-      height: 52,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-        ),
-        border: Border.all(width: 1),
-      ),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          suffixText: showAsterisk ? '*' : null,
-          suffixStyle: TextStyle(color: Colors.red),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 16),
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RichText(
+            text: TextSpan(text: label, style: txtInterTextField, children: [
+              TextSpan(
+                  text: showAsterisk ? ' *' : '',
+                  style: TextStyle(color: Colors.red)),
+            ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: TextFormField(
+              controller: controller,
+              style: txtInterDropDownValue,
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: hintStyle,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: AppColors.darkBlue,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade200,
+                  ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

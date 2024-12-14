@@ -17,6 +17,7 @@ dependencies:
   curved_navigation_bar:
   country_picker: ^2.0.27
   flutter_svg: ^2.0.16
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
