@@ -45,10 +45,11 @@ class SpecialistScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ContainerWithIcon1(
                       onPressed: () {
-
                       },
-                      height: 60,
-                      width: 60,
+                      containerHeight: 200,
+                      containerWidth: 200,
+                      iconHeight: 60,
+                      iconWidth: 60,
                       iconPath: ConstantValue.imagePathListForSpecialist[index],
                       text: ConstantValue.textListForSpecialist[index],
                     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../global/styles.dart';
 
 class CustomBannerContainer extends StatelessWidget {
   const CustomBannerContainer(
@@ -14,8 +16,8 @@ class CustomBannerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 343,
-      height: 150,
+      width: Get.width * 0.95,
+      height: Get.height * 0.193,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment(-0.92, 0.38),
@@ -26,29 +28,20 @@ class CustomBannerContainer extends StatelessWidget {
       ),
       child: Stack(
         clipBehavior: Clip.none,
+        //It allow to image take space outside the container
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  headerText,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 1.5,
-                  ),
-                ),
+                Text(headerText, style: txtInterMedium12),
                 const SizedBox(height: 9),
                 Text(
                   subText,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 10,
-                    fontFamily: 'Inter',
                     fontWeight: FontWeight.w400,
                     height: 1.5,
                   ),
@@ -60,8 +53,8 @@ class CustomBannerContainer extends StatelessWidget {
             right: 20,
             bottom: 0,
             child: Container(
-              width: 132,
-              height: 175,
+              width: Get.width * 0.37,
+              height: Get.height * 0.2325,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(imgPath),

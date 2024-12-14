@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'custom_icon_sizebox.dart';
 
 import 'custom_icon_sized_box.dart';
@@ -9,14 +8,18 @@ class ContainerWithIcon1 extends StatelessWidget {
       {super.key,
       required this.text,
       required this.iconPath,
-      required this.height,
-      required this.width,
+      required this.containerHeight,
+      required this.containerWidth,
+      required this.iconWidth,
+      required this.iconHeight,
       required this.onPressed});
 
   final String text;
   final String iconPath;
-  final double height;
-  final double width;
+  final double containerWidth;
+  final double containerHeight;
+  final double iconWidth;
+  final double iconHeight;
   final VoidCallback? onPressed;
 
   @override
@@ -24,8 +27,8 @@ class ContainerWithIcon1 extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        width: Get.width * 0.275,
-        height: Get.height * 0.18,
+        width: containerWidth,
+        height: containerHeight,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         clipBehavior: Clip.antiAlias,
         decoration: ShapeDecoration(
@@ -38,7 +41,9 @@ class ContainerWithIcon1 extends StatelessWidget {
         child: Column(
           children: [
             CustomIconSizeBox(
-                iconPath: iconPath, iconWidth: width, iconHeight: height),
+                iconPath: iconPath,
+                iconWidth: iconWidth,
+                iconHeight: iconHeight),
             const SizedBox(height: 16),
             Text(
               text,
