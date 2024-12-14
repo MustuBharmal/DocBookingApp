@@ -25,7 +25,7 @@ class ServiceScreen extends StatelessWidget {
                 height: 30,
               ),
               CustomBannerContainer(
-                  imgPath: AppImage.maleDoctor,
+                  imgPath: AppImage.maleDoctor1,
                   headerText: ConstantString.headerTextForServices,
                   subText: ConstantString.subTextForServices),
               const SizedBox(

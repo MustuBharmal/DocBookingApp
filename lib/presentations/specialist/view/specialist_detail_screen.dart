@@ -23,7 +23,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   heightFactor: 0.76,
                   child: Image.asset(
-                    AppImage.femaleDoctor,
+                    AppImage.femaleDoctor2,
                     fit: BoxFit.cover,
                   ),
                 ),

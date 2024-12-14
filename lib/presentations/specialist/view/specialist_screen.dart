@@ -24,7 +24,7 @@ class SpecialistScreen extends StatelessWidget {
                 height: 30,
               ),
               CustomBannerContainer(
-                  imgPath: AppImage.femaleDoctor,
+                  imgPath: AppImage.femaleDoctor1,
                   headerText: ConstantString.headerTextForSpecialist,
                   subText: ConstantString.subTextForSpecialist),
               const SizedBox(
