@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
 import '../../../widgets/custom_specialist_container.dart';
-import '../widget/custom_widget.dart';
+import '../widget/custom_search_textfield.dart';
 
 class ListOfSpecialistScreen extends GetView<SpecialistController> {
   const ListOfSpecialistScreen({super.key});
