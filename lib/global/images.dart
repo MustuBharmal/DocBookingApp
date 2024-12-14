@@ -7,7 +7,7 @@ abstract class AppImage {
 
   static String get femaleDoctor1 => 'female_doctor1'.imagePng;
 
-  static String get femaleDoctor2 => 'female_doctor2'.imagePng;
+  static String get femaleDoctor2 => 'female_doctor2'.jpeg;
 
   ///icons
   static String get bloodletting => 'bloodletting'.iconPng;
@@ -78,6 +78,9 @@ extension on String {
 
   ///for logo folder
   String get logoPng => 'assets/logos/$this.png';
+
+  ///for jpeg
+  String get jpeg => 'assets/images/$this.jpeg';
 
   ///for svg folder
   String get svg => 'assets/svgs/$this.svg';

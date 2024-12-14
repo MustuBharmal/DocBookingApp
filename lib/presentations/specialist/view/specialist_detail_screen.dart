@@ -29,7 +29,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   heightFactor: 0.76,
                   child: Image.asset(
-                    "assets/images/female_doctor2.jpeg",
+                    AppImage.femaleDoctor2,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -264,8 +264,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   BlueButton(
                     label: ConstantString.bookAppointment,
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   )
                 ],
               ),
