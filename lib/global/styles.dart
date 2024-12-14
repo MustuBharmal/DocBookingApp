@@ -5,6 +5,9 @@ import 'app_color.dart';
 
 const headerStyle =
 TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold);
+const subHeaderStyle =
+TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500);
+
 const titleStyle =
 TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold);
 TextStyle subtitleStyle = GoogleFonts.poppins(

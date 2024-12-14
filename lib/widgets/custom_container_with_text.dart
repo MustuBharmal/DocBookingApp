@@ -16,6 +16,7 @@ class CustomerContainerWithText extends StatelessWidget {
     return Container(
       width: width,
       height: height,
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -29,7 +30,6 @@ class CustomerContainerWithText extends StatelessWidget {
           style: const TextStyle(
             color: Color(0xFF2268FF),
             fontSize: 14,
-            fontFamily: 'Inter',
             fontWeight: FontWeight.w500,
             height: 0,
           ),
