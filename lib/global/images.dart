@@ -12,6 +12,8 @@ abstract class AppImage {
   ///icons
   static String get bloodletting => 'bloodletting'.iconPng;
 
+  static String get mapOutline => 'map_icon'.iconPng;
+
   static String get flushots => 'flushots'.iconPng;
 
   static String get home => 'home'.iconPng;
