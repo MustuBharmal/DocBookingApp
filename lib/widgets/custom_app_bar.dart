@@ -6,9 +6,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool back;
   final bool isVisible;
+  final VoidCallback? onPressed;
 
   const CustomAppBar(
       {required this.title,
+      this.onPressed,
       this.isVisible = true,
       required this.back,
       super.key});
@@ -24,10 +26,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: Text(title),
         centerTitle: true,
         actions: [
-          Visibility(
-              visible: isVisible,
-              child: IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.notifications)))
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Visibility(
+                visible: isVisible,
+                child: InkWell(
+                  onTap: onPressed,
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Color(0xFFF5F1FD))),
+                    child: Icon(
+                      Icons.notifications,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                )),
+          )
         ],
         backgroundColor: AppColors.white,
         iconTheme: IconThemeData(color: AppColors.black),
