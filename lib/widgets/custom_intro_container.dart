@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../global/styles.dart';
 
 class CustomBannerContainer extends StatelessWidget {
-  const CustomBannerContainer(
-      {super.key,
-      required this.imgPath,
-      required this.headerText,
-      required this.subText});
+  const CustomBannerContainer({super.key, required this.imgPath, required this.headerText, required this.subText});
 
   final String imgPath;
   final String headerText;
@@ -28,9 +24,9 @@ class CustomBannerContainer extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                begin: Alignment(-0.92, 0.38),
-                end: Alignment(0.92, -0.38),
-                colors: [Color(0xFF2267FF), Color(0xFFABC4FC)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xFF2267FF),Color(0xFF2267FF), Color(0xFFABC4FC)],
               ),
               borderRadius: BorderRadius.circular(24),
             ),
@@ -38,7 +34,10 @@ class CustomBannerContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(headerText, style: txtInterMedium12,),
+                Text(
+                  headerText,
+                  style: txtInterMedium12,
+                ),
                 const SizedBox(height: 9),
                 Text(
                   subText,
@@ -55,7 +54,10 @@ class CustomBannerContainer extends StatelessWidget {
           Positioned(
             right: 16,
             top: -16,
-            child: Image.asset(imgPath,height: 250,),
+            child: Image.asset(
+              imgPath,
+              height: 250,
+            ),
           ),
         ],
       ),

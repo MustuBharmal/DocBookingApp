@@ -1,6 +1,5 @@
-import 'package:get/get.dart';
-
 import 'package:doc_booking_app/global/images.dart';
+import 'package:get/get.dart';
 
 import '../presentations/profile/view/about_us_screen.dart';
 import '../presentations/profile/view/contact_us_screen.dart';
@@ -22,12 +21,12 @@ class ConstantValue {
   ];
 
   static List imagePathListForServices = [
-    AppImage.phlebotomy,
-    AppImage.vitaminIv,
-    AppImage.vitaminBooster,
-    AppImage.bloodletting,
-    AppImage.trtAdministration,
-    AppImage.flushots,
+    AppImage.homeCategory1,
+    AppImage.homeCategory2,
+    AppImage.homeCategory3,
+    AppImage.homeCategory4,
+    AppImage.homeCategory5,
+    AppImage.homeCategory6,
   ];
 
   static const detailList = [
@@ -58,7 +57,6 @@ class ConstantValue {
     PrescriptionScreen.routeName,
   ];
 
-
   static const textListForSpecialist = [
     ConstantString.doctor,
     ConstantString.nutritionalist,
@@ -69,12 +67,12 @@ class ConstantValue {
   ];
 
   static List imagePathListForSpecialist = [
-    AppImage.doctor,
-    AppImage.nutritionalist,
-    AppImage.fitnessCoach,
-    AppImage.trtTreatment,
-    AppImage.hrtTreatment,
-    AppImage.mentalHealth,
+    AppImage.specialistIcon1,
+    AppImage.specialistIcon2,
+    AppImage.specialistIcon4,
+    AppImage.specialistIcon5,
+    AppImage.specialistIcon6,
+    AppImage.specialistIcon3,
   ];
 
   static double height = Get.height;

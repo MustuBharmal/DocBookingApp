@@ -1,8 +1,4 @@
 import 'package:doc_booking_app/global/images.dart';
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
-import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
-import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,12 +7,6 @@ class HomeController extends GetxController {
   Rx<TextEditingController> searchController = TextEditingController().obs;
   RxInt selectedIndex = RxInt(0);
 
-  final List<Widget> pages = const [
-    HomeScreen(),
-    ServiceScreen(),
-    SpecialistScreen(),
-    ProfileScreen()
-  ];
   RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
@@ -41,7 +31,6 @@ class HomeController extends GetxController {
   };
 
   void updateSelectedImage(String service) {
-    selectedImagePath.value =
-        serviceImages[service] ?? AppImage.stethoscope;
+    selectedImagePath.value = serviceImages[service] ?? AppImage.stethoscope;
   }
 }

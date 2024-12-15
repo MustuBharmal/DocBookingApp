@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'custom_icon_sized_box.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ContainerWithIcon1 extends StatelessWidget {
   const ContainerWithIcon1(
       {super.key,
       required this.text,
       required this.iconPath,
-      required this.iconWidth,
-      required this.iconHeight,
+      // required this.iconWidth,
+      // required this.iconHeight,
       required this.onPressed});
 
   final String text;
   final String iconPath;
-  final double iconWidth;
-  final double iconHeight;
+
+  // final double iconWidth;
+  // final double iconHeight;
   final VoidCallback? onPressed;
 
   @override
@@ -31,20 +32,27 @@ class ContainerWithIcon1 extends StatelessWidget {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomIconSizeBox(
-                iconPath: iconPath,
-                iconWidth: iconWidth,
-                iconHeight: iconHeight),
-            SizedBox(height: 16,),
-            Text(
-              text,
-              style: const TextStyle(
-                color: Color(0xFF363636),
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 3,
+              child: SvgPicture.asset(
+                iconPath,
+                fit: BoxFit.contain,
+              ),
+            ),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: Color(0xFF363636),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],

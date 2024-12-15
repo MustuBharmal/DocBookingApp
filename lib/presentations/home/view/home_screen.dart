@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/global/constant_string.dart';
+import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
@@ -6,6 +7,7 @@ import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../global/app_color.dart';
 import '../../../global/constant_values.dart';
 import '../../../global/styles.dart';
@@ -20,66 +22,103 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Hello, John Doe",
-              style: TextStyle(
-                color: AppColors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Hello, John Doe",
+            style: TextStyle(
+              color: AppColors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
             ),
-            const SizedBox(
-              height: 20,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const CustomSearchTextField(
+            hintText: 'Search by service or location',
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const SectionHeader(
+            title: ConstantString.upcomingAppointments,
+            spacing: 20,
+            childWidget: AppointmentCard(),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const SectionHeader(
+            title: ConstantString.bookNow,
+            spacing: 12,
+            childWidget: BookingOptions(),
+          ),
+          // have to discuss with Mohd bhai
+          SectionHeader(
+            title: ConstantString.topServices,
+            button: TextButton(
+              onPressed: () {},
+              child: Text("See All", style: subtitleStyle1),
             ),
-            const CustomSearchTextField(
-              hintText: 'Search by service or location',
+            spacing: 20,
+            childWidget: GridView(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 10, childAspectRatio: 0.95),
+              children: [
+                ContainerWithIcon1(
+                  onPressed: () {},
+                  iconPath: AppImage.homeCategory1,
+                  text: ConstantValue.textListForServices[0],
+                ),
+                ContainerWithIcon1(
+                  onPressed: () {},
+                  iconPath: AppImage.homeCategory2,
+                  text: ConstantValue.textListForServices[1],
+                ),
+                ContainerWithIcon1(
+                  onPressed: () {},
+                  iconPath: AppImage.homeCategory3,
+                  text: ConstantValue.textListForServices[2],
+                ),
+              ],
             ),
-            const SizedBox(
-              height: 20,
+          ),
+          // have to discuss with Mohd bhai
+          SectionHeader(
+            title: ConstantString.topRatedSpecialist,
+            button: TextButton(
+              onPressed: () {
+                Get.toNamed(ListOfSpecialistScreen.routeName);
+              },
+              child: Text("See All", style: subtitleStyle1),
             ),
-            const SectionHeader(
-              title: ConstantString.upcomingAppointments,
-              spacing: 20,
-              childWidget: AppointmentCard(),
+            spacing: 0,
+            childWidget: ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final specialist = SpecialistController.instance.filteredSpecialists[index];
+                return CustomSpecialistContainer(
+                  name: specialist.name,
+                  specialist: specialist.specialist,
+                  charges: specialist.charges,
+                  rating: specialist.rating,
+                  review: specialist.review,
+                  onPressed: () {
+                    Get.toNamed(SpecialistDetailScreen.routeName);
+                  },
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              itemCount: 3,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const SectionHeader(
-              title: ConstantString.bookNow,
-              spacing: 12,
-              childWidget: BookingOptions(),
-            ),
-            // have to discuss with Mohd bhai
-            SectionHeader(
-              title: ConstantString.topServices,
-              button: TextButton(
-                onPressed: () {},
-                child: Text("See All", style: subtitleStyle1),
-              ),
-              spacing: 20,
-              childWidget: const ServiceListView(),
-            ),
-            // have to discuss with Mohd bhai
-            SectionHeader(
-              title: ConstantString.topRatedSpecialist,
-              button: TextButton(
-                onPressed: () {
-                  Get.toNamed(ListOfSpecialistScreen.routeName);
-                },
-                child: Text("See All", style: subtitleStyle1),
-              ),
-              spacing: 0,
-              childWidget: const SpecialistListView(),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -240,76 +279,19 @@ class BookingOptions extends StatelessWidget {
         CustomerContainerWithText(
           text: "Visit Local Clinic",
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         CustomerContainerWithText(
           text: "Arrange Home Visit",
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         CustomerContainerWithText(
           text: "Chat with Specialist",
         ),
       ],
-    );
-  }
-}
-
-class ServiceListView extends StatelessWidget {
-  const ServiceListView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: Get.height * 0.18,
-      width: double.infinity,
-      child: ListView.separated(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return ContainerWithIcon1(
-            onPressed: () {},
-            iconPath: ConstantValue.imagePathListForServices[index],
-            text: ConstantValue.textListForServices[index],
-            iconHeight: Get.height * 0.052,
-            iconWidth: Get.width * 0.06,
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(width: 10),
-        itemCount: 3,
-      ),
-    );
-  }
-}
-
-class SpecialistListView extends StatelessWidget {
-  const SpecialistListView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 10),
-      width: double.infinity,
-      height: Get.height * 0.45,
-      child: ListView.separated(
-        physics: const ScrollPhysics(),
-        primary: true,
-        itemBuilder: (context, index) {
-          final specialist =
-              SpecialistController.instance.filteredSpecialists[index];
-          return CustomSpecialistContainer(
-            name: specialist.name,
-            specialist: specialist.specialist,
-            charges: specialist.charges,
-            rating: specialist.rating,
-            review: specialist.review,
-            onPressed: () {
-              Get.toNamed(SpecialistDetailScreen.routeName);
-            },
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: 10),
-        itemCount: 3,
-      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../widgets/custom_dialogbox.dart';
+
 import '../../../widgets/custom_icon_sizebox.dart';
 
 class CustomSearchTextField extends StatelessWidget {
@@ -32,22 +32,12 @@ class CustomSearchTextField extends StatelessWidget {
                   Expanded(
                     child: CustomIconSizeBox(
                       iconPath: HomeController.instance.selectedImagePath.value,
-                      iconWidth: Get.width*0.07,
-                      iconHeight: Get.width*0.07,
+                      iconWidth: Get.width * 0.07,
+                      iconHeight: Get.width * 0.07,
                     ),
                   ),
                   Expanded(
-                    child: IconButton(
-                      onPressed: () {
-                        TypeOfDialogs.showBottomSheetDialog(
-                          Get.context!,
-                          "Select Service",
-                          HomeController.instance.serviceImages.keys.toList(),
-                          HomeController.instance.searchController.value,
-                        );
-                      },
-                      icon: const Icon(Icons.arrow_drop_down),
-                    ),
+                    child: const Icon(Icons.arrow_drop_down),
                   ),
                 ],
               ),
@@ -81,3 +71,4 @@ class CustomSearchTextField extends StatelessWidget {
     );
   }
 }
+

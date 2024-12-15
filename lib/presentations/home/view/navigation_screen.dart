@@ -1,5 +1,10 @@
+import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
+import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
+import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../global/app_color.dart';
 import '../../../global/images.dart';
 import '../../../widgets/custom_app_bar.dart';
@@ -13,10 +18,12 @@ class NavigationScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => Scaffold(
+      () => Scaffold(
+        backgroundColor: AppColors.scaffoldBGColor,
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
+
         ),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
@@ -30,7 +37,7 @@ class NavigationScreen extends GetView<HomeController> {
           },
           child: KeyedSubtree(
             key: ValueKey<int>(controller.selectedIndex.value),
-            child: controller.pages[controller.selectedIndex.value],
+            child: pages[controller.selectedIndex.value],
           ),
         ),
         bottomNavigationBar: Container(
@@ -52,7 +59,7 @@ class NavigationScreen extends GetView<HomeController> {
             unselectedItemColor: AppColors.grey,
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent,
-            items: List.generate(controller.pages.length, (index) {
+            items: List.generate(pages.length, (index) {
               final bool isSelected = controller.selectedIndex.value == index;
               return BottomNavigationBarItem(
                 icon: Center(
@@ -93,6 +100,8 @@ class NavigationScreen extends GetView<HomeController> {
       ),
     );
   }
+
+  final List<Widget> pages = const [HomeScreen(), ServiceScreen(), SpecialistScreen(), ProfileScreen()];
 
   String _getIconPath(int index) {
     switch (index) {

@@ -1,12 +1,12 @@
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/images.dart';
-import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
+import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginWelcomeScreen extends StatelessWidget {
+class LoginWelcomeScreen extends GetView<AuthenticationController> {
   static const String routeName = '/login-welcome-screen';
 
   const LoginWelcomeScreen({super.key});
@@ -54,17 +54,13 @@ class LoginWelcomeScreen extends StatelessWidget {
                 ),
               ),
               BlueButton(
-                onPressed: () {
-                  Get.offNamed(NavigationScreen.routeName);
-                },
+                onPressed: controller.signup,
                 label: 'Sign In',
               ),
               const SizedBox(height: 12),
               CustomOutlinedButton(
                 label: 'Sign Up',
-                onPressed: () {
-                  Get.offNamed(NavigationScreen.routeName);
-                },
+                onPressed: controller.login,
               ),
               const SizedBox(height: 40),
             ],

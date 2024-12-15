@@ -11,37 +11,67 @@ abstract class AppImage {
 
   ///icons
   static String get bloodletting => 'bloodletting'.iconPng;
+
   static String get flushots => 'flushots'.iconPng;
+
   static String get home => 'home'.iconPng;
+
   static String get homeVisit => 'home_visit'.iconPng;
-  static String get medicalKit=>'medical_kit'.iconPng;
-  static String get notification=>'notification'.iconPng;
-  static String get phlebotomy=>'phlebotomy'.iconPng;
-  static String get stethoscope=>'stethoscope'.iconPng;
-  static String get stethoscopeWhite=>'stethoscope_white'.iconPng;
-  static String get trtAdministration=>'trt_administration'.iconPng;
-  static String get user=>'user'.iconPng;
-  static String get vitaminBooster=>'vitamin_booster'.iconPng;
-  static String get vitaminIv=>'vitamin_iv'.iconPng;
-  static String get mentalHealth=>'mental_health'.iconPng;
-  static String get doctor=>'doctor'.iconPng;
-  static String get fitnessCoach=>'fitness_coach'.iconPng;
-  static String get hrtTreatment=>'hrt_treatment'.iconPng;
-  static String get trtTreatment=>'trt_treatment'.iconPng;
-  static String get nutritionalist=>'nutritionalist'.iconPng;
-  static String get aboutUs=> 'about_us'.iconPng;
-  static String get contactUs=> 'contact_us'.iconPng;
-  static String get paymentCard=> 'payment_card'.iconPng;
-  static String get prescription=> 'prescription'.iconPng;
-  static String get profile2User=> 'profile_2_user'.iconPng;
-  static String get faq=> 'faq'.iconPng;
-  static String get userMyProfile=> 'user_my_profile'.iconPng;
+
+  static String get medicalKit => 'medical_kit'.iconPng;
+
+  static String get notification => 'notification'.iconPng;
+
+  static String get phlebotomy => 'phlebotomy'.iconPng;
+
+  static String get stethoscope => 'stethoscope'.iconPng;
+
+  static String get stethoscopeWhite => 'stethoscope_white'.iconPng;
+
+  static String get trtAdministration => 'trt_administration'.iconPng;
+
+  static String get user => 'user'.iconPng;
+
+  static String get vitaminBooster => 'vitamin_booster'.iconPng;
+
+  static String get vitaminIv => 'vitamin_iv'.iconPng;
+
+  static String get mentalHealth => 'mental_health'.iconPng;
+
+  static String get doctor => 'doctor'.iconPng;
+
+  static String get fitnessCoach => 'fitness_coach'.iconPng;
+
+  static String get hrtTreatment => 'hrt_treatment'.iconPng;
+
+  static String get trtTreatment => 'trt_treatment'.iconPng;
+
+  static String get nutritionalist => 'nutritionalist'.iconPng;
+
+  static String get aboutUs => 'about_us'.iconPng;
+
+  static String get contactUs => 'contact_us'.iconPng;
+
+  static String get paymentCard => 'payment_card'.iconPng;
+
+  static String get prescription => 'prescription'.iconPng;
+
+  static String get profile2User => 'profile_2_user'.iconPng;
+
+  static String get faq => 'faq'.iconPng;
+
+  static String get userMyProfile => 'user_my_profile'.iconPng;
+
   static String get arrowLeft => 'arrow_left'.iconPng;
+
   static String get editProfile => 'edit_profile'.iconPng;
+
   static String get mapOutline => 'map_icon'.iconPng;
+
   static String get filledAdd => 'filled_add'.iconPng;
 
   static String get camera => 'camera'.iconPng;
+
   static String get arrowDown => 'arrow_down'.iconPng;
 
   static String get map => 'map'.iconPng;
@@ -61,11 +91,37 @@ abstract class AppImage {
   static const String intro3 = '$imageFolderLocation/iv_intro_3.png';
 
 //Icons
+  static String get homeCategory1 => 'home_category1'.svg;
+
+  static String get homeCategory2 => 'home_category2'.svg;
+
+  static String get homeCategory3 => 'home_category3'.svg;
+
+  static String get homeCategory4 => 'home_category4'.svg;
+
+  static String get homeCategory5 => 'home_category5'.svg;
+
+  static String get homeCategory6 => 'home_category6'.svg;
+  static String get specialistIcon1 => 'specialist_icon_1'.svg;
+
+  static String get specialistIcon2 => 'specialist_icon_2'.svg;
+
+  static String get specialistIcon4 => 'specialist_icon_4'.svg;
+
+  static String get specialistIcon5 => 'specialist_icon_5'.svg;
+
+  static String get specialistIcon6 => 'specialist_icon_6'.svg;
+
+  static String get specialistIcon3 => 'specialist_icon_3'.svg;
+
+
+
+
+
 
 }
 
 extension on String {
-
   ///for image folder
   String get imagePng => 'assets/images/$this.png';
 

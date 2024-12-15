@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static Color primary = fromHex('#2268FF');
-  static Color secondary = const Color(0xff262628);
-  static Color black = const Color(0xff262628);
-  static Color white = const Color(0xffFFFFFF);
-  static Color textFieldBackground = const Color(0xffE5E5E5);
-  static Color genderTextColor = const Color(0xffA6A6A6);
-  static Color border = const Color(0xffC4C4C4);
-  static Color circle = const Color(0xffE2E2E2);
-  static Color whiteGrey = const Color(0xffC3C2C2);
-  static Color grey = const Color(0xff918F8F);
-  static const Color shadow = Color(0xffedeef5);
-  static const Color borderColor = Color(0xffF5F1FE);
-  static const Color borderColorLight = Color(0xFFF0F0F0);
-  static const Color blue = Color(0xFF3C6EE0);
-  static const Color darkBlue = Color(0xFF2554C2);
-  static Color gray600 = fromHex('#717171');
-  static Color gray = const Color.fromRGBO(137, 156, 168, 1);
-  static Color whiteA700 = fromHex('#ffffff');
-  static const Color blueGradient1 = Color(0xFFABE2FC);
-  static const Color blueGradient2 = Color(0xFF2267FF);
+  static Color primary = Color(0xFF2268FF); //#2268FF
+  static Color secondary = const Color(0xff262628); //#262628
+  static Color transparent = const Color(0x00FFFFFF); //#262628
+  static Color scaffoldBGColor = const Color(0xffFBFBFD); //#FBFBFD
+  static Color black = const Color(0xff262628); //#262628
+  static Color white = const Color(0xffFFFFFF); //#FFFFFF
+  static Color textFieldBackground = const Color(0xffE5E5E5); //#E5E5E5
+  static Color genderTextColor = const Color(0xffA6A6A6); //#A6A6A6
+  static Color border = const Color(0xffC4C4C4); //#C4C4C4
+  static Color circle = const Color(0xffE2E2E2); //#E2E2E2
+  static Color whiteGrey = const Color(0xffC3C2C2); //#C3C2C2
+  static Color grey = const Color(0xff918F8F); //#918F8F
+  static const Color shadow = Color(0xffedeef5); //#edeef5
+  static const Color borderColor = Color(0xffF5F1FE); //#F5F1FE
+  static const Color borderColorLight = Color(0xFFF0F0F0); //#F0F0F0
+  static const Color blue = Color(0xFF3C6EE0); //#3C6EE0
+  static const Color darkBlue = Color(0xFF2554C2); //#2554C2
+  static Color gray600 = Color(0xFF717171); //##717171
+  static Color gray = const Color.fromRGBO(137, 156, 168, 1); //#168, 1
+  static Color whiteA700 = Colors.white; //#FFFFFF
+  static const Color blueGradient1 = Color(0xFFABE2FC); //#ABE2FC
+  static const Color blueGradient2 = Color(0xFF2267FF); //#2267FF
 
-  static Color fromHex(String hexString) {
+/*static Color fromHex(String hexString) {
     final buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
     buffer.write(hexString.replaceFirst('#', ''));
     return Color(int.parse(buffer.toString(), radix: 16));
-  }
+  }*/
 }

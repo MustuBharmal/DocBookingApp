@@ -1,5 +1,5 @@
 import 'package:doc_booking_app/global/theme.dart';
-import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
+import 'package:doc_booking_app/presentations/authentication/binding/auth_binding.dart';
 import 'package:doc_booking_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,9 +20,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Doctor Booking App',
       debugShowCheckedModeBanner: false,
-      initialBinding: HomeBinding(),
+      initialBinding: AuthBinding(),
       getPages: AppRoutes.pages,
-      // initialBinding: AuthBinding(),
       themeMode: ThemeMode.light,
       theme: AppThemes.lightTheme,
     );
