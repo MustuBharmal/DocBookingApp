@@ -73,6 +73,7 @@ class ContactUsScreen extends GetView<ProfileController> {
                 padding: const EdgeInsets.only(top: 10.0,bottom: 20),
                 child: CustomTextField(
                     label: 'Message',
+                    maxLines: 6,
                     showAsterisk: true,
                     controller: controller.messageController,
                     hintStyle: txtInterTextFieldHint,

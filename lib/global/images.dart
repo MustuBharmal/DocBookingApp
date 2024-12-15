@@ -39,6 +39,7 @@ abstract class AppImage {
   static String get arrowLeft => 'arrow_left'.iconPng;
   static String get editProfile => 'edit_profile'.iconPng;
   static String get mapOutline => 'map_icon'.iconPng;
+  static String get filledAdd => 'filled_add'.iconPng;
 
   static String get camera => 'camera'.iconPng;
   static String get arrowDown => 'arrow_down'.iconPng;

@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find<ProfileController>();
 
+  
   RxBool isEditingProfile = RxBool(false);
   RxString imageUrl = RxString('');
 
@@ -23,10 +24,19 @@ class ProfileController extends GetxController {
   var selectedCountry = CountryParser.parseCountryCode('US').obs;
 
   // Phone number state
-  var phoneNumber = ''.obs;
+  RxString phoneNumber = RxString('');
 
 
   RxString prefCommMethod = RxString('Whatsapp');
+  final List<String> faqQuestions = [
+    "How do I book an appointment with a specialist?",
+    "How do I cancel an appointment?",
+    "What payment methods are accepted?",
+    "Is there a consultation fee?",
+    "How do I reschedule an appointment?",
+    "How do I contact customer support?",
+    "How do I create an account?",
+  ];
 
 
   final TextEditingController nameController = TextEditingController(text: 'Alex Doe');
