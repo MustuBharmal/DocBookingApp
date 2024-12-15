@@ -11,10 +11,9 @@ class CustomSearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceWidth = Get.width;
     return Container(
-      width: Get.width * 0.95,
-      height: Get.height * 0.07,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: deviceWidth * 0.04),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
@@ -25,52 +24,58 @@ class CustomSearchTextField extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Obx(() => SizedBox(
-                width: Get.width * 0.125,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CustomIconSizeBox(
-                        iconHeight: 30,
-                          iconWidth: 30,
-                          iconPath:
-                              HomeController.instance.selectedImagePath.value),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        onPressed: () {
-                          TypeOfDialogs.showBottomSheetDialog(
-                            Get.context!,
-                            "Select Service",
-                            HomeController.instance.serviceImages.keys.toList(),
-                            HomeController.instance.searchController.value,
-                          );
-                        },
-                        icon: const Icon(Icons.arrow_drop_down),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          const SizedBox(width: 8),
-          VerticalDivider(
-            color: Colors.grey.shade300,
-            thickness: 1,
-            width: 1,
-          ),
-          const SizedBox(width: 8),
           Obx(
-            () => Expanded(
-              child: TextField(
-                controller: HomeController.instance.searchController.value,
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: TextStyle(color: Colors.grey.shade500),
-                  border: InputBorder.none,
-                ),
+            () => SizedBox(
+              width: deviceWidth * 0.15,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CustomIconSizeBox(
+                      iconPath: HomeController.instance.selectedImagePath.value,
+                      iconWidth: Get.width*0.07,
+                      iconHeight: Get.width*0.07,
+                    ),
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      onPressed: () {
+                        TypeOfDialogs.showBottomSheetDialog(
+                          Get.context!,
+                          "Select Service",
+                          HomeController.instance.serviceImages.keys.toList(),
+                          HomeController.instance.searchController.value,
+                        );
+                      },
+                      icon: const Icon(Icons.arrow_drop_down),
+                    ),
+                  ),
+                ],
               ),
             ),
-          )
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            height: 30,
+            child: VerticalDivider(
+              color: Colors.grey.shade400,
+              thickness: 1,
+              width: 1,
+            ),
+          ),
+          Expanded(
+            child: TextField(
+              controller: HomeController.instance.searchController.value,
+              style: TextStyle(fontSize: deviceWidth * 0.04),
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: TextStyle(
+                  color: Colors.grey.shade500,
+                  fontSize: deviceWidth * 0.04,
+                ),
+                border: InputBorder.none,
+              ),
+            ),
+          ),
         ],
       ),
     );
