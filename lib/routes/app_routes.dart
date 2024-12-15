@@ -33,8 +33,7 @@ class AppRoutes {
           ProfileBinding(),
         ]),
     GetPage(name: SplashScreen.routeName, page: () => const SplashScreen()),
-    GetPage(
-        name: OnboardingScreen.routeName, page: () => const OnboardingScreen()),
+    GetPage(name: OnboardingScreen.routeName, page: () => OnboardingScreen()),
     GetPage(
         name: LoginWelcomeScreen.routeName,
         page: () => const LoginWelcomeScreen()),
@@ -42,6 +41,14 @@ class AppRoutes {
         name: HomeScreen.routeName,
         page: () => const HomeScreen(),
         binding: HomeBinding()),
+    GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen(),),
+    GetPage(name: UserInfoScreen.routeName, page: () => UserInfoScreen(),),
+    GetPage(name: PaymentManagementScreen.routeName, page: () => PaymentManagementScreen(),),
+    GetPage(name: FAQScreen.routeName, page: () => FAQScreen(),),
+    GetPage(name: ContactUsScreen.routeName, page: () => ContactUsScreen(),),
+    GetPage(name: AboutUsScreen.routeName, page: () => AboutUsScreen(),),
+    GetPage(name: HowToBePartnerScreen.routeName, page: () => HowToBePartnerScreen(),),
+    GetPage(name: PrescriptionScreen.routeName, page: () => PrescriptionScreen(),),
     GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
     GetPage(name: SpecialistDetailScreen.routeName, page: () => SpecialistDetailScreen()),
     GetPage(

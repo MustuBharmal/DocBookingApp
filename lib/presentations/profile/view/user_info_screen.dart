@@ -1,4 +1,4 @@
-
+import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/global/styles.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +12,7 @@ import '../widgets/profile_field.dart';
 import '../widgets/profile_image.dart';
 
 class UserInfoScreen extends GetView<ProfileController> {
+
   static const routeName = '/user-info-screen';
 
   const UserInfoScreen({super.key});
@@ -25,7 +26,7 @@ class UserInfoScreen extends GetView<ProfileController> {
         controller: controller,
       ),
       body: Obx(
-        () => Padding(
+            () => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: controller.isEditingProfile.value == true
               ? _buildEditProfile(context)
@@ -100,6 +101,7 @@ class UserInfoScreen extends GetView<ProfileController> {
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextField(
             label: 'Address',
+
             controller: controller.addressController,
             showAsterisk: true,
             hintStyle: txtInterTextFieldHint,
@@ -152,18 +154,12 @@ class UserInfoScreen extends GetView<ProfileController> {
           isEditing: false,
         ),
         const SizedBox(height: 25),
-        ProfileField(
-          label: 'Full Name',
-          value: controller.nameController.text,
-        ),
-        ProfileField(
-            label: 'Email Address', value: controller.emailController.text),
-        ProfileField(
-            label: 'Phone Number', value: controller.phoneController.text),
-        ProfileField(label: 'DOB', value: controller.dobController.text),
-        ProfileField(label: 'Sex', value: controller.selectedSex.value),
-        ProfileField(
-            label: 'Address', value: controller.addressController.text),
+        ProfileField(label: 'Full Name', value: controller.nameController.text,),
+        ProfileField(label:'Email Address', value: controller.emailController.text),
+        ProfileField(label:'Phone Number', value: controller.phoneController.text),
+        ProfileField(label:'DOB', value: controller.dobController.text),
+        ProfileField(label: 'Sex', value:controller.selectedSex.value),
+        ProfileField(label: 'Address', value: controller.addressController.text),
         ProfileField(label: 'Zip Code', value: controller.zipController.text),
         ProfileField(label: 'State', value: controller.selectedState.value),
       ],
