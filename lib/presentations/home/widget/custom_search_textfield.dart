@@ -54,7 +54,7 @@ class CustomSearchTextField extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+            padding: EdgeInsets.symmetric(horizontal: 8),
             height: 30,
             child: VerticalDivider(
               color: Colors.grey.shade400,
