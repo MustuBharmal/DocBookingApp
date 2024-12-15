@@ -1,4 +1,3 @@
-import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/global/styles.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';

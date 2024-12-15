@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class FAQScreen extends GetView<ProfileController> {
               question: controller.faqQuestions[index],
               onTap: () {
                 // Add functionality for question expansion or navigation
-                print("Tapped on: ${controller.faqQuestions[index]}");
+                LogUtil.debug("Tapped on: ${controller.faqQuestions[index]}");
               },
             );
           },
