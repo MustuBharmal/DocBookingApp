@@ -17,18 +17,16 @@ class ServiceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.only(top: 0, left: 16, right: 16),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: CustomBannerContainer(
-                    imgPath: AppImage.maleDoctor,
-                    headerText: ConstantString.headerTextForServices,
-                    subText: ConstantString.subTextForServices),
-              ),
+              CustomBannerContainer(
+                  imgPath: AppImage.maleDoctor,
+                  headerText: ConstantString.headerTextForServices,
+                  subText: ConstantString.subTextForServices),
               Container(
                 padding: EdgeInsets.only(left: 10, right: 10, top: 16),
                 width: 340,

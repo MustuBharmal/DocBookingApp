@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../global/styles.dart';
 
@@ -16,26 +17,28 @@ class CustomBannerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 0.95,
-      height: Get.height * 0.193,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment(-0.92, 0.38),
-          end: Alignment(0.92, -0.38),
-          colors: [Color(0xFF2267FF), Color(0xFFABC4FC)],
-        ),
-        borderRadius: BorderRadius.circular(24),
-      ),
+      height: Get.height * 0.25,
       child: Stack(
+        alignment: Alignment.bottomCenter,
         clipBehavior: Clip.none,
         //It allow to image take space outside the container
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 30),
+          Container(
+            height: Get.height * 0.2,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                begin: Alignment(-0.92, 0.38),
+                end: Alignment(0.92, -0.38),
+                colors: [Color(0xFF2267FF), Color(0xFFABC4FC)],
+              ),
+              borderRadius: BorderRadius.circular(24),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(headerText, style: txtInterMedium12),
+                Text(headerText, style: txtInterMedium12,),
                 const SizedBox(height: 9),
                 Text(
                   subText,
@@ -50,19 +53,9 @@ class CustomBannerContainer extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 20,
-            bottom: 0,
-            child: Container(
-              width: Get.width * 0.37,
-              height: Get.height * 0.2325,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(imgPath),
-                  scale: 1,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
+            right: 16,
+            top: -16,
+            child: Image.asset(imgPath,height: 250,),
           ),
         ],
       ),

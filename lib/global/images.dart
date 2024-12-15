@@ -3,7 +3,7 @@ abstract class AppImage {
   static String get companyLogo => 'company_logo'.logoPng;
 
   ///images
-  static String get maleDoctor => 'male_doctor'.imagePng;
+  static String get maleDoctor => 'male_doctor1'.imagePng;
 
   static String get femaleDoctor1 => 'female_doctor1'.imagePng;
 
