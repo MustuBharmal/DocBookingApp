@@ -13,6 +13,7 @@ abstract class AppColors {
   static Color grey = const Color(0xff918F8F);
   static const Color shadow = Color(0xffedeef5);
   static const Color borderColor = Color(0xffF5F1FE);
+  static const Color borderColorLight = Color(0xFFF0F0F0);
   static const Color blue = Color(0xFF3C6EE0);
   static const Color darkBlue = Color(0xFF2554C2);
   static Color gray600 = fromHex('#717171');

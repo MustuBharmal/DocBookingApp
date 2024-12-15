@@ -12,8 +12,6 @@ class CustomIconSizeBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      width: iconWidth,
-      height: iconHeight,
       iconPath,
       fit: BoxFit.contain,
     );

@@ -46,8 +46,6 @@ class SpecialistScreen extends StatelessWidget {
                     return ContainerWithIcon1(
                       onPressed: () {
                       },
-                      containerHeight: 200,
-                      containerWidth: 200,
                       iconHeight: 60,
                       iconWidth: 60,
                       iconPath: ConstantValue.imagePathListForSpecialist[index],

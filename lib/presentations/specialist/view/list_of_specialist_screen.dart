@@ -38,13 +38,9 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                   children: [
                     CustomerContainerWithText(
                       text: ConstantString.home,
-                      width: Get.height * 0.210,
-                      height: Get.height * 0.06,
                     ),
                     CustomerContainerWithText(
                       text: ConstantString.clinic,
-                      width: Get.height * 0.210,
-                      height: Get.height * 0.06,
                     )
                   ],
                 ),

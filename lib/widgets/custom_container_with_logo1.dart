@@ -6,16 +6,12 @@ class ContainerWithIcon1 extends StatelessWidget {
       {super.key,
       required this.text,
       required this.iconPath,
-      required this.containerHeight,
-      required this.containerWidth,
       required this.iconWidth,
       required this.iconHeight,
       required this.onPressed});
 
   final String text;
   final String iconPath;
-  final double containerWidth;
-  final double containerHeight;
   final double iconWidth;
   final double iconHeight;
   final VoidCallback? onPressed;
@@ -25,8 +21,6 @@ class ContainerWithIcon1 extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        width: containerWidth,
-        height: containerHeight,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         clipBehavior: Clip.antiAlias,
         decoration: ShapeDecoration(
@@ -37,12 +31,14 @@ class ContainerWithIcon1 extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomIconSizeBox(
                 iconPath: iconPath,
                 iconWidth: iconWidth,
                 iconHeight: iconHeight),
-            const SizedBox(height: 16),
+            SizedBox(height: 16,),
             Text(
               text,
               style: const TextStyle(

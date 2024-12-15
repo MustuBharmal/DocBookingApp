@@ -1,37 +1,32 @@
 import 'package:flutter/material.dart';
 
+import '../global/app_color.dart';
+
 class CustomerContainerWithText extends StatelessWidget {
   const CustomerContainerWithText(
       {super.key,
-      required this.text,
-      required this.height,
-      required this.width});
+      required this.text,});
 
   final String text;
-  final double width;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 1, color: Color(0xFFF0F0F0)),
+          side:  BorderSide(width: 1, color: AppColors.borderColorLight),
           borderRadius: BorderRadius.circular(100),
         ),
       ),
       child: Center(
         child: Text(
           text,
-          style: const TextStyle(
-            color: Color(0xFF2268FF),
+          style: TextStyle(
+            color: AppColors.blueGradient2,
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            height: 0,
           ),
         ),
       ),

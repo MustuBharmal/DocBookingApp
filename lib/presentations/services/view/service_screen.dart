@@ -45,8 +45,6 @@ class ServiceScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ContainerWithIcon1(
                       onPressed: () {},
-                      containerWidth: 200,
-                      containerHeight: 100,
                       iconHeight: 60,
                       iconWidth: 60,
                       iconPath: ConstantValue.imagePathListForServices[index],

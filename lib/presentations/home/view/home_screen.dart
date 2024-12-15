@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             const CustomSearchTextField(
               hintText: 'Search by service or location',
@@ -46,16 +46,17 @@ class HomeScreen extends StatelessWidget {
             const SectionHeader(
               title: ConstantString.upcomingAppointments,
               spacing: 20,
-              child: AppointmentCard(),
+              childWidget: AppointmentCard(),
             ),
             const SizedBox(
               height: 20,
             ),
             const SectionHeader(
               title: ConstantString.bookNow,
-              spacing: 0,
-              child: BookingOptions(),
+              spacing: 12,
+              childWidget: BookingOptions(),
             ),
+            // have to discuss with Mohd bhai
             SectionHeader(
               title: ConstantString.topServices,
               button: TextButton(
@@ -63,8 +64,9 @@ class HomeScreen extends StatelessWidget {
                 child: Text("See All", style: subtitleStyle1),
               ),
               spacing: 20,
-              child: const ServiceListView(),
+              childWidget: const ServiceListView(),
             ),
+            // have to discuss with Mohd bhai
             SectionHeader(
               title: ConstantString.topRatedSpecialist,
               button: TextButton(
@@ -74,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                 child: Text("See All", style: subtitleStyle1),
               ),
               spacing: 0,
-              child: const SpecialistListView(),
+              childWidget: const SpecialistListView(),
             ),
           ],
         ),
@@ -87,14 +89,14 @@ class SectionHeader extends StatelessWidget {
   final String title;
   final Widget? button;
   final double spacing;
-  final Widget child;
+  final Widget childWidget;
 
   const SectionHeader({
     super.key,
     required this.title,
     this.button,
     required this.spacing,
-    required this.child,
+    required this.childWidget,
   });
 
   @override
@@ -110,7 +112,7 @@ class SectionHeader extends StatelessWidget {
           ],
         ),
         SizedBox(height: spacing),
-        child,
+        childWidget,
       ],
     );
   }
@@ -232,29 +234,21 @@ class BookingOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 12),
-      child: Column(
-        children: [
-          CustomerContainerWithText(
-            text: "Visit Local Clinic",
-            width: Get.height * 1,
-            height: Get.height * 0.06,
-          ),
-          const SizedBox(height: 10),
-          CustomerContainerWithText(
-            text: "Arrange Home Visit",
-            width: Get.height * 1,
-            height: Get.height * 0.06,
-          ),
-          const SizedBox(height: 10),
-          CustomerContainerWithText(
-            text: "Chat with Specialist",
-            width: Get.height * 1,
-            height: Get.height * 0.06,
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        CustomerContainerWithText(
+          text: "Visit Local Clinic",
+        ),
+        SizedBox(height: 10,),
+        CustomerContainerWithText(
+          text: "Arrange Home Visit",
+        ),
+        SizedBox(height: 10,),
+        CustomerContainerWithText(
+          text: "Chat with Specialist",
+        ),
+      ],
     );
   }
 }
@@ -265,9 +259,10 @@ class ServiceListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
       height: Get.height * 0.18,
+      width: double.infinity,
       child: ListView.separated(
+        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
@@ -275,10 +270,8 @@ class ServiceListView extends StatelessWidget {
             onPressed: () {},
             iconPath: ConstantValue.imagePathListForServices[index],
             text: ConstantValue.textListForServices[index],
-            containerHeight: Get.height * 0.18,
-            containerWidth: Get.width * 0.275,
-            iconHeight: Get.height * 0.055,
-            iconWidth: Get.height * 0.055,
+            iconHeight: Get.height * 0.052,
+            iconWidth: Get.width * 0.06,
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 10),

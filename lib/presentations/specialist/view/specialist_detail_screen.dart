@@ -18,24 +18,25 @@ class SpecialistDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(children: [
-              //Doctor Image
-              ClipRect(
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  heightFactor: 0.76,
-                  child: Image.asset(
-                    AppImage.femaleDoctor2,
-                    fit: BoxFit.cover,
+            Stack(
+              children: [
+                //Doctor Image
+                ClipRect(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    heightFactor: 0.76,
+                    child: Image.asset(
+                      AppImage.femaleDoctor2,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              //Back Icon Button
-              Positioned(
+                //Back Icon Button
+                Positioned(
                   top: Get.width * 0.14,
                   left: Get.width * 0.05,
                   child: CircleAvatar(
@@ -45,8 +46,10 @@ class SpecialistDetailScreen extends StatelessWidget {
                           Get.back();
                         },
                         icon: const Icon(Icons.arrow_back_ios_new)),
-                  ))
-            ]),
+                  ),
+                )
+              ],
+            ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               decoration: BoxDecoration(
