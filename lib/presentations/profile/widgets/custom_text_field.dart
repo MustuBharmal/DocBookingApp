@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextStyle hintStyle;
   final String hintText;
+  final int maxLines;
 
   const CustomTextField({
     super.key,
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     required this.hintStyle,
     required this.hintText,
+    this.maxLines = 1,
   });
 
   @override
@@ -38,6 +40,7 @@ class CustomTextField extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               style: txtInterDropDownValue,
+              maxLines: maxLines,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: hintStyle,
@@ -57,7 +60,7 @@ class CustomTextField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   borderSide: BorderSide(color: Colors.red),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 12),
               ),
             ),
           ),
