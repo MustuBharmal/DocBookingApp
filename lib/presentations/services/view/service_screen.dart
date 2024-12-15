@@ -3,9 +3,6 @@ import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../global/app_color.dart';
-import '../../../util/log_utils.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 
 class ServiceScreen extends StatelessWidget {
@@ -16,7 +13,6 @@ class ServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(

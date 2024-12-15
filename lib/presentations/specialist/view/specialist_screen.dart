@@ -14,23 +14,20 @@ class SpecialistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 30,
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: CustomBannerContainer(
+                    imgPath: AppImage.femaleDoctor1,
+                    headerText: ConstantString.headerTextForSpecialist,
+                    subText: ConstantString.subTextForSpecialist),
               ),
-              CustomBannerContainer(
-                  imgPath: AppImage.femaleDoctor1,
-                  headerText: ConstantString.headerTextForSpecialist,
-                  subText: ConstantString.subTextForSpecialist),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 16),
                 width: 340,
                 height: 500,
                 child: GridView.builder(
@@ -38,8 +35,8 @@ class SpecialistScreen extends StatelessWidget {
                   primary: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
                   ),
                   itemCount: ConstantValue.textListForSpecialist.length,
                   itemBuilder: (context, index) {
@@ -47,7 +44,7 @@ class SpecialistScreen extends StatelessWidget {
                       onPressed: () {
                       },
                       containerHeight: 200,
-                      containerWidth: 200,
+                      containerWidth: 100,
                       iconHeight: 60,
                       iconWidth: 60,
                       iconPath: ConstantValue.imagePathListForSpecialist[index],
