@@ -26,8 +26,8 @@ class ProfileController extends GetxController {
   var phoneNumber = ''.obs;
 
 
-  final preferredCommunicationMethod = 'Whatsapp';
-  RxString message = RxString('');
+  RxString prefCommMethod = RxString('Whatsapp');
+
 
   final TextEditingController nameController = TextEditingController(text: 'Alex Doe');
   final TextEditingController emailController = TextEditingController(text: 'alex.doe@gmail.com');
@@ -35,8 +35,14 @@ class ProfileController extends GetxController {
   final TextEditingController dobController = TextEditingController(text: '27/02/1992');
   final TextEditingController addressController = TextEditingController(text: 'Street 2334, New York');
   final TextEditingController zipController = TextEditingController(text: '53542');
+  final TextEditingController messageController = TextEditingController(text: '');
   final List<String> stateList = ['Florida', 'New York', 'Los Angeles'];
   final List<String> sexOptions = ['Male', 'Female', 'Other'];
+  final List<String> prefCommMethodList = ['Whatsapp', 'Telephone', 'Message'];
+  final List<String> businessNamesList = ['Fitness First','Travelling','Psychology'];
+  final List<String> businessTypesList = ['Clinic', 'Hospital','Small Hospital'];
+  RxString selectedBusinessName = RxString('Fitness First');
+  RxString selectedBusinessType = RxString('Clinic');
   RxString selectedState = RxString('New York');
   RxString selectedSex = RxString('Male');
 
