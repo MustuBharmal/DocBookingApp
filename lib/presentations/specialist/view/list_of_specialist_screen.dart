@@ -1,13 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../global/app_color.dart';
-import '../../../widgets/custom_specialist_container.dart';
+import 'package:doc_booking_app/widgets/custom_specialist_container.dart';
+
+import '../widget/custom_button.dart';
 
 class ListOfSpecialistScreen extends GetView<SpecialistController> {
   const ListOfSpecialistScreen({super.key});
@@ -19,21 +22,24 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
     return Scaffold(
       appBar: const CustomAppBar(title: "Search", back: true),
       backgroundColor: AppColors.white,
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Obx(
-                () => CustomSearchTextfield(
-                  hintText: ConstantString.searchByName,
-                  controller:
-                      SpecialistController.instance.searchController.value,
+      body: Stack(
+        children: [
+          // Main Content
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                // Search Field
+                Obx(
+                  () => CustomSearchTextfield(
+                    hintText: ConstantString.searchByName,
+                    controller:
+                        SpecialistController.instance.searchController.value,
+                  ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Row(
+                const SizedBox(height: 10),
+                // Home & Clinics Tabs
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomerContainerWithText(
@@ -48,33 +54,44 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                     )
                   ],
                 ),
-              ),
-              Obx(() {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  primary: true,
-                  itemBuilder: (context, index) {
-                    final specialist = controller.filteredSpecialists[index];
-                    return CustomSpecialistContainer(
-                      name: specialist.name,
-                      specialist: specialist.specialist,
-                      charges: specialist.charges,
-                      rating: specialist.rating,
-                      review: specialist.review,
-                      onPressed: () {
-                        Get.toNamed(SpecialistDetailScreen.routeName);
+                const SizedBox(height: 10),
+                // Specialist List
+                Expanded(
+                  child: Obx(() {
+                    return ListView.separated(
+                      itemBuilder: (context, index) {
+                        final specialist =
+                            controller.filteredSpecialists[index];
+                        return CustomSpecialistContainer(
+                          name: specialist.name,
+                          specialist: specialist.specialist,
+                          charges: specialist.charges,
+                          rating: specialist.rating,
+                          review: specialist.review,
+                          onPressed: () {
+                            Get.toNamed(SpecialistDetailScreen.routeName);
+                          },
+                        );
                       },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 10),
+                      itemCount: controller.filteredSpecialists.length,
                     );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
-                  itemCount: controller.filteredSpecialists.length,
-                );
-              }),
-            ],
+                  }),
+                ),
+              ],
+            ),
           ),
-        ),
+          Positioned(
+              bottom: 23,
+              right: 16,
+              child: CustomButton(
+                  onPressed: () {},
+                  height: Get.height * 0.05,
+                  width: Get.width * 0.33,
+                  iconPath: AppImage.map,
+                  label: "Map View")),
+        ],
       ),
     );
   }
