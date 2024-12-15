@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../global/styles.dart';
+
+import '../global/styles.dart';
 
 import '../global/styles.dart';
 

@@ -12,9 +12,9 @@ class CustomOutlinedButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.all(2),
+        padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [AppColors.blueGradient1, AppColors.blueGradient2]),
+          gradient: const LinearGradient(colors: [AppColors.blueGradient1, AppColors.blueGradient2]),
           borderRadius: BorderRadius.circular(50),
         ),
         child: Container(

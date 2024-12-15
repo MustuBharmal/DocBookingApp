@@ -1,7 +1,7 @@
-import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
+import '../../../global/images.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../controller/home_controller.dart';
 
@@ -99,7 +99,7 @@ class NavigationScreen extends GetView<HomeController> {
       case 0:
         return AppImage.home;
       case 1:
-        return AppImage.stethoscopeWhite;
+        return AppImage.bloodletting;
       case 2:
         return AppImage.medicalKit;
       case 3:

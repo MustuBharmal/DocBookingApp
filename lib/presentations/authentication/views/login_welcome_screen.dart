@@ -14,58 +14,61 @@ class LoginWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Welcome to',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Welcome to',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: Get.height * 0.1,
-                  ),
-                  Image.asset(AppImage.appLogo),
-                  SizedBox(
-                    height: Get.height * 0.05,
-                  ),
-                  Text(
-                    "Doctor's Booking",
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w500,
+                    SizedBox(
+                      height: Get.height * 0.1,
                     ),
-                  ),
-                ],
+                    Image.asset(AppImage.appLogo),
+                    SizedBox(
+                      height: Get.height * 0.05,
+                    ),
+                    Text(
+                      "Doctor's Booking",
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            BlueButton(
-              onPressed: () {
-                Get.offNamed(NavigationScreen.routeName);
-              },
-              label: 'Sign In',
-            ),
-            const SizedBox(height: 12),
-            CustomOutlinedButton(
-              label: 'Sign Up',
-              onPressed: () {
-                Get.offNamed(NavigationScreen.routeName);
-              },
-            ),
-            const SizedBox(height: 40),
-          ],
+              BlueButton(
+                onPressed: () {
+                  Get.offNamed(NavigationScreen.routeName);
+                },
+                label: 'Sign In',
+              ),
+              const SizedBox(height: 12),
+              CustomOutlinedButton(
+                label: 'Sign Up',
+                onPressed: () {
+                  Get.offNamed(NavigationScreen.routeName);
+                },
+              ),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );

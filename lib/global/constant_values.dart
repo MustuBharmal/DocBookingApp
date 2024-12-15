@@ -1,6 +1,6 @@
-import 'package:doc_booking_app/global/images.dart';
-
+import 'package:get/get.dart';
 import 'constant_string.dart';
+import 'images.dart';
 
 class ConstantValue {
   static const textListForServices = [
@@ -20,15 +20,6 @@ class ConstantValue {
     AppImage.trtAdministration,
     AppImage.flushots,
   ];
-  static const detailList = [
-    ConstantString.userInfo,
-    ConstantString.paymentMng,
-    ConstantString.faq,
-    ConstantString.contactUs,
-    ConstantString.aboutUs,
-    ConstantString.howTobBePartner,
-    ConstantString.prescription
-  ];
 
   static const textListForSpecialist = [
     ConstantString.doctor,
@@ -47,4 +38,7 @@ class ConstantValue {
     AppImage.hrtTreatment,
     AppImage.mentalHealth,
   ];
+
+  static double height = Get.height;
+  static double width = Get.width;
 }
