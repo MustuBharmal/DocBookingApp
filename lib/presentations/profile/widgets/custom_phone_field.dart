@@ -3,10 +3,6 @@ import 'package:country_picker/country_picker.dart';
 import 'package:get/get.dart';
 import '../../../global/styles.dart';
 import '../controller/profile_controller.dart';
-import 'package:get/get.dart';
-import '../../../global/app_color.dart';
-import '../../../global/styles.dart';
-import '../controller/profile_controller.dart';
 
 class CustomPhoneField extends StatelessWidget {
   final TextEditingController controller;
