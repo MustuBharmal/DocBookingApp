@@ -188,7 +188,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const CustomerHeaderText(text: "About"),
+                  const CustomHeaderText(text: "About"),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 16),
                     child: RichText(
@@ -227,7 +227,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const CustomerHeaderText(
+                  const CustomHeaderText(
                     text: "Location",
                   ),
                   const SizedBox(height: 10),
@@ -250,7 +250,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  CustomerHeaderText(
+                  CustomHeaderText(
                     text: "Review",
                     button: TextButton(
                         onPressed: () {

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/blue_button.dart';
 import '../widgets/custom_drop_down.dart';
-import '../widgets/custom_phone_field.dart';
+import '../../../widgets/custom_phone_field.dart';
 import '../widgets/custom_profile_appbar.dart';
-import '../widgets/custom_text_field.dart';
+import '../../../widgets/custom_text_field.dart';
 import '../widgets/profile_field.dart';
 import '../widgets/profile_image.dart';
 

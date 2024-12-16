@@ -138,6 +138,9 @@ abstract class AppImage {
   static String get myProfileInactive => 'my_profile_inactive'.svg;
 
   static String get myProfileActive => 'my_profile_active'.svg;
+
+  static String get eye => 'eye'.svg;
+  static String get cameraSvg => 'camera'.svg;
 }
 
 extension on String {

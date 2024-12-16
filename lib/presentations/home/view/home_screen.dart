@@ -153,7 +153,7 @@ class SectionHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomerHeaderText(text: title),
+            CustomHeaderText(text: title),
             if (button != null) button!,
           ],
         ),

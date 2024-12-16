@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../global/styles.dart';
 
 
-class CustomerHeaderText extends StatelessWidget {
-  const CustomerHeaderText({super.key, required this.text, this.button});
+class CustomHeaderText extends StatelessWidget {
+  const CustomHeaderText({super.key, required this.text, this.button});
 
   final String text;
   final dynamic button;

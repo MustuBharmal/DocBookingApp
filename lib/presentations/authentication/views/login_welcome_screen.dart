@@ -54,13 +54,13 @@ class LoginWelcomeScreen extends GetView<AuthenticationController> {
                 ),
               ),
               BlueButton(
-                onPressed: controller.signup,
+                onPressed: controller.login,
                 label: 'Sign In',
               ),
               const SizedBox(height: 12),
               CustomOutlinedButton(
                 label: 'Sign Up',
-                onPressed: controller.login,
+                onPressed: controller.signup,
               ),
               const SizedBox(height: 40),
             ],

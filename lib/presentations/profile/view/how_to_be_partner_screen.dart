@@ -6,8 +6,8 @@ import '../../../global/styles.dart';
 import '../../../widgets/blue_button.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../widgets/custom_drop_down.dart';
-import '../widgets/custom_phone_field.dart';
-import '../widgets/custom_text_field.dart';
+import '../../../widgets/custom_phone_field.dart';
+import '../../../widgets/custom_text_field.dart';
 
 class HowToBePartnerScreen extends GetView<ProfileController>{
   static const String routeName = '/how-to-be-partner-screen';

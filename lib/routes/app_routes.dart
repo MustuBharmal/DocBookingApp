@@ -1,5 +1,7 @@
+import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
+import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/about_us_screen.dart';
@@ -23,11 +25,14 @@ import '../presentations/splash_screens/view/splash_screen.dart';
 
 class AppRoutes {
   static List<GetPage> pages = [
-    GetPage(name: NavigationScreen.routeName, page: () => const NavigationScreen(), bindings: [
-      HomeBinding(),
-      SpecialistBinding(),
-      ProfileBinding(),
-    ]),
+    GetPage(
+        name: NavigationScreen.routeName,
+        page: () => const NavigationScreen(),
+        bindings: [
+          HomeBinding(),
+          SpecialistBinding(),
+          ProfileBinding(),
+        ]),
     GetPage(
       name: SplashScreen.routeName,
       page: () => const SplashScreen(),
@@ -36,7 +41,9 @@ class AppRoutes {
       name: OnboardingScreen.routeName,
       page: () => OnboardingScreen(),
     ),
-    GetPage(name: LoginWelcomeScreen.routeName, page: () => const LoginWelcomeScreen()),
+    GetPage(
+        name: LoginWelcomeScreen.routeName,
+        page: () => const LoginWelcomeScreen()),
     /* GetPage(
         name: HomeScreen.routeName,
         page: () => const HomeScreen(),
@@ -89,6 +96,17 @@ class AppRoutes {
       name: SpecialistDetailScreen.routeName,
       page: () => const SpecialistDetailScreen(),
     ),
-    GetPage(name: ListOfSpecialistScreen.routeName, page: () => const ListOfSpecialistScreen(), binding: SpecialistBinding()),
+    GetPage(
+        name: ListOfSpecialistScreen.routeName,
+        page: () => const ListOfSpecialistScreen(),
+        binding: SpecialistBinding()),
+    GetPage(
+      name: LoginScreen.routeName,
+      page: () => LoginScreen(),
+    ),
+    GetPage(
+      name: SignupScreen.routeName,
+      page: () => SignupScreen(),
+    )
   ];
 }

@@ -1,7 +1,7 @@
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:doc_booking_app/presentations/profile/widgets/custom_drop_down.dart';
-import 'package:doc_booking_app/presentations/profile/widgets/custom_phone_field.dart';
-import 'package:doc_booking_app/presentations/profile/widgets/custom_text_field.dart';
+import 'package:doc_booking_app/widgets/custom_phone_field.dart';
+import 'package:doc_booking_app/widgets/custom_text_field.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
