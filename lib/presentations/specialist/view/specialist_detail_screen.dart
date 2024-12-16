@@ -29,12 +29,12 @@ class SpecialistDetailScreen extends StatelessWidget {
                   aspectRatio: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(6),
                         image: DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      alignment: FractionalOffset.topCenter,
-                      image: AssetImage(AppImage.femaleDoctor2),
-                    )),
+                          fit: BoxFit.fitWidth,
+                          alignment: FractionalOffset.topCenter,
+                          image: AssetImage(AppImage.femaleDoctor2),
+                        )),
                   ),
                 ),
                 //Back Icon Button
@@ -109,11 +109,11 @@ class SpecialistDetailScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    blurRadius: 5,
-                                    spreadRadius: 2,
-                                    offset: const Offset(0, 3),
-                                  ),
+                                    color: Color(0x99E8E8F2),
+                                    blurRadius: 24.67,
+                                    offset: Offset(0, 4.93),
+                                    spreadRadius: 0,
+                                  )
                                 ],
                               ),
                               child: const Icon(
@@ -152,11 +152,11 @@ class SpecialistDetailScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    blurRadius: 5,
-                                    spreadRadius: 2,
-                                    offset: const Offset(0, 3),
-                                  ),
+                                    color: Color(0x99E8E8F2),
+                                    blurRadius: 24.67,
+                                    offset: Offset(0, 4.93),
+                                    spreadRadius: 0,
+                                  )
                                 ],
                               ),
                               child: const Icon(
