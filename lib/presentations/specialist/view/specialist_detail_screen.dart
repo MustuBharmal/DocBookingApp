@@ -25,14 +25,16 @@ class SpecialistDetailScreen extends StatelessWidget {
             Stack(
               children: [
                 //Doctor Image
-                ClipRect(
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    heightFactor: 0.76,
-                    child: Image.asset(
-                      AppImage.femaleDoctor2,
-                      fit: BoxFit.cover,
-                    ),
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                        image: DecorationImage(
+                      fit: BoxFit.fitWidth,
+                      alignment: FractionalOffset.topCenter,
+                      image: AssetImage(AppImage.femaleDoctor2),
+                    )),
                   ),
                 ),
                 //Back Icon Button
