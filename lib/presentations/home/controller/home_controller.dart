@@ -25,8 +25,10 @@ class HomeController extends GetxController {
     'My Profile',
   ];
 
-  void onItemTapped(int index) {
-    selectedIndex.value = index;
+  void navigateTo(int index) {
+    Get.back();
+    selectedIndex.value = index; // Update the index
+    // Close the drawer
   }
 
   RxString selectedImagePath = AppImage.stethoscope.obs;
