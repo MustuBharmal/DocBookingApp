@@ -119,6 +119,10 @@ abstract class AppImage {
 
   static String get serviceIcon2 => 'service_icon_2'.svg;
 
+  static String get alarm => 'alarm'.svg;
+
+  static String get calendar => 'calendar'.svg;
+
 }
 
 extension on String {

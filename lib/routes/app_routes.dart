@@ -71,7 +71,7 @@ class AppRoutes {
     ),
     GetPage(
       name: PrescriptionScreen.routeName,
-      page: () => const PrescriptionScreen(),
+      page: () => PrescriptionScreen(),
     ),
     GetPage(
       name: SpecialistScreen.routeName,

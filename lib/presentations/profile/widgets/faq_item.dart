@@ -1,6 +1,8 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
 
+import '../../../global/app_color.dart';
+
 class FAQItem extends StatelessWidget {
   final String question;
   final VoidCallback onTap;
@@ -18,7 +20,7 @@ class FAQItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.grey.shade200,
+            color: AppColors.borderColor,
           ),
           borderRadius: BorderRadius.circular(14),
         ),
