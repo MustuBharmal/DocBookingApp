@@ -1,6 +1,9 @@
 import 'package:doc_booking_app/global/constant_values.dart';
+import 'package:doc_booking_app/global/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import '../../../global/app_color.dart';
 import '../../../global/images.dart';
 import '../../../widgets/custom_app_bar.dart';
@@ -14,7 +17,7 @@ class NavigationScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-          () => Scaffold(
+      () => Scaffold(
         backgroundColor: AppColors.scaffoldBGColor,
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
@@ -30,7 +33,7 @@ class NavigationScreen extends GetView<HomeController> {
           ),
         ),
         bottomNavigationBar: Container(
-          height: 80,
+          // height: 80,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -46,107 +49,116 @@ class NavigationScreen extends GetView<HomeController> {
               ),
             ],
           ),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                top: -20,
-                left: (MediaQuery.of(context).size.width / 4) * controller.selectedIndex.value + 20,
-                child: _buildActiveButton(),
-              ),
-              BottomNavigationBar(
-                elevation: 0,
-                selectedFontSize: 12,
-                unselectedFontSize: 12,
-                selectedItemColor: AppColors.primary,
-                unselectedItemColor: AppColors.grey,
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.transparent,
-                items: List.generate(ConstantValue.pages.length, (index) {
-                  return BottomNavigationBarItem(
-                    icon: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        _buildNavIcon(index),
-                        const SizedBox(height: 4),
-                        Text(
-                          _getLabel(index),
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: controller.selectedIndex.value == index
-                                ? AppColors.primary
-                                : AppColors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                    label: '',
-                  );
-                }),
-                currentIndex: controller.selectedIndex.value,
-                onTap: (index) {
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(
+              ConstantValue.pages.length,
+              (index) {
+                return _buildNavIcon(index).onClick(() {
                   controller.selectedIndex.value = index;
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActiveButton() {
-    return Container(
-      width: 48,
-      height: 48,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          colors: [Color(0xFFABE2FC), Color(0xFF2267FF)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 8,
-            spreadRadius: 1,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Center(
-        child: Image.asset(
-          _getIconPath(controller.selectedIndex.value),
-          width: 24,
-          height: 24,
-          color: Colors.white,
+                });
+              },
+            ),
+          ) /*BottomNavigationBar(
+            elevation: 0,
+            selectedFontSize: 12,
+            unselectedFontSize: 12,
+            selectedItemColor: AppColors.primary,
+            unselectedItemColor: AppColors.grey,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.transparent,
+            items: List.generate(
+              ConstantValue.pages.length,
+              (index) {
+                return BottomNavigationBarItem(
+                  icon: _buildNavIcon(index),
+                  label: '',
+                );
+              },
+            ),
+            currentIndex: controller.selectedIndex.value,
+            onTap: (index) {
+              controller.selectedIndex.value = index;
+            },
+          )*/
+          ,
         ),
       ),
     );
   }
 
   Widget _buildNavIcon(int index) {
-    return Image.asset(
-      _getIconPath(index),
-      width: 24,
-      height: 24,
-      color: controller.selectedIndex.value == index ? Colors.transparent : AppColors.grey,
-    );
+    if (controller.selectedIndex.value == index) {
+      return Transform.translate(
+        offset: Offset(0, -25),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.blueGradient1,
+                      AppColors.blueGradient2,
+                    ],
+                  ),
+                  shape: BoxShape.circle),
+              child: SvgPicture.asset(
+                _getIconPath(index, controller.selectedIndex.value == index),
+                width: 24,
+                height: 24,
+                // color: /*controller.selectedIndex.value == index ? Colors.transparent :*/ AppColors.grey,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              _getLabel(index),
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: AppColors.primary,
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return SvgPicture.asset(
+        _getIconPath(index, controller.selectedIndex.value == index),
+        width: 24,
+        height: 24,
+        // color: /*controller.selectedIndex.value == index ? Colors.transparent :*/ AppColors.grey,
+      );
+    }
   }
 
-
-
-  String _getIconPath(int index) {
+  String _getIconPath(int index, bool active) {
     switch (index) {
       case 0:
-        return AppImage.home;
+        if (active) {
+          return AppImage.homeActive;
+        } else {
+          return AppImage.homeInactive;
+        }
       case 1:
-        return AppImage.bloodletting;
+        if (active) {
+          return AppImage.servicesActive;
+        } else {
+          return AppImage.servicesInactive;
+        }
       case 2:
-        return AppImage.medicalKit;
+        if (active) {
+          return AppImage.specialistActive;
+        } else {
+          return AppImage.specialistInactive;
+        }
       case 3:
-        return AppImage.user;
+        if (active) {
+          return AppImage.myProfileActive;
+        } else {
+          return AppImage.myProfileInactive;
+        }
       default:
         return '';
     }

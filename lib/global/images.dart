@@ -123,6 +123,21 @@ abstract class AppImage {
 
   static String get calendar => 'calendar'.svg;
 
+  static String get homeActive => 'home_active'.svg;
+
+  static String get homeInactive => 'home_inactive'.svg;
+
+  static String get servicesInactive => 'services_inactive'.svg;
+
+  static String get servicesActive => 'services_active'.svg;
+
+  static String get specialistInactive => 'specialist_inactive'.svg;
+
+  static String get specialistActive => 'specialist_active'.svg;
+
+  static String get myProfileInactive => 'my_profile_inactive'.svg;
+
+  static String get myProfileActive => 'my_profile_active'.svg;
 }
 
 extension on String {
