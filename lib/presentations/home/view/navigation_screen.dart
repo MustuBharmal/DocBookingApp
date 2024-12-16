@@ -5,10 +5,6 @@ import '../../../global/app_color.dart';
 import '../../../global/images.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../controller/home_controller.dart';
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
-import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
-import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 
 class NavigationScreen extends GetView<HomeController> {
   const NavigationScreen({super.key});
