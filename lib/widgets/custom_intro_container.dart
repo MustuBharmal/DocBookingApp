@@ -12,7 +12,7 @@ class CustomBannerContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: Get.height * 0.25,
       child: Stack(
         alignment: Alignment.bottomCenter,

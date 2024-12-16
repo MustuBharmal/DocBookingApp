@@ -102,6 +102,7 @@ abstract class AppImage {
   static String get homeCategory5 => 'home_category5'.svg;
 
   static String get homeCategory6 => 'home_category6'.svg;
+
   static String get specialistIcon1 => 'specialist_icon_1'.svg;
 
   static String get specialistIcon2 => 'specialist_icon_2'.svg;
@@ -114,10 +115,9 @@ abstract class AppImage {
 
   static String get specialistIcon3 => 'specialist_icon_3'.svg;
 
+  static String get serviceIcon1 => 'service_icon_1'.svg;
 
-
-
-
+  static String get serviceIcon2 => 'service_icon_2'.svg;
 
 }
 

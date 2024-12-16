@@ -1,10 +1,9 @@
-import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../global/constant_values.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
-import '../../../widgets/custom_intro_container.dart';
 
 class SpecialistScreen extends StatelessWidget {
   const SpecialistScreen({super.key});
@@ -17,17 +16,11 @@ class SpecialistScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: SingleChildScrollView(
         child: Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 30,
-            ),
-            CustomBannerContainer(
-                imgPath: AppImage.femaleDoctor1,
-                headerText: ConstantString.headerTextForSpecialist,
-                subText: ConstantString.subTextForSpecialist),
-            const SizedBox(
-              height: 20,
-            ),
+            SvgPicture.asset(AppImage.serviceIcon2),
             SizedBox(
               child: GridView.builder(
                 shrinkWrap: true,
