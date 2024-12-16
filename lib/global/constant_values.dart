@@ -1,13 +1,18 @@
 import 'package:doc_booking_app/global/images.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../presentations/home/view/home_screen.dart';
 import '../presentations/profile/view/about_us_screen.dart';
 import '../presentations/profile/view/contact_us_screen.dart';
 import '../presentations/profile/view/faq_screen.dart';
 import '../presentations/profile/view/how_to_be_partner_screen.dart';
 import '../presentations/profile/view/payment_management_screen.dart';
 import '../presentations/profile/view/prescription_screen.dart';
+import '../presentations/profile/view/profile_screen.dart';
 import '../presentations/profile/view/user_info_screen.dart';
+import '../presentations/services/view/service_screen.dart';
+import '../presentations/specialist/view/specialist_screen.dart';
 import 'constant_string.dart';
 
 class ConstantValue {
@@ -74,7 +79,14 @@ class ConstantValue {
     AppImage.specialistIcon6,
     AppImage.specialistIcon3,
   ];
+  static final List<Widget> pages = const [
+    HomeScreen(),
+    ServiceScreen(),
+    SpecialistScreen(),
+    ProfileScreen(),
+  ];
 
   static double height = Get.height;
   static double width = Get.width;
+
 }

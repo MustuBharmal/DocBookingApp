@@ -1,14 +1,14 @@
-import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
-import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
-import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
+import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../global/app_color.dart';
 import '../../../global/images.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../controller/home_controller.dart';
+import 'package:doc_booking_app/presentations/home/view/home_screen.dart';
+import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
+import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
+import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 
 class NavigationScreen extends GetView<HomeController> {
   const NavigationScreen({super.key});
@@ -18,90 +18,128 @@ class NavigationScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Scaffold(
+          () => Scaffold(
         backgroundColor: AppColors.scaffoldBGColor,
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
-
         ),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           switchInCurve: Curves.easeIn,
           switchOutCurve: Curves.easeOut,
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
           child: KeyedSubtree(
             key: ValueKey<int>(controller.selectedIndex.value),
-            child: pages[controller.selectedIndex.value],
+            child: ConstantValue.pages[controller.selectedIndex.value],
           ),
         ),
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: AppColors.white,
+          height: 80,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black12,
                 blurRadius: 8,
                 spreadRadius: 1,
-                offset: const Offset(0, -2),
+                offset: Offset(0, -2),
               ),
             ],
           ),
-          child: BottomNavigationBar(
-            elevation: 0,
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.grey,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.transparent,
-            items: List.generate(pages.length, (index) {
-              final bool isSelected = controller.selectedIndex.value == index;
-              return BottomNavigationBarItem(
-                icon: Center(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      if (isSelected)
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            gradient: LinearGradient(
-                              colors: [Color(0xFFABE2FC), Color(0xFF2267FF)],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                top: -20,
+                left: (MediaQuery.of(context).size.width / 4) * controller.selectedIndex.value + 20,
+                child: _buildActiveButton(),
+              ),
+              BottomNavigationBar(
+                elevation: 0,
+                selectedFontSize: 12,
+                unselectedFontSize: 12,
+                selectedItemColor: AppColors.primary,
+                unselectedItemColor: AppColors.grey,
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: Colors.transparent,
+                items: List.generate(ConstantValue.pages.length, (index) {
+                  return BottomNavigationBarItem(
+                    icon: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _buildNavIcon(index),
+                        const SizedBox(height: 4),
+                        Text(
+                          _getLabel(index),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: controller.selectedIndex.value == index
+                                ? AppColors.primary
+                                : AppColors.grey,
                           ),
                         ),
-                      Image.asset(
-                        _getIconPath(index),
-                        width: 20,
-                        height: 20,
-                        color: isSelected ? Colors.white : AppColors.grey,
-                      ),
-                    ],
-                  ),
-                ),
-                label: _getLabel(index),
-              );
-            }),
-            currentIndex: controller.selectedIndex.value,
-            onTap: (index) {
-              controller.selectedIndex.value = index;
-            },
+                      ],
+                    ),
+                    label: '',
+                  );
+                }),
+                currentIndex: controller.selectedIndex.value,
+                onTap: (index) {
+                  controller.selectedIndex.value = index;
+                },
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  final List<Widget> pages = const [HomeScreen(), ServiceScreen(), SpecialistScreen(), ProfileScreen()];
+  Widget _buildActiveButton() {
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          colors: [Color(0xFFABE2FC), Color(0xFF2267FF)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 8,
+            spreadRadius: 1,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Image.asset(
+          _getIconPath(controller.selectedIndex.value),
+          width: 24,
+          height: 24,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavIcon(int index) {
+    return Image.asset(
+      _getIconPath(index),
+      width: 24,
+      height: 24,
+      color: controller.selectedIndex.value == index ? Colors.transparent : AppColors.grey,
+    );
+  }
+
+
 
   String _getIconPath(int index) {
     switch (index) {
