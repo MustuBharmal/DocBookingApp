@@ -13,15 +13,15 @@ class SpecialistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(AppImage.serviceIcon2),
-            SizedBox(
+            Container(
+              padding: EdgeInsets.only(left: 10, right: 10, top: 16),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -35,8 +35,6 @@ class SpecialistScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ContainerWithIcon1(
                     onPressed: () {},
-                    // iconHeight: 60,
-                    // iconWidth: 60,
                     iconPath: ConstantValue.imagePathListForSpecialist[index],
                     text: ConstantValue.textListForSpecialist[index],
                   );

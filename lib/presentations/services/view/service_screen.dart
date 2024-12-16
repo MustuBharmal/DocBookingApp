@@ -1,6 +1,4 @@
-import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/constant_values.dart';
-import 'package:doc_booking_app/widgets/custom_intro_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -21,10 +19,6 @@ class ServiceScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // CustomBannerContainer(
-            //     imgPath: AppImage.maleDoctor,
-            //     headerText: ConstantString.headerTextForServices,
-            //     subText: ConstantString.subTextForServices),
             SvgPicture.asset(AppImage.serviceIcon1),
             Container(
               padding: EdgeInsets.only(left: 10, right: 10, top: 16),
@@ -33,14 +27,14 @@ class ServiceScreen extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
+                  childAspectRatio: 1.25,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
                 ),
                 itemCount: ConstantValue.textListForServices.length,
                 itemBuilder: (context, index) {
                   return ContainerWithIcon1(
                     onPressed: () {},
-
                     iconPath: ConstantValue.imagePathListForServices[index],
                     text: ConstantValue.textListForServices[index],
                   );

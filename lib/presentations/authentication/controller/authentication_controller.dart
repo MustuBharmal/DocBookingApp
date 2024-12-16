@@ -6,10 +6,10 @@ class AuthenticationController extends GetxController {
   RxInt activeIndex = RxInt(0);
 
   Future<void> signup() async {
-    Get.toNamed(NavigationScreen.routeName);
+    Get.offAllNamed(NavigationScreen.routeName);
   }
 
   Future<void> login() async {
-    Get.toNamed(NavigationScreen.routeName);
+    Get.offAllNamed(NavigationScreen.routeName);
   }
 }
