@@ -7,15 +7,15 @@ import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../global/app_color.dart';
 import '../../../global/constant_values.dart';
 import '../../../global/styles.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 import '../../../widgets/custom_specialist_container.dart';
 import '../../specialist/view/list_of_specialist_screen.dart';
+import '../controller/home_controller.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
 
   static const routeName = '/home-screen';
@@ -61,15 +61,19 @@ class HomeScreen extends StatelessWidget {
           SectionHeader(
             title: ConstantString.topServices,
             button: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                controller.navigateTo(1);
+              },
               child: Text("See All", style: subtitleStyle1),
             ),
             spacing: 20,
             childWidget: GridView(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, crossAxisSpacing: 10, childAspectRatio: 0.95),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 0.95),
               children: [
                 ContainerWithIcon1(
                   onPressed: () {},
@@ -101,8 +105,11 @@ class HomeScreen extends StatelessWidget {
             spacing: 0,
             childWidget: ListView.separated(
               shrinkWrap: true,
+              primary: true,
+              physics: ScrollPhysics(),
               itemBuilder: (context, index) {
-                final specialist = SpecialistController.instance.filteredSpecialists[index];
+                final specialist =
+                    SpecialistController.instance.filteredSpecialists[index];
                 return CustomSpecialistContainer(
                   name: specialist.name,
                   specialist: specialist.specialist,
@@ -276,19 +283,19 @@ class BookingOptions extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CustomerContainerWithText(
+        CustomContainerWithText(
           text: "Visit Local Clinic",
         ),
         SizedBox(
           height: 10,
         ),
-        CustomerContainerWithText(
+        CustomContainerWithText(
           text: "Arrange Home Visit",
         ),
         SizedBox(
           height: 10,
         ),
-        CustomerContainerWithText(
+        CustomContainerWithText(
           text: "Chat with Specialist",
         ),
       ],

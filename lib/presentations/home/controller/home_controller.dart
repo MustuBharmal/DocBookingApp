@@ -14,8 +14,8 @@ class HomeController extends GetxController {
     'Specialists',
     'My Profile',
   ];
-
-  void onItemTapped(int index) {
+  void navigateTo(int index) {
+    Get.back();
     selectedIndex.value = index;
   }
 

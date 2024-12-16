@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../global/app_color.dart';
 
-class CustomerContainerWithText extends StatelessWidget {
-  const CustomerContainerWithText(
+class CustomContainerWithText extends StatelessWidget {
+  const CustomContainerWithText(
       {super.key,
       required this.text,});
 

@@ -2,6 +2,7 @@ import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class CustomBottomSheetWidget extends GetView<HomeController> {
@@ -68,7 +69,7 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                       leading: SizedBox(
                         width: 30,
                         height: 30,
-                        child: Image.asset(
+                        child: SvgPicture.asset(
                           ConstantValue.imagePathListForServices[index],
                           fit: BoxFit.contain,
                         ),
