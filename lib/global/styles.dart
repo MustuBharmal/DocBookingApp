@@ -49,6 +49,11 @@ TextStyle txtInterMedium12 = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w700,
 );
+TextStyle headerTextStyle = TextStyle(
+  color: AppColors.black,
+  fontSize: 24,
+  fontWeight: FontWeight.w600,
+);
 TextStyle subtitleStyle3 = GoogleFonts.poppins(
   color: AppColors.black,
   fontSize: 24,

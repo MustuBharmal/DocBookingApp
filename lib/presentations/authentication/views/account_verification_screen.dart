@@ -1,0 +1,102 @@
+import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/authentication/widget/custom_pinput.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../global/app_color.dart';
+import '../../../global/styles.dart';
+import '../../../widgets/blue_button.dart';
+import '../controller/otp_timer_controller.dart';
+
+class AccountVerificationScreen extends GetView<AuthenticationController> {
+  AccountVerificationScreen({super.key});
+
+  static const routeName = "/account_verification-screen";
+
+  //why we use controller here ?
+  /* because of when user move to verification screen then start timer. so controller initialized  when user move to verification screen
+   otherwise timer will start when controller initialized.
+   */
+  final OTPTimerController timerController = Get.put(OTPTimerController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 40, bottom: 18),
+              child: Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.borderColor),
+                    shape: BoxShape.circle,
+                    color: AppColors.white),
+                child: IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_new)),
+              ),
+            ),
+            Text("Account Verification", style: headerTextStyle),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 30),
+              child: Text(
+                'Please enter the OTP you received to ${controller.emailController.text} ',
+                style: txtInterTextField,
+              ),
+            ),
+            CustomPinput(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (timerController.timerText.value == 'Resend') {
+                      timerController.resetTimer();
+                    }
+                  },
+                  child: Obx(() => Text(
+                        timerController.timerText.value == 'Resend'
+                            ? 'Resend the code'
+                            : 'Resend the code',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: timerController.timerText.value == 'Resend'
+                              ? Colors.blue
+                              : Colors.grey,
+                        ),
+                      )),
+                ),
+                SizedBox(width: 10),
+                Obx(() => Text(
+                      timerController.timerText.value == 'Resend'
+                          ? ''
+                          : timerController.timerText.value,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue,
+                      ),
+                    )),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: BlueButton(
+                label: "Verify Now",
+                onPressed: () {
+                  Get.offNamed(AccountVerificationScreen.routeName);
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

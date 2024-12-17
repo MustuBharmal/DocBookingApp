@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
@@ -26,17 +27,34 @@ class AuthenticationController extends GetxController {
 
   final ImagePicker _picker = ImagePicker();
 
+  @override
+  void onInit() {
+    super.onInit();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (timeLeft.value > 0) {
+        timeLeft.value--;
+      } else {
+        isTimerActive.value = false;
+        _timer.cancel();
+      }
+    });
+  }
+  @override
+  void onClose() {
+    _timer.cancel(); // Stop the timer when the controller is disposed
+    super.onClose();
+  }
+
   // Function to pick an image from the gallery
   Future<void> pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       selectedImage.value = File(image.path);
     }
-  }
-
-  // Function to remove the selected image
-  void removeImage() {
-    selectedImage.value = null;
   }
 
   void isVisible() {
@@ -50,4 +68,8 @@ class AuthenticationController extends GetxController {
   Future<void> login() async {
     Get.offAllNamed(LoginScreen.routeName);
   }
+  RxInt timeLeft = 60.obs; // 1 minute timer
+  RxBool isTimerActive = true.obs;
+
+  late Timer _timer;
 }

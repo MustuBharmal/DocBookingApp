@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/authentication/views/forgot_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/widget/custom_password_textfield.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
@@ -50,22 +51,13 @@ class LoginScreen extends GetView<AuthenticationController> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8, bottom: 30),
-                      child: Text(
-                        'Sign in',
-                        style: TextStyle(
-                          color: Color(0xFF363636),
-                          fontSize: 24,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
+                      child: Text('Sign in', style: headerTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: CustomTextField(
                         controller: controller.emailController,
-                        hintText: "Enter Email",
+                        hintText: "eg. xyz@gmail.com",
                         label: "Email Address",
                         hintStyle: txtInterTextFieldHint,
                         showAsterisk: true,
@@ -77,7 +69,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                         isPasswordTextField: true,
                         textEditingController: controller.passController,
                         hintStyle: txtInterTextFieldHint,
-                        hintText: "Enter Password"),
+                        hintText: "eg. 123"),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -94,7 +86,9 @@ class LoginScreen extends GetView<AuthenticationController> {
                         ),
                         // Forgot Password
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed(ForgotPasswordScreen.routeName);
+                          },
                           child: Text(
                             'Forgot Password?',
                             style: blueNormalTextStyle,

@@ -1,3 +1,5 @@
+import 'package:doc_booking_app/presentations/authentication/views/account_verification_screen.dart';
+import 'package:doc_booking_app/presentations/authentication/views/forgot_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
@@ -107,6 +109,14 @@ class AppRoutes {
     GetPage(
       name: SignupScreen.routeName,
       page: () => SignupScreen(),
+    ),
+    GetPage(
+      name: ForgotPasswordScreen.routeName,
+      page: () => ForgotPasswordScreen(),
+    ),
+    GetPage(
+      name: AccountVerificationScreen.routeName,
+      page: () => AccountVerificationScreen(),
     )
   ];
 }
