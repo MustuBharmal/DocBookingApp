@@ -48,6 +48,6 @@ class AuthenticationController extends GetxController {
   }
 
   Future<void> login() async {
-    Get.offAllNamed(NavigationScreen.routeName);
+    Get.offAllNamed(LoginScreen.routeName);
   }
 }
