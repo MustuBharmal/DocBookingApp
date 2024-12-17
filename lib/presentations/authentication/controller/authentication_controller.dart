@@ -19,7 +19,7 @@ class AuthenticationController extends GetxController {
   TextEditingController addressController = TextEditingController();
   TextEditingController postCodeController = TextEditingController();
   TextEditingController countryController = TextEditingController();
-
+  RxString selectSex = RxString('Male');
   RxBool isObscure = true.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
 

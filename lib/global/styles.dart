@@ -9,7 +9,7 @@ const subHeaderStyle =
     TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500);
 
 const titleStyle =
-TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold);
+    TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold);
 TextStyle subtitleStyle = GoogleFonts.poppins(
   color: AppColors.black,
   fontSize: 18,
@@ -24,7 +24,6 @@ TextStyle txtInterRegular15Gray600 = TextStyle(
 TextStyle txtInterTextField = TextStyle(
   color: AppColors.gray600,
   fontSize: 16,
-  fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
 );
 TextStyle txtInterTextFieldHint = TextStyle(
@@ -76,5 +75,8 @@ TextStyle normalTextStyle = TextStyle(
   fontSize: 14,
   color: Colors.grey,
 );
-
-
+TextStyle blueNormalTextStyle = TextStyle(
+  color: Color(0xFF2268FF),
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);

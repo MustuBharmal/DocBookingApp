@@ -2,7 +2,7 @@ import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/widget/custom_password_textfield.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
+import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,33 +16,32 @@ class LoginScreen extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
-    LogUtil.debug("${Get.width * 0.591},${Get.height * 0.253}");
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
       body: Container(
         padding: EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: Get.width * 0.591,
-                height: Get.height * 0.253,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image.asset(AppImage.appLogo),
-                    Text(
-                      "Doctor's Booking",
-                      style: TextStyle(
-                        color: Color(0xFF2268FF),
-                        fontSize: 26,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ],
+              Padding(
+                padding: const EdgeInsets.only(top: 21),
+                child: SizedBox(
+                  width: Get.width * 0.591,
+                  height: Get.height * 0.253,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Image.asset(AppImage.appLogo),
+                      Text(
+                        "Doctor's Booking",
+                        style: TextStyle(
+                          color: Color(0xFF2268FF),
+                          fontSize: 26,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -84,40 +83,33 @@ class LoginScreen extends GetView<AuthenticationController> {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              child: Checkbox(
-                                value: true,
-                                onChanged: (value) {},
-                                activeColor: Colors.blue,
-                                visualDensity: VisualDensity.compact,
-                              ),
+                            Checkbox(
+                              value: true,
+                              onChanged: (value) {},
+                              activeColor: Colors.blue,
+                              visualDensity: VisualDensity.compact,
                             ),
-                            const Text(
-                              'Remember me',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey, // Text color
-                              ),
-                            ),
+                            Text('Remember me', style: txtInterTextField),
                           ],
                         ),
                         // Forgot Password
                         GestureDetector(
                           onTap: () {},
-                          child: const Text(
+                          child: Text(
                             'Forgot Password?',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.blue, // Text color
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: blueNormalTextStyle,
                           ),
                         ),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 30, bottom: 18),
-                      child: BlueButton(label: "Sign In"),
+                      child: BlueButton(
+                        label: "Sign In",
+                        onPressed: () {
+                          Get.offAllNamed(NavigationScreen.routeName);
+                        },
+                      ),
                     ),
                     Center(
                       child: Column(
@@ -125,24 +117,14 @@ class LoginScreen extends GetView<AuthenticationController> {
                         children: [
                           Text(
                             'Don’t have an account?',
-                            style: TextStyle(
-                              color: Color(0xFF899CA8),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: normalTextStyle,
                           ),
                           TextButton(
                               onPressed: () {
                                 Get.offNamed(SignupScreen.routeName);
                               },
-                              child: Text(
-                                "Sign Up here",
-                                style: TextStyle(
-                                  color: Color(0xFF2268FF),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ))
+                              child: Text("Sign Up here",
+                                  style: blueNormalTextStyle))
                         ],
                       ),
                     )
