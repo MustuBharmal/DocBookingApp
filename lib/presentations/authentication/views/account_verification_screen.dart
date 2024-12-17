@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/widget/custom_pinput.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,17 +22,19 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
+    LogUtil.debug("${Get.height * 0.0583}");
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //icon for back
             Padding(
-              padding: const EdgeInsets.only(top: 40, bottom: 18),
+              padding: const EdgeInsets.only(top: 41, bottom: 18),
               child: Container(
-                width: 44,
-                height: 44,
+                width: Get.width * 0.1224,
+                height: Get.height * 0.0583,
                 decoration: BoxDecoration(
                     border: Border.all(color: AppColors.borderColor),
                     shape: BoxShape.circle,
