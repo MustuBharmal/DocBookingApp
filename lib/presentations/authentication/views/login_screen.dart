@@ -84,13 +84,11 @@ class LoginScreen extends GetView<AuthenticationController> {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              child: Checkbox(
-                                value: true,
-                                onChanged: (value) {},
-                                activeColor: Colors.blue,
-                                visualDensity: VisualDensity.compact,
-                              ),
+                            Checkbox(
+                              value: true,
+                              onChanged: (value) {},
+                              activeColor: Colors.blue,
+                              visualDensity: VisualDensity.compact,
                             ),
                             const Text(
                               'Remember me',
@@ -117,7 +115,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 30, bottom: 18),
-                      child: BlueButton(label: "Sign In"),
+                      child: BlueButton(label: "Sign In",onPressed: controller.login,),
                     ),
                     Center(
                       child: Column(
