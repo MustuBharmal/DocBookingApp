@@ -6,6 +6,8 @@ import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/custom_tab_bar.dart';
+
 class PrescriptionInsideScreen extends GetView<ProfileController> {
   static const String routeName = '/prescription-inside-screen';
 
@@ -23,56 +25,16 @@ class PrescriptionInsideScreen extends GetView<ProfileController> {
         ),
         body: Column(
           children: [
-            const CustomTabBar(),
+            const CustomTabBar(
+              tabText1: "Notes",
+              tabText2: "Forms",
+            ),
             Expanded(
               child: TabBarView(
                 children: [
                   PrescriptionChatScreen(), // Chat Screen
                   PrescriptionFormScreen(), // Form Screen
                 ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomTabBar extends StatelessWidget {
-  const CustomTabBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: Material(
-        color: Colors.transparent,
-        elevation: 0, // Remove shadow
-        child: TabBar(
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          //for Remove background color when tap on button
-          indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            border: Border.all(color: AppColors.primary, width: 2),
-          ),
-          indicatorColor: Colors.transparent,
-          labelColor: AppColors.primary,
-          unselectedLabelColor: Colors.grey,
-          indicatorSize: TabBarIndicatorSize.tab,
-          dividerColor: Colors.transparent,
-
-          tabs: const [
-            Tab(
-              child: Text(
-                "Notes",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-            ),
-            Tab(
-              child: Text(
-                "Forms",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),
           ],
