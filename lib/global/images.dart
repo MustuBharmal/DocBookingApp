@@ -13,7 +13,7 @@ abstract class AppImage {
 
   static String get home => 'home'.iconPng;
 
-  static String get stethoscope => 'stethoscope'.iconPng;
+  //static String get stethoscope => 'stethoscope'.iconPng;
 
   static String get user => 'user'.iconPng;
 
@@ -109,6 +109,9 @@ abstract class AppImage {
   static String get eye => 'eye'.svg;
 
   static String get cameraSvg => 'camera'.svg;
+
+  static String get stethoscope => 'stethoscope'.svg;
+
 }
 
 extension on String {

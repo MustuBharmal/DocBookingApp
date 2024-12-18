@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/custom_dialogbox.dart';
@@ -14,7 +13,6 @@ class CustomSearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceWidth = Get.width;
-    LogUtil.debug(Get.height * 0.008);
     return Container(
       width: deviceWidth * 0.95,
       padding: EdgeInsets.symmetric(horizontal: deviceWidth * 0.04),
