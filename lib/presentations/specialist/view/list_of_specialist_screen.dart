@@ -6,7 +6,6 @@ import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../global/app_color.dart';
 import '../../../global/images.dart';
 import '../../../widgets/custom_specialist_container.dart';
 import '../widget/custom_button.dart';
@@ -85,7 +84,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                   height: Get.height * 0.05,
                   width: Get.width * 0.33,
                   iconPath: AppImage.map,
-                  label: "Map View",
+                  label: ConstantString.mapView,
                 ),
               ),
             )

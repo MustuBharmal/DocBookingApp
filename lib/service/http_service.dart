@@ -1,0 +1,120 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:dio/io.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
+import '../global/apis.dart';
+import '../util/log_utils.dart';
+
+class HttpService extends HttpOverrides {
+  HttpService._internal();
+
+  static final HttpService instance = HttpService._internal();
+  static dio.Dio _dio = dio.Dio();
+
+  final dio.BaseOptions _baseOptions =
+  dio.BaseOptions(baseUrl: Api.baseUrl, headers: {
+    'Content-Type': 'application/json',
+    'Apitoken':
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWRtaW4iLCJleHAiOjE3MDcxMTM4MDd9.81c8uR-Vl_kZkCCPZBKT5uJ_lQe8L0zoad_WVsAES2M'
+  });
+
+  HttpService.initialize() {
+    _dio = dio.Dio(_baseOptions);
+  }
+
+  static Future<Response<dynamic>?> get(
+      String path, Map<String, dynamic> params, String tokenString,
+      {bool token = false}) async {
+    dio.Response? result;
+    try {
+      (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+          (HttpClient dioClient) {
+        dioClient.badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+        return dioClient;
+      };
+      final dio.Response response = await _dio.get(path,
+          queryParameters: params,
+          options:
+          token ? dio.Options(headers: {'APIToken': tokenString}) : null);
+      if (response.statusCode == 200) {
+        result = response;
+      } else {
+        LogUtil.error(response.data['message']);
+      }
+    } catch (e) {
+      LogUtil.error(e);
+    }
+    return result?.data;
+  }
+
+  static Future<Map<String, dynamic>?> post(
+      String path, Map<String, dynamic> data, String tokenString,
+      {bool token = false}) async {
+    Map<String, dynamic> result = {};
+    try {
+      (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+          (HttpClient dioClient) {
+        dioClient.badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+        return dioClient;
+      };
+      final dio.Response response = await _dio.post(path,
+          data: jsonEncode(data),
+          options:
+          token ? dio.Options(headers: {'APIToken': tokenString}) : null);
+      if (response.statusCode == 200) {
+        result = response.data as Map<String, dynamic>;
+        return result;
+      }
+      LogUtil.error(response.statusCode);
+      throw Exception(response.statusMessage);
+    } catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    }
+  }
+
+  static Future<Map<String, dynamic>> picPost(
+      String path, FormData data, String tokenString,
+      {bool token = true}) async {
+    Map<String, dynamic> result = {};
+    try {
+      (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+          (HttpClient dioClient) {
+        dioClient.badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+        return dioClient;
+      };
+
+      final dio.Response response = await _dio.post(
+        path,
+        data: data,
+        options: token
+            ? dio.Options(headers: {
+          'Apitoken': tokenString, // Ensure tokenString is used here
+          'Content-Type': 'multipart/form-data',
+        })
+            : null,
+      );
+      if (response.statusCode == 200) {
+        // Check if response data is a JSON map or a string
+        if (response.data is Map<String, dynamic>) {
+          result = response.data;
+        } else if (response.data is String) {
+          // Parse the string to JSON if it's a JSON string
+          result = jsonDecode(response.data);
+        } else {
+          LogUtil.error("Unexpected response format");
+        }
+      } else {
+        LogUtil.error("Request failed: ${response.data['message']}");
+      }
+    } catch (e) {
+      LogUtil.error("Error: $e");
+      rethrow;
+    }
+    return result;
+  }
+}

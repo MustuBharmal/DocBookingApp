@@ -64,7 +64,7 @@ class HomeScreen extends GetView<HomeController> {
               onPressed: () {
                 controller.navigateTo(1);
               },
-              child: Text("See All", style: subtitleStyle1),
+              child: Text(ConstantString.seeAll, style: subtitleStyle1),
             ),
             spacing: 20,
             childWidget: GridView(
@@ -100,7 +100,7 @@ class HomeScreen extends GetView<HomeController> {
               onPressed: () {
                 Get.toNamed(ListOfSpecialistScreen.routeName);
               },
-              child: Text("See All", style: subtitleStyle1),
+              child: Text(ConstantString.seeAll, style: subtitleStyle1),
             ),
             spacing: 0,
             childWidget: ListView.separated(
@@ -284,19 +284,19 @@ class BookingOptions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CustomContainerWithText(
-          text: "Visit Local Clinic",
+          text:ConstantString.visitLocalClinic ,
         ),
         SizedBox(
           height: 10,
         ),
         CustomContainerWithText(
-          text: "Arrange Home Visit",
+          text: ConstantString.arrHomeVisit,
         ),
         SizedBox(
           height: 10,
         ),
         CustomContainerWithText(
-          text: "Chat with Specialist",
+          text: ConstantString.chatWSpeciaList,
         ),
       ],
     );

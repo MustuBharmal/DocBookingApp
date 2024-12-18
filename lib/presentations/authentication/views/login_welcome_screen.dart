@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
@@ -27,7 +28,7 @@ class LoginWelcomeScreen extends GetView<AuthenticationController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Welcome to',
+                      ConstantString.welcomeTo,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: AppColors.primary,
@@ -43,7 +44,7 @@ class LoginWelcomeScreen extends GetView<AuthenticationController> {
                       height: Get.height * 0.05,
                     ),
                     Text(
-                      "Doctor's Booking",
+                      ConstantString.doctorBooking,
                       style: TextStyle(
                         color: AppColors.primary,
                         fontSize: 26,
@@ -55,11 +56,11 @@ class LoginWelcomeScreen extends GetView<AuthenticationController> {
               ),
               BlueButton(
                 onPressed: controller.login,
-                label: 'Sign In',
+                label: ConstantString.signIn,
               ),
               const SizedBox(height: 12),
               CustomOutlinedButton(
-                label: 'Sign Up',
+                label: ConstantString.signUn,
                 onPressed: controller.signup,
               ),
               const SizedBox(height: 40),

@@ -3,7 +3,6 @@ import 'package:doc_booking_app/presentations/home/controller/home_controller.da
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../widgets/custom_dialogbox.dart';
 import '../../../widgets/custom_icon_sizebox.dart';
 

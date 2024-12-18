@@ -3,9 +3,6 @@ abstract class AppImage {
   static String get companyLogo => 'company_logo'.logoPng;
 
   ///images
-  static String get maleDoctor => 'male_doctor1'.imagePng;
-
-  static String get femaleDoctor1 => 'female_doctor1'.imagePng;
 
   static String get femaleDoctor2 => 'female_doctor2'.jpeg;
 
@@ -16,37 +13,9 @@ abstract class AppImage {
 
   static String get home => 'home'.iconPng;
 
-  static String get homeVisit => 'home_visit'.iconPng;
-
-  static String get medicalKit => 'medical_kit'.iconPng;
-
-  static String get notification => 'notification'.iconPng;
-
-  static String get phlebotomy => 'phlebotomy'.iconPng;
-
   static String get stethoscope => 'stethoscope'.iconPng;
 
-  static String get stethoscopeWhite => 'stethoscope_white'.iconPng;
-
-  static String get trtAdministration => 'trt_administration'.iconPng;
-
   static String get user => 'user'.iconPng;
-
-  static String get vitaminBooster => 'vitamin_booster'.iconPng;
-
-  static String get vitaminIv => 'vitamin_iv'.iconPng;
-
-  static String get mentalHealth => 'mental_health'.iconPng;
-
-  static String get doctor => 'doctor'.iconPng;
-
-  static String get fitnessCoach => 'fitness_coach'.iconPng;
-
-  static String get hrtTreatment => 'hrt_treatment'.iconPng;
-
-  static String get trtTreatment => 'trt_treatment'.iconPng;
-
-  static String get nutritionalist => 'nutritionalist'.iconPng;
 
   static String get aboutUs => 'about_us'.iconPng;
 
@@ -76,8 +45,6 @@ abstract class AppImage {
 
   static String get map => 'map'.iconPng;
 
-  static String get search => 'search'.iconPng;
-
   //Folder Location
   static const String imageFolderLocation = 'assets/images';
 
@@ -90,7 +57,7 @@ abstract class AppImage {
   static const String intro2 = '$imageFolderLocation/iv_intro_2.png';
   static const String intro3 = '$imageFolderLocation/iv_intro_3.png';
 
-//Icons
+  //Icons
   static String get homeCategory1 => 'home_category1'.svg;
 
   static String get homeCategory2 => 'home_category2'.svg;
@@ -140,6 +107,7 @@ abstract class AppImage {
   static String get myProfileActive => 'my_profile_active'.svg;
 
   static String get eye => 'eye'.svg;
+
   static String get cameraSvg => 'camera'.svg;
 }
 

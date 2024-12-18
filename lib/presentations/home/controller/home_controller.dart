@@ -14,6 +14,7 @@ class HomeController extends GetxController {
     'Specialists',
     'My Profile',
   ];
+
   void navigateTo(int index) {
     Get.back();
     selectedIndex.value = index;
@@ -22,12 +23,12 @@ class HomeController extends GetxController {
   RxString selectedImagePath = AppImage.stethoscope.obs;
 
   final Map<String, String> serviceImages = {
-    "Phlebotomy": AppImage.phlebotomy,
-    "Vitamin IV": AppImage.vitaminIv,
-    "Vitamin Booster": AppImage.vitaminBooster,
-    "TRT Administration": AppImage.bloodletting,
-    "Bloodletting": AppImage.trtAdministration,
-    "Flu Shots": AppImage.flushots,
+    "Phlebotomy": AppImage.homeCategory1,
+    "Vitamin IV": AppImage.homeCategory2,
+    "Vitamin Booster": AppImage.homeCategory3,
+    "TRT Administration": AppImage.homeCategory4,
+    "Bloodletting": AppImage.homeCategory5,
+    "Flu Shots": AppImage.homeCategory6,
   };
 
   void updateSelectedImage(String service) {
