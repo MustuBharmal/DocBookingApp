@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -39,6 +40,7 @@ class ProfileController extends GetxController {
   ];
 
 
+
   final TextEditingController nameController = TextEditingController(text: 'Alex Doe');
   final TextEditingController emailController = TextEditingController(text: 'alex.doe@gmail.com');
   final TextEditingController phoneController = TextEditingController(text: '3455672356');
@@ -55,6 +57,29 @@ class ProfileController extends GetxController {
   RxString selectedBusinessType = RxString('Clinic');
   RxString selectedState = RxString('New York');
   RxString selectedSex = RxString('Male');
+
+  // prescription inside data
+
+  final TextEditingController chatController = TextEditingController();
+  final TextEditingController symptomsController = TextEditingController();
+  final TextEditingController bloodGrpController = TextEditingController();
+
+
+
+  RxList<String> messages = [
+    "Please avoid junk food and sugar drinks. Keep yourself stress-free.",
+    "Yes, I will try my best to avoid it, but sometimes it's so hard!"
+  ].obs;
+
+  // Add message to the list
+  void addMessage(String message) {
+    if (message.isNotEmpty) {
+      messages.add(message);
+    }
+  }
+
+
+
 
   // Update phone number
   void updatePhoneNumber(String value) {

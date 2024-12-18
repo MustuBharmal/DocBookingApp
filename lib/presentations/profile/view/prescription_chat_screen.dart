@@ -1,0 +1,77 @@
+import 'package:doc_booking_app/global/styles.dart';
+import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../global/app_color.dart';
+
+class PrescriptionChatScreen extends GetView<ProfileController> {
+  static const String routeName = '/prescription-chat-screen';
+  const PrescriptionChatScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: Obx(
+                () => ListView.builder(
+              padding: EdgeInsets.all(10),
+              itemCount: controller.messages.length,
+              itemBuilder: (context, index) {
+                final isUserMessage = index % 2 != 0; // Alternate alignment
+                return Align(
+                  alignment: isUserMessage
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: isUserMessage ?AppColors.primary : AppColors.borderColor),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(controller.messages[index]),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              border: Border.all(color: AppColors.borderColor),
+              borderRadius: BorderRadius.circular(20)
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: controller.chatController,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "Type your message",
+                      hintStyle: txtInterTextFieldHint,
+                      border: InputBorder.none
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.send, color: AppColors.primary),
+                  onPressed: () {
+                    controller.addMessage(controller.chatController.text);
+                    controller.chatController.clear();
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

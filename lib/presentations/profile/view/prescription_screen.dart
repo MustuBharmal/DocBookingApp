@@ -1,6 +1,8 @@
 
 
+import 'package:doc_booking_app/presentations/profile/view/prescription_inside_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widgets/custom_prescription_container.dart';
 class PrescriptionScreen extends StatelessWidget {
@@ -43,7 +45,7 @@ class PrescriptionScreen extends StatelessWidget {
               date: data['date']!,
               time: data['time']!,
               onPressed: () {
-                // Handle card ta
+                Get.toNamed(PrescriptionInsideScreen.routeName);
               },
             ),
           );
