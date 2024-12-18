@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
-import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../views/login_screen.dart';
 
 class AuthenticationController extends GetxController {
   static AuthenticationController get instance =>
@@ -64,7 +65,7 @@ class AuthenticationController extends GetxController {
   }
 
   Future<void> login() async {
-    Get.offAllNamed(NavigationScreen.routeName);
+    Get.offAllNamed(LoginScreen.routeName);
   }
   RxInt timeLeft = 60.obs; // 1 minute timer
   RxBool isTimerActive = true.obs;

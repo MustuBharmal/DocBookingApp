@@ -29,7 +29,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             onPageChanged: (index) {
               controller.activeIndex.value = index;
             },
-            // physics: NeverScrollableScrollPhysics(),
             controller: pageController,
             children: [
               Image.asset(AppImage.intro1, alignment: Alignment.topCenter),
@@ -43,69 +42,75 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: Get.height * 0.40,
               decoration:
                   BoxDecoration(color: AppColors.white, borderRadius: const BorderRadius.vertical(top: Radius.circular(42))),
-              padding: const EdgeInsets.all(16),
-              child: Padding(
-                padding: const EdgeInsets.all(22.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Obx(
-                      () => Text(
-                        controller.activeIndex.value == 0
-                            ? 'Let us Come to You'
-                            : controller.activeIndex.value == 1
-                                ? 'Visit our Wellness Centres'
-                                : 'Virtual Specialists',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              padding: const EdgeInsets.all(22),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: Get.height * .12,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                      Obx(
+                            () => Text(
+                          controller.activeIndex.value == 0
+                              ? 'Let us Come to You'
+                              : controller.activeIndex.value == 1
+                              ? 'Visit our Wellness Centres'
+                              : 'Virtual Specialists',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
                       ),
-                    ),
-                    Obx(
-                      () => Text(
-                        controller.activeIndex.value == 0
-                            ? 'Cant get to a clinic, let us come to you, book a Home visit appointment today.'
-                            : controller.activeIndex.value == 1
-                                ? 'Private Affordable Proactive healthcare.'
-                                : 'Easily contact our Network of specialists, From Doctors to Nutritionists.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      Obx(
+                            () => Text(
+                          controller.activeIndex.value == 0
+                              ? 'Cant get to a clinic, let us come to you, book a Home visit appointment today.'
+                              : controller.activeIndex.value == 1
+                              ? 'Private Affordable Proactive healthcare.'
+                              : 'Easily contact our Network of specialists, From Doctors to Nutritionists.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                        ),
                       ),
-                    ),
-                    Obx(
-                      () => Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          3,
-                          (index) => Container(
-                            margin: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                                gradient: controller.activeIndex.value == index
-                                    ? const LinearGradient(
-                                        colors: [AppColors.blueGradient1, AppColors.blueGradient2],
-                                      )
-                                    : null,
-                                color: controller.activeIndex.value != index ? AppColors.gray : null,
-                                shape: BoxShape.circle),
-                            height: 10,
-                            width: 10,
-                          ),
+
+                    ],),
+                  ),
+                  Obx(
+                        () => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        3,
+                            (index) => Container(
+                          margin: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              gradient: controller.activeIndex.value == index
+                                  ? const LinearGradient(
+                                colors: [AppColors.blueGradient1, AppColors.blueGradient2],
+                              )
+                                  : null,
+                              color: controller.activeIndex.value != index ? AppColors.gray : null,
+                              shape: BoxShape.circle),
+                          height: 10,
+                          width: 10,
                         ),
                       ),
                     ),
-                    BlueButton(
-                      label: 'Next',
-                      onPressed: () {
-                        if (controller.activeIndex.value < 2) {
-                          pageController.animateToPage(controller.activeIndex.value + 1,
-                              duration: Duration(milliseconds: 250), curve: Curves.easeIn);
-                        } else {
-                          Get.offAllNamed(LoginWelcomeScreen.routeName);
-                        }
-                      },
-                    ),
-                    CustomTextButton(onPressed: () {}, label: 'Skip')
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 10,),
+                  BlueButton(
+                    label: 'Next',
+                    onPressed: () {
+                      if (controller.activeIndex.value < 2) {
+                        pageController.animateToPage(controller.activeIndex.value + 1,
+                            duration: Duration(milliseconds: 250), curve: Curves.easeIn);
+                      } else {
+                        Get.offAllNamed(LoginWelcomeScreen.routeName);
+                      }
+                    },
+                  ),
+                  CustomTextButton(onPressed: () {}, label: 'Skip')
+                ],
               ),
             ),
           )

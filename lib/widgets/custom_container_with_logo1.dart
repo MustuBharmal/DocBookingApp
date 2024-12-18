@@ -6,15 +6,10 @@ class ContainerWithIcon1 extends StatelessWidget {
       {super.key,
       required this.text,
       required this.iconPath,
-      // required this.iconWidth,
-      // required this.iconHeight,
       required this.onPressed});
 
   final String text;
   final String iconPath;
-
-  // final double iconWidth;
-  // final double iconHeight;
   final VoidCallback? onPressed;
 
   @override
@@ -32,7 +27,6 @@ class ContainerWithIcon1 extends StatelessWidget {
           ),
         ),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Flexible(
