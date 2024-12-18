@@ -46,29 +46,37 @@ class CustomTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Material(
+        color: Colors.transparent,
+        elevation: 0, // Remove shadow
+        child: TabBar(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          //for Remove background color when tap on button
+          indicator: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            border: Border.all(color: AppColors.primary, width: 2),
+          ),
+          indicatorColor: Colors.transparent,
+          labelColor: AppColors.primary,
+          unselectedLabelColor: Colors.grey,
+          indicatorSize: TabBarIndicatorSize.tab,
+          dividerColor: Colors.transparent,
 
-      child: TabBar(
-        indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          border: Border.all(color: AppColors.primary, width: 2),
+          tabs: const [
+            Tab(
+              child: Text(
+                "Notes",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Tab(
+              child: Text(
+                "Forms",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ],
         ),
-        labelColor: AppColors.primary, // Text color for selected tab
-        unselectedLabelColor: Colors.grey, // Text color for unselected tab
-        indicatorSize: TabBarIndicatorSize.tab,
-        tabs: const [
-          Tab(
-            child: Text(
-              "Notes",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-          ),
-          Tab(
-            child: Text(
-              "Forms",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ],
       ),
     );
   }

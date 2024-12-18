@@ -41,8 +41,6 @@ abstract class AppImage {
 
   static String get camera => 'camera'.iconPng;
 
-  static String get arrowDown => 'arrow_down'.iconPng;
-
   static String get map => 'map'.iconPng;
 
   //Folder Location
@@ -111,6 +109,8 @@ abstract class AppImage {
   static String get cameraSvg => 'camera'.svg;
 
   static String get stethoscope => 'stethoscope'.svg;
+
+  static String get arrowDown => 'arrow_down'.svg;
 
 }
 
