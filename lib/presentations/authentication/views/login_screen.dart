@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/views/forgot_password_screen.dart';
@@ -34,7 +35,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                     children: [
                       Image.asset(AppImage.appLogo),
                       Text(
-                        "Doctor's Booking",
+                        ConstantString.doctorBooking,
                         style: TextStyle(
                           color: Color(0xFF2268FF),
                           fontSize: 26,
@@ -51,20 +52,21 @@ class LoginScreen extends GetView<AuthenticationController> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8, bottom: 30),
-                      child: Text('Sign in', style: headerTextStyle),
+                      child:
+                          Text(ConstantString.signIn, style: headerTextStyle),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: CustomTextField(
                         controller: controller.emailController,
                         hintText: "eg. xyz@gmail.com",
-                        label: "Email Address",
+                        label: ConstantString.emailAddress,
                         hintStyle: txtInterTextFieldHint,
                         showAsterisk: true,
                       ),
                     ),
                     CustomPasswordTextfield(
-                        label: "Password",
+                        label: ConstantString.password,
                         showAsterisk: true,
                         isPasswordTextField: true,
                         textEditingController: controller.passController,
@@ -81,7 +83,8 @@ class LoginScreen extends GetView<AuthenticationController> {
                               activeColor: Colors.blue,
                               visualDensity: VisualDensity.compact,
                             ),
-                            Text('Remember me', style: txtInterTextField),
+                            Text(ConstantString.rememberMe,
+                                style: txtInterTextField),
                           ],
                         ),
                         // Forgot Password
@@ -90,7 +93,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                             Get.toNamed(ForgotPasswordScreen.routeName);
                           },
                           child: Text(
-                            'Forgot Password?',
+                            "${ConstantString.forgotPass}?",
                             style: blueNormalTextStyle,
                           ),
                         ),
@@ -99,7 +102,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                     Padding(
                       padding: const EdgeInsets.only(top: 30, bottom: 18),
                       child: BlueButton(
-                        label: "Sign In",
+                        label: ConstantString.signIn,
                         onPressed: () {
                           Get.offAllNamed(NavigationScreen.routeName);
                         },
@@ -110,14 +113,14 @@ class LoginScreen extends GetView<AuthenticationController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Don’t have an account?',
+                            ConstantString.doNotHaveAcc,
                             style: normalTextStyle,
                           ),
                           TextButton(
                               onPressed: () {
                                 Get.offNamed(SignupScreen.routeName);
                               },
-                              child: Text("Sign Up here",
+                              child: Text(ConstantString.signUpHere,
                                   style: blueNormalTextStyle))
                         ],
                       ),

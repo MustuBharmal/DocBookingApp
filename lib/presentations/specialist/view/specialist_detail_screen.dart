@@ -129,7 +129,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Rating"),
+                                  Text(ConstantString.rating),
                                   Text(
                                     "4.8 out of 5.0",
                                     style: TextStyle(
@@ -172,7 +172,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Patient"),
+                                  Text(ConstantString.patient),
                                   Text(
                                     "500+",
                                     style: TextStyle(
@@ -188,7 +188,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const CustomHeaderText(text: "About"),
+                  const CustomHeaderText(text: ConstantString.about),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 16),
                     child: RichText(
@@ -204,7 +204,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                                 alignment: Alignment.bottomLeft,
                                 children: [
                                   const Text(
-                                    "Read More",
+                                    ConstantString.readMore,
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.black,
@@ -228,7 +228,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                     ),
                   ),
                   const CustomHeaderText(
-                    text: "Location",
+                    text: ConstantString.location,
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -251,18 +251,19 @@ class SpecialistDetailScreen extends StatelessWidget {
                     ],
                   ),
                   CustomHeaderText(
-                    text: "Review",
+                    text: ConstantString.review,
                     button: TextButton(
                         onPressed: () {
                           Get.toNamed(ReviewsScreen.routeName);
                         },
-                        child: Text("See all", style: subtitleStyle1)),
+                        child:
+                            Text(ConstantString.seeAll, style: subtitleStyle1)),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: CustomReviewCard(
                         name: "Virat Kohli",
-                        imagePath: AppImage.doctor,
+                        imagePath: AppImage.user,
                         day: "2 d",
                         rating: 4,
                         review: "Nice it is very Useful for me."),

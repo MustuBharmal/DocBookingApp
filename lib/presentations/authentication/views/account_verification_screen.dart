@@ -1,3 +1,5 @@
+import 'package:doc_booking_app/global/constant_string.dart';
+import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/widget/custom_pinput.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
@@ -46,7 +48,7 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
                     icon: const Icon(Icons.arrow_back_ios_new)),
               ),
             ),
-            Text("Account Verification", style: headerTextStyle),
+            Text(ConstantString.accVerification, style: headerTextStyle),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 30),
               child: Text(
@@ -91,7 +93,7 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: BlueButton(
-                label: "Verify Now",
+                label: ConstantString.verifyNow,
                 onPressed: () {
                   Get.offNamed(AccountVerificationScreen.routeName);
                 },

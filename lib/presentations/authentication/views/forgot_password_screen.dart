@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/views/account_verification_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
@@ -37,16 +38,16 @@ class ForgotPasswordScreen extends GetView<AuthenticationController> {
                     icon: const Icon(Icons.arrow_back_ios_new)),
               ),
             ),
-            Text("Forgot Password", style: headerTextStyle),
+            Text(ConstantString.forgotPass, style: headerTextStyle),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 30),
               child: Text(
-                'Enter email address to receive a 4 \ndigit code for verification',
+                ConstantString.subTextForForgot,
                 style: txtInterTextField,
               ),
             ),
             CustomTextField(
-                label: "Email Address",
+                label: ConstantString.emailAddress,
                 showAsterisk: true,
                 controller: controller.emailController,
                 hintStyle: txtInterTextFieldHint,
@@ -54,7 +55,7 @@ class ForgotPasswordScreen extends GetView<AuthenticationController> {
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: BlueButton(
-                label: "Continue",
+                label: ConstantString.continueLabel,
                 onPressed: () {
                   Get.offNamed(AccountVerificationScreen.routeName);
                 },
