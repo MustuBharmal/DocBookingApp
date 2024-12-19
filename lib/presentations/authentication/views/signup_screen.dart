@@ -14,9 +14,18 @@ import 'package:get/get.dart';
 import '../../../global/styles.dart';
 
 class SignupScreen extends GetView<AuthenticationController> {
-  const SignupScreen({super.key});
+  SignupScreen({super.key});
 
   static const routeName = "/signup-screen";
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
+  final TextEditingController sexController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController postCodeController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +52,7 @@ class SignupScreen extends GetView<AuthenticationController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 25),
-                      child: Text(ConstantString.createAccount,
-                          style: txtInterTextField),
+                      child: Text(ConstantString.createAccount, style: txtInterTextField),
                     ),
                     CustomImageContainer(),
                     SizedBox(height: 5),
@@ -63,26 +71,26 @@ class SignupScreen extends GetView<AuthenticationController> {
                           CustomTextField(
                               label: ConstantString.fullName,
                               showAsterisk: true,
-                              controller: controller.fullNameController,
+                              controller: fullNameController,
                               hintStyle: txtInterTextFieldHint,
                               hintText: "eg. Alex"),
                         ],
                       ),
                     ),
                     CustomTextField(
-                      controller: controller.emailController,
+                      controller: emailController,
                       hintText: "eg. alex@gmail.com",
                       label: ConstantString.emailAddress,
                       hintStyle: txtInterTextFieldHint,
                       showAsterisk: true,
                     ),
                     CustomPhoneField(
-                      controller: controller.phoneController,
+                      controller: phoneController,
                     ),
                     CustomDobTextField(
                         hintText: "day/month/year",
                         hintStyle: txtInterTextFieldHint,
-                        controller: controller.dobController,
+                        controller: dobController,
                         label: ConstantString.dob,
                         showAsterisk: true,
                         validator: null),
@@ -97,20 +105,20 @@ class SignupScreen extends GetView<AuthenticationController> {
                     CustomTextField(
                         label: ConstantString.address,
                         showAsterisk: true,
-                        controller: controller.addressController,
+                        controller: addressController,
                         hintStyle: txtInterTextFieldHint,
                         hintText: "eg 4517 Washington Ave. Manchester, Kentucky 39495"),
                     CustomTextField(
                         label: ConstantString.postCode,
                         showAsterisk: true,
-                        controller: controller.postCodeController,
+                        controller: postCodeController,
                         hintStyle: txtInterTextFieldHint,
                         inputType: TextInputType.number,
                         hintText: "eg 12345"),
                     CustomTextField(
                         label: ConstantString.country,
                         showAsterisk: true,
-                        controller: controller.countryController,
+                        controller: countryController,
                         hintStyle: txtInterTextFieldHint,
                         hintText: "eg india"),
                     Padding(
@@ -118,7 +126,7 @@ class SignupScreen extends GetView<AuthenticationController> {
                       child: BlueButton(
                         label: ConstantString.save,
                         onPressed: () {
-                          Get.offAllNamed(NavigationScreen.routeName);
+                          Get.offNamed(NavigationScreen.routeName);
                         },
                       ),
                     )
@@ -137,8 +145,7 @@ class SignupScreen extends GetView<AuthenticationController> {
                         onPressed: () {
                           Get.offNamed(LoginScreen.routeName);
                         },
-                        child: Text(ConstantString.signInHere,
-                            style: blueNormalTextStyle))
+                        child: Text(ConstantString.signInHere, style: blueNormalTextStyle))
                   ],
                 ),
               )

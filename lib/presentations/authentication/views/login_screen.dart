@@ -7,13 +7,17 @@ import 'package:doc_booking_app/presentations/authentication/widget/custom_passw
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../global/styles.dart';
 import '../../../widgets/custom_text_field.dart';
 
 class LoginScreen extends GetView<AuthenticationController> {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
   static const routeName = "/login-screen";
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: CustomTextField(
-                      controller: controller.emailController,
+                      controller: emailController,
                       hintText: "eg. xyz@gmail.com",
                       label: ConstantString.emailAddress,
                       hintStyle: txtInterTextFieldHint,
@@ -66,10 +70,9 @@ class LoginScreen extends GetView<AuthenticationController> {
                     label: ConstantString.password,
                     showAsterisk: true,
                     isPasswordTextField: true,
-                    textEditingController: controller.passController,
+                    textEditingController: passController,
                     hintStyle: txtInterTextFieldHint,
                     hintText: "eg. 123",
-
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,8 +85,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                             activeColor: Colors.blue,
                             visualDensity: VisualDensity.compact,
                           ),
-                          Text(ConstantString.rememberMe,
-                              style: txtInterTextField),
+                          Text(ConstantString.rememberMe, style: txtInterTextField),
                         ],
                       ),
                       // Forgot Password
@@ -103,14 +105,14 @@ class LoginScreen extends GetView<AuthenticationController> {
                     child: BlueButton(
                       label: ConstantString.signIn,
                       onPressed: () {
-                        if(!controller.emailController.text.contains('@')){
+                        if (!emailController.text.isEmail) {
                           return;
                         }
-                        if(controller.passController.text.trim().length < 6){
+                        if (passController.text.trim().length < 6) {
                           return;
                         }
                         // Get.offAllNamed(NavigationScreen.routeName);
-                        controller.login();
+                        controller.login(emailController.text, passController.text);
                       },
                     ),
                   ),
@@ -126,8 +128,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                             onPressed: () {
                               Get.offNamed(SignupScreen.routeName);
                             },
-                            child: Text(ConstantString.signUpHere,
-                                style: blueNormalTextStyle))
+                            child: Text(ConstantString.signUpHere, style: blueNormalTextStyle))
                       ],
                     ),
                   )

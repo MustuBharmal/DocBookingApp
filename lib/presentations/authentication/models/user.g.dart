@@ -7,26 +7,26 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      profilePic: json['profilePic'] as String,
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      email: json['email'] as String,
-      phone: json['phone'] as String,
-      sex: json['sex'] as String,
-      dob: json['dob'] as String,
-      address: json['address'] as String,
-      country: json['country'] as String,
-      state: json['state'] as String,
-      city: json['city'] as String,
-      createdAt: json['createdAt'] as String,
-      updatedAt: json['updatedAt'] as String,
-      is_verified: json['is_verified'] as String,
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      profilePic: json['profilePic'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      phone: json['phone'] as String?,
+      sex: json['sex'] as String?,
+      dob: json['dob'] as String?,
+      address: json['address'] as String?,
+      country: json['country'] as String?,
+      state: json['state'] as String?,
+      city: json['city'] as String?,
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      isVerified: json['is_verified'] as String?,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
-      'profilePic': instance.profilePic,
       'id': instance.id,
+      'profilePic': instance.profilePic,
       'name': instance.name,
       'email': instance.email,
       'phone': instance.phone,
@@ -38,5 +38,5 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'city': instance.city,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'is_verified': instance.is_verified,
+      'is_verified': instance.isVerified,
     };

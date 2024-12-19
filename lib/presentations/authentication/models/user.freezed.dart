@@ -20,20 +20,21 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get profilePic => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
-  String get sex => throw _privateConstructorUsedError;
-  String get dob => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String get country => throw _privateConstructorUsedError;
-  String get state => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get updatedAt => throw _privateConstructorUsedError;
-  String get is_verified => throw _privateConstructorUsedError;
+  String? get profilePic => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
+  String? get sex => throw _privateConstructorUsedError;
+  String? get dob => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  String? get country => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  String? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_verified')
+  String? get isVerified => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,20 +51,20 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String profilePic,
-      int id,
-      String name,
-      String email,
-      String phone,
-      String sex,
-      String dob,
-      String address,
-      String country,
-      String state,
-      String city,
-      String createdAt,
-      String updatedAt,
-      String is_verified});
+      {int id,
+      String? profilePic,
+      String? name,
+      String? email,
+      String? phone,
+      String? sex,
+      String? dob,
+      String? address,
+      String? country,
+      String? state,
+      String? city,
+      String? createdAt,
+      String? updatedAt,
+      @JsonKey(name: 'is_verified') String? isVerified});
 }
 
 /// @nodoc
@@ -81,78 +82,78 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? profilePic = null,
     Object? id = null,
-    Object? name = null,
-    Object? email = null,
-    Object? phone = null,
-    Object? sex = null,
-    Object? dob = null,
-    Object? address = null,
-    Object? country = null,
-    Object? state = null,
-    Object? city = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? is_verified = null,
+    Object? profilePic = freezed,
+    Object? name = freezed,
+    Object? email = freezed,
+    Object? phone = freezed,
+    Object? sex = freezed,
+    Object? dob = freezed,
+    Object? address = freezed,
+    Object? country = freezed,
+    Object? state = freezed,
+    Object? city = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? isVerified = freezed,
   }) {
     return _then(_value.copyWith(
-      profilePic: null == profilePic
-          ? _value.profilePic
-          : profilePic // ignore: cast_nullable_to_non_nullable
-              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
+      profilePic: freezed == profilePic
+          ? _value.profilePic
+          : profilePic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      sex: null == sex
+              as String?,
+      sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
-      dob: null == dob
+              as String?,
+      dob: freezed == dob
           ? _value.dob
           : dob // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      country: null == country
+              as String?,
+      country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
+              as String?,
+      state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
+              as String?,
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
+              as String?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      is_verified: null == is_verified
-          ? _value.is_verified
-          : is_verified // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -165,20 +166,20 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String profilePic,
-      int id,
-      String name,
-      String email,
-      String phone,
-      String sex,
-      String dob,
-      String address,
-      String country,
-      String state,
-      String city,
-      String createdAt,
-      String updatedAt,
-      String is_verified});
+      {int id,
+      String? profilePic,
+      String? name,
+      String? email,
+      String? phone,
+      String? sex,
+      String? dob,
+      String? address,
+      String? country,
+      String? state,
+      String? city,
+      String? createdAt,
+      String? updatedAt,
+      @JsonKey(name: 'is_verified') String? isVerified});
 }
 
 /// @nodoc
@@ -193,78 +194,78 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? profilePic = null,
     Object? id = null,
-    Object? name = null,
-    Object? email = null,
-    Object? phone = null,
-    Object? sex = null,
-    Object? dob = null,
-    Object? address = null,
-    Object? country = null,
-    Object? state = null,
-    Object? city = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-    Object? is_verified = null,
+    Object? profilePic = freezed,
+    Object? name = freezed,
+    Object? email = freezed,
+    Object? phone = freezed,
+    Object? sex = freezed,
+    Object? dob = freezed,
+    Object? address = freezed,
+    Object? country = freezed,
+    Object? state = freezed,
+    Object? city = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? isVerified = freezed,
   }) {
     return _then(_$UserImpl(
-      profilePic: null == profilePic
-          ? _value.profilePic
-          : profilePic // ignore: cast_nullable_to_non_nullable
-              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      name: null == name
+      profilePic: freezed == profilePic
+          ? _value.profilePic
+          : profilePic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
+              as String?,
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      sex: null == sex
+              as String?,
+      sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
-      dob: null == dob
+              as String?,
+      dob: freezed == dob
           ? _value.dob
           : dob // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      country: null == country
+              as String?,
+      country: freezed == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
+              as String?,
+      state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
+              as String?,
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: null == updatedAt
+              as String?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      is_verified: null == is_verified
-          ? _value.is_verified
-          : is_verified // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      isVerified: freezed == isVerified
+          ? _value.isVerified
+          : isVerified // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -273,56 +274,58 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl(
-      {required this.profilePic,
-      required this.id,
-      required this.name,
-      required this.email,
-      required this.phone,
-      required this.sex,
-      required this.dob,
-      required this.address,
-      required this.country,
-      required this.state,
-      required this.city,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.is_verified});
+      {this.id = 0,
+      this.profilePic,
+      this.name,
+      this.email,
+      this.phone,
+      this.sex,
+      this.dob,
+      this.address,
+      this.country,
+      this.state,
+      this.city,
+      this.createdAt,
+      this.updatedAt,
+      @JsonKey(name: 'is_verified') this.isVerified});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String profilePic;
-  @override
+  @JsonKey()
   final int id;
   @override
-  final String name;
+  final String? profilePic;
   @override
-  final String email;
+  final String? name;
   @override
-  final String phone;
+  final String? email;
   @override
-  final String sex;
+  final String? phone;
   @override
-  final String dob;
+  final String? sex;
   @override
-  final String address;
+  final String? dob;
   @override
-  final String country;
+  final String? address;
   @override
-  final String state;
+  final String? country;
   @override
-  final String city;
+  final String? state;
   @override
-  final String createdAt;
+  final String? city;
   @override
-  final String updatedAt;
+  final String? createdAt;
   @override
-  final String is_verified;
+  final String? updatedAt;
+  @override
+  @JsonKey(name: 'is_verified')
+  final String? isVerified;
 
   @override
   String toString() {
-    return 'User(profilePic: $profilePic, id: $id, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, is_verified: $is_verified)';
+    return 'User(id: $id, profilePic: $profilePic, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, isVerified: $isVerified)';
   }
 
   @override
@@ -330,9 +333,9 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.profilePic, profilePic) ||
                 other.profilePic == profilePic) &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -346,16 +349,16 @@ class _$UserImpl implements _User {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.is_verified, is_verified) ||
-                other.is_verified == is_verified));
+            (identical(other.isVerified, isVerified) ||
+                other.isVerified == isVerified));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      profilePic,
       id,
+      profilePic,
       name,
       email,
       phone,
@@ -367,7 +370,7 @@ class _$UserImpl implements _User {
       city,
       createdAt,
       updatedAt,
-      is_verified);
+      isVerified);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -387,51 +390,52 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String profilePic,
-      required final int id,
-      required final String name,
-      required final String email,
-      required final String phone,
-      required final String sex,
-      required final String dob,
-      required final String address,
-      required final String country,
-      required final String state,
-      required final String city,
-      required final String createdAt,
-      required final String updatedAt,
-      required final String is_verified}) = _$UserImpl;
+      {final int id,
+      final String? profilePic,
+      final String? name,
+      final String? email,
+      final String? phone,
+      final String? sex,
+      final String? dob,
+      final String? address,
+      final String? country,
+      final String? state,
+      final String? city,
+      final String? createdAt,
+      final String? updatedAt,
+      @JsonKey(name: 'is_verified') final String? isVerified}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get profilePic;
-  @override
   int get id;
   @override
-  String get name;
+  String? get profilePic;
   @override
-  String get email;
+  String? get name;
   @override
-  String get phone;
+  String? get email;
   @override
-  String get sex;
+  String? get phone;
   @override
-  String get dob;
+  String? get sex;
   @override
-  String get address;
+  String? get dob;
   @override
-  String get country;
+  String? get address;
   @override
-  String get state;
+  String? get country;
   @override
-  String get city;
+  String? get state;
   @override
-  String get createdAt;
+  String? get city;
   @override
-  String get updatedAt;
+  String? get createdAt;
   @override
-  String get is_verified;
+  String? get updatedAt;
+  @override
+  @JsonKey(name: 'is_verified')
+  String? get isVerified;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

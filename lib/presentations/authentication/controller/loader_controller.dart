@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BaseController extends GetxController {
+class LoaderController extends GetxController {
+  static LoaderController get instance=>Get.find<LoaderController>();
   static bool isLoaderShow = false;
   Rx<Error> error = Error().obs;
 

@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart' as dio;
-import 'package:dio/io.dart';
+import 'package:doc_booking_app/presentations/authentication/controller/loader_controller.dart';
+
 import '../global/apis.dart';
 import '../util/log_utils.dart';
 
@@ -12,7 +14,7 @@ class HttpService extends HttpOverrides {
   static dio.Dio _dio = dio.Dio();
   final dio.BaseOptions _baseOptions = dio.BaseOptions(
     baseUrl: Api.baseUrl,
-    validateStatus: (int? status){
+    validateStatus: (int? status) {
       return true;
     },
     headers: {
@@ -27,21 +29,14 @@ class HttpService extends HttpOverrides {
     _dio = dio.Dio(_baseOptions);
   }
 
-  static Future<dio.Response<dynamic>?> get(
-      String path, Map<String, dynamic> params, String tokenString,
+  static Future<dio.Response<dynamic>?> get(String path, Map<String, dynamic> params, String tokenString,
       {bool token = false}) async {
     dio.Response? result;
     try {
-      (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
-          (HttpClient dioClient) {
-        dioClient.badCertificateCallback =
-            ((X509Certificate cert, String host, int port) => true);
-        return dioClient;
-      };
+      LoaderController.instance.showLoader();
       final dio.Response response = await _dio.get(path,
-          queryParameters: params,
-          options:
-              token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
+          queryParameters: params, options: token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
+      LoaderController.instance.dismissLoader();
       if (response.statusCode == 200) {
         result = response;
       } else {
@@ -53,21 +48,15 @@ class HttpService extends HttpOverrides {
     return result?.data;
   }
 
-  static Future<Map<String, dynamic>> post(
-      String path, Map<String, dynamic> data, String tokenString,
+  static Future<Map<String, dynamic>> post(String path, Map<String, dynamic> data, String tokenString,
       {bool token = false}) async {
     Map<String, dynamic> result = {};
     try {
-      (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
-          (HttpClient dioClient) {
-        dioClient.badCertificateCallback =
-            ((X509Certificate cert, String host, int port) => true);
-        return dioClient;
-      };
+      LoaderController.instance.showLoader();
+
       final dio.Response response = await _dio.post(path,
-          data: jsonEncode(data),
-          options:
-              token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
+          data: jsonEncode(data), options: token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
+      LoaderController.instance.dismissLoader();
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
         return result;
@@ -80,18 +69,10 @@ class HttpService extends HttpOverrides {
     return result;
   }
 
-  static Future<Map<String, dynamic>> picPost(
-      String path, dio.FormData data, String tokenString,
-      {bool token = true}) async {
+  static Future<Map<String, dynamic>> picPost(String path, dio.FormData data, String tokenString, {bool token = true}) async {
     Map<String, dynamic> result = {};
     try {
-      (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
-          (HttpClient dioClient) {
-        dioClient.badCertificateCallback =
-            ((X509Certificate cert, String host, int port) => true);
-        return dioClient;
-      };
-
+      LoaderController.instance.showLoader();
       final dio.Response response = await _dio.post(
         path,
         data: data,
@@ -102,6 +83,7 @@ class HttpService extends HttpOverrides {
               })
             : null,
       );
+      LoaderController.instance.dismissLoader();
       if (response.statusCode == 200) {
         // Check if response data is a JSON map or a string
         if (response.data is Map<String, dynamic>) {

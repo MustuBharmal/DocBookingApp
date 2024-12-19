@@ -37,9 +37,7 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
                 width: Get.width * 0.1224,
                 height: Get.height * 0.0583,
                 decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.borderColor),
-                    shape: BoxShape.circle,
-                    color: AppColors.white),
+                    border: Border.all(color: AppColors.borderColor), shape: BoxShape.circle, color: AppColors.white),
                 child: IconButton(
                     onPressed: () {
                       Get.back();
@@ -51,7 +49,7 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 30),
               child: Text(
-                'Please enter the OTP you received to ${controller.emailController.text} ',
+                'Please enter the OTP you received to ${controller.email} ',
                 style: txtInterTextField,
               ),
             ),
@@ -66,22 +64,16 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
                     }
                   },
                   child: Obx(() => Text(
-                        timerController.timerText.value == 'Resend'
-                            ? 'Resend the code'
-                            : 'Resend the code',
+                        timerController.timerText.value == 'Resend' ? 'Resend the code' : 'Resend the code',
                         style: TextStyle(
                           fontSize: 16,
-                          color: timerController.timerText.value == 'Resend'
-                              ? Colors.blue
-                              : Colors.grey,
+                          color: timerController.timerText.value == 'Resend' ? Colors.blue : Colors.grey,
                         ),
                       )),
                 ),
                 SizedBox(width: 10),
                 Obx(() => Text(
-                      timerController.timerText.value == 'Resend'
-                          ? ''
-                          : timerController.timerText.value,
+                      timerController.timerText.value == 'Resend' ? '' : timerController.timerText.value,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.blue,

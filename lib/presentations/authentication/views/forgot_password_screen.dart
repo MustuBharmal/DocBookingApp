@@ -10,9 +10,10 @@ import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
 
 class ForgotPasswordScreen extends GetView<AuthenticationController> {
-  const ForgotPasswordScreen({super.key});
+  ForgotPasswordScreen({super.key});
 
   static const routeName = "/forgot_password-screen";
+  final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +29,7 @@ class ForgotPasswordScreen extends GetView<AuthenticationController> {
                 width: 44,
                 height: 44,
                 decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.borderColor),
-                    shape: BoxShape.circle,
-                    color: AppColors.white),
+                    border: Border.all(color: AppColors.borderColor), shape: BoxShape.circle, color: AppColors.white),
                 child: IconButton(
                     onPressed: () {
                       Get.back();
@@ -49,7 +48,7 @@ class ForgotPasswordScreen extends GetView<AuthenticationController> {
             CustomTextField(
                 label: ConstantString.emailAddress,
                 showAsterisk: true,
-                controller: controller.emailController,
+                controller: emailController,
                 hintStyle: txtInterTextFieldHint,
                 hintText: "eg. xyz@gmail.com"),
             Padding(

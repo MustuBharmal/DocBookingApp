@@ -8,23 +8,21 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   const factory User({
-    required String profilePic,
-    required int id,
-    required String name,
-    required String email,
-    required String phone,
-    required String sex,
-    required String dob,
-    required String address,
-    required String country,
-    required String state,
-    required String city,
-    required String createdAt,
-    required String updatedAt,
-    required String is_verified,
-
+    @Default(0) int id,
+    String? profilePic,
+    String? name,
+    String? email,
+    String? phone,
+    String? sex,
+    String? dob,
+    String? address,
+    String? country,
+    String? state,
+    String? city,
+    String? createdAt,
+    String? updatedAt,
+    @JsonKey(name: 'is_verified') String? isVerified,
   }) = _User;
 
-  factory User.fromJson(Map<String, Object?> json)
-  => _$UserFromJson(json);
+  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
 }

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../global/app_color.dart';
 
 class CustomTabBar extends StatelessWidget {
-  const CustomTabBar(
-      {super.key, required this.tabText1, required this.tabText2});
+  const CustomTabBar({super.key, required this.tabText1, required this.tabText2});
 
   final String tabText1;
   final String tabText2;
@@ -17,7 +16,7 @@ class CustomTabBar extends StatelessWidget {
         color: Colors.transparent,
         elevation: 0, // Remove shadow
         child: TabBar(
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
           //for Remove background color when tap on button
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(100),

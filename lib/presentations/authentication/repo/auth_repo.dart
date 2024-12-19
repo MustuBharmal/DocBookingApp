@@ -28,12 +28,13 @@ abstract class AuthRepo {
         StorageUtil.writeUserId(result['data']['user']['id']);
 
         return User.fromJson(result['data']['user']);
-      }else if(!result['isLive']){
+      } else if (!result['isLive']) {
         LogUtil.debug("Account is not verified");
         LogUtil.debug(result['message']);
         throw Exception(result['message']);
         // otp screen
-      }/* else if (result['status'] == 404) {
+      }
+      /* else if (result['status'] == 404) {
         throw result['result']['message'];
       } else if (result['status'] == 401) {
         return false; // Handle invalid credentials
