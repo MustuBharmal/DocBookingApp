@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoaderController extends GetxController {
-  static LoaderController get instance=>Get.find<LoaderController>();
+  static LoaderController get instance => Get.find<LoaderController>();
   static bool isLoaderShow = false;
   Rx<Error> error = Error().obs;
 
-  void showLoader() {
+  void showLoader() async {
     isLoaderShow = true;
-    Get.dialog(Center(child: CircularProgressIndicator()),
-        barrierDismissible: true);
+    await Get.dialog(Center(child: CircularProgressIndicator()), barrierDismissible: true);
+    isLoaderShow = false;
   }
 
   void dismissLoader() {
-    isLoaderShow = false;
     Get.back();
   }
 
-  /*void showError({String title = "Alert!", String? msg}) {
+/*void showError({String title = "Alert!", String? msg}) {
     if (isLoaderShow) {
       dismissLoader();
     }

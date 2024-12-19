@@ -1,15 +1,15 @@
 import 'package:doc_booking_app/global/app_color.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
 class CustomPinInput extends StatelessWidget {
-  const CustomPinInput({super.key});
+  const CustomPinInput(this.pinController, {super.key});
+
+  final TextEditingController pinController;
 
   @override
   Widget build(BuildContext context) {
-    String validPin = "1234";
     final defaultPinTheme = PinTheme(
       width: Get.width * 0.205,
       height: Get.height * 0.067,
@@ -32,11 +32,15 @@ class CustomPinInput extends StatelessWidget {
           defaultPinTheme: defaultPinTheme,
           focusedPinTheme: focusedPinTheme,
           validator: (value) {
-            return value == validPin ? "Pin is correct" : "Pin is incorrect";
+            if (value?.length != 4) {
+              return 'Enter valid pin';
+            }
+            return null;
           },
-          onCompleted: (pin) {
+          controller: pinController,
+          /*onCompleted: (pin) {
             LogUtil.debug("Success $pin");
-          },
+          },*/
         ),
       ),
     );

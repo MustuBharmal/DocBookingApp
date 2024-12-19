@@ -1,7 +1,6 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/widget/custom_pinput.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,10 +19,10 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
    otherwise timer will start when controller initialized.
    */
   final OTPTimerController timerController = Get.put(OTPTimerController());
+  final TextEditingController pinController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    LogUtil.debug("${Get.height * 0.0583}");
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(16),
@@ -53,7 +52,7 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
                 style: txtInterTextField,
               ),
             ),
-            CustomPinInput(),
+            CustomPinInput(pinController),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -63,13 +62,15 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
                       timerController.resetTimer();
                     }
                   },
-                  child: Obx(() => Text(
-                        timerController.timerText.value == 'Resend' ? 'Resend the code' : 'Resend the code',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: timerController.timerText.value == 'Resend' ? Colors.blue : Colors.grey,
-                        ),
-                      )),
+                  child: Obx(
+                    () => Text(
+                      timerController.timerText.value == 'Resend' ? 'Resend the code' : 'Resend the code',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: timerController.timerText.value == 'Resend' ? Colors.blue : Colors.grey,
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(width: 10),
                 Obx(() => Text(
