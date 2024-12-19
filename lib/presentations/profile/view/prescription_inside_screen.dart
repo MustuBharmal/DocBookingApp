@@ -1,4 +1,3 @@
-import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_chat_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_form_screen.dart';

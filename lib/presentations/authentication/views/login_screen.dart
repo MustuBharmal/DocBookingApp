@@ -4,7 +4,6 @@ import 'package:doc_booking_app/presentations/authentication/controller/authenti
 import 'package:doc_booking_app/presentations/authentication/views/forgot_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/widget/custom_password_textfield.dart';
-import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,87 +45,93 @@ class LoginScreen extends GetView<AuthenticationController> {
                   ),
                 ),
               ),
-              SizedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8, bottom: 30),
-                      child:
-                          Text(ConstantString.signIn, style: headerTextStyle),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, bottom: 30),
+                    child: Text(ConstantString.signIn, style: headerTextStyle),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: CustomTextField(
+                      controller: controller.emailController,
+                      hintText: "eg. xyz@gmail.com",
+                      label: ConstantString.emailAddress,
+                      hintStyle: txtInterTextFieldHint,
+                      showAsterisk: true,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: CustomTextField(
-                        controller: controller.emailController,
-                        hintText: "eg. xyz@gmail.com",
-                        label: ConstantString.emailAddress,
-                        hintStyle: txtInterTextFieldHint,
-                        showAsterisk: true,
-                      ),
-                    ),
-                    CustomPasswordTextfield(
-                        label: ConstantString.password,
-                        showAsterisk: true,
-                        isPasswordTextField: true,
-                        textEditingController: controller.passController,
-                        hintStyle: txtInterTextFieldHint,
-                        hintText: "eg. 123"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: true,
-                              onChanged: (value) {},
-                              activeColor: Colors.blue,
-                              visualDensity: VisualDensity.compact,
-                            ),
-                            Text(ConstantString.rememberMe,
-                                style: txtInterTextField),
-                          ],
-                        ),
-                        // Forgot Password
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(ForgotPasswordScreen.routeName);
-                          },
-                          child: Text(
-                            "${ConstantString.forgotPass}?",
-                            style: blueNormalTextStyle,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30, bottom: 18),
-                      child: BlueButton(
-                        label: ConstantString.signIn,
-                        onPressed: () {
-                          Get.offAllNamed(NavigationScreen.routeName);
-                        },
-                      ),
-                    ),
-                    Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  CustomPasswordTextfield(
+                    label: ConstantString.password,
+                    showAsterisk: true,
+                    isPasswordTextField: true,
+                    textEditingController: controller.passController,
+                    hintStyle: txtInterTextFieldHint,
+                    hintText: "eg. 123",
+
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
-                          Text(
-                            ConstantString.doNotHaveAcc,
-                            style: normalTextStyle,
+                          Checkbox(
+                            value: true,
+                            onChanged: (value) {},
+                            activeColor: Colors.blue,
+                            visualDensity: VisualDensity.compact,
                           ),
-                          TextButton(
-                              onPressed: () {
-                                Get.offNamed(SignupScreen.routeName);
-                              },
-                              child: Text(ConstantString.signUpHere,
-                                  style: blueNormalTextStyle))
+                          Text(ConstantString.rememberMe,
+                              style: txtInterTextField),
                         ],
                       ),
-                    )
-                  ],
-                ),
+                      // Forgot Password
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(ForgotPasswordScreen.routeName);
+                        },
+                        child: Text(
+                          "${ConstantString.forgotPass}?",
+                          style: blueNormalTextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30, bottom: 18),
+                    child: BlueButton(
+                      label: ConstantString.signIn,
+                      onPressed: () {
+                        if(!controller.emailController.text.contains('@')){
+                          return;
+                        }
+                        if(controller.passController.text.trim().length < 6){
+                          return;
+                        }
+                        // Get.offAllNamed(NavigationScreen.routeName);
+                        controller.login();
+                      },
+                    ),
+                  ),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          ConstantString.doNotHaveAcc,
+                          style: normalTextStyle,
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Get.offNamed(SignupScreen.routeName);
+                            },
+                            child: Text(ConstantString.signUpHere,
+                                style: blueNormalTextStyle))
+                      ],
+                    ),
+                  )
+                ],
               )
             ],
           ),

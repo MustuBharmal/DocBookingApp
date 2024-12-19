@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
 
-class CustomDobTextfield extends StatelessWidget {
-  const CustomDobTextfield(
+class CustomDobTextField extends StatelessWidget {
+  const CustomDobTextField(
       {super.key,
       required this.controller,
       required this.label,

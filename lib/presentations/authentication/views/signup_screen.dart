@@ -79,7 +79,7 @@ class SignupScreen extends GetView<AuthenticationController> {
                     CustomPhoneField(
                       controller: controller.phoneController,
                     ),
-                    CustomDobTextfield(
+                    CustomDobTextField(
                         hintText: "day/month/year",
                         hintStyle: txtInterTextFieldHint,
                         controller: controller.dobController,

@@ -1,10 +1,11 @@
 import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
-class CustomPinput extends StatelessWidget {
-  const CustomPinput({super.key});
+class CustomPinInput extends StatelessWidget {
+  const CustomPinInput({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class CustomPinput extends StatelessWidget {
             return value == validPin ? "Pin is correct" : "Pin is incorrect";
           },
           onCompleted: (pin) {
-            print("Success $pin");
+            LogUtil.debug("Success $pin");
           },
         ),
       ),

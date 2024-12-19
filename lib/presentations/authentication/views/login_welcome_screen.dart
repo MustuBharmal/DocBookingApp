@@ -2,6 +2,7 @@ import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,9 @@ class LoginWelcomeScreen extends GetView<AuthenticationController> {
                 ),
               ),
               BlueButton(
-                onPressed: controller.login,
+                onPressed: (){
+                  Get.offAllNamed(LoginScreen.routeName);
+                },
                 label: ConstantString.signIn,
               ),
               const SizedBox(height: 12),

@@ -9,7 +9,7 @@ abstract class AppImage {
   ///icons
   static String get bloodletting => 'bloodletting'.iconPng;
 
-  static String get flushots => 'flushots'.iconPng;
+  static String get fluShots => 'flushots'.iconPng;
 
   static String get home => 'home'.iconPng;
 
@@ -111,13 +111,9 @@ abstract class AppImage {
   static String get stethoscope => 'stethoscope'.svg;
 
   static String get arrowDown => 'arrow_down'.svg;
-
 }
 
 extension on String {
-  ///for image folder
-  String get imagePng => 'assets/images/$this.png';
-
   ///for icon folder
   String get iconPng => 'assets/icons/$this.png';
 

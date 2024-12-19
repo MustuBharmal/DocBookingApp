@@ -57,7 +57,6 @@ class HomeScreen extends GetView<HomeController> {
             spacing: 12,
             childWidget: BookingOptions(),
           ),
-          // have to discuss with Mohd bhai
           SectionHeader(
             title: ConstantString.topServices,
             button: TextButton(

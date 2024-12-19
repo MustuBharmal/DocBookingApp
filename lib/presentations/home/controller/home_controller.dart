@@ -20,7 +20,7 @@ class HomeController extends GetxController {
     selectedIndex.value = index;
   }
 
-  RxString selectedImagePath = AppImage.stethoscope.obs;
+  RxString selectedImagePath = AppImage.servicesInactive.obs;
 
   final Map<String, String> serviceImages = {
     "Phlebotomy": AppImage.homeCategory1,

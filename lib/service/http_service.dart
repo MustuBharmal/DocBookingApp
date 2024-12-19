@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:dio/io.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import '../global/apis.dart';
 import '../util/log_utils.dart';
 
@@ -11,19 +10,24 @@ class HttpService extends HttpOverrides {
 
   static final HttpService instance = HttpService._internal();
   static dio.Dio _dio = dio.Dio();
-
-  final dio.BaseOptions _baseOptions =
-  dio.BaseOptions(baseUrl: Api.baseUrl, headers: {
-    'Content-Type': 'application/json',
-    'Apitoken':
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWRtaW4iLCJleHAiOjE3MDcxMTM4MDd9.81c8uR-Vl_kZkCCPZBKT5uJ_lQe8L0zoad_WVsAES2M'
-  });
+  final dio.BaseOptions _baseOptions = dio.BaseOptions(
+    baseUrl: Api.baseUrl,
+    validateStatus: (int? status){
+      return true;
+    },
+    headers: {
+      'Content-Type': 'application/json',
+      'own-access-token':
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWRtaW4iLCJleHAiOjE3MDcxMTM4MDd9.81c8uR-Vl_kZkCCPZBKT5uJ_lQe8L0zoad_WVsAES2M'
+    },
+  );
 
   HttpService.initialize() {
+    LogUtil.debug(Api.baseUrl);
     _dio = dio.Dio(_baseOptions);
   }
 
-  static Future<Response<dynamic>?> get(
+  static Future<dio.Response<dynamic>?> get(
       String path, Map<String, dynamic> params, String tokenString,
       {bool token = false}) async {
     dio.Response? result;
@@ -31,13 +35,13 @@ class HttpService extends HttpOverrides {
       (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
           (HttpClient dioClient) {
         dioClient.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
+            ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
       final dio.Response response = await _dio.get(path,
           queryParameters: params,
           options:
-          token ? dio.Options(headers: {'APIToken': tokenString}) : null);
+              token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
       if (response.statusCode == 200) {
         result = response;
       } else {
@@ -49,7 +53,7 @@ class HttpService extends HttpOverrides {
     return result?.data;
   }
 
-  static Future<Map<String, dynamic>?> post(
+  static Future<Map<String, dynamic>> post(
       String path, Map<String, dynamic> data, String tokenString,
       {bool token = false}) async {
     Map<String, dynamic> result = {};
@@ -57,13 +61,13 @@ class HttpService extends HttpOverrides {
       (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
           (HttpClient dioClient) {
         dioClient.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
+            ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
       final dio.Response response = await _dio.post(path,
           data: jsonEncode(data),
           options:
-          token ? dio.Options(headers: {'APIToken': tokenString}) : null);
+              token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
         return result;
@@ -72,19 +76,19 @@ class HttpService extends HttpOverrides {
       throw Exception(response.statusMessage);
     } catch (e) {
       LogUtil.error(e);
-      rethrow;
     }
+    return result;
   }
 
   static Future<Map<String, dynamic>> picPost(
-      String path, FormData data, String tokenString,
+      String path, dio.FormData data, String tokenString,
       {bool token = true}) async {
     Map<String, dynamic> result = {};
     try {
       (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
           (HttpClient dioClient) {
         dioClient.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
+            ((X509Certificate cert, String host, int port) => true);
         return dioClient;
       };
 
@@ -93,9 +97,9 @@ class HttpService extends HttpOverrides {
         data: data,
         options: token
             ? dio.Options(headers: {
-          'Apitoken': tokenString, // Ensure tokenString is used here
-          'Content-Type': 'multipart/form-data',
-        })
+                'own-access-token': tokenString, // Ensure tokenString is used here
+                'Content-Type': 'multipart/form-data',
+              })
             : null,
       );
       if (response.statusCode == 200) {

@@ -1,16 +1,16 @@
 class Api {
-  static String baseUrl = "";
-  static String signUp = "signup";
-  static String signIn = "signin";
-  static String profile = "patient/profile";
-  static String forgetPassword = "forget-password";
-  static String changePassword = "patient/changePassword";
-  static String logOut = "patient/logout";
-  static String updateProfile = "patient/profile";
-  static String inquiry = "inquiry";
-  static String sportType = "common/sport-type";
-  static String venueFacility = "common/venue-facility";
-  static String imageUpload = "upload_image?type=profile";
-  static String adminTemplateGet = "admin/template/get";
-  static String uploadMultipleImages = "common/upload_image_multi";
+  static String baseUrl = "https://crazylense.com";
+  static String signUp = "/applicationinterface/api/signup";
+  static String signIn = "/applicationinterface/api/singin";
+  static String profile = "/applicationinterface/api/patient/profile";
+  static String forgetPassword = "/applicationinterface/api/forget-password";
+  static String changePassword = "/applicationinterface/api/patient/changePassword";
+  static String logOut = "/applicationinterface/api/patient/logout";
+  static String updateProfile = "/applicationinterface/api/patient/profile";
+  static String inquiry = "/applicationinterface/api/inquiry";
+  static String sportType = "/applicationinterface/api/common/sport-type";
+  static String venueFacility = "/applicationinterface/api/common/venue-facility";
+  static String imageUpload = "/applicationinterface/api/upload_image?type=profile";
+  static String adminTemplateGet = "/applicationinterface/api/admin/template/get";
+  static String uploadMultipleImages = "/applicationinterface/api/common/upload_image_multi";
 }

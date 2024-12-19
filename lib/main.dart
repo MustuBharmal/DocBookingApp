@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/global/theme.dart';
 import 'package:doc_booking_app/presentations/authentication/binding/auth_binding.dart';
 import 'package:doc_booking_app/routes/app_routes.dart';
+import 'package:doc_booking_app/service/http_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,7 +9,7 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   // await Firebase.initializeApp();
   await GetStorage.init();
-  // HttpService.initialize();
+  HttpService.initialize();
   runApp(const MyApp());
 }
 

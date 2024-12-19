@@ -1,5 +1,4 @@
 import 'package:doc_booking_app/global/constant_string.dart';
-import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/widget/custom_pinput.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
@@ -56,7 +55,7 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
                 style: txtInterTextField,
               ),
             ),
-            CustomPinput(),
+            CustomPinInput(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
