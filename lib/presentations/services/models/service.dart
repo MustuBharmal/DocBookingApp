@@ -9,12 +9,12 @@ part 'service.g.dart';
 @freezed
 class Service with _$Service {
   const factory Service({
-    required String icon,
-    required int id,
-    required String name,
-    @JsonKey(name: 'is_active')required bool isActive,
-    required String createdAt,
-    required String updatedAt
+     String? icon,
+     int? id,
+     String? name,
+    @JsonKey(name: 'is_active') bool? isActive,
+     String? createdAt,
+     String? updatedAt
 
   }) = _Service;
 
