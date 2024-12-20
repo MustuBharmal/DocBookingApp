@@ -9,7 +9,7 @@ import 'package:doc_booking_app/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginWelcomeScreen extends GetView<AuthenticationController> {
+class LoginWelcomeScreen extends GetView<AuthController> {
   static const String routeName = '/login-welcome-screen';
 
   const LoginWelcomeScreen({super.key});

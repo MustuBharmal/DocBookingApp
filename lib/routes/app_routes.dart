@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/presentations/authentication/binding/auth_binding.dart';
 import 'package:doc_booking_app/presentations/authentication/views/account_verification_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/forgot_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
@@ -45,8 +46,9 @@ class AppRoutes {
       page: () => OnboardingScreen(),
     ),
     GetPage(
-        name: LoginWelcomeScreen.routeName,
-        page: () => const LoginWelcomeScreen()),
+      name: LoginWelcomeScreen.routeName,
+      page: () => const LoginWelcomeScreen(),
+    ),
     /* GetPage(
         name: HomeScreen.routeName,
         page: () => const HomeScreen(),
@@ -119,8 +121,8 @@ class AppRoutes {
       page: () => ForgotPasswordScreen(),
     ),
     GetPage(
-      name: AccountVerificationScreen.routeName,
-      page: () => AccountVerificationScreen(),
-    )
+        name: AccountVerificationScreen.routeName,
+        page: () => AccountVerificationScreen(),
+        binding: OtpVerificationBinding())
   ];
 }

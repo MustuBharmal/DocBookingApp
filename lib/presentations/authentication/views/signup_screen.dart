@@ -14,7 +14,7 @@ import '../../../global/styles.dart';
 import '../models/user.dart';
 import '../widget/custom_password_textfield.dart';
 
-class SignupScreen extends GetView<AuthenticationController> {
+class SignupScreen extends GetView<AuthController> {
   SignupScreen({super.key});
 
   static const routeName = "/signup-screen";

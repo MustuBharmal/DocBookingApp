@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import '../../../global/styles.dart';
 import '../../../widgets/custom_text_field.dart';
 
-class LoginScreen extends GetView<AuthenticationController> {
+class LoginScreen extends GetView<AuthController> {
   LoginScreen({super.key});
 
   static const routeName = "/login-screen";
@@ -112,6 +112,7 @@ class LoginScreen extends GetView<AuthenticationController> {
                           return;
                         }
                         // Get.offAllNamed(NavigationScreen.routeName);
+                        controller.email = emailController.text;
                         controller.login(emailController.text, passController.text);
                       },
                     ),

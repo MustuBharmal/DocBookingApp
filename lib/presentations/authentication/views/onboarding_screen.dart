@@ -3,6 +3,7 @@ import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
+import 'package:doc_booking_app/util/storage_util.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController pageController = PageController(initialPage: 0);
-  AuthenticationController controller = AuthenticationController.instance;
+  AuthController controller = AuthController.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -119,11 +120,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             duration: Duration(milliseconds: 250),
                             curve: Curves.easeIn);
                       } else {
+                        StorageUtil.writeOnboardingScreenId(true);
                         Get.offAllNamed(LoginWelcomeScreen.routeName);
                       }
                     },
                   ),
-                  CustomTextButton(onPressed: () {}, label: ConstantString.skip)
+                  CustomTextButton(
+                    onPressed: () {
+                      StorageUtil.writeOnboardingScreenId(true);
+                      Get.offAllNamed(LoginWelcomeScreen.routeName);
+                    },
+                    label: ConstantString.skip,
+                  )
                 ],
               ),
             ),

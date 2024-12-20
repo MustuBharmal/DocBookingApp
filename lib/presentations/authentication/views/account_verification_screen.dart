@@ -49,7 +49,7 @@ class AccountVerificationScreen extends GetView<OTPTimerController> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 30),
               child: Text(
-                'Please enter the OTP you received to ${AuthenticationController.instance.email} ',
+                'Please enter the OTP you received to ${AuthController.instance.email} ',
                 style: txtInterTextField,
               ),
             ),
@@ -95,7 +95,7 @@ class AccountVerificationScreen extends GetView<OTPTimerController> {
                 label: ConstantString.verifyNow,
                 onPressed: () {
                   controller.verifyOtp(
-                    AuthenticationController.instance.email!,
+                    AuthController.instance.email!,
                     pinController.text,
                   );
                 },

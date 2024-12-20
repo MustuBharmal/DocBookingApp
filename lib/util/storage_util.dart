@@ -4,6 +4,7 @@ abstract class StorageUtil {
   static const String _tokenKey = 'token';
   static const String _userDataKey = 'userData';
   static const String _userIdKey = 'userID';
+  static const String _onboardingScreenIdKey = 'userID';
   static GetStorage storage = GetStorage();
 
   static String? getToken() {
@@ -25,6 +26,17 @@ abstract class StorageUtil {
       return storage.read(_userIdKey).toString();
     }
     return null;
+  }
+
+  static bool? getOnboardingScreenId() {
+    if (storage.hasData(_onboardingScreenIdKey)) {
+      return storage.read(_onboardingScreenIdKey);
+    }
+    return null;
+  }
+
+  static writeOnboardingScreenId(bool value) {
+    storage.write(_onboardingScreenIdKey, value);
   }
 
   static writeUserId(String value) {

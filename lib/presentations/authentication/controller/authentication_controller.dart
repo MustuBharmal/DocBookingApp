@@ -7,9 +7,10 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../exception/server_exception.dart';
 import '../models/user.dart';
+import '../views/account_verification_screen.dart';
 
-class AuthenticationController extends GetxController {
-  static AuthenticationController get instance => Get.find<AuthenticationController>();
+class AuthController extends GetxController {
+  static AuthController get instance => Get.find<AuthController>();
   RxInt activeIndex = RxInt(0);
   RxString selectSex = RxString('Male');
   RxString selectState = RxString('state1');
@@ -71,7 +72,8 @@ class AuthenticationController extends GetxController {
 
   Future<void> signUp(User user) async {
     try {
-      await AuthRepo.signUp(user);
+      AuthController.instance.user.value =await AuthRepo.signUp(user);
+      Get.offAllNamed(AccountVerificationScreen.routeName);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

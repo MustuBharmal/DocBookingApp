@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:doc_booking_app/presentations/authentication/models/user.dart';
+import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../exception/server_exception.dart';
@@ -25,13 +26,14 @@ abstract class AuthRepo {
       final result = await HttpService.post(Api.signIn, data, '');
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-
         StorageUtil.writeToken(result['data']['access_token']);
-        StorageUtil.writeUserId(result['data']['user']['id']);
-
+        StorageUtil.writeUserId(result['data']['user']['id'].toString());
+        Get.offAllNamed(NavigationScreen.routeName);
         return User.fromJson(result['data']['user']);
       } else if (!result['isLive']) {
         LogUtil.debug(result);
+        StorageUtil.writeToken(result['data']['access_token']);
+        StorageUtil.writeUserId(result['data']['user']['id'].toString());
         Get.toNamed(AccountVerificationScreen.routeName);
         throw Exception(result['message']);
       } else {
@@ -80,7 +82,7 @@ abstract class AuthRepo {
   }
 
   // signup method
-  static Future<void> signUp(User user) async {
+  static Future<User> signUp(User user) async {
     try {
       Map<String, dynamic> data = user.toJson();
       LogUtil.debug('json: $data');
@@ -89,12 +91,11 @@ abstract class AuthRepo {
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message']);
-        return;
+        return User.fromJson(result['data']);
       }else if (!result['isLive'] == true) {
-        Get.toNamed(AccountVerificationScreen.routeName);
-        return;
+        throw Exception("Error: ${result['message']}");
       } else {
-        throw Exception("Error: ${result['status']}");
+        throw Exception("Error: ${result['message']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);

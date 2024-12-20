@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
 
-class ForgotPasswordScreen extends GetView<AuthenticationController> {
+class ForgotPasswordScreen extends GetView<AuthController> {
   ForgotPasswordScreen({super.key});
 
   static const routeName = "/forgot_password-screen";

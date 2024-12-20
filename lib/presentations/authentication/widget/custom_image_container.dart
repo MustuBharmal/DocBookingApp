@@ -4,7 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomImageContainer extends GetView<AuthenticationController> {
+class CustomImageContainer extends GetView<AuthController> {
   const CustomImageContainer({super.key});
 
   @override

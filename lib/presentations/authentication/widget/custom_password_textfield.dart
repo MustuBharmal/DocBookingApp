@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../global/styles.dart';
 
-class CustomPasswordTextfield extends GetView<AuthenticationController> {
+class CustomPasswordTextfield extends GetView<AuthController> {
   final String label;
   final bool showAsterisk;
   final TextEditingController textEditingController;
