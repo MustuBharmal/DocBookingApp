@@ -1,7 +1,6 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
-import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
@@ -57,7 +56,7 @@ class HomeScreen extends GetView<HomeController> {
             childWidget: BookingOptions(),
           ),
           Obx(
-            ()=> SectionHeader(
+            () => SectionHeader(
               title: ConstantString.topServices,
               button: TextButton(
                 onPressed: () {
@@ -67,7 +66,9 @@ class HomeScreen extends GetView<HomeController> {
               ),
               spacing: 20,
               childWidget: GridView.builder(
-                itemCount: controller.services.length > 3 ? 3 : controller.services.length,
+                itemCount: controller.services.length > 3
+                    ? 3
+                    : controller.services.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -77,42 +78,45 @@ class HomeScreen extends GetView<HomeController> {
                 itemBuilder: (BuildContext context, int index) {
                   return ContainerWithIcon1(
                     onPressed: () {},
-                    iconPath: controller.services[index]?.icon ?? '',
+                    iconPath: controller.services[index]!.icon!,
                     text: controller.services[index]?.name ?? '',
                   );
                 },
               ),
             ),
           ),
-          SectionHeader(
-            title: ConstantString.topRatedSpecialist,
-            button: TextButton(
-              onPressed: () {
-                Get.toNamed(ListOfSpecialistScreen.routeName);
-              },
-              child: Text(ConstantString.seeAll, style: subtitleStyle1),
-            ),
-            spacing: 0,
-            childWidget: ListView.separated(
-              shrinkWrap: true,
-              primary: true,
-              physics: ScrollPhysics(),
-              itemBuilder: (context, index) {
-                final specialist =
-                    SpecialistController.instance.filteredSpecialists[index];
-                return CustomSpecialistContainer(
-                  name: specialist.name,
-                  specialist: specialist.specialist,
-                  charges: specialist.charges,
-                  rating: specialist.rating,
-                  review: specialist.review,
-                  onPressed: () {
-                    Get.toNamed(SpecialistDetailScreen.routeName);
-                  },
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-              itemCount: 3,
+          Obx(
+            () => SectionHeader(
+              title: ConstantString.topRatedSpecialist,
+              button: TextButton(
+                onPressed: () {
+                  Get.toNamed(ListOfSpecialistScreen.routeName);
+                },
+                child: Text(ConstantString.seeAll, style: subtitleStyle1),
+              ),
+              spacing: 0,
+              childWidget: ListView.builder(
+                shrinkWrap: true,
+                primary: true,
+                physics: ScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final doctor = controller.doctorList[index];
+                  return CustomSpecialistContainer(
+                    picPath: doctor?.profilePic ?? '',
+                    name: doctor?.name ?? '',
+                    specialist: doctor?.specialization ?? '',
+                    charges: doctor?.fees ?? '',
+                    // rating: doctor.rating,
+                    // review: doctor.review,
+                    onPressed: () {
+                      Get.to(SpecialistDetailScreen(doctor: doctor!));
+                    },
+                  );
+                },
+                itemCount: controller.doctorList.length >= 3
+                    ? 3
+                    : controller.doctorList.length,
+              ),
             ),
           ),
         ],
@@ -274,7 +278,7 @@ class BookingOptions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CustomContainerWithText(
-          text:ConstantString.visitLocalClinic ,
+          text: ConstantString.visitLocalClinic,
         ),
         SizedBox(
           height: 10,

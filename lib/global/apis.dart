@@ -6,6 +6,7 @@ class Api {
   static String dashboard = "/applicationinterface/api/patient/dashboard";
   static String services = "/applicationinterface/api/service";
   static String specialist = "/applicationinterface/api/specialist";
+  static String doctors = "/applicationinterface/api/doctor";
   static String profile = "/applicationinterface/api/patient/profile";
   static String forgetPassword = "/applicationinterface/api/forget-password";
   static String changePassword = "/applicationinterface/api/patient/changePassword";

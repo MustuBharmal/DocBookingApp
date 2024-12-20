@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../exception/server_exception.dart';
+import '../../specialist/models/doctor_list.dart';
 
 class HomeController extends GetxController {
   static HomeController get instance => Get.find<HomeController>();
@@ -15,6 +16,7 @@ class HomeController extends GetxController {
   RxInt selectedIndex = RxInt(0);
   Rxn<Dashboard> dashboard = Rxn(Dashboard());
   RxList<Service?> services = RxList.empty();
+  RxList<DoctorsList?> doctorList = RxList.empty();
   RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
@@ -29,6 +31,7 @@ class HomeController extends GetxController {
     super.onInit();
     dashboardData();
     getServices();
+    getSpecialist();
   }
 
   void navigateTo(int index) {
@@ -67,6 +70,18 @@ class HomeController extends GetxController {
   void getServices() async {
     try {
       services.value = await HomeRepo.getServices();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  void getSpecialist() async {
+    try {
+      doctorList.value = await HomeRepo.getDoctors();
       // await HomeRepo.getSpecialist();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);

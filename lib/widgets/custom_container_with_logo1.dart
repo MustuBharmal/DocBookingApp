@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
 
 class ContainerWithIcon1 extends StatelessWidget {
@@ -30,16 +28,21 @@ class ContainerWithIcon1 extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // Flexible(
+            //   fit: FlexFit.tight,
+            //   flex: 3,
+            //   child: CachedNetworkImage(
+            //     imageUrl: iconPath,
+            //     fit: BoxFit.contain,
+            //     errorWidget: (context, val, obj) {
+            //       return Image.asset(AppImage.appLogo);
+            //     },
+            //   ),
+            // ),
             Flexible(
               fit: FlexFit.tight,
-              flex: 3,
-              child: CachedNetworkImage(
-                imageUrl: iconPath,
-                fit: BoxFit.contain,
-                errorWidget: (context, val, obj) {
-                  return Image.asset(AppImage.appLogo);
-                },
-              ),
+              flex: 4,
+              child: Image.network(iconPath),
             ),
             Flexible(
               fit: FlexFit.tight,

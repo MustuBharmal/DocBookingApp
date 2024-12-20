@@ -17,7 +17,6 @@ import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/user_info_screen.dart';
 import 'package:doc_booking_app/presentations/review/view/reviews_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:get/get.dart';
 
@@ -100,10 +99,10 @@ class AppRoutes {
       name: ReviewsScreen.routeName,
       page: () => const ReviewsScreen(),
     ),
-    GetPage(
+    /*GetPage(
       name: SpecialistDetailScreen.routeName,
       page: () => const SpecialistDetailScreen(),
-    ),
+    ),*/
     GetPage(
         name: ListOfSpecialistScreen.routeName,
         page: () => const ListOfSpecialistScreen(),

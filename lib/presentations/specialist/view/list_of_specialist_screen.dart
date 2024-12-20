@@ -56,11 +56,12 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                           final specialist =
                               controller.filteredSpecialists[index];
                           return CustomSpecialistContainer(
+                            picPath: '',
                             name: specialist.name,
-                            specialist: specialist.specialist,
+                            specialist: specialist.doctorList,
                             charges: specialist.charges,
-                            rating: specialist.rating,
-                            review: specialist.review,
+                            // rating: specialist.rating,
+                            // review: specialist.review,
                             onPressed: () {
                               Get.toNamed(SpecialistDetailScreen.routeName);
                             },

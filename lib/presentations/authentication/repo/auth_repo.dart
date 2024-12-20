@@ -123,7 +123,7 @@ abstract class AuthRepo {
       if (result['isLive']) {
         LogUtil.debug(result['data']);
         return User.fromJson(result['data']);
-      } else if (!result['isLive'] == true) {
+      } else if (!result['isLive']) {
         throw Exception("Error: ${result['message']}");
       } else {
         throw Exception("Error: ${result['message']}");

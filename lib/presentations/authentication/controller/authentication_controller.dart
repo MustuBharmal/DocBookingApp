@@ -9,6 +9,7 @@ import '../../../exception/server_exception.dart';
 import '../../home/view/navigation_screen.dart';
 import '../models/user.dart';
 import '../views/account_verification_screen.dart';
+import '../views/login_welcome_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController get instance => Get.find<AuthController>();
@@ -94,7 +95,9 @@ class AuthController extends GetxController {
       Get.snackbar('Error', 'No internet connection');
     } catch (e) {
       Get.snackbar('Login failed', '$e');
-    } finally {}
+    } finally {
+      Get.offAllNamed(LoginWelcomeScreen.routeName);
+    }
   }
 
   RxInt timeLeft = 60.obs; // 1 minute timer

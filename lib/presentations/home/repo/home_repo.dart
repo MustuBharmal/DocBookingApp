@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/presentations/home/models/dashboard.dart';
 import 'package:doc_booking_app/presentations/services/models/service.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/util/storage_util.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -22,7 +23,6 @@ abstract class HomeRepo {
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        Get.snackbar('Success', result['message']);
         return Dashboard.fromJson(result['data']);
       } else {
         throw Exception("Error: ${result['message']}");
@@ -72,21 +72,21 @@ abstract class HomeRepo {
     }
   }
 
-  static Future<void> getSpecialist() async {
+  static Future<List<DoctorsList?>> getDoctors() async {
     try {
       Map<String, dynamic> data = {};
-      LogUtil.debug(Api.specialist);
+      List<DoctorsList?> listOfSpecialist = [];
+      LogUtil.debug(Api.doctors);
       final result = await HttpService.post(
-        Api.specialist,
+        Api.doctors,
         data,
         StorageUtil.getToken().toString(),
         token: true,
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        Get.snackbar('Success', result['message']);
-        return;
-        // return User.fromJson(result['data']);
+        listOfSpecialist = List<DoctorsList>.from(result["data"]!.map((x) => DoctorsList.fromJson(x)));
+        return listOfSpecialist;
       } else {
         throw Exception("Error: ${result['message']}");
       }

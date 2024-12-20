@@ -5,17 +5,19 @@ class CustomSpecialistContainer extends StatelessWidget {
   const CustomSpecialistContainer(
       {super.key,
       required this.name,
+        required this.picPath,
       required this.specialist,
-      required this.review,
-      required this.rating,
+      // required this.review,
+      // required this.rating,
       required this.charges,
       required this.onPressed});
 
   final String name;
-  final int review;
+  final String picPath;
+  // final int review;
   final String specialist;
-  final int charges;
-  final double rating;
+  final String charges;
+  // final double rating;
   final VoidCallback onPressed;
 
   @override
@@ -30,15 +32,12 @@ class CustomSpecialistContainer extends StatelessWidget {
           width: 60,
           height: 60,
           decoration: ShapeDecoration(
-            image: const DecorationImage(
-              image: NetworkImage("https://via.placeholder.com/60x60"),
-              fit: BoxFit.cover,
-            ),
             shape: RoundedRectangleBorder(
               side: const BorderSide(width: 1, color: Color(0xFFF4F4F6)),
               borderRadius: BorderRadius.circular(15),
             ),
           ),
+          child: Image.network(picPath, fit: BoxFit.cover,),
         ),
         isThreeLine: true,
         title: Text(
@@ -56,7 +55,7 @@ class CustomSpecialistContainer extends StatelessWidget {
                   color: Colors.grey[600],
                   fontWeight: FontWeight.w400),
             ),
-            Row(
+            /*Row(
               children: [
                 const Icon(
                   Icons.star,
@@ -74,7 +73,7 @@ class CustomSpecialistContainer extends StatelessWidget {
                   style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                 ),
               ],
-            ),
+            ),*/
           ],
         ),
         trailing: Text(

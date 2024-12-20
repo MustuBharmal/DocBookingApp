@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
-import 'package:doc_booking_app/presentations/review/view/reviews_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/widget/custom_review_card.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
@@ -11,7 +11,9 @@ import 'package:get/get.dart';
 import '../../../global/styles.dart';
 
 class SpecialistDetailScreen extends StatelessWidget {
-  const SpecialistDetailScreen({super.key});
+  final DoctorsList doctor;
+
+  const SpecialistDetailScreen({required this.doctor, super.key});
 
   static const routeName = '/specialist_detail-screen';
 
@@ -29,12 +31,22 @@ class SpecialistDetailScreen extends StatelessWidget {
                   aspectRatio: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          alignment: FractionalOffset.topCenter,
-                          image: AssetImage(AppImage.femaleDoctor2),
-                        )),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: doctor.profilePic!,
+                      fit: BoxFit.fitWidth,
+                      alignment: FractionalOffset.topCenter,
+                      progressIndicatorBuilder: (context, val, pr) {
+                        return Center(
+                            child: CircularProgressIndicator(
+                              value: pr.progress,
+                            ));
+                      },
+                      errorWidget: (context, val, obj) {
+                        return Image.asset(AppImage.serviceIcon1);
+                      },
+                    ),
                   ),
                 ),
                 //Back Icon Button
@@ -61,14 +73,14 @@ class SpecialistDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Peater Parker",
+                            doctor.name ??'',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -76,7 +88,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 4),
                           Text(
-                            "Psychiatrist",
+                            doctor.specialization ?? '',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.grey,
@@ -85,7 +97,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        "\$10/hr",
+                        "\$${doctor.fees}/hr",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -94,7 +106,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
+                  /*Container(
                     padding: EdgeInsets.symmetric(vertical: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,14 +199,14 @@ class SpecialistDetailScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
+                  ),*/
+                  SizedBox(height: 20,),
                   const CustomHeaderText(text: ConstantString.about),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 16),
                     child: RichText(
                       text: TextSpan(
-                        text:
-                            "Physical Medicine and Rehabilitation (PM&R) physicians, also known as physiatrists, treat a wide variety of medical conditions... ",
+                        text: doctor.about,
                         style: normalTextStyle,
                         children: [
                           WidgetSpan(
@@ -250,7 +262,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  CustomHeaderText(
+                  /*CustomHeaderText(
                     text: ConstantString.review,
                     button: TextButton(
                         onPressed: () {
@@ -258,8 +270,8 @@ class SpecialistDetailScreen extends StatelessWidget {
                         },
                         child:
                             Text(ConstantString.seeAll, style: subtitleStyle1)),
-                  ),
-                  Padding(
+                  ),*/
+                  /*Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: CustomReviewCard(
                         name: "Virat Kohli",
@@ -267,7 +279,8 @@ class SpecialistDetailScreen extends StatelessWidget {
                         day: "2 d",
                         rating: 4,
                         review: "Nice it is very Useful for me."),
-                  ),
+                  ),*/
+                  SizedBox(height: 30,),
                   BlueButton(
                     label: ConstantString.bookAppointment,
                     onPressed: () {},
