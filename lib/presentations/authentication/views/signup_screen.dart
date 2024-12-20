@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 
 import '../../../global/styles.dart';
 import '../models/user.dart';
+import '../widget/custom_password_textfield.dart';
 
 class SignupScreen extends GetView<AuthenticationController> {
   SignupScreen({super.key});
@@ -19,6 +20,7 @@ class SignupScreen extends GetView<AuthenticationController> {
   static const routeName = "/signup-screen";
 
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
@@ -86,6 +88,14 @@ class SignupScreen extends GetView<AuthenticationController> {
                   CustomPhoneField(
                     controller: phoneController,
                   ),
+                  CustomPasswordTextfield(
+                    label: ConstantString.password,
+                    showAsterisk: true,
+                    isPasswordTextField: true,
+                    textEditingController: passController,
+                    hintStyle: txtInterTextFieldHint,
+                    hintText: "eg. 123",
+                  ),
                   CustomDobTextField(
                       hintText: "day/month/year",
                       hintStyle: txtInterTextFieldHint,
@@ -115,12 +125,22 @@ class SignupScreen extends GetView<AuthenticationController> {
                       hintStyle: txtInterTextFieldHint,
                       inputType: TextInputType.number,
                       hintText: "eg 12345"),
-                  CustomTextField(
-                      label: ConstantString.country,
+                  CustomDropdown(
+                      label: "State",
+                      items: ["state1", "state2"],
                       showAsterisk: true,
-                      controller: countryController,
-                      hintStyle: txtInterTextFieldHint,
-                      hintText: "eg india"),
+                      selectedItem: controller.selectState.value,
+                      onChanged: (state) {
+                        controller.selectState.value = state!;
+                      }),
+                  CustomDropdown(
+                      label: "State",
+                      items: ["country1", "country2"],
+                      showAsterisk: true,
+                      selectedItem: controller.selectCountry.value,
+                      onChanged: (country) {
+                        controller.selectCountry.value = country!;
+                      }),
                   Padding(
                     padding: const EdgeInsets.only(top: 19, bottom: 20),
                     child: BlueButton(

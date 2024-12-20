@@ -12,6 +12,8 @@ class AuthenticationController extends GetxController {
   static AuthenticationController get instance => Get.find<AuthenticationController>();
   RxInt activeIndex = RxInt(0);
   RxString selectSex = RxString('Male');
+  RxString selectState = RxString('state1');
+  RxString selectCountry = RxString('country1');
   RxBool isObscure = true.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
   Rxn<User> user = Rxn<User>();
