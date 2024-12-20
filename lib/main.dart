@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
-  // await Firebase.initializeApp();
   await GetStorage.init();
   HttpService.initialize();
   runApp(const MyApp());

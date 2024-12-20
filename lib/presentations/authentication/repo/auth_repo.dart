@@ -86,13 +86,44 @@ abstract class AuthRepo {
     try {
       Map<String, dynamic> data = user.toJson();
       LogUtil.debug('json: $data');
-      LogUtil.debug(Api.otpVerification);
+      LogUtil.debug(Api.signUp);
       final result = await HttpService.post(Api.signUp, data, '');
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message']);
         return User.fromJson(result['data']);
-      }else if (!result['isLive'] == true) {
+      } else if (!result['isLive'] == true) {
+        throw Exception("Error: ${result['message']}");
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        var errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  // get user
+  static Future<User> getUser() async {
+    try {
+      LogUtil.debug(Api.profile);
+      final result = await HttpService.get(
+        Api.profile,
+        {},
+       StorageUtil.getToken().toString(),
+        token: true,
+      );
+      if (result['isLive']) {
+        LogUtil.debug(result['data']);
+        return User.fromJson(result['data']);
+      } else if (!result['isLive'] == true) {
         throw Exception("Error: ${result['message']}");
       } else {
         throw Exception("Error: ${result['message']}");

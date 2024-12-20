@@ -9,7 +9,7 @@ part 'dashboard.g.dart';
 @freezed
 class Dashboard with _$Dashboard {
   const factory Dashboard({
-    @JsonKey(name: 'upcoming_appointments')List<Null>? upcomingAppointments,
+    // @JsonKey(name: 'upcoming_appointments')List<Null>? upcomingAppointments,
     @JsonKey(name: 'about-us') String? aboutUs,
     @JsonKey(name: 'privacy-policy') String? privacyPolicy,
     @JsonKey(name: 'teams-condition') String? teamsCondition

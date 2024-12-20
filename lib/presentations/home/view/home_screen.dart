@@ -1,5 +1,5 @@
 import 'package:doc_booking_app/global/constant_string.dart';
-import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
@@ -8,7 +8,6 @@ import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
-import '../../../global/constant_values.dart';
 import '../../../global/styles.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 import '../../../widgets/custom_specialist_container.dart';
@@ -28,7 +27,7 @@ class HomeScreen extends GetView<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Hello, John Doe",
+            "Hello, ${AuthController.instance.user.value?.name?.capitalizeFirst ?? ''}",
             style: TextStyle(
               color: AppColors.black,
               fontSize: 20,
@@ -57,42 +56,34 @@ class HomeScreen extends GetView<HomeController> {
             spacing: 12,
             childWidget: BookingOptions(),
           ),
-          SectionHeader(
-            title: ConstantString.topServices,
-            button: TextButton(
-              onPressed: () {
-                controller.navigateTo(1);
-              },
-              child: Text(ConstantString.seeAll, style: subtitleStyle1),
-            ),
-            spacing: 20,
-            childWidget: GridView(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 0.95),
-              children: [
-                ContainerWithIcon1(
-                  onPressed: () {},
-                  iconPath: AppImage.homeCategory1,
-                  text: ConstantValue.textListForServices[0],
-                ),
-                ContainerWithIcon1(
-                  onPressed: () {},
-                  iconPath: AppImage.homeCategory2,
-                  text: ConstantValue.textListForServices[1],
-                ),
-                ContainerWithIcon1(
-                  onPressed: () {},
-                  iconPath: AppImage.homeCategory3,
-                  text: ConstantValue.textListForServices[2],
-                ),
-              ],
+          Obx(
+            ()=> SectionHeader(
+              title: ConstantString.topServices,
+              button: TextButton(
+                onPressed: () {
+                  controller.navigateTo(1);
+                },
+                child: Text(ConstantString.seeAll, style: subtitleStyle1),
+              ),
+              spacing: 20,
+              childWidget: GridView.builder(
+                itemCount: controller.services.length > 3 ? 3 : controller.services.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 0.95),
+                itemBuilder: (BuildContext context, int index) {
+                  return ContainerWithIcon1(
+                    onPressed: () {},
+                    iconPath: controller.services[index]?.icon ?? '',
+                    text: controller.services[index]?.name ?? '',
+                  );
+                },
+              ),
             ),
           ),
-          // have to discuss with Mohd bhai
           SectionHeader(
             title: ConstantString.topRatedSpecialist,
             button: TextButton(
