@@ -5,5 +5,6 @@ abstract class AppThemes {
       brightness: Brightness.light,
       fontFamily: 'Inter',
       useMaterial3: true,
-      scaffoldBackgroundColor: Colors.white);
+      scaffoldBackgroundColor: Colors.white,
+  appBarTheme: AppBarTheme(scrolledUnderElevation: 0));
 }

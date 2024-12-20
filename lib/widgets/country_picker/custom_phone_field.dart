@@ -1,0 +1,146 @@
+import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
+import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart';
+import 'package:flutter/material.dart';
+
+import '../../global/app_color.dart';
+import '../../global/styles.dart';
+
+class CustomPhoneField extends StatefulWidget {
+  final TextEditingController controller;
+  final ValueChanged<CountryModel>? onChanged;
+
+  const CustomPhoneField({
+    super.key,
+    required this.controller,
+    this.onChanged,
+  });
+
+  @override
+  State<CustomPhoneField> createState() => _CustomPhoneFieldState();
+}
+
+class _CustomPhoneFieldState extends State<CustomPhoneField> {
+  List<CountryModel> countries = [];
+  bool loading = true;
+  CountryModel? selectedCountry;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getCountries();
+    });
+  }
+
+  getCountries() async {
+    try {
+      countries.clear();
+      countries.addAll(await AuthRepo.getCountries());
+      loading = false;
+      if (countries.isNotEmpty) {
+        selectedCountry = countries.first;
+      }
+      setState(() {});
+    } catch (e) {}
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 18.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RichText(
+            text: TextSpan(
+              text: 'Phone Number',
+              style: txtInterTextField,
+              children: const [
+                TextSpan(
+                  text: ' *',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: AppColors.borderColor,
+              ),
+            ),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    showBottomSheet(
+                      context: context,
+                      builder: (_) => Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20),
+                          ),
+                        ),
+                        padding: EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            SearchBar(),
+                            Expanded(child: ListView.builder(itemBuilder: (ctx, index) => Text('${countries[index].emoji ?? ''} ${countries[index].name ?? ''}')))
+                          ],
+                        ),
+                      ),
+                    );
+                    /* showCountryPicker(
+                          context: context,
+                          showPhoneCode: true,
+                          onSelect: (Country country) {
+                            profileController.updateCountry(country);
+                          },
+                        );*/
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: [
+                        Text(
+                          selectedCountry?.emoji ?? '',
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                        const SizedBox(width: 6),
+                        const Icon(Icons.arrow_drop_down, size: 18),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 1,
+                  height: 30,
+                  color: Colors.grey.shade300,
+                ),
+                Expanded(
+                  child: TextFormField(
+                    style: txtInterDropDownValue,
+                    controller: widget.controller,
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                    ),
+                    onChanged: (value) {
+                      if (widget.onChanged != null) {
+                        // widget.onChanged!(value);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/blue_button.dart';
 import '../widgets/custom_drop_down.dart';
-import '../../../widgets/custom_phone_field.dart';
+import '../../../widgets/country_picker/custom_phone_field.dart';
 import '../widgets/custom_profile_appbar.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../widgets/profile_field.dart';
@@ -69,9 +69,9 @@ class UserInfoScreen extends GetView<ProfileController> {
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomPhoneField(
             controller: controller.phoneController,
-            onChanged: (value) {
-              controller.phoneController.text = value;
-            },
+            // onChanged: (value) {
+            //   controller.phoneController.text = value;
+            // },
           ),
         ),
         Padding(

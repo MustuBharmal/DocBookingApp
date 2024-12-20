@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,11 +23,13 @@ class AuthController extends GetxController {
   Rxn<User> user = Rxn<User>();
   final ImagePicker _picker = ImagePicker();
   String? email;
+  RxList<CountryModel> countries = RxList.empty();
+  Rx<CountryModel?> selectedCountrySingUp = Rx(null);
 
   @override
   void onInit() {
     super.onInit();
-    _startTimer();
+    // _startTimer();
   }
 
   void _startTimer() {
@@ -74,7 +77,7 @@ class AuthController extends GetxController {
 
   Future<void> signUp(User user) async {
     try {
-      AuthController.instance.user.value =await AuthRepo.signUp(user);
+      AuthController.instance.user.value = await AuthRepo.signUp(user);
       Get.offAllNamed(AccountVerificationScreen.routeName);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);

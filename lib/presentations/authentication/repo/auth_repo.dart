@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as dio;
+import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/user.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ abstract class AuthRepo {
         _passwordKey: password,
       };
       LogUtil.debug(Api.signIn);
-      final result = await HttpService.post(Api.signIn, data, '');
+      final result = await HttpService.post(Api.signIn, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         StorageUtil.writeToken(result['data']['access_token']);
@@ -60,7 +61,7 @@ abstract class AuthRepo {
         _otpKey: otp,
       };
       LogUtil.debug(Api.otpVerification);
-      final result = await HttpService.post(Api.otpVerification, data, '');
+      final result = await HttpService.post(Api.otpVerification, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message']);
@@ -87,7 +88,7 @@ abstract class AuthRepo {
       Map<String, dynamic> data = user.toJson();
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
-      final result = await HttpService.post(Api.signUp, data, '');
+      final result = await HttpService.post(Api.signUp, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message']);
@@ -117,7 +118,6 @@ abstract class AuthRepo {
       final result = await HttpService.get(
         Api.profile,
         {},
-       StorageUtil.getToken().toString(),
         token: true,
       );
       if (result['isLive']) {
@@ -128,6 +128,42 @@ abstract class AuthRepo {
       } else {
         throw Exception("Error: ${result['message']}");
       }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        var errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  static Future<List<CountryModel>> getCountries() async {
+    try {
+      LogUtil.debug(Api.profile);
+      final result = await HttpService.post(
+        Api.country,
+        {},
+      );
+      if (result['code'] == 200) {
+        CountryResponse countryResponse = CountryResponse.fromJson(result);
+        if (countryResponse.success) {
+          return countryResponse.data;
+        } else {
+          throw Exception("Error: ${countryResponse.message}");
+        }
+      }
+      return [];
+      //   LogUtil.debug(result['data']);
+      //   return User.fromJson(result['data']);
+      // } else if (!result['isLive']) {
+      //   throw Exception("Error: ${result['message']}");
+      // } else {
+      //   throw Exception("Error: ${result['message']}");
+      // }
     } on ServerException catch (e) {
       LogUtil.error(e);
       rethrow;

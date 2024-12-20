@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/extensions.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -9,39 +10,38 @@ class CustomImageContainer extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    LogUtil.debug(Get.height * 0.095,);
-    return Obx(() => GestureDetector(
-          onTap: controller.pickImage,
-          child: DottedBorder(
-            color: Color(0xFFF5F1FE),
-            dashPattern: [8, 4],
-            strokeWidth: 2,
-            borderType: BorderType.RRect,
-            radius: const Radius.circular(20),
-            child: Container(
-              width: Get.width * 0.2,
-              height: Get.height * 0.095,
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: controller.selectedImage.value == null
-                  ? Icon(
-                      Icons.camera_alt,
-                      color: Colors.blue,
-                      size: 36,
-                    )
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.file(
-                        controller.selectedImage.value!,
-                        fit: BoxFit.cover,
-                        width: 80,
-                        height: 80,
-                      ),
-                    ),
+    LogUtil.debug(
+      Get.height * 0.095,
+    );
+    return Obx(() => DottedBorder(
+          color: Color(0xFFF5F1FE),
+          dashPattern: [8, 4],
+          strokeWidth: 2,
+          borderType: BorderType.RRect,
+          radius: const Radius.circular(20),
+          child: Container(
+            width: Get.width * 0.2,
+            height: Get.height * 0.095,
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.circular(20),
             ),
+            child: controller.selectedImage.value == null
+                ? Icon(
+                    Icons.camera_alt,
+                    color: Colors.blue,
+                    size: 36,
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.file(
+                      controller.selectedImage.value!,
+                      fit: BoxFit.cover,
+                      width: 80,
+                      height: 80,
+                    ),
+                  ),
           ),
-        ));
+        )).onClick(() {});
   }
 }

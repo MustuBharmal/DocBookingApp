@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart' as dio;
 import 'package:doc_booking_app/presentations/authentication/controller/loader_controller.dart';
+import 'package:doc_booking_app/util/storage_util.dart';
 
 import '../global/apis.dart';
 import '../util/log_utils.dart';
@@ -29,18 +30,15 @@ class HttpService extends HttpOverrides {
     _dio = dio.Dio(_baseOptions);
   }
 
-  static Future<Map<String, dynamic>> get(
-      String path, Map<String, dynamic> params, String tokenString,
-      {bool token = false}) async {
+  static Future<Map<String, dynamic>> get(String path, Map<String, dynamic> params,
+      {bool token = false, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
       LoaderController.instance.showLoader();
       final dio.Response response = await _dio.get(
         path,
         queryParameters: params,
-        options: token
-            ? dio.Options(headers: {'own-access-token': 'Bearer $tokenString'})
-            : null,
+        options: token ? dio.Options(headers: {'own-access-token': 'Bearer ${StorageUtil.getToken().toString()}'}) : null,
       );
       LoaderController.instance.dismissLoader();
       if (response.statusCode == 200) {
@@ -55,9 +53,8 @@ class HttpService extends HttpOverrides {
     return result;
   }
 
-  static Future<Map<String, dynamic>> post(
-      String path, Map<String, dynamic> data, String tokenString,
-      {bool token = false}) async {
+  static Future<Map<String, dynamic>> post(String path, Map<String, dynamic> data,
+      {bool token = true, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
       LoaderController.instance.showLoader();
@@ -68,7 +65,7 @@ class HttpService extends HttpOverrides {
         options: token
             ? dio.Options(
                 headers: {
-                  'own-access-token': 'Bearer $tokenString',
+                  'own-access-token': 'Bearer ${StorageUtil.getToken().toString()}',
                 },
               )
             : null,
@@ -86,9 +83,7 @@ class HttpService extends HttpOverrides {
     return result;
   }
 
-  static Future<Map<String, dynamic>> picPost(
-      String path, dio.FormData data, String tokenString,
-      {bool token = true}) async {
+  static Future<Map<String, dynamic>> picPost(String path, dio.FormData data, {bool token = true, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
       LoaderController.instance.showLoader();
@@ -97,8 +92,7 @@ class HttpService extends HttpOverrides {
         data: data,
         options: token
             ? dio.Options(headers: {
-                'own-access-token':
-                    tokenString, // Ensure tokenString is used here
+                'own-access-token': StorageUtil.getToken().toString(), // Ensure tokenString is used here
                 'Content-Type': 'multipart/form-data',
               })
             : null,

@@ -1,4 +1,4 @@
-import 'package:country_picker/country_picker.dart';
+// import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,7 @@ class ProfileController extends GetxController {
   }
 
   // Country state (default is US)
-  var selectedCountry = CountryParser.parseCountryCode('US').obs;
+  // var selectedCountry = CountryParser.parseCountryCode('US').obs;
 
   // Phone number state
   RxString phoneNumber = RxString('');
@@ -87,12 +87,12 @@ class ProfileController extends GetxController {
   }
 
   // Update country
-  void updateCountry(Country country) {
-    selectedCountry.value = country;
-  }
+  // void updateCountry(Country country) {
+  //   // selectedCountry.value = country;
+  // }
 
   // Get full phone number with country code
-  String get fullPhoneNumber =>
-      '+${selectedCountry.value.phoneCode} ${phoneNumber.value}';
+  // String get fullPhoneNumber =>
+  //     '+${selectedCountry.value.phoneCode} ${phoneNumber.value}';
 
 }

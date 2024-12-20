@@ -1,16 +1,15 @@
+import 'package:dio/dio.dart' as dio;
 import 'package:doc_booking_app/presentations/home/models/dashboard.dart';
 import 'package:doc_booking_app/presentations/services/models/service.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
-import 'package:doc_booking_app/util/storage_util.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
+
 import '../../../exception/server_exception.dart';
 import '../../../global/apis.dart';
 import '../../../service/http_service.dart';
 import '../../../util/log_utils.dart';
 
 abstract class HomeRepo {
-
   static Future<Dashboard?> dashboardApi() async {
     try {
       Map<String, dynamic> data = {};
@@ -18,8 +17,6 @@ abstract class HomeRepo {
       final result = await HttpService.post(
         Api.dashboard,
         data,
-        StorageUtil.getToken().toString(),
-        token: true,
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);
@@ -48,8 +45,6 @@ abstract class HomeRepo {
       final result = await HttpService.get(
         Api.services,
         data,
-        StorageUtil.getToken().toString(),
-        token: true,
       );
       if (result['isLive'] == true) {
         listOfServices = List<Service>.from(result["data"]!.map((x) => Service.fromJson(x)));
@@ -80,8 +75,6 @@ abstract class HomeRepo {
       final result = await HttpService.post(
         Api.doctors,
         data,
-        StorageUtil.getToken().toString(),
-        token: true,
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);

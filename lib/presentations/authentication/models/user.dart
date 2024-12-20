@@ -1,8 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
-// optional: Since our Person class is serializable, we must add this line.
-// But if Person was not serializable, we could skip it.
 part 'user.g.dart';
 
 @freezed

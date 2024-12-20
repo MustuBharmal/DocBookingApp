@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
 
@@ -66,7 +67,7 @@ class CustomDropdown extends StatelessWidget {
               contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
 
             ),
-            icon: Image.asset(AppImage.arrowDown),
+            icon: SvgPicture.asset(AppImage.arrowDown),
             items: items
                 .map((item) => DropdownMenuItem<String>(
               value: item,
