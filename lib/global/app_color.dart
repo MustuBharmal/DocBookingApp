@@ -20,6 +20,7 @@ abstract class AppColors {
   static const Color blue = Color(0xFF3C6EE0); //#3C6EE0
   static const Color darkBlue = Color(0xFF2554C2); //#2554C2
   static Color gray600 = Color(0xFF717171); //##717171
+  static Color textHeaderGray = Color(0xFF899CA8); //##899CA8
   static Color gray = const Color.fromRGBO(137, 156, 168, 1); //#168, 1
   static Color whiteA700 = Colors.white; //#FFFFFF
   static const Color blueGradient1 = Color(0xFFABE2FC); //#ABE2FC

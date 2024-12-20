@@ -22,7 +22,7 @@ TextStyle txtInterRegular15Gray600 = TextStyle(
   fontWeight: FontWeight.w400,
 );
 TextStyle txtInterTextField = TextStyle(
-  color: AppColors.gray600,
+  color: AppColors.textHeaderGray,
   fontSize: 16,
   fontWeight: FontWeight.w400,
 );

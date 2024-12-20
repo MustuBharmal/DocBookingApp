@@ -21,6 +21,7 @@ class User with _$User {
     String? city,
     String? createdAt,
     String? updatedAt,
+    @JsonKey(name: 'password') String? password,
     @JsonKey(name: 'is_verified') String? isVerified,
   }) = _User;
 

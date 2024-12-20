@@ -33,6 +33,8 @@ mixin _$User {
   String? get city => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'password')
+  String? get password => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_verified')
   String? get isVerified => throw _privateConstructorUsedError;
 
@@ -64,6 +66,7 @@ abstract class $UserCopyWith<$Res> {
       String? city,
       String? createdAt,
       String? updatedAt,
+      @JsonKey(name: 'password') String? password,
       @JsonKey(name: 'is_verified') String? isVerified});
 }
 
@@ -95,6 +98,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? city = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? password = freezed,
     Object? isVerified = freezed,
   }) {
     return _then(_value.copyWith(
@@ -150,6 +154,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
       isVerified: freezed == isVerified
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
@@ -179,6 +187,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? city,
       String? createdAt,
       String? updatedAt,
+      @JsonKey(name: 'password') String? password,
       @JsonKey(name: 'is_verified') String? isVerified});
 }
 
@@ -207,6 +216,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? city = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? password = freezed,
     Object? isVerified = freezed,
   }) {
     return _then(_$UserImpl(
@@ -262,6 +272,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
       isVerified: freezed == isVerified
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
@@ -287,6 +301,7 @@ class _$UserImpl implements _User {
       this.city,
       this.createdAt,
       this.updatedAt,
+      @JsonKey(name: 'password') this.password,
       @JsonKey(name: 'is_verified') this.isVerified});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -320,12 +335,15 @@ class _$UserImpl implements _User {
   @override
   final String? updatedAt;
   @override
+  @JsonKey(name: 'password')
+  final String? password;
+  @override
   @JsonKey(name: 'is_verified')
   final String? isVerified;
 
   @override
   String toString() {
-    return 'User(id: $id, profilePic: $profilePic, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, isVerified: $isVerified)';
+    return 'User(id: $id, profilePic: $profilePic, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, password: $password, isVerified: $isVerified)';
   }
 
   @override
@@ -349,6 +367,8 @@ class _$UserImpl implements _User {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified));
   }
@@ -370,6 +390,7 @@ class _$UserImpl implements _User {
       city,
       createdAt,
       updatedAt,
+      password,
       isVerified);
 
   /// Create a copy of User
@@ -403,6 +424,7 @@ abstract class _User implements User {
       final String? city,
       final String? createdAt,
       final String? updatedAt,
+      @JsonKey(name: 'password') final String? password,
       @JsonKey(name: 'is_verified') final String? isVerified}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -433,6 +455,9 @@ abstract class _User implements User {
   String? get createdAt;
   @override
   String? get updatedAt;
+  @override
+  @JsonKey(name: 'password')
+  String? get password;
   @override
   @JsonKey(name: 'is_verified')
   String? get isVerified;

@@ -20,7 +20,7 @@ class CustomPhoneField extends StatelessWidget {
     final ProfileController profileController = Get.put(ProfileController());
 
     return Obx(() => Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(bottom: 18.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

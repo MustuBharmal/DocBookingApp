@@ -20,6 +20,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       city: json['city'] as String?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
+      password: json['password'] as String?,
       isVerified: json['is_verified'] as String?,
     );
 
@@ -38,5 +39,6 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'city': instance.city,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'password': instance.password,
       'is_verified': instance.isVerified,
     };

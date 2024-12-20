@@ -13,7 +13,7 @@ abstract class AppImage {
 
   static String get home => 'home'.iconPng;
 
-  //static String get stethoscope => 'stethoscope'.iconPng;
+  static String get signUpCamera => 'sign_up_camera'.iconPng;
 
   static String get user => 'user'.iconPng;
 

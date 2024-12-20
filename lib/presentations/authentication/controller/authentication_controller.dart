@@ -67,6 +67,18 @@ class AuthenticationController extends GetxController {
     } finally {}
   }
 
+  Future<void> signUp(User user) async {
+    try {
+      await AuthRepo.signUp(user);
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
   RxInt timeLeft = 60.obs; // 1 minute timer
   RxBool isTimerActive = true.obs;
 

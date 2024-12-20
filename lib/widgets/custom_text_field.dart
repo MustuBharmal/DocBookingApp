@@ -26,16 +26,20 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(bottom: 18.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RichText(
-            text: TextSpan(text: label, style: txtInterTextField, children: [
-              TextSpan(
-                  text: showAsterisk ? ' *' : '',
-                  style: TextStyle(color: Colors.red)),
-            ]),
+            text: TextSpan(
+              text: label,
+              style: txtInterTextField,
+              children: [
+                TextSpan(
+                    text: showAsterisk ? ' *' : '',
+                    style: TextStyle(color: Colors.red)),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -64,7 +68,7 @@ class CustomTextField extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.red),
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    EdgeInsets.symmetric(horizontal: 15, vertical: 17),
               ),
             ),
           ),

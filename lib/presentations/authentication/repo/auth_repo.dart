@@ -78,4 +78,34 @@ abstract class AuthRepo {
       rethrow;
     }
   }
+
+  // signup method
+  static Future<void> signUp(User user) async {
+    try {
+      Map<String, dynamic> data = user.toJson();
+      LogUtil.debug('json: $data');
+      LogUtil.debug(Api.otpVerification);
+      final result = await HttpService.post(Api.signUp, data, '');
+      if (result['isLive'] == true) {
+        LogUtil.debug(result);
+        Get.snackbar('Success', result['message']);
+        return;
+      }else if (!result['isLive'] == true) {
+        Get.toNamed(AccountVerificationScreen.routeName);
+        return;
+      } else {
+        throw Exception("Error: ${result['status']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        var errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
 }

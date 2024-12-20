@@ -24,7 +24,7 @@ class CustomDobTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(bottom: 18.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,8 +69,8 @@ class CustomDobTextField extends StatelessWidget {
                 borderSide: const BorderSide(color: Colors.red),
               ),
               contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
+                horizontal: 15,
+                vertical: 17,
               ),
             ),
             onTap: () async {

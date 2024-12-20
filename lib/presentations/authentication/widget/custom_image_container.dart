@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ class CustomImageContainer extends GetView<AuthenticationController> {
 
   @override
   Widget build(BuildContext context) {
+    LogUtil.debug(Get.height * 0.095,);
     return Obx(() => GestureDetector(
           onTap: controller.pickImage,
           child: DottedBorder(
@@ -17,8 +19,8 @@ class CustomImageContainer extends GetView<AuthenticationController> {
             borderType: BorderType.RRect,
             radius: const Radius.circular(20),
             child: Container(
-              width: 80,
-              height: 80,
+              width: Get.width * 0.2,
+              height: Get.height * 0.095,
               decoration: BoxDecoration(
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(20),
