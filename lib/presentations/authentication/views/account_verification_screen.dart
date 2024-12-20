@@ -1,6 +1,6 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
-import 'package:doc_booking_app/presentations/authentication/widget/custom_pinput.dart';
+import 'package:doc_booking_app/presentations/authentication/widget/custom_pin_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +9,7 @@ import '../../../global/styles.dart';
 import '../../../widgets/blue_button.dart';
 import '../controller/otp_timer_controller.dart';
 
-class AccountVerificationScreen extends GetView<AuthenticationController> {
+class AccountVerificationScreen extends GetView<OTPTimerController> {
   AccountVerificationScreen({super.key});
 
   static const routeName = "/account_verification-screen";
@@ -18,7 +18,6 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
   /* because of when user move to verification screen then start timer. so controller initialized  when user move to verification screen
    otherwise timer will start when controller initialized.
    */
-  final OTPTimerController timerController = Get.put(OTPTimerController());
   final TextEditingController pinController = TextEditingController();
 
   @override
@@ -36,7 +35,9 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
                 width: Get.width * 0.1224,
                 height: Get.height * 0.0583,
                 decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.borderColor), shape: BoxShape.circle, color: AppColors.white),
+                    border: Border.all(color: AppColors.borderColor),
+                    shape: BoxShape.circle,
+                    color: AppColors.white),
                 child: IconButton(
                     onPressed: () {
                       Get.back();
@@ -48,7 +49,7 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 30),
               child: Text(
-                'Please enter the OTP you received to ${controller.email} ',
+                'Please enter the OTP you received to ${AuthenticationController.instance.email} ',
                 style: txtInterTextField,
               ),
             ),
@@ -58,23 +59,29 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (timerController.timerText.value == 'Resend') {
-                      timerController.resetTimer();
+                    if (controller.timerText.value == 'Resend') {
+                      controller.resetTimer();
                     }
                   },
                   child: Obx(
                     () => Text(
-                      timerController.timerText.value == 'Resend' ? 'Resend the code' : 'Resend the code',
+                      controller.timerText.value == 'Resend'
+                          ? 'Resend the code'
+                          : 'Resend the code',
                       style: TextStyle(
                         fontSize: 16,
-                        color: timerController.timerText.value == 'Resend' ? Colors.blue : Colors.grey,
+                        color: controller.timerText.value == 'Resend'
+                            ? Colors.blue
+                            : Colors.grey,
                       ),
                     ),
                   ),
                 ),
                 SizedBox(width: 10),
                 Obx(() => Text(
-                      timerController.timerText.value == 'Resend' ? '' : timerController.timerText.value,
+                      controller.timerText.value == 'Resend'
+                          ? ''
+                          : controller.timerText.value,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.blue,
@@ -87,7 +94,10 @@ class AccountVerificationScreen extends GetView<AuthenticationController> {
               child: BlueButton(
                 label: ConstantString.verifyNow,
                 onPressed: () {
-                  Get.offNamed(AccountVerificationScreen.routeName);
+                  controller.verifyOtp(
+                    AuthenticationController.instance.email!,
+                    pinController.text,
+                  );
                 },
               ),
             )

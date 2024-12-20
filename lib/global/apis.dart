@@ -2,6 +2,7 @@ class Api {
   static String baseUrl = "https://crazylense.com";
   static String signUp = "/applicationinterface/api/signup";
   static String signIn = "/applicationinterface/api/singin";
+  static String otpVerification = "/applicationinterface/api/verify-email";
   static String profile = "/applicationinterface/api/patient/profile";
   static String forgetPassword = "/applicationinterface/api/forget-password";
   static String changePassword = "/applicationinterface/api/patient/changePassword";

@@ -1,5 +1,10 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:get/get.dart';
+
+import '../../../exception/server_exception.dart';
+import '../repo/auth_repo.dart';
 
 class OTPTimerController extends GetxController {
   var timerText = '1:00'.obs;
@@ -40,5 +45,20 @@ class OTPTimerController extends GetxController {
   void onClose() {
     _timer.cancel();
     super.onClose();
+  }
+
+  void verifyOtp(String email, String otp) async {
+    try {
+      bool isVerified = await AuthRepo.otpVerification(email, otp);
+      if(isVerified) {
+        Get.offNamed(NavigationScreen.routeName);
+      }
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
   }
 }
