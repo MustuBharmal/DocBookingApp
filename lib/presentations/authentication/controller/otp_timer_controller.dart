@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../../exception/server_exception.dart';
 import '../repo/auth_repo.dart';
 
-class OTPTimerController extends GetxController {
+class OTPVerificationController extends GetxController {
   var timerText = '1:00'.obs;
   late Timer _timer;
   int secondsRemaining = 60;

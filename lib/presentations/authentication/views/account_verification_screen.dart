@@ -9,7 +9,7 @@ import '../../../global/styles.dart';
 import '../../../widgets/blue_button.dart';
 import '../controller/otp_timer_controller.dart';
 
-class AccountVerificationScreen extends GetView<OTPTimerController> {
+class AccountVerificationScreen extends GetView<OTPVerificationController> {
   AccountVerificationScreen({super.key});
 
   static const routeName = "/account_verification-screen";

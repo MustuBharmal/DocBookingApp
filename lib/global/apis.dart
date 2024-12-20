@@ -3,6 +3,9 @@ class Api {
   static String signUp = "/applicationinterface/api/singup";
   static String signIn = "/applicationinterface/api/singin";
   static String otpVerification = "/applicationinterface/api/verify-email";
+  static String dashboard = "/applicationinterface/api/patient/dashboard";
+  static String services = "/applicationinterface/api/service";
+  static String specialist = "/applicationinterface/api/specialist";
   static String profile = "/applicationinterface/api/patient/profile";
   static String forgetPassword = "/applicationinterface/api/forget-password";
   static String changePassword = "/applicationinterface/api/patient/changePassword";

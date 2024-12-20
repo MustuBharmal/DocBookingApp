@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../exception/server_exception.dart';
+import '../../home/view/navigation_screen.dart';
 import '../models/user.dart';
 import '../views/account_verification_screen.dart';
 
@@ -74,6 +75,19 @@ class AuthController extends GetxController {
     try {
       AuthController.instance.user.value =await AuthRepo.signUp(user);
       Get.offAllNamed(AccountVerificationScreen.routeName);
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  Future<void> getUser() async {
+    try {
+      user.value = await AuthRepo.getUser();
+      Get.offAllNamed(NavigationScreen.routeName);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

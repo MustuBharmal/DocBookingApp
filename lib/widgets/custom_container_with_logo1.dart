@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ContainerWithIcon1 extends StatelessWidget {
   const ContainerWithIcon1(
@@ -32,9 +33,12 @@ class ContainerWithIcon1 extends StatelessWidget {
             Flexible(
               fit: FlexFit.tight,
               flex: 3,
-              child: SvgPicture.asset(
-                iconPath,
+              child: CachedNetworkImage(
+                imageUrl: iconPath,
                 fit: BoxFit.contain,
+                errorWidget: (context, val, obj) {
+                  return Image.asset(AppImage.appLogo);
+                },
               ),
             ),
             Flexible(
@@ -42,6 +46,7 @@ class ContainerWithIcon1 extends StatelessWidget {
               flex: 1,
               child: Text(
                 text,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Color(0xFF363636),
                   fontSize: 12,

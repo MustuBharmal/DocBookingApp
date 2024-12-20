@@ -1,4 +1,3 @@
-import 'package:doc_booking_app/presentations/authentication/binding/auth_binding.dart';
 import 'package:doc_booking_app/presentations/authentication/views/account_verification_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/forgot_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
@@ -22,6 +21,7 @@ import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:get/get.dart';
 
+import '../presentations/authentication/binding/otp_verification_binding.dart';
 import '../presentations/profile/binding/profile_binding.dart';
 import '../presentations/specialist/binding/specialist_binding.dart';
 import '../presentations/specialist/view/list_of_specialist_screen.dart';

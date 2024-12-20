@@ -29,33 +29,50 @@ class HttpService extends HttpOverrides {
     _dio = dio.Dio(_baseOptions);
   }
 
-  static Future<dio.Response<dynamic>?> get(String path, Map<String, dynamic> params, String tokenString,
+  static Future<Map<String, dynamic>> get(
+      String path, Map<String, dynamic> params, String tokenString,
       {bool token = false}) async {
-    dio.Response? result;
+    Map<String, dynamic> result = {};
     try {
       LoaderController.instance.showLoader();
-      final dio.Response response = await _dio.get(path,
-          queryParameters: params, options: token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
+      final dio.Response response = await _dio.get(
+        path,
+        queryParameters: params,
+        options: token
+            ? dio.Options(headers: {'own-access-token': 'Bearer $tokenString'})
+            : null,
+      );
       LoaderController.instance.dismissLoader();
       if (response.statusCode == 200) {
-        result = response;
+        result = response.data as Map<String, dynamic>;
       } else {
+        LogUtil.error(response.data);
         LogUtil.error(response.data['message']);
       }
     } catch (e) {
       LogUtil.error(e);
     }
-    return result?.data;
+    return result;
   }
 
-  static Future<Map<String, dynamic>> post(String path, Map<String, dynamic> data, String tokenString,
+  static Future<Map<String, dynamic>> post(
+      String path, Map<String, dynamic> data, String tokenString,
       {bool token = false}) async {
     Map<String, dynamic> result = {};
     try {
       LoaderController.instance.showLoader();
 
-      final dio.Response response = await _dio.post(path,
-          data: jsonEncode(data), options: token ? dio.Options(headers: {'own-access-token': tokenString}) : null);
+      final dio.Response response = await _dio.post(
+        path,
+        data: jsonEncode(data),
+        options: token
+            ? dio.Options(
+                headers: {
+                  'own-access-token': 'Bearer $tokenString',
+                },
+              )
+            : null,
+      );
       LoaderController.instance.dismissLoader();
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
@@ -69,7 +86,9 @@ class HttpService extends HttpOverrides {
     return result;
   }
 
-  static Future<Map<String, dynamic>> picPost(String path, dio.FormData data, String tokenString, {bool token = true}) async {
+  static Future<Map<String, dynamic>> picPost(
+      String path, dio.FormData data, String tokenString,
+      {bool token = true}) async {
     Map<String, dynamic> result = {};
     try {
       LoaderController.instance.showLoader();
@@ -78,7 +97,8 @@ class HttpService extends HttpOverrides {
         data: data,
         options: token
             ? dio.Options(headers: {
-                'own-access-token': tokenString, // Ensure tokenString is used here
+                'own-access-token':
+                    tokenString, // Ensure tokenString is used here
                 'Content-Type': 'multipart/form-data',
               })
             : null,
