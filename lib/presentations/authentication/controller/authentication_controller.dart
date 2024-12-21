@@ -26,7 +26,6 @@ class AuthController extends GetxController {
   RxList<CountryModel> countries = RxList.empty();
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
 
-
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (timeLeft.value > 0) {
@@ -94,8 +93,22 @@ class AuthController extends GetxController {
     } catch (e) {
       Get.snackbar('Login failed', '$e');
       Get.offAllNamed(LoginWelcomeScreen.routeName);
-    } finally {
-    }
+    } finally {}
+  }
+
+  Future<void> forgetPasswordEmail(String email) async {
+    try {
+      final isOtpSent = await AuthRepo.forgetPassword(email);
+      if (isOtpSent) {
+        Get.toNamed(AccountVerificationScreen.routeName);
+      }
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
   }
 
   RxInt timeLeft = 60.obs; // 1 minute timer

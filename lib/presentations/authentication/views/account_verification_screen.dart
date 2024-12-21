@@ -12,7 +12,7 @@ import '../controller/otp_timer_controller.dart';
 class AccountVerificationScreen extends GetView<OTPVerificationController> {
   AccountVerificationScreen({super.key});
 
-  static const routeName = "/account_verification-screen";
+  static const routeName = '/account_verification-screen';
 
   //why we use controller here ?
   /* because of when user move to verification screen then start timer. so controller initialized  when user move to verification screen

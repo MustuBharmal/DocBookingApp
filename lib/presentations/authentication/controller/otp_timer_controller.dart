@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
+import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../exception/server_exception.dart';
@@ -51,7 +51,7 @@ class OTPVerificationController extends GetxController {
     try {
       bool isVerified = await AuthRepo.otpVerification(email, otp);
       if(isVerified) {
-        Get.offNamed(NavigationScreen.routeName);
+        Get.offNamed(LoginWelcomeScreen.routeName);
       }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);

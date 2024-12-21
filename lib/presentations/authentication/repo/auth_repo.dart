@@ -82,6 +82,41 @@ abstract class AuthRepo {
     }
   }
 
+  // forget password
+
+  static Future<bool> forgetPassword(String email) async {
+    try {
+      Map<String, dynamic> data = {
+        _email: email,
+      };
+      LogUtil.debug(Api.forgetPassword);
+      final result = await HttpService.post(
+        Api.forgetPassword,
+        data,
+        token: false,
+      );
+      if (result['isLive'] == true) {
+        LogUtil.debug(result);
+        Get.snackbar('Success', result['message']);
+        return true;
+      } else if (!result['isLive'] == true) {
+        throw Exception("Error: ${result['message']}");
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        var errMessage = errData['result']['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
   // signup method
   static Future<User> signUp(User user) async {
     try {

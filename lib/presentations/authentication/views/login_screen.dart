@@ -14,7 +14,7 @@ import '../../../widgets/custom_text_field.dart';
 class LoginScreen extends GetView<AuthController> {
   LoginScreen({super.key});
 
-  static const routeName = "/login-screen";
+  static const routeName = '/login-screen';
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
@@ -60,7 +60,7 @@ class LoginScreen extends GetView<AuthController> {
                     padding: const EdgeInsets.only(bottom: 10),
                     child: CustomTextField(
                       controller: emailController,
-                      hintText: "eg. xyz@gmail.com",
+                      hintText: 'eg. xyz@gmail.com',
                       label: ConstantString.emailAddress,
                       hintStyle: txtInterTextFieldHint,
                       showAsterisk: true,
@@ -72,7 +72,7 @@ class LoginScreen extends GetView<AuthController> {
                     isPasswordTextField: true,
                     textEditingController: passController,
                     hintStyle: txtInterTextFieldHint,
-                    hintText: "eg. 123",
+                    hintText: 'eg. 123',
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +94,7 @@ class LoginScreen extends GetView<AuthController> {
                           Get.toNamed(ForgotPasswordScreen.routeName);
                         },
                         child: Text(
-                          "${ConstantString.forgotPass}?",
+                          '${ConstantString.forgotPass}?',
                           style: blueNormalTextStyle,
                         ),
                       ),
