@@ -231,7 +231,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomIconSizeBox(
-                          iconPath: AppImage.mapOutline,
+                          iconPath: AppImage.map,
                           iconWidth: 25,
                           iconHeight: 25),
                       SizedBox(

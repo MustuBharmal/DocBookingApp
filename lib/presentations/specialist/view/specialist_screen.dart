@@ -1,8 +1,7 @@
 import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../global/constant_values.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 
 class SpecialistScreen extends StatelessWidget {
@@ -31,12 +30,13 @@ class SpecialistScreen extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: ConstantValue.textListForSpecialist.length,
+                itemCount: HomeController.instance.specialList.length,
                 itemBuilder: (context, index) {
+                  final specialist = HomeController.instance.specialList[index];
                   return ContainerWithIcon1(
                     onPressed: () {},
-                    iconPath: ConstantValue.imagePathListForSpecialist[index],
-                    text: ConstantValue.textListForSpecialist[index],
+                    iconPath: specialist?.icon ?? '',
+                    text: specialist?.name ?? '',
                   );
                 },
               ),

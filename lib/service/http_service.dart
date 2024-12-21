@@ -34,13 +34,13 @@ class HttpService extends HttpOverrides {
       {bool token = false, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
-      LoaderController.instance.showLoader();
+      showLoader ? LoaderController.instance.showLoader() : null;
       final dio.Response response = await _dio.get(
         path,
         queryParameters: params,
         options: token ? dio.Options(headers: {'own-access-token': 'Bearer ${StorageUtil.getToken().toString()}'}) : null,
       );
-      LoaderController.instance.dismissLoader();
+      showLoader ? LoaderController.instance.dismissLoader() : null;
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
       } else {
@@ -57,7 +57,7 @@ class HttpService extends HttpOverrides {
       {bool token = true, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
-      LoaderController.instance.showLoader();
+      showLoader ?LoaderController.instance.showLoader(): null;
 
       final dio.Response response = await _dio.post(
         path,
@@ -70,7 +70,7 @@ class HttpService extends HttpOverrides {
               )
             : null,
       );
-      LoaderController.instance.dismissLoader();
+      showLoader ?LoaderController.instance.dismissLoader(): null;
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
         return result;

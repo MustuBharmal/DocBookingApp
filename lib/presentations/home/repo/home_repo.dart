@@ -8,6 +8,7 @@ import '../../../exception/server_exception.dart';
 import '../../../global/apis.dart';
 import '../../../service/http_service.dart';
 import '../../../util/log_utils.dart';
+import '../../specialist/models/specialist.dart';
 
 abstract class HomeRepo {
   static Future<Dashboard?> dashboardApi() async {
@@ -17,6 +18,7 @@ abstract class HomeRepo {
       final result = await HttpService.post(
         Api.dashboard,
         data,
+        showLoader: false
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);
@@ -45,9 +47,11 @@ abstract class HomeRepo {
       final result = await HttpService.get(
         Api.services,
         data,
+        showLoader: false
       );
       if (result['isLive'] == true) {
-        listOfServices = List<Service>.from(result['data']!.map((x) => Service.fromJson(x)));
+        listOfServices =
+            List<Service>.from(result['data']!.map((x) => Service.fromJson(x)));
         LogUtil.debug(result);
         Get.snackbar('Success', result['message']);
         return listOfServices;
@@ -72,13 +76,12 @@ abstract class HomeRepo {
       Map<String, dynamic> data = {};
       List<DoctorsList?> listOfSpecialist = [];
       LogUtil.debug(Api.doctors);
-      final result = await HttpService.post(
-        Api.doctors,
-        data,
-      );
+      final result =
+          await HttpService.post(Api.doctors, data, showLoader: false);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        listOfSpecialist = List<DoctorsList>.from(result['data']!.map((x) => DoctorsList.fromJson(x)));
+        listOfSpecialist = List<DoctorsList>.from(
+            result['data']!.map((x) => DoctorsList.fromJson(x)));
         return listOfSpecialist;
       } else {
         throw Exception("Error: ${result['message']}");
@@ -96,18 +99,20 @@ abstract class HomeRepo {
     }
   }
 
-  static Future<List<DoctorsList?>> getSpecialistType() async {
+  static Future<List<Specialist?>> getSpecialistType() async {
     try {
-      Map<String, dynamic> data = {};
-      List<DoctorsList?> listOfSpecialist = [];
+      List<Specialist?> listOfSpecialist = [];
       LogUtil.debug(Api.specialistType);
-      final result = await HttpService.post(
+      final result = await HttpService.get(
         Api.specialistType,
-        data,
+        {},
+        token: true,
+        showLoader: false
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        listOfSpecialist = List<DoctorsList>.from(result['data']!.map((x) => DoctorsList.fromJson(x)));
+        listOfSpecialist = List<Specialist>.from(
+            result['data']!.map((x) => Specialist.fromJson(x)));
         return listOfSpecialist;
       } else {
         throw Exception("Error: ${result['message']}");

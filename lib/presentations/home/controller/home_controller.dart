@@ -4,6 +4,7 @@ import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/models/dashboard.dart';
 import 'package:doc_booking_app/presentations/home/repo/home_repo.dart';
 import 'package:doc_booking_app/presentations/services/models/service.dart';
+import 'package:doc_booking_app/presentations/specialist/models/specialist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ class HomeController extends GetxController {
   Rxn<Dashboard> dashboard = Rxn(Dashboard());
   RxList<Service?> services = RxList.empty();
   RxList<DoctorsList?> doctorList = RxList.empty();
+  RxList<Specialist?> specialList = RxList.empty();
   RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
@@ -29,9 +31,12 @@ class HomeController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    dashboardData();
-    getServices();
-    getSpecialist();
+    Future.delayed(Duration(seconds: 2), () {
+      dashboardData();
+      getServices();
+      getSpecialist();
+      getSpecialistType();
+    });
   }
 
   void navigateTo(int index) {
@@ -92,7 +97,7 @@ class HomeController extends GetxController {
 
   void getSpecialistType() async {
     try {
-      doctorList.value = await HomeRepo.getDoctors();
+      specialList.value = await HomeRepo.getSpecialistType();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

@@ -41,7 +41,7 @@ abstract class AppImage {
 
   static String get camera => 'camera'.iconPng;
 
-  static String get map => 'map'.iconPng;
+  static String get map => 'map'.svg;
 
   //Folder Location
   static const String imageFolderLocation = 'assets/images';
