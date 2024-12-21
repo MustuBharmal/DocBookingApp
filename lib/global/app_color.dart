@@ -26,11 +26,5 @@ abstract class AppColors {
   static Color whiteA700 = Colors.white; //#FFFFFF
   static const Color blueGradient1 = Color(0xFFABE2FC); //#ABE2FC
   static const Color blueGradient2 = Color(0xFF2267FF); //#2267FF
-
-/*static Color fromHex(String hexString) {
-    final buffer = StringBuffer();
-    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
-    buffer.write(hexString.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }*/
+  static const Color dividerBorderColor = Color(0xFFDFDFDF); //#DFDFDF
 }
