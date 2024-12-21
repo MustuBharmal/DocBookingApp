@@ -72,9 +72,11 @@ class HomeScreen extends GetView<HomeController> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.95),
+                    crossAxisCount: 3, // Number of items per row
+                    crossAxisSpacing: 10, // Horizontal spacing
+                    mainAxisSpacing: 20, // Vertical spacing
+                    childAspectRatio: 108.67 / 122
+                ),
                 itemBuilder: (BuildContext context, int index) {
                   return ContainerWithIcon1(
                     onPressed: () {},
@@ -101,16 +103,21 @@ class HomeScreen extends GetView<HomeController> {
                 physics: ScrollPhysics(),
                 itemBuilder: (context, index) {
                   final doctor = controller.doctorList[index];
-                  return CustomSpecialistContainer(
-                    picPath: doctor?.profilePic ?? '',
-                    name: doctor?.name ?? '',
-                    specialist: doctor?.specialization ?? '',
-                    charges: doctor?.fees ?? '',
-                    // rating: doctor.rating,
-                    // review: doctor.review,
-                    onPressed: () {
-                      Get.to(SpecialistDetailScreen(doctor: doctor!));
-                    },
+                  return Column(
+                    children: [
+                      CustomSpecialistContainer(
+                        picPath: doctor?.profilePic ?? '',
+                        name: doctor?.name ?? '',
+                        specialist: doctor?.specialization ?? '',
+                        charges: doctor?.fees ?? '',
+                        // rating: doctor.rating,
+                        // review: doctor.review,
+                        onPressed: () {
+                          Get.to(SpecialistDetailScreen(doctor: doctor!));
+                        },
+                      ),
+                      SizedBox(height: 10,)
+                    ],
                   );
                 },
                 itemCount: controller.doctorList.length >= 3

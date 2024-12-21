@@ -25,8 +25,8 @@ class PrescriptionInsideScreen extends GetView<ProfileController> {
         body: Column(
           children: [
             const CustomTabBar(
-              tabText1: "Notes",
-              tabText2: "Forms",
+              tabText1: 'Notes',
+              tabText2: 'Forms',
             ),
             Expanded(
               child: TabBarView(

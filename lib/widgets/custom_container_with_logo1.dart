@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../global/app_color.dart';
 import '../global/images.dart';
 
 class ContainerWithIcon1 extends StatelessWidget {
@@ -30,36 +31,29 @@ class ContainerWithIcon1 extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Flexible(
-              fit: FlexFit.tight,
-              flex: 3,
-              child: CachedNetworkImage(
-                imageUrl: iconPath,
-                fit: BoxFit.contain,
-                progressIndicatorBuilder: (context, val, pr) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: pr.progress,
-                    ),
-                  );
-                },
-                errorWidget: (context, val, obj) {
-                  return Image.asset(AppImage.serviceIcon1);
-                },
-              ),
+            CachedNetworkImage(
+              imageUrl: iconPath,
+              fit: BoxFit.contain,
+              progressIndicatorBuilder: (context, val, pr) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: pr.progress,
+                  ),
+                );
+              },
+              errorWidget: (context, val, obj) {
+                return Image.asset(AppImage.serviceIcon1);
+              },
             ),
-            Flexible(
-              fit: FlexFit.tight,
-              flex: 1,
-              child: Text(
-                text,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Color(0xFF363636),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
+            Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              style:  TextStyle(
+                color: AppColors.textHeaderBlack,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
