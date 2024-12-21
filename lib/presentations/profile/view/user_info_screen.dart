@@ -4,6 +4,7 @@ import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/global/styles.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
+import 'package:doc_booking_app/widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,6 @@ import 'package:get/get.dart';
 import '../../../widgets/blue_button.dart';
 import '../../../widgets/country_picker/custom_phone_field.dart';
 import '../../../widgets/custom_text_field.dart';
-import '../widgets/custom_drop_down.dart';
 import '../widgets/profile_field.dart';
 import '../widgets/profile_image.dart';
 
@@ -37,7 +37,7 @@ class UserInfoScreen extends GetView<ProfileController> {
                 width: 24,
               ),
             ),
-          ).onClick(() => Get.back())
+          ).onClick(() => controller.isEditingProfile.toggle())
           /*Icon(
             icon: Image.asset(AppImage.editProfile),
             onPressed: () {
@@ -109,7 +109,17 @@ class UserInfoScreen extends GetView<ProfileController> {
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomDropdown(
             label: 'Sex',
-            items: controller.sexOptions,
+            items: controller.sexOptions
+                /*.map(
+                  (item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(
+                      item,
+                      style: txtInterDropDownValue,
+                    ),
+                  ),
+                )
+                .toList()*/,
             showAsterisk: true,
             selectedItem: controller.selectedSex.value,
             onChanged: (sexValue) {
@@ -141,7 +151,17 @@ class UserInfoScreen extends GetView<ProfileController> {
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomDropdown(
             label: 'State',
-            items: controller.stateList,
+            items: controller.stateList
+                /*.map(
+                  (item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(
+                      item,
+                      style: txtInterDropDownValue,
+                    ),
+                  ),
+                )
+                .toList()*/,
             selectedItem: controller.selectedState.value,
             showAsterisk: true,
             onChanged: (stateValue) {

@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/global/extensions.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +9,6 @@ class CustomImageContainer extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    LogUtil.debug(
-      Get.height * 0.095,
-    );
     return Obx(() => DottedBorder(
           color: Color(0xFFF5F1FE),
           dashPattern: [8, 4],

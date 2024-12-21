@@ -13,7 +13,9 @@ class LoaderController extends GetxController {
   }
 
   void dismissLoader() {
-    Get.back();
+    if (isLoaderShow) {
+      Get.back(closeOverlays: true, canPop: false);
+    }
   }
 
 /*void showError({String title = "Alert!", String? msg}) {

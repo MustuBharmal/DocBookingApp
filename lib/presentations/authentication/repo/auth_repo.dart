@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
+import 'package:doc_booking_app/presentations/authentication/models/state_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/user.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:get/get.dart';
@@ -172,11 +173,7 @@ abstract class AuthRepo {
 
   static Future<List<CountryModel>> getCountries() async {
     try {
-      LogUtil.debug(Api.profile);
-      final result = await HttpService.post(
-        Api.country,
-        {},
-      );
+      final result = await HttpService.post(Api.country, {}, showLoader: false);
       if (result['code'] == 200) {
         final CountryResponse countryResponse = CountryResponse.fromJson(result);
         if (countryResponse.success) {
@@ -186,13 +183,32 @@ abstract class AuthRepo {
         }
       }
       return [];
-      //   LogUtil.debug(result['data']);
-      //   return User.fromJson(result['data']);
-      // } else if (!result['isLive']) {
-      //   throw Exception("Error: ${result['message']}");
-      // } else {
-      //   throw Exception("Error: ${result['message']}");
-      // }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message'].toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  static Future<List<StateModel>> getState(String countryId) async {
+    try {
+      final result = await HttpService.post(Api.state, {'country_id': countryId}, showLoader: false);
+      LogUtil.debug(result);
+      if (result['code'] == 200) {
+        final StateResponse stateResponse = StateResponse.fromJson(result);
+        if (stateResponse.success) {
+          return stateResponse.data;
+        } else {
+          throw Exception('Error: ${stateResponse.message}');
+        }
+      }
+      return [];
     } on ServerException catch (e) {
       LogUtil.error(e);
       rethrow;

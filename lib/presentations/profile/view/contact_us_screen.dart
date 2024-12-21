@@ -1,9 +1,9 @@
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
-import 'package:doc_booking_app/presentations/profile/widgets/custom_drop_down.dart';
-import 'package:doc_booking_app/widgets/country_picker/custom_phone_field.dart';
-import 'package:doc_booking_app/widgets/custom_text_field.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
+import 'package:doc_booking_app/widgets/country_picker/custom_phone_field.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
+import 'package:doc_booking_app/widgets/custom_drop_down.dart';
+import 'package:doc_booking_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -67,7 +67,7 @@ class ContactUsScreen extends GetView<ProfileController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10.0,bottom: 20),
+                padding: const EdgeInsets.only(top: 10.0, bottom: 20),
                 child: CustomTextField(
                     label: 'Message',
                     maxLines: 6,

@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
+import 'package:doc_booking_app/presentations/authentication/models/state_model.dart';
 import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,14 +18,19 @@ class AuthController extends GetxController {
   static AuthController get instance => Get.find<AuthController>();
   RxInt activeIndex = RxInt(0);
   RxString selectSex = RxString('Male');
-  RxString selectState = RxString('state1');
-  RxString selectCountry = RxString('country1');
+
+  // RxString selectState = RxString('state1');
+  Rx<CountryModel?> selectCountry = Rx(null);
+  Rx<StateModel?> selectState = Rx(null);
   RxBool isObscure = true.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
+  Rx<File?> selectedImageSignup = Rx<File?>(null);
   Rxn<User> user = Rxn<User>();
   final ImagePicker _picker = ImagePicker();
   String? email;
-  RxList<CountryModel> countries = RxList.empty();
+  final RxList<CountryModel> countries = RxList.empty();
+  final RxList<StateModel> states = RxList.empty();
+  final RxList<StateModel> searchedStates = RxList.empty();
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
 
   void _startTimer() {
@@ -35,6 +42,12 @@ class AuthController extends GetxController {
         _timer.cancel();
       }
     });
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    getCountries();
   }
 
   @override
@@ -51,11 +64,44 @@ class AuthController extends GetxController {
     }
   }
 
+  void searchState(String value) {
+    searchedStates.clear();
+    searchedStates
+        .addAll(states.where((country) => country.name?.toLowerCase().startsWith(value.toLowerCase()) ?? false).toList());
+  }
+
+  getCountries() async {
+    try {
+      countries.clear();
+      countries.addAll(await AuthRepo.getCountries());
+    } catch (e) {
+      LogUtil.error(e.toString());
+    }
+  }
+
+  getStates(int countryId) async {
+    try {
+      states.clear();
+      states.addAll(await AuthRepo.getState(countryId.toString()));
+      update(['state']);
+      searchState('');
+      LogUtil.debug(states.length);
+    } catch (e) {
+      LogUtil.error(e.toString());
+    }
+  }
+
+  // Function to pick an image from the gallery
+  Future<void> pickImageSignup() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    if (image != null) {
+      selectedImageSignup.value = File(image.path);
+    }
+  }
+
   void isVisible() {
     isObscure.value = !isObscure.value;
   }
-
-  Future<void> signup() async {}
 
   Future<void> login(String email, String password) async {
     try {
@@ -69,10 +115,56 @@ class AuthController extends GetxController {
     } finally {}
   }
 
-  Future<void> signUp(User user) async {
+  Future<void> signUp(
+      {required String name,
+      required String email,
+      required String phone,
+      required String password,
+      required String dob,
+      required String sex,
+      required String state,
+      required String country}) async {
     try {
-      AuthController.instance.user.value = await AuthRepo.signUp(user);
-      Get.offAllNamed(AccountVerificationScreen.routeName);
+      if (name.isEmpty) {
+        Get.snackbar('Error', 'Please enter name!');
+        return;
+      }
+      if (email.isEmpty) {
+        Get.snackbar('Error', 'Please enter email!');
+        return;
+      }
+      if (!email.isEmail) {
+        Get.snackbar('Error', 'Please enter valid email!');
+        return;
+      }
+      if (phone.isEmpty) {
+        Get.snackbar('Error', 'Please enter phone number!');
+        return;
+      }
+      if (!phone.isPhoneNumber) {
+        Get.snackbar('Error', 'Please enter valid phone number!');
+        return;
+      }
+      if (password.isEmpty) {
+        Get.snackbar('Error', 'Please enter password!');
+        return;
+      }
+      if (dob.isEmpty) {
+        Get.snackbar('Error', 'Please enter Date of birth!');
+        return;
+      }
+      if (sex.isEmpty) {
+        Get.snackbar('Error', 'Please select gender!');
+        return;
+      }
+      if (state.isEmpty) {
+        Get.snackbar('Error', 'Please select state!');
+        return;
+      }
+      if (country.isEmpty) {
+        Get.snackbar('Error', 'Please select country!');
+        return;
+      }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

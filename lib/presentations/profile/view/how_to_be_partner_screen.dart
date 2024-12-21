@@ -1,11 +1,11 @@
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../global/styles.dart';
 import '../../../widgets/blue_button.dart';
 import '../../../widgets/custom_app_bar.dart';
-import '../widgets/custom_drop_down.dart';
 import '../../../widgets/country_picker/custom_phone_field.dart';
 import '../../../widgets/custom_text_field.dart';
 

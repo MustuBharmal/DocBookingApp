@@ -114,6 +114,7 @@ abstract class AppImage {
 
   static String get backArrow => 'back_arrow'.svg;
   static String get editIcon => 'edit_icon'.svg;
+  static String get icCamera => 'ic_camera'.svg;
 }
 
 extension on String {

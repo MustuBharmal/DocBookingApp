@@ -1,6 +1,7 @@
 class Api {
   static String baseUrl = 'https://crazylense.com/applicationinterface/api/';
   static String country = 'country';
+  static String state = 'state';
   static String signUp = 'singup';
   static String signIn = 'singin';
   static String otpVerification = 'verify-email';

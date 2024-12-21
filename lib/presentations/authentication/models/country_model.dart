@@ -26,7 +26,7 @@ class CountryResponse with _$CountryResponse {
 @freezed
 class CountryModel with _$CountryModel {
   const factory CountryModel({
-    @JsonKey(name: 'id') int? id,
+     @JsonKey(name: 'id')required int id,
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'iso3') String? iso3,
     @JsonKey(name: 'iso2') String? iso2,
