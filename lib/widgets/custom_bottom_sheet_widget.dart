@@ -1,9 +1,11 @@
-import 'package:doc_booking_app/global/constant_values.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../global/app_color.dart';
+import '../global/images.dart';
 
 class CustomBottomSheetWidget extends GetView<HomeController> {
   final String header;
@@ -19,17 +21,16 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    print(Get.height * 0.51);
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 23),
       decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
       ),
       child: SizedBox(
-        width: double.infinity,
-        height: Get.height * 0.55,
+        height: Get.height * 0.51,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -37,66 +38,84 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
               children: [
                 Text(
                   header,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textHeaderBlack),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     ConstantString.done,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.blue,
+                      color: AppColors.primary,
                     ),
                   ),
                 ),
               ],
             ),
-            const Divider(),
+            Divider(color: AppColors.borderColorLight,thickness: 2,),
             Expanded(
               child: ListView.builder(
+                physics: ScrollPhysics(),
+                primary: true,
                 shrinkWrap: true,
-                itemCount: listOfItems.length,
+                itemCount: HomeController.instance.services.length,
                 itemBuilder: (context, index) {
-                  String item = listOfItems[index];
+                  final item = HomeController.instance.services[index];
                   return Obx(() {
-                    final isSelected = controller.selectedService.value == item;
-                    return ListTile(
-                      leading: SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: SvgPicture.asset(
-                          ConstantValue.imagePathListForServices[index],
-                          fit: BoxFit.contain,
+                    final isSelected =
+                        controller.selectedService.value == item!.name;
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: CachedNetworkImage(
+                              imageUrl: item.icon ?? '',
+                              fit: BoxFit.contain,
+                              progressIndicatorBuilder: (context, val, pr) {
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: pr.progress,
+                                  ),
+                                );
+                              },
+                              errorWidget: (context, val, obj) {
+                                return Image.asset(AppImage.serviceIcon1);
+                              },
+                            ),
+                          ),
+                          title: Text(
+                            item.name ?? '',
+                            style: TextStyle(
+                              color: isSelected ? Colors.blue : Colors.black,
+                            ),
+                          ),
+                          trailing: Radio(
+                            value: item.name ?? '',
+                            groupValue: HomeController.instance.selectedService.value,
+                            activeColor: Colors.blue,
+                            onChanged: (String? value) {
+                              controller.updateSelectedImage(value!);
+                              controller.selectedService.value = value;
+                              searchControllers.text = value;
+                              // Navigator.pop(context);
+                            },
+                          ),
+                          onTap: () {
+                            controller.updateSelectedImage(item.name ?? '');
+                            controller.selectedService.value = item.name ?? '';
+                            searchControllers.text = item.name ?? '';
+                            // Navigator.pop(context);
+                          },
                         ),
-                      ),
-                      title: Text(
-                        item,
-                        style: TextStyle(
-                          color: isSelected ? Colors.blue : Colors.black,
-                        ),
-                      ),
-                      trailing: Radio(
-                        value: item,
-                        groupValue: HomeController.instance.selectedService.value,
-                        activeColor: Colors.blue,
-                        onChanged: (String? value) {
-                          controller.updateSelectedImage(value!);
-                          controller.selectedService.value = value;
-                          searchControllers.text=value;
-                          Navigator.pop(context);
-                        },
-                      ),
-                      onTap: () {
-                        controller.updateSelectedImage(item);
-                        controller.selectedService.value = item;
-                        searchControllers.text=item;
-                        Navigator.pop(context);
-                      },
+                        Divider(color: AppColors.borderColorLight,thickness: 1,),
+                      ],
                     );
                   });
                 },
