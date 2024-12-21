@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CustomIconSizeBox extends StatelessWidget {
   const CustomIconSizeBox(
@@ -15,7 +13,7 @@ class CustomIconSizeBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
+    return Image.asset(
       width: iconWidth,
       height: iconHeight,
       iconPath,

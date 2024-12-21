@@ -42,12 +42,12 @@ class HomeController extends GetxController {
   RxString selectedImagePath = AppImage.servicesInactive.obs;
 
   final Map<String, String> serviceImages = {
-    "Phlebotomy": AppImage.homeCategory1,
-    "Vitamin IV": AppImage.homeCategory2,
-    "Vitamin Booster": AppImage.homeCategory3,
-    "TRT Administration": AppImage.homeCategory4,
-    "Bloodletting": AppImage.homeCategory5,
-    "Flu Shots": AppImage.homeCategory6,
+    'Phlebotomy': AppImage.homeCategory1,
+    'Vitamin IV': AppImage.homeCategory2,
+    'Vitamin Booster': AppImage.homeCategory3,
+    'TRT Administration': AppImage.homeCategory4,
+    'Bloodletting': AppImage.homeCategory5,
+    'Flu Shots': AppImage.homeCategory6,
   };
 
   void updateSelectedImage(String service) {
@@ -57,7 +57,6 @@ class HomeController extends GetxController {
   void dashboardData() async {
     try {
       dashboard.value = await HomeRepo.dashboardApi();
-      // await HomeRepo.getSpecialist();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
@@ -82,7 +81,18 @@ class HomeController extends GetxController {
   void getSpecialist() async {
     try {
       doctorList.value = await HomeRepo.getDoctors();
-      // await HomeRepo.getSpecialist();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  void getSpecialistType() async {
+    try {
+      doctorList.value = await HomeRepo.getDoctors();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

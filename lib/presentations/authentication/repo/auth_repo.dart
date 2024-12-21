@@ -115,11 +115,7 @@ abstract class AuthRepo {
   static Future<User> getUser() async {
     try {
       LogUtil.debug(Api.profile);
-      final result = await HttpService.get(
-        Api.profile,
-        {},
-        token: true,
-      );
+      final result = await HttpService.get(Api.profile, {}, token: true);
       if (result['isLive']) {
         LogUtil.debug(result['data']);
         return User.fromJson(result['data']);
@@ -153,7 +149,7 @@ abstract class AuthRepo {
         if (countryResponse.success) {
           return countryResponse.data;
         } else {
-          throw Exception("Error: ${countryResponse.message}");
+          throw Exception('Error: ${countryResponse.message}');
         }
       }
       return [];

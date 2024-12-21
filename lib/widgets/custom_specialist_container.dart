@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
+
+import '../global/images.dart';
 
 class CustomSpecialistContainer extends StatelessWidget {
   const CustomSpecialistContainer(
@@ -37,7 +40,20 @@ class CustomSpecialistContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
           ),
-          child: Image.network(picPath, fit: BoxFit.cover,),
+          child: CachedNetworkImage(
+            imageUrl: picPath,
+            fit: BoxFit.contain,
+            progressIndicatorBuilder: (context, val, pr) {
+              return Center(
+                child: CircularProgressIndicator(
+                  value: pr.progress,
+                ),
+              );
+            },
+            errorWidget: (context, val, obj) {
+              return Image.asset(AppImage.serviceIcon1);
+            },
+          ),
         ),
         isThreeLine: true,
         title: Text(
@@ -77,7 +93,7 @@ class CustomSpecialistContainer extends StatelessWidget {
           ],
         ),
         trailing: Text(
-          "\$$charges/hr",
+          '\$$charges/hr',
           style: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
         ),

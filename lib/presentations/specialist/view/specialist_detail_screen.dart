@@ -4,11 +4,9 @@ import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
-import 'package:doc_booking_app/widgets/custom_header_text.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../global/styles.dart';
 
 class SpecialistDetailScreen extends StatelessWidget {
   final DoctorsList doctor;
@@ -35,13 +33,14 @@ class SpecialistDetailScreen extends StatelessWidget {
                     ),
                     child: CachedNetworkImage(
                       imageUrl: doctor.profilePic!,
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.contain,
                       alignment: FractionalOffset.topCenter,
                       progressIndicatorBuilder: (context, val, pr) {
                         return Center(
-                            child: CircularProgressIndicator(
-                              value: pr.progress,
-                            ));
+                          child: CircularProgressIndicator(
+                            value: pr.progress,
+                          ),
+                        );
                       },
                       errorWidget: (context, val, obj) {
                         return Image.asset(AppImage.serviceIcon1);
@@ -56,16 +55,17 @@ class SpecialistDetailScreen extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: AppColors.white,
                     child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_new)),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: const Icon(Icons.arrow_back_ios_new),
+                    ),
                   ),
                 )
               ],
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 18),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -73,38 +73,31 @@ class SpecialistDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            doctor.name ??'',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            doctor.specialization ?? '',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        doctor.name?.capitalizeFirst ?? '',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
-                        "\$${doctor.fees}/hr",
+                        '\$${doctor.fees}/hr',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
                     ],
+                  ),
+                  Text(
+                    doctor.specialization?.capitalizeFirst ?? '',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.textHeaderGray,
+                    ),
                   ),
                   /*Container(
                     padding: EdgeInsets.symmetric(vertical: 16),
@@ -200,47 +193,37 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),*/
-                  SizedBox(height: 20,),
-                  const CustomHeaderText(text: ConstantString.about),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    ConstantString.about,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textHeaderBlack),
+                  ),
                   Container(
-                    padding: EdgeInsets.only(top: 10, bottom: 16),
+                    padding: EdgeInsets.only(top: 10, bottom: 20),
                     child: RichText(
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                         text: doctor.about,
-                        style: normalTextStyle,
-                        children: [
-                          WidgetSpan(
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Stack(
-                                alignment: Alignment.bottomLeft,
-                                children: [
-                                  const Text(
-                                    ConstantString.readMore,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      decoration: TextDecoration.none,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    child: Container(
-                                      height: 1.5,
-                                      color: Colors.black,
-                                      width: 65,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: AppColors.textHeaderGray),
                       ),
                     ),
                   ),
-                  const CustomHeaderText(
-                    text: ConstantString.location,
+                  Text(
+                    ConstantString.location,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textHeaderBlack,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -256,8 +239,11 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          "4517 Washington Ave. Manchester, Kentucky 39495",
-                          style: normalTextStyle,
+                          '4517 Washington Ave. Manchester, Kentucky 39495',
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: AppColors.textHeaderGray,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ],
@@ -280,7 +266,9 @@ class SpecialistDetailScreen extends StatelessWidget {
                         rating: 4,
                         review: "Nice it is very Useful for me."),
                   ),*/
-                  SizedBox(height: 30,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   BlueButton(
                     label: ConstantString.bookAppointment,
                     onPressed: () {},

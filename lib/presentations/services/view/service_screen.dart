@@ -1,4 +1,4 @@
-import 'package:doc_booking_app/global/constant_values.dart';
+import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -31,12 +31,12 @@ class ServiceScreen extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: ConstantValue.textListForServices.length,
+                itemCount: HomeController.instance.services.length,
                 itemBuilder: (context, index) {
                   return ContainerWithIcon1(
                     onPressed: () {},
-                    iconPath: ConstantValue.imagePathListForServices[index],
-                    text: ConstantValue.textListForServices[index],
+                    iconPath: HomeController.instance.services[index]?.icon ?? '',
+                    text: HomeController.instance.services[index]?.name ?? '',
                   );
                 },
               ),

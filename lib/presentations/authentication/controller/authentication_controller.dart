@@ -26,11 +26,6 @@ class AuthController extends GetxController {
   RxList<CountryModel> countries = RxList.empty();
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
 
-  @override
-  void onInit() {
-    super.onInit();
-    // _startTimer();
-  }
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -98,8 +93,8 @@ class AuthController extends GetxController {
       Get.snackbar('Error', 'No internet connection');
     } catch (e) {
       Get.snackbar('Login failed', '$e');
-    } finally {
       Get.offAllNamed(LoginWelcomeScreen.routeName);
+    } finally {
     }
   }
 
