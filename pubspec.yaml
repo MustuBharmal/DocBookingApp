@@ -26,6 +26,7 @@ dependencies:
   json_annotation: ^4.9.0
   webview_flutter: ^4.10.0
   cached_network_image: ^3.4.1
+#  very_good_analysis: ^7.0.0
 
 
 

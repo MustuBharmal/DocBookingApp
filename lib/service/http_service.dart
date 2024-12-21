@@ -57,7 +57,7 @@ class HttpService extends HttpOverrides {
       {bool token = true, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
-      showLoader ?LoaderController.instance.showLoader(): null;
+      showLoader ? LoaderController.instance.showLoader() : null;
 
       final dio.Response response = await _dio.post(
         path,
@@ -70,7 +70,7 @@ class HttpService extends HttpOverrides {
               )
             : null,
       );
-      showLoader ?LoaderController.instance.dismissLoader(): null;
+      showLoader ? LoaderController.instance.dismissLoader() : null;
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
         return result;
@@ -101,10 +101,10 @@ class HttpService extends HttpOverrides {
       if (response.statusCode == 200) {
         // Check if response data is a JSON map or a string
         if (response.data is Map<String, dynamic>) {
-          result = response.data;
+          result = response.data as Map<String, dynamic>;
         } else if (response.data is String) {
           // Parse the string to JSON if it's a JSON string
-          result = jsonDecode(response.data);
+          result = jsonDecode(response.data.toString()) as Map<String, dynamic>;
         } else {
           LogUtil.error("Unexpected response format");
         }

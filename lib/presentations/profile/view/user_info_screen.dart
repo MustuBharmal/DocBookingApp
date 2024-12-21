@@ -1,17 +1,21 @@
+import 'package:doc_booking_app/global/app_color.dart';
+import 'package:doc_booking_app/global/extensions.dart';
+import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/global/styles.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import '../../../widgets/blue_button.dart';
-import '../widgets/custom_drop_down.dart';
 import '../../../widgets/country_picker/custom_phone_field.dart';
-import '../widgets/custom_profile_appbar.dart';
 import '../../../widgets/custom_text_field.dart';
+import '../widgets/custom_drop_down.dart';
 import '../widgets/profile_field.dart';
 import '../widgets/profile_image.dart';
 
 class UserInfoScreen extends GetView<ProfileController> {
-
   static const routeName = '/user-info-screen';
 
   const UserInfoScreen({super.key});
@@ -19,17 +23,34 @@ class UserInfoScreen extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomProfileAppBar(
+      appBar: CustomAppBar(
         title: 'Profile',
-        back: true,
-        controller: controller,
+        actions: [
+          Container(
+            padding: EdgeInsets.all(6),
+            decoration:
+                BoxDecoration(color: AppColors.white, shape: BoxShape.circle, border: Border.all(color: AppColors.borderColor)),
+            child: Center(
+              child: SvgPicture.asset(
+                AppImage.editIcon,
+                height: 24,
+                width: 24,
+              ),
+            ),
+          ).onClick(() => Get.back())
+          /*Icon(
+            icon: Image.asset(AppImage.editProfile),
+            onPressed: () {
+              controller.isEditingProfile.toggle();
+            },
+          ),*/
+        ],
+        // controller: controller,
       ),
       body: Obx(
-            () => Padding(
+        () => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: controller.isEditingProfile.value == true
-              ? _buildEditProfile(context)
-              : _buildViewProfile(context),
+          child: controller.isEditingProfile.value == true ? _buildEditProfile(context) : _buildViewProfile(context),
         ),
       ),
     );
@@ -100,7 +121,6 @@ class UserInfoScreen extends GetView<ProfileController> {
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextField(
             label: 'Address',
-
             controller: controller.addressController,
             showAsterisk: true,
             hintStyle: txtInterTextFieldHint,
@@ -153,11 +173,14 @@ class UserInfoScreen extends GetView<ProfileController> {
           isEditing: false,
         ),
         const SizedBox(height: 25),
-        ProfileField(label: 'Full Name', value: controller.nameController.text,),
-        ProfileField(label:'Email Address', value: controller.emailController.text),
-        ProfileField(label:'Phone Number', value: controller.phoneController.text),
-        ProfileField(label:'DOB', value: controller.dobController.text),
-        ProfileField(label: 'Sex', value:controller.selectedSex.value),
+        ProfileField(
+          label: 'Full Name',
+          value: controller.nameController.text,
+        ),
+        ProfileField(label: 'Email Address', value: controller.emailController.text),
+        ProfileField(label: 'Phone Number', value: controller.phoneController.text),
+        ProfileField(label: 'DOB', value: controller.dobController.text),
+        ProfileField(label: 'Sex', value: controller.selectedSex.value),
         ProfileField(label: 'Address', value: controller.addressController.text),
         ProfileField(label: 'Zip Code', value: controller.zipController.text),
         ProfileField(label: 'State', value: controller.selectedState.value),
@@ -165,4 +188,3 @@ class UserInfoScreen extends GetView<ProfileController> {
     );
   }
 }
-

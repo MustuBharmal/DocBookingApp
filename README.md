@@ -14,3 +14,13 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+build runner command
+
+dart run build_runner build --delete-conflicting-outputs
+
+login creds
+admin@gmail.com
+123456
+otp 1234

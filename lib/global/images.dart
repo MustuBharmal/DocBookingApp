@@ -111,6 +111,9 @@ abstract class AppImage {
   static String get stethoscope => 'stethoscope'.svg;
 
   static String get arrowDown => 'arrow_down'.svg;
+
+  static String get backArrow => 'back_arrow'.svg;
+  static String get editIcon => 'edit_icon'.svg;
 }
 
 extension on String {

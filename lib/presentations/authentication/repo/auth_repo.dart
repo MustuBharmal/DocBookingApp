@@ -19,7 +19,7 @@ abstract class AuthRepo {
   // login is working
   static Future<User?> signIn(String email, String password) async {
     try {
-      Map<String, dynamic> data = {
+      final Map<String, dynamic> data = {
         _email: email,
         _passwordKey: password,
       };
@@ -27,13 +27,13 @@ abstract class AuthRepo {
       final result = await HttpService.post(Api.signIn, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        StorageUtil.writeToken(result['data']['access_token']);
+        StorageUtil.writeToken(result['data']['access_token'].toString());
         StorageUtil.writeUserId(result['data']['user']['id'].toString());
         Get.offAllNamed(NavigationScreen.routeName);
-        return User.fromJson(result['data']['user']);
-      } else if (!result['isLive']) {
+        return User.fromJson(result['data']['user'] as Map<String, dynamic>);
+      } else if (result['isLive'] == false) {
         LogUtil.debug(result);
-        StorageUtil.writeToken(result['data']['access_token']);
+        StorageUtil.writeToken(result['data']['access_token'].toString());
         StorageUtil.writeUserId(result['data']['user']['id'].toString());
         Get.toNamed(AccountVerificationScreen.routeName);
         throw Exception(result['message']);
@@ -45,8 +45,8 @@ abstract class AuthRepo {
       rethrow;
     } catch (e) {
       if (e is dio.DioException) {
-        var errData = (e).response!.data;
-        var errMessage = errData['message'];
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;
@@ -56,7 +56,7 @@ abstract class AuthRepo {
   // otp verification
   static Future<bool> otpVerification(String email, String otp) async {
     try {
-      Map<String, dynamic> data = {
+      final Map<String, dynamic> data = {
         _email: email,
         _otpKey: otp,
       };
@@ -64,7 +64,7 @@ abstract class AuthRepo {
       final result = await HttpService.post(Api.otpVerification, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        Get.snackbar('Success', result['message']);
+        Get.snackbar('Success', result['message'].toString());
         return true;
       } else {
         throw Exception("Error: ${result['status']}");
@@ -74,8 +74,8 @@ abstract class AuthRepo {
       rethrow;
     } catch (e) {
       if (e is dio.DioException) {
-        var errData = (e).response!.data;
-        var errMessage = errData['message'];
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;
@@ -86,7 +86,7 @@ abstract class AuthRepo {
 
   static Future<bool> forgetPassword(String email) async {
     try {
-      Map<String, dynamic> data = {
+      final Map<String, dynamic> data = {
         _email: email,
       };
       LogUtil.debug(Api.forgetPassword);
@@ -97,9 +97,9 @@ abstract class AuthRepo {
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        Get.snackbar('Success', result['message']);
+        Get.snackbar('Success', result['message'].toString());
         return true;
-      } else if (!result['isLive'] == true) {
+      } else if (result['isLive'] == false) {
         throw Exception("Error: ${result['message']}");
       } else {
         throw Exception("Error: ${result['message']}");
@@ -109,8 +109,8 @@ abstract class AuthRepo {
       rethrow;
     } catch (e) {
       if (e is dio.DioException) {
-        var errData = (e).response!.data;
-        var errMessage = errData['result']['message'];
+        final errData = (e).response!.data;
+        final String? errMessage = errData['result']['message']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;
@@ -120,16 +120,14 @@ abstract class AuthRepo {
   // signup method
   static Future<User> signUp(User user) async {
     try {
-      Map<String, dynamic> data = user.toJson();
+      final Map<String, dynamic> data = user.toJson();
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
       final result = await HttpService.post(Api.signUp, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        Get.snackbar('Success', result['message']);
-        return User.fromJson(result['data']);
-      } else if (!result['isLive'] == true) {
-        throw Exception("Error: ${result['message']}");
+        Get.snackbar('Success', result['message'].toString());
+        return User.fromJson(result['data'] as Map<String, dynamic>);
       } else {
         throw Exception("Error: ${result['message']}");
       }
@@ -138,8 +136,8 @@ abstract class AuthRepo {
       rethrow;
     } catch (e) {
       if (e is dio.DioException) {
-        var errData = (e).response!.data;
-        var errMessage = errData['message'];
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;
@@ -151,10 +149,10 @@ abstract class AuthRepo {
     try {
       LogUtil.debug(Api.profile);
       final result = await HttpService.get(Api.profile, {}, token: true);
-      if (result['isLive']) {
+      if (result['isLive'] == true) {
         LogUtil.debug(result['data']);
-        return User.fromJson(result['data']);
-      } else if (!result['isLive']) {
+        return User.fromJson(result['data'] as Map<String, dynamic>);
+      } else if (result['isLive'] == false) {
         throw Exception("Error: ${result['message']}");
       } else {
         throw Exception("Error: ${result['message']}");
@@ -164,8 +162,8 @@ abstract class AuthRepo {
       rethrow;
     } catch (e) {
       if (e is dio.DioException) {
-        var errData = (e).response!.data;
-        var errMessage = errData['message'];
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;
@@ -180,7 +178,7 @@ abstract class AuthRepo {
         {},
       );
       if (result['code'] == 200) {
-        CountryResponse countryResponse = CountryResponse.fromJson(result);
+        final CountryResponse countryResponse = CountryResponse.fromJson(result);
         if (countryResponse.success) {
           return countryResponse.data;
         } else {
@@ -200,8 +198,8 @@ abstract class AuthRepo {
       rethrow;
     } catch (e) {
       if (e is dio.DioException) {
-        var errData = (e).response!.data;
-        var errMessage = errData['message'];
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message'].toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;

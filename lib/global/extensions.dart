@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 extension ClickListener on Widget {
-  Widget onClick(Function()? clickHandler) {
+  Widget onClick(VoidCallback? clickHandler) {
     /// Log button click
     // FirebaseAnalyticsEvents.logButtonClicked(name);
     return GestureDetector(
@@ -15,7 +15,7 @@ extension ClickListener on Widget {
   }
 }
 
-debounce(Function? func, [int delay = 250]) {
+VoidCallback debounce(Function? func, [int delay = 250]) {
   Timer? timer;
   return () {
     if (timer != null) {
