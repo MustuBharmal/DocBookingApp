@@ -65,6 +65,17 @@ class ProfileController extends GetxController {
     'How do I contact customer support?',
     'How do I create an account?',
   ];
+  final List<String> faqAnswers = [
+    'To book an appointment with a specialist, navigate to the "Book Appointment" section, select your preferred specialist, and follow the prompts to confirm your booking.',
+    'You can cancel an appointment by going to the "My Appointments" section, selecting the appointment you wish to cancel, and tapping on the "Cancel Appointment" option.',
+    'We accept various payment methods, including credit/debit cards, net banking, and popular digital wallets like Google Pay, PayPal, and others.',
+    'Yes, there is a consultation fee that varies based on the specialist. The fee details will be displayed before you confirm the appointment.',
+    'To reschedule an appointment, go to the "My Appointments" section, select the appointment, and choose the "Reschedule" option. Follow the instructions to pick a new date and time.',
+    'To contact customer support, go to the "Help & Support" section in the app. You can either use the live chat feature or email our support team directly.',
+    'Creating an account is simple. Open the app, click on "Sign Up," and provide the required details such as name, email, phone number, and password.',
+  ];
+  List<bool> expanded = [];
+
 
   // prescription inside data
 
@@ -76,6 +87,7 @@ class ProfileController extends GetxController {
   onInit() {
     super.onInit();
     initializeControllers();
+    expanded = List.filled(faqQuestions.length, false);
   }
 
   initializeControllers() {
@@ -106,6 +118,12 @@ class ProfileController extends GetxController {
   // Update phone number
   void updatePhoneNumber(String value) {
     phoneNumber.value = value;
+  }
+
+  // toggle faq questions expansion
+  void toggleExpansion(int index) {
+    expanded[index] = !expanded[index];
+    update();
   }
 
 // Update country

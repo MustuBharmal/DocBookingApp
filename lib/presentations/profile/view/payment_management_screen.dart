@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class PaymentManagementScreen extends StatelessWidget {
@@ -6,6 +7,9 @@ class PaymentManagementScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: CustomAppBar(title: 'Payment Management', back: true, isVisible: false,),
+      body: Container(),
+    );
   }
 }

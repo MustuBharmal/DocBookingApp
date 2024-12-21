@@ -27,12 +27,9 @@ const HowToBePartnerScreen({super.key});
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  'Tell us about your business -- we\'d be happy \nto partner with you on our journey!',
-                  style: txtInterTextField,
-                ),
+              Text(
+                'Tell us about your business -- we\'d be happy \nto partner with you on our journey!',
+                style: txtInterTextField,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),

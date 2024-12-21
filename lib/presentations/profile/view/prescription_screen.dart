@@ -1,6 +1,7 @@
 
 
 import 'package:doc_booking_app/presentations/profile/view/prescription_inside_screen.dart';
+import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,26 +13,23 @@ class PrescriptionScreen extends StatelessWidget {
   // Simulating API Response Data
   final List<Map<String, String>> prescriptionData = [
     {
-      "name": "Peater Parker",
-      "specialist": "Psychiatrist",
-      "date": "October 10, 2024",
-      "time": "10:30pm",
+      'name': 'Peater Parker',
+      'specialist': 'Psychiatrist',
+      'date': 'October 10, 2024',
+      'time': '10:30pm',
     },
     {
-      "name": "Bruce Wayne",
-      "specialist": "Neurologist",
-      "date": "November 15, 2024",
-      "time": "3:00pm",
+      'name': 'Bruce Wayne',
+      'specialist': 'Neurologist',
+      'date': 'November 15, 2024',
+      'time': '3:00pm',
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Prescription'),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(title: 'Prescription', back: true, isVisible: false,),
       body: ListView.builder(
         itemCount: prescriptionData.length,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

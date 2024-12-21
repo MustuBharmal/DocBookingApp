@@ -28,12 +28,9 @@ class ContactUsScreen extends GetView<ProfileController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Text(
-                  'Let us know about your query',
-                  style: txtInterTextField,
-                ),
+              Text(
+                'Let us know about your query',
+                style: txtInterTextField,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
