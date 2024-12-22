@@ -15,7 +15,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? addActions;
 
   const CustomAppBar(
-      {required this.title, this.onPressed, this.isVisible = true, this.back = true, this.addActions, this.actions, super.key});
+      {required this.title,
+      this.onPressed,
+      this.isVisible = true,
+      this.back = true,
+      this.addActions,
+      this.actions,
+      super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -29,13 +35,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ? Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                    color: AppColors.white, shape: BoxShape.circle, border: Border.all(color: AppColors.borderColor)),
+                    color: AppColors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.borderColor)),
                 child: Center(
-                    child: SvgPicture.asset(
-                  AppImage.backArrow,
-                  height: 24,
-                  width: 24,
-                ))).onClick(() => Get.back())
+                  child: SvgPicture.asset(
+                    AppImage.backArrow,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
+              ).onClick(() => Get.back())
             : null,
         title: Text(title),
         centerTitle: true,
@@ -52,7 +62,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle, border: Border.all(color: Color(0xFFF5F1FD))),
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Color(0xFFF5F1FD))),
                         child: Icon(
                           Icons.notifications,
                           size: 20,

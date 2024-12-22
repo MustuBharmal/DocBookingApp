@@ -4,6 +4,7 @@ import 'package:doc_booking_app/presentations/authentication/views/login_screen.
 import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
+import 'package:doc_booking_app/presentations/booking/views/book_time_slot_screen.dart';
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/about_us_screen.dart';
@@ -125,8 +126,13 @@ class AppRoutes {
       page: () => ForgotPasswordScreen(),
     ),
     GetPage(
-        name: AccountVerificationScreen.routeName,
-        page: () => AccountVerificationScreen(),
-        binding: OtpVerificationBinding())
+      name: AccountVerificationScreen.routeName,
+      page: () => AccountVerificationScreen(),
+      binding: OtpVerificationBinding(),
+    ),
+    GetPage(
+      name: BookTimeSlotScreen.routeName,
+      page: () => BookTimeSlotScreen(),
+    )
   ];
 }
