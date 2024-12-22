@@ -26,7 +26,7 @@ class BookSlotsConfirmScreen extends StatelessWidget {
             Column(
               children: [
                 AppointmentCard(),
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
                 Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -51,15 +51,10 @@ class BookSlotsConfirmScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Column(children: [BlueButton(
+            BlueButton(
               onPressed: () {},
-              label: 'Reschedule',
+              label: 'Book',
             ),
-              const SizedBox(height: 12),
-              CustomOutlinedButton(
-                label: 'Cancel',
-                onPressed: (){},
-              ),],)
           ],
         ),
       ),
