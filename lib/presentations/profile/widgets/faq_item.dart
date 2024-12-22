@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
@@ -36,7 +37,16 @@ class FAQItem extends StatelessWidget {
                 question,
                 style: txtInterDropDownValue
               ),
-              trailing: !isExpanded ? Image.asset(AppImage.filledAdd) : Icon(Icons.minimize_rounded, color: AppColors.primary,),
+              trailing: SizedBox(
+                width: 20,
+                height: 20,
+                child: SvgPicture.asset(
+                  isExpanded ? AppImage.filledMinus : AppImage.filledAdd,
+                  colorFilter: isExpanded
+                      ? ColorFilter.mode(AppColors.grey, BlendMode.srcIn)
+                      : null,
+                ),
+              ),
               onTap: onTap,
             ),
             if (isExpanded)

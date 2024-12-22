@@ -37,7 +37,6 @@ abstract class AppImage {
 
   static String get mapOutline => 'map_icon'.iconPng;
 
-  static String get filledAdd => 'filled_add'.iconPng;
 
   static String get camera => 'camera'.iconPng;
 
@@ -115,6 +114,12 @@ abstract class AppImage {
   static String get backArrow => 'back_arrow'.svg;
   static String get editIcon => 'edit_icon'.svg;
   static String get icCamera => 'ic_camera'.svg;
+
+  static String get filledAdd => 'filled_add'.svg;
+
+  static String get filledMinus => 'filled_minus'.svg;
+
+
 }
 
 extension on String {
