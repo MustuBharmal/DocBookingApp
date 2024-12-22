@@ -66,7 +66,7 @@ class LoginScreen extends GetView<AuthController> {
                       showAsterisk: true,
                     ),
                   ),
-                  CustomPasswordTextfield(
+                  CustomPasswordTextField(
                     label: ConstantString.password,
                     showAsterisk: true,
                     isPasswordTextField: true,
@@ -111,7 +111,6 @@ class LoginScreen extends GetView<AuthController> {
                         if (passController.text.trim().length < 6) {
                           return;
                         }
-                        // Get.offAllNamed(NavigationScreen.routeName);
                         controller.email = emailController.text;
                         controller.login(emailController.text, passController.text);
                       },

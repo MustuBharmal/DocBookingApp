@@ -124,7 +124,7 @@ class SignupScreen extends GetView<AuthController> {
                     countries: controller.countries,
                     // selectedCountry: controller.selectedCountrySingUp.value,
                   ),
-                  CustomPasswordTextfield(
+                  CustomPasswordTextField(
                     label: ConstantString.password,
                     showAsterisk: true,
                     isPasswordTextField: true,
