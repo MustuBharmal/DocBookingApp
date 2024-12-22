@@ -21,6 +21,7 @@ import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.
 import 'package:get/get.dart';
 
 import '../presentations/authentication/binding/otp_verification_binding.dart';
+import '../presentations/booking/views/book_slots_confirm_screen.dart';
 import '../presentations/profile/binding/profile_binding.dart';
 import '../presentations/specialist/binding/specialist_binding.dart';
 import '../presentations/specialist/view/list_of_specialist_screen.dart';
@@ -59,6 +60,10 @@ class AppRoutes {
     GetPage(
       name: UserInfoScreen.routeName,
       page: () => const UserInfoScreen(),
+    ),
+    GetPage(
+      name: BookSlotsConfirmScreen.routeName,
+      page: () => const BookSlotsConfirmScreen(),
     ),
     GetPage(
       name: PaymentManagementScreen.routeName,

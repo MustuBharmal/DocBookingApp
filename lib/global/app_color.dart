@@ -25,6 +25,7 @@ abstract class AppColors {
   static Color gray = const Color.fromRGBO(137, 156, 168, 1); //#168, 1
   static Color whiteA700 = Colors.white; //#FFFFFF
   static const Color blueGradient1 = Color(0xFFABE2FC); //#ABE2FC
+  static const Color blueGradient3 = Color(0xFFACC5FD); //#ACC5FD
   static const Color blueGradient2 = Color(0xFF2267FF); //#2267FF
   static const Color dividerBorderColor = Color(0xFFDFDFDF); //#DFDFDF
 }

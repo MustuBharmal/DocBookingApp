@@ -49,6 +49,16 @@ TextStyle txtInterMedium12 = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w700,
 );
+TextStyle txtInterTitle16White = TextStyle(
+  color: Colors.white,
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);
+TextStyle txtInterSubtitle13White = TextStyle(
+  color: Colors.white,
+  fontSize: 13,
+  fontWeight: FontWeight.w400,
+);
 TextStyle headerTextStyle = TextStyle(
   color: AppColors.black,
   fontSize: 24,

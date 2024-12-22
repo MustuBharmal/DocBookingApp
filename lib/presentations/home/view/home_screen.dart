@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
+import '../../../widgets/appointment_card.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 import '../../../widgets/custom_specialist_container.dart';
 import '../../specialist/view/list_of_specialist_screen.dart';
@@ -165,7 +166,7 @@ class SectionHeader extends StatelessWidget {
   }
 }
 
-class AppointmentCard extends StatelessWidget {
+/*class AppointmentCard extends StatelessWidget {
   const AppointmentCard({super.key});
 
   @override
@@ -193,13 +194,25 @@ class AppointmentCard extends StatelessWidget {
               color: Colors.blue,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    SizedBox(width: 12),
-                    Column(
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12), // Rounded rectangle
+                        image: DecorationImage(
+                          image: AssetImage(AppImage.femaleDoctor2),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(width: 12),
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -221,51 +234,72 @@ class AppointmentCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.home, color: Colors.white, size: 20),
-                        SizedBox(width: 8),
-                        Text(
-                          'Home Visit',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                          color: AppColors.blueGradient3
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.home, color: Colors.white, size: 20),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Home Visit',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Icon(Icons.access_time, color: Colors.white, size: 20),
-                        SizedBox(width: 8),
-                        Text(
-                          '10:30pm',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: AppColors.blueGradient3
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.access_time, color: Colors.white, size: 20),
+                          SizedBox(width: 8),
+                          Text(
+                            '10:30pm',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 12),
-                Row(
-                  children: [
-                    Icon(Icons.calendar_today, color: Colors.white, size: 20),
-                    SizedBox(width: 8),
-                    Text(
-                      'October 10, 2024',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
+                        ],
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: AppColors.blueGradient3
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.calendar_today, color: Colors.white, size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        'October 10, 2024',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -274,7 +308,7 @@ class AppointmentCard extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 class BookingOptions extends StatelessWidget {
   const BookingOptions({super.key});

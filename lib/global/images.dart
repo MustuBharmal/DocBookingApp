@@ -119,6 +119,8 @@ abstract class AppImage {
 
   static String get filledMinus => 'filled_minus'.svg;
 
+  static String get firstAid => 'first_aid'.svg;
+
 
 }
 

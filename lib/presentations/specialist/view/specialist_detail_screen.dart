@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
+import 'package:doc_booking_app/presentations/booking/views/book_slots_confirm_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
@@ -271,7 +272,9 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   BlueButton(
                     label: ConstantString.bookAppointment,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(BookSlotsConfirmScreen.routeName);
+                    },
                   )
                 ],
               ),
