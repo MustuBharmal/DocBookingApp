@@ -13,12 +13,7 @@ class CountryResponse with _$CountryResponse {
     @JsonKey(name: 'data') @Default([]) List<CountryModel> data,
   }) = _CountryResponse;
 
-  /*
-  "code": 200,
-  "isLive": true,
-  "status": "success",
-  "message": "Country data successfully retrieved.",
-*/
+
 
   factory CountryResponse.fromJson(Map<String, Object?> json) => _$CountryResponseFromJson(json);
 }

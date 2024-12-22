@@ -12,6 +12,7 @@ class CustomDobTextField extends StatelessWidget {
       required this.showAsterisk,
       required this.hintStyle,
       required this.hintText,
+      this.errorText,
       required this.validator});
 
   final TextEditingController controller;
@@ -20,6 +21,7 @@ class CustomDobTextField extends StatelessWidget {
   final TextStyle hintStyle;
   final String hintText;
   final String? Function(String?)? validator;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +83,15 @@ class CustomDobTextField extends StatelessWidget {
                 lastDate: DateTime(2100),
               );
               if (pickedDate != null) {
-                controller.text =
-                    DateFormat('dd/MM/yyyy').format(pickedDate).split(' ')[0];
+                controller.text = DateFormat('dd/MM/yyyy').format(pickedDate).split(' ')[0];
               }
             },
           ),
+          if (errorText != null)
+            Text(
+              errorText!,
+              style: TextStyle(color: AppColors.errorTextColor),
+            )
         ],
       ),
     );

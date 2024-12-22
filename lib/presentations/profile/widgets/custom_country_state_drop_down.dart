@@ -15,6 +15,7 @@ class CustomCountryStateDropdown<T> extends StatelessWidget {
   final void Function(T)? onSelected;
   final FutureOr<List<T>?> Function(String) suggestionsCallback;
   final TextEditingController controller;
+  final String? errorText;
 
   const CustomCountryStateDropdown(
       {super.key,
@@ -23,6 +24,7 @@ class CustomCountryStateDropdown<T> extends StatelessWidget {
       required this.itemBuilder,
       required this.onSelected,
       required this.suggestionsCallback,
+      this.errorText,
       required this.controller});
 
   @override
@@ -90,6 +92,11 @@ class CustomCountryStateDropdown<T> extends StatelessWidget {
             onSelected: onSelected,
             suggestionsCallback: suggestionsCallback,
           ),
+          if (errorText != null)
+            Text(
+              errorText!,
+              style: TextStyle(color: AppColors.errorTextColor),
+            )
         ],
       ),
     );

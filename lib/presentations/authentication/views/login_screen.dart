@@ -66,7 +66,7 @@ class LoginScreen extends GetView<AuthController> {
                       showAsterisk: true,
                     ),
                   ),
-                  CustomPasswordTextField(
+                  CustomPasswordTextfield(
                     label: ConstantString.password,
                     showAsterisk: true,
                     isPasswordTextField: true,

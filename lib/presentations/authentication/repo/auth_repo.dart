@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart' as dio;
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/state_model.dart';
@@ -119,12 +121,37 @@ abstract class AuthRepo {
   }
 
   // signup method
-  static Future<User> signUp(User user) async {
+  static Future<User> signUp({
+    required String name,
+    required String email,
+    required String sex,
+    required String dob,
+    required String phone,
+    required String address,
+    required String country,
+    required String state,
+    required String city,
+    required String profilePic,
+    required String password,
+    bool showLoader = true,
+  }) async {
     try {
-      final Map<String, dynamic> data = user.toJson();
+      final Map<String, dynamic> data = {
+        'name': name,
+        'email': email,
+        'sex': sex,
+        'dob': dob,
+        'phone': phone,
+        'address': address,
+        'country': country,
+        'state': state,
+        'city': city,
+        'profile_pic': profilePic,
+        'password': password,
+      };
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
-      final result = await HttpService.post(Api.signUp, data);
+      final result = await HttpService.post(Api.signUp, data, showLoader: showLoader);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message'].toString());
@@ -143,6 +170,29 @@ abstract class AuthRepo {
       }
       rethrow;
     }
+  }
+
+  static Future<String?> uploadProfilePic(File picture, {bool showLoader = true}) async {
+    try {
+      final dio.FormData data = dio.FormData.fromMap({'files': await dio.MultipartFile.fromFile(picture.path)});
+      final result = await HttpService.picPost(Api.imageUpload, data, showLoader: showLoader);
+      if (result['isLive'] == true) {
+        return result['data']['store_url'];
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+    return null;
   }
 
   // get user

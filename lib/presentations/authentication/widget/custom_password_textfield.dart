@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../global/styles.dart';
 
-class CustomPasswordTextField extends GetView<AuthController> {
+class CustomPasswordTextfield extends GetView<AuthController> {
   final String label;
   final bool showAsterisk;
   final TextEditingController textEditingController;
@@ -13,17 +13,18 @@ class CustomPasswordTextField extends GetView<AuthController> {
   final String hintText;
   final int maxLines;
   final bool isPasswordTextField;
+  final String? errorText;
 
-  const CustomPasswordTextField({
-    super.key,
-    required this.label,
-    this.isPasswordTextField = false,
-    required this.showAsterisk,
-    required this.textEditingController,
-    required this.hintStyle,
-    required this.hintText,
-    this.maxLines = 1,
-  });
+  const CustomPasswordTextfield(
+      {super.key,
+      required this.label,
+      this.isPasswordTextField = false,
+      required this.showAsterisk,
+      required this.textEditingController,
+      required this.hintStyle,
+      required this.hintText,
+      this.maxLines = 1,
+      this.errorText});
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +53,7 @@ class CustomPasswordTextField extends GetView<AuthController> {
             () => TextFormField(
               controller: textEditingController,
               style: txtInterDropDownValue,
-              obscureText:
-                  isPasswordTextField ? controller.isObscure.value : false,
+              obscureText: isPasswordTextField ? controller.isObscure.value : false,
               maxLines: maxLines,
               decoration: InputDecoration(
                 hintText: hintText,
@@ -81,9 +81,7 @@ class CustomPasswordTextField extends GetView<AuthController> {
                 suffixIcon: isPasswordTextField
                     ? IconButton(
                         icon: Icon(
-                          controller.isObscure.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                          controller.isObscure.value ? Icons.visibility_off : Icons.visibility,
                           color: Colors.grey,
                         ),
                         onPressed: () {
@@ -94,6 +92,11 @@ class CustomPasswordTextField extends GetView<AuthController> {
               ),
             ),
           ),
+          if (errorText != null)
+            Text(
+              errorText!,
+              style: TextStyle(color: AppColors.errorTextColor),
+            )
         ],
       ),
     );

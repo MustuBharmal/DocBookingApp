@@ -10,12 +10,14 @@ class CustomPhoneField extends StatefulWidget {
   final TextEditingController controller;
   final ValueChanged<CountryModel>? onChanged;
   final List<CountryModel>? countries;
+  final String? errorText;
 
   const CustomPhoneField({
     super.key,
     required this.controller,
     this.countries,
     this.onChanged,
+    this.errorText,
   });
 
   @override
@@ -222,6 +224,11 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
               ],
             ),
           ),
+          if (widget.errorText != null)
+            Text(
+              widget.errorText!,
+              style: TextStyle(color: AppColors.errorTextColor),
+            )
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
 
@@ -11,6 +12,8 @@ class CustomDropdown extends StatelessWidget {
   final String? selectedItem;
   final ValueChanged<String?> onChanged;
 
+  final String? errorText;
+
   const CustomDropdown({
     super.key,
     required this.label,
@@ -18,6 +21,7 @@ class CustomDropdown extends StatelessWidget {
     required this.items,
     this.selectedItem,
     required this.onChanged,
+    this.errorText,
   });
 
   @override
@@ -55,30 +59,31 @@ class CustomDropdown extends StatelessWidget {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(
-                    color: AppColors.borderColor
-                ),
+                borderSide: BorderSide(color: AppColors.borderColor),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(color: Colors.red),
               ),
-
               contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
-
             ),
             icon: SvgPicture.asset(AppImage.arrowDown),
             items: items
                 .map((item) => DropdownMenuItem<String>(
-              value: item,
-              child: Text(
-                item,
-                style: txtInterDropDownValue,
-              ),
-            ))
+                      value: item,
+                      child: Text(
+                        item,
+                        style: txtInterDropDownValue,
+                      ),
+                    ))
                 .toList(),
             onChanged: onChanged,
           ),
+          if (errorText != null)
+            Text(
+              errorText!,
+              style: TextStyle(color: AppColors.errorTextColor),
+            )
         ],
       ),
     );

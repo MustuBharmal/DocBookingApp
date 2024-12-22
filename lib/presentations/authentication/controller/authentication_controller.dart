@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:doc_booking_app/presentations/authentication/controller/loader_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/state_model.dart';
 import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart';
+import 'package:doc_booking_app/service/http_service.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,7 +19,7 @@ import '../views/login_welcome_screen.dart';
 class AuthController extends GetxController {
   static AuthController get instance => Get.find<AuthController>();
   RxInt activeIndex = RxInt(0);
-  RxString selectSex = RxString('Male');
+  Rx<String?> selectSex = Rx(null);
 
   // RxString selectState = RxString('state1');
   Rx<CountryModel?> selectCountry = Rx(null);
@@ -28,10 +30,12 @@ class AuthController extends GetxController {
   Rxn<User> user = Rxn<User>();
   final ImagePicker _picker = ImagePicker();
   String? email;
-  final RxList<CountryModel> countries = RxList.empty();
-  final RxList<StateModel> states = RxList.empty();
+  final List<CountryModel> countries = [];
+  final RxList<CountryModel> searchedCountries = RxList.empty();
+  final List<StateModel> states = [];
   final RxList<StateModel> searchedStates = RxList.empty();
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
+  RxMap<String, String> signupError = RxMap({});
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -65,15 +69,33 @@ class AuthController extends GetxController {
   }
 
   void searchState(String value) {
-    searchedStates.clear();
-    searchedStates
-        .addAll(states.where((country) => country.name?.toLowerCase().startsWith(value.toLowerCase()) ?? false).toList());
+    if (value.isNotEmpty) {
+      searchedStates.clear();
+      searchedStates
+          .addAll(states.where((country) => country.name?.toLowerCase().startsWith(value.toLowerCase()) ?? false).toList());
+    } else {
+      searchedStates.clear();
+      searchedStates.addAll(states);
+    }
+  }
+
+  void searchCountry(String value) {
+    if (value.isNotEmpty) {
+      searchedCountries.clear();
+      searchedCountries
+          .addAll(countries.where((country) => country.name?.toLowerCase().startsWith(value.toLowerCase()) ?? false).toList());
+    } else {
+      searchedCountries.clear();
+      searchedCountries.addAll(countries);
+    }
   }
 
   getCountries() async {
     try {
       countries.clear();
       countries.addAll(await AuthRepo.getCountries());
+      searchedCountries.clear();
+      searchedCountries.addAll(countries);
     } catch (e) {
       LogUtil.error(e.toString());
     }
@@ -121,55 +143,91 @@ class AuthController extends GetxController {
       required String phone,
       required String password,
       required String dob,
+      required String address,
+      required String postalCode,
       required String sex,
       required String state,
       required String country}) async {
     try {
+      signupError.clear();
       if (name.isEmpty) {
-        Get.snackbar('Error', 'Please enter name!');
-        return;
+        signupError['name'] = 'Please enter name';
       }
       if (email.isEmpty) {
-        Get.snackbar('Error', 'Please enter email!');
-        return;
-      }
-      if (!email.isEmail) {
-        Get.snackbar('Error', 'Please enter valid email!');
-        return;
+        signupError['email'] = 'Please enter email!';
+      } else if (!email.isEmail) {
+        signupError['email'] = 'Please enter valid email!';
       }
       if (phone.isEmpty) {
-        Get.snackbar('Error', 'Please enter phone number!');
-        return;
+        signupError['phone'] = 'Please enter phone number!';
       }
       if (!phone.isPhoneNumber) {
-        Get.snackbar('Error', 'Please enter valid phone number!');
-        return;
+        signupError['phone'] = 'Please enter valid phone number!';
       }
       if (password.isEmpty) {
-        Get.snackbar('Error', 'Please enter password!');
-        return;
+        signupError['password'] = 'Please enter password!';
       }
       if (dob.isEmpty) {
-        Get.snackbar('Error', 'Please enter Date of birth!');
-        return;
+        signupError['dob'] = 'Please enter Date of birth!';
       }
       if (sex.isEmpty) {
-        Get.snackbar('Error', 'Please select gender!');
-        return;
+        signupError['sex'] = 'Please select gender!';
       }
       if (state.isEmpty) {
-        Get.snackbar('Error', 'Please select state!');
-        return;
+        signupError['state'] = 'Please select state!';
       }
       if (country.isEmpty) {
-        Get.snackbar('Error', 'Please select country!');
-        return;
+        signupError['country'] = 'Please select country!';
       }
+      if (postalCode.isEmpty) {
+        signupError['city'] = 'Please enter Postal Code!';
+      }
+      if (address.isEmpty) {
+        signupError['address'] = 'Please enter address!';
+      }
+      if (selectedImageSignup.value == null) {
+        signupError['profile_pic'] = 'Please select image';
+      }
+      if (signupError.isNotEmpty) {
+        return;
+      } else {
+        LoaderController.instance.showLoader();
+        final String? profilePic = await AuthRepo.uploadProfilePic(selectedImageSignup.value!, showLoader: false);
+        if (profilePic == null) {
+          Get.snackbar('Error', 'Image Upload failed!');
+          return;
+        }
+        user.value = await AuthRepo.signUp(
+            name: name,
+            email: email,
+            dob: dob,
+            phone: phone,
+            address: address,
+            sex: sex,
+            state: state,
+            city: postalCode,
+            profilePic: profilePic,
+            password: password,
+            country: country,
+            showLoader: false);
+        LoaderController.instance.dismissLoader();
+        if (user.value != null) {
+          this.email = email;
+          Get.toNamed(AccountVerificationScreen.routeName);
+        }
+      }
+    } on CustomErrorMap catch (e) {
+      signupError.clear();
+      signupError.addAll(e.errors);
+      LoaderController.instance.dismissLoader();
     } on ServerException catch (e) {
+      LoaderController.instance.dismissLoader();
       Get.snackbar('Error', e.message);
     } on SocketException {
+      LoaderController.instance.dismissLoader();
       Get.snackbar('Error', 'No internet connection');
     } catch (e) {
+      LoaderController.instance.dismissLoader();
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
