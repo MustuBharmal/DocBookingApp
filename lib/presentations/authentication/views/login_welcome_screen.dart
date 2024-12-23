@@ -62,7 +62,7 @@ class LoginWelcomeScreen extends GetView<AuthController> {
               ),
               const SizedBox(height: 12),
               CustomOutlinedButton(
-                label: ConstantString.signUn,
+                label: ConstantString.signUp,
                 onPressed: () => Get.toNamed(SignupScreen.routeName),
               ),
               const SizedBox(height: 40),

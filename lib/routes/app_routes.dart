@@ -36,7 +36,6 @@ class AppRoutes {
         bindings: [
           HomeBinding(),
           SpecialistBinding(),
-          ProfileBinding(),
         ]),
     GetPage(
       name: SplashScreen.routeName,
@@ -59,9 +58,9 @@ class AppRoutes {
       page: () => const ProfileScreen(),
     ),
     GetPage(
-      name: UserInfoScreen.routeName,
-      page: () => const UserInfoScreen(),
-    ),
+        name: UserInfoScreen.routeName,
+        page: () => const UserInfoScreen(),
+        binding: ProfileBinding()),
     GetPage(
       name: BookSlotsConfirmScreen.routeName,
       page: () => const BookSlotsConfirmScreen(),
@@ -71,9 +70,9 @@ class AppRoutes {
       page: () => const PaymentManagementScreen(),
     ),
     GetPage(
-      name: FAQScreen.routeName,
-      page: () => const FAQScreen(),
-    ),
+        name: FAQScreen.routeName,
+        page: () => const FAQScreen(),
+        binding: ProfileBinding()),
     GetPage(
       name: ContactUsScreen.routeName,
       page: () => const ContactUsScreen(),

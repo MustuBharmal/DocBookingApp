@@ -12,24 +12,28 @@ class FAQScreen extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.expanded = List.filled(controller.faqQuestions.length, false);
     return Scaffold(
-      appBar: CustomAppBar(title: 'FAQ', back: true, isVisible: false,),
+      appBar: CustomAppBar(
+        title: 'FAQ',
+        back: true,
+        isVisible: false,
+      ),
       body: Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: GetBuilder<ProfileController>(
-          builder: (controller){
-          return ListView.builder(
-            itemCount: controller.faqQuestions.length,
+        child: Obx(
+          ()=> ListView.builder(
+            itemCount: controller.listOfFaqs.length,
             itemBuilder: (context, index) {
-              return FAQItem(
-                question: controller.faqQuestions[index],
-                answer: controller.faqAnswers[index],
-                isExpanded : controller.expanded[index],
-                onTap: () => controller.toggleExpansion(index),
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+                child: FAQItem(
+                  question: controller.listOfFaqs[index]?.title ?? '',
+                  answer: controller.listOfFaqs[index]?.description ?? '',
+                ),
               );
             },
-          );}
+          ),
         ),
       ),
     );

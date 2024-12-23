@@ -1,9 +1,15 @@
 // import 'package:country_picker/country_picker.dart';
+import 'dart:io';
+
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
+import 'package:doc_booking_app/presentations/profile/repo/profile_repo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../exception/server_exception.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find<ProfileController>();
@@ -17,6 +23,7 @@ class ProfileController extends GetxController {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController zipController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
+  RxList<FaqModels?> listOfFaqs = RxList.empty();
   final List<String> stateList = ['Florida', 'New York', 'Los Angeles'];
   final List<String> sexOptions = ['Male', 'Female', 'Other'];
   final List<String> prefCommMethodList = ['Whatsapp', 'Telephone', 'Message'];
@@ -56,26 +63,6 @@ class ProfileController extends GetxController {
   RxString phoneNumber = RxString('');
 
   RxString prefCommMethod = RxString('Whatsapp');
-  final List<String> faqQuestions = [
-    'How do I book an appointment with a specialist?',
-    'How do I cancel an appointment?',
-    'What payment methods are accepted?',
-    'Is there a consultation fee?',
-    'How do I reschedule an appointment?',
-    'How do I contact customer support?',
-    'How do I create an account?',
-  ];
-  final List<String> faqAnswers = [
-    'To book an appointment with a specialist, navigate to the "Book Appointment" section, select your preferred specialist, and follow the prompts to confirm your booking.',
-    'You can cancel an appointment by going to the "My Appointments" section, selecting the appointment you wish to cancel, and tapping on the "Cancel Appointment" option.',
-    'We accept various payment methods, including credit/debit cards, net banking, and popular digital wallets like Google Pay, PayPal, and others.',
-    'Yes, there is a consultation fee that varies based on the specialist. The fee details will be displayed before you confirm the appointment.',
-    'To reschedule an appointment, go to the "My Appointments" section, select the appointment, and choose the "Reschedule" option. Follow the instructions to pick a new date and time.',
-    'To contact customer support, go to the "Help & Support" section in the app. You can either use the live chat feature or email our support team directly.',
-    'Creating an account is simple. Open the app, click on "Sign Up," and provide the required details such as name, email, phone number, and password.',
-  ];
-  List<bool> expanded = [];
-
 
   // prescription inside data
 
@@ -87,7 +74,7 @@ class ProfileController extends GetxController {
   onInit() {
     super.onInit();
     initializeControllers();
-    expanded = List.filled(faqQuestions.length, false);
+    getFaq();
   }
 
   initializeControllers() {
@@ -120,18 +107,16 @@ class ProfileController extends GetxController {
     phoneNumber.value = value;
   }
 
-  // toggle faq questions expansion
-  void toggleExpansion(int index) {
-    expanded[index] = !expanded[index];
-    update();
+  // get faq
+  void getFaq() async{
+    try {
+      listOfFaqs.value = await ProfileRepo.getFaqs();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
   }
-
-// Update country
-// void updateCountry(Country country) {
-//   // selectedCountry.value = country;
-// }
-
-// Get full phone number with country code
-// String get fullPhoneNumber =>
-//     '+${selectedCountry.value.phoneCode} ${phoneNumber.value}';
 }
