@@ -24,6 +24,7 @@ import 'package:get/get.dart';
 import '../presentations/authentication/binding/otp_verification_binding.dart';
 import '../presentations/booking/views/book_slots_confirm_screen.dart';
 import '../presentations/profile/binding/profile_binding.dart';
+import '../presentations/profile/view/user_info_edit_screen.dart';
 import '../presentations/specialist/binding/specialist_binding.dart';
 import '../presentations/specialist/view/list_of_specialist_screen.dart';
 import '../presentations/splash_screens/view/splash_screen.dart';
@@ -132,6 +133,10 @@ class AppRoutes {
     GetPage(
       name: BookTimeSlotScreen.routeName,
       page: () => BookTimeSlotScreen(),
+    ),
+    GetPage(
+      name: UserInfoEditScreen.routeName,
+      page: () => UserInfoEditScreen(),
     )
   ];
 }

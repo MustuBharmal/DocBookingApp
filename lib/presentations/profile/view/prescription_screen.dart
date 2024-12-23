@@ -29,7 +29,7 @@ class PrescriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Prescription', back: true, isVisible: false,),
+      appBar: CustomAppBar(title: 'Prescription', back: true, isNotificationVisible: false,),
       body: ListView.builder(
         itemCount: prescriptionData.length,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),

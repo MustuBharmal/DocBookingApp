@@ -3,6 +3,7 @@ import 'package:doc_booking_app/global/extensions.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/global/styles.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/presentations/profile/view/user_info_edit_screen.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:doc_booking_app/widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,10 @@ class UserInfoScreen extends GetView<ProfileController> {
         actions: [
           Container(
             padding: EdgeInsets.all(6),
-            decoration:
-                BoxDecoration(color: AppColors.white, shape: BoxShape.circle, border: Border.all(color: AppColors.borderColor)),
+            decoration: BoxDecoration(
+                color: AppColors.white,
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.borderColor)),
             child: Center(
               child: SvgPicture.asset(
                 AppImage.editIcon,
@@ -37,7 +40,7 @@ class UserInfoScreen extends GetView<ProfileController> {
                 width: 24,
               ),
             ),
-          ).onClick(() => controller.isEditingProfile.toggle())
+          ).onClick(() => Get.toNamed(UserInfoEditScreen.routeName))
           /*Icon(
             icon: Image.asset(AppImage.editProfile),
             onPressed: () {
@@ -47,11 +50,9 @@ class UserInfoScreen extends GetView<ProfileController> {
         ],
         // controller: controller,
       ),
-      body: Obx(
-        () => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: controller.isEditingProfile.value == true ? _buildEditProfile(context) : _buildViewProfile(context),
-        ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: _buildViewProfile(context),
       ),
     );
   }
@@ -110,7 +111,7 @@ class UserInfoScreen extends GetView<ProfileController> {
           child: CustomDropdown(
             label: 'Sex',
             items: controller.sexOptions
-                /*.map(
+            /*.map(
                   (item) => DropdownMenuItem<String>(
                     value: item,
                     child: Text(
@@ -119,7 +120,8 @@ class UserInfoScreen extends GetView<ProfileController> {
                     ),
                   ),
                 )
-                .toList()*/,
+                .toList()*/
+            ,
             showAsterisk: true,
             selectedItem: controller.selectedSex.value,
             onChanged: (sexValue) {
@@ -152,7 +154,7 @@ class UserInfoScreen extends GetView<ProfileController> {
           child: CustomDropdown(
             label: 'State',
             items: controller.stateList
-                /*.map(
+            /*.map(
                   (item) => DropdownMenuItem<String>(
                     value: item,
                     child: Text(
@@ -161,7 +163,8 @@ class UserInfoScreen extends GetView<ProfileController> {
                     ),
                   ),
                 )
-                .toList()*/,
+                .toList()*/
+            ,
             selectedItem: controller.selectedState.value,
             showAsterisk: true,
             onChanged: (stateValue) {
@@ -197,11 +200,14 @@ class UserInfoScreen extends GetView<ProfileController> {
           label: 'Full Name',
           value: controller.nameController.text,
         ),
-        ProfileField(label: 'Email Address', value: controller.emailController.text),
-        ProfileField(label: 'Phone Number', value: controller.phoneController.text),
+        ProfileField(
+            label: 'Email Address', value: controller.emailController.text),
+        ProfileField(
+            label: 'Phone Number', value: controller.phoneController.text),
         ProfileField(label: 'DOB', value: controller.dobController.text),
         ProfileField(label: 'Sex', value: controller.selectedSex.value),
-        ProfileField(label: 'Address', value: controller.addressController.text),
+        ProfileField(
+            label: 'Address', value: controller.addressController.text),
         ProfileField(label: 'Zip Code', value: controller.zipController.text),
         ProfileField(label: 'State', value: controller.selectedState.value),
       ],

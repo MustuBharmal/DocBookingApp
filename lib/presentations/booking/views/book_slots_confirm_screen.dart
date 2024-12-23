@@ -16,7 +16,7 @@ class BookSlotsConfirmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Book Appointment', back: true, isVisible: false),
+      appBar: CustomAppBar(title: 'Book Appointment', back: true, isNotificationVisible: false),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

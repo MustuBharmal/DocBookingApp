@@ -20,7 +20,7 @@ class PrescriptionInsideScreen extends GetView<ProfileController> {
         appBar: CustomAppBar(
           title: 'Prescription',
           back: true,
-          isVisible: false,
+          isNotificationVisible: false,
         ),
         body: Column(
           children: [

@@ -16,7 +16,7 @@ class FAQScreen extends GetView<ProfileController> {
       appBar: CustomAppBar(
         title: 'FAQ',
         back: true,
-        isVisible: false,
+        isNotificationVisible: false,
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 10.0),

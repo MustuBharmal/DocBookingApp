@@ -9,7 +9,7 @@ import '../global/app_color.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool back;
-  final bool isVisible;
+  final bool isNotificationVisible;
   final VoidCallback? onPressed;
   final List<Widget>? actions;
   final List<Widget>? addActions;
@@ -17,7 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar(
       {required this.title,
       this.onPressed,
-      this.isVisible = true,
+      this.isNotificationVisible = true,
       this.back = true,
       this.addActions,
       this.actions,
@@ -55,7 +55,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 16),
                 child: Visibility(
-                    visible: isVisible,
+                    visible: isNotificationVisible,
                     child: InkWell(
                       onTap: onPressed,
                       child: Container(

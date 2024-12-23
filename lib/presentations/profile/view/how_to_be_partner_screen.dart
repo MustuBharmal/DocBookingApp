@@ -19,7 +19,7 @@ const HowToBePartnerScreen({super.key});
       appBar: CustomAppBar(
         title: 'How to be Partner',
         back: true,
-        isVisible: false,
+        isNotificationVisible: false,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),

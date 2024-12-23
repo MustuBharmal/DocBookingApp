@@ -20,7 +20,7 @@ import '../widget/custom_password_textfield.dart';
 class SignupScreen extends GetView<AuthController> {
   SignupScreen({super.key});
 
-  static const routeName = "/signup-screen";
+  static const routeName = '/signup-screen';
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
@@ -49,7 +49,7 @@ class SignupScreen extends GetView<AuthController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      ConstantString.signUn,
+                      ConstantString.signUp,
                       style: headerTextStyle,
                     ),
                     Padding(
@@ -107,12 +107,12 @@ class SignupScreen extends GetView<AuthController> {
                       showAsterisk: true,
                       controller: fullNameController,
                       hintStyle: txtInterTextFieldHint,
-                      hintText: "eg. Alex",
+                      hintText: 'eg. Alex',
                       errorText: controller.signupError['name'],
                     ),
                     CustomTextField(
                       controller: emailController,
-                      hintText: "eg. alex@gmail.com",
+                      hintText: 'eg. alex@gmail.com',
                       label: ConstantString.emailAddress,
                       hintStyle: txtInterTextFieldHint,
                       showAsterisk: true,
@@ -129,11 +129,11 @@ class SignupScreen extends GetView<AuthController> {
                       isPasswordTextField: true,
                       textEditingController: passController,
                       hintStyle: txtInterTextFieldHint,
-                      hintText: "eg. 123",
+                      hintText: 'eg. 123',
                       errorText: controller.signupError['password'],
                     ),
                     CustomDobTextField(
-                      hintText: "day/month/year",
+                      hintText: 'day/month/year',
                       hintStyle: txtInterTextFieldHint,
                       controller: dobController,
                       label: ConstantString.dob,
@@ -144,7 +144,7 @@ class SignupScreen extends GetView<AuthController> {
                     CustomDropdown(
                       label: ConstantString.sex,
                       showAsterisk: true,
-                      items: ["Male", "Female", "Other"],
+                      items: ['Male', 'Female', 'Other'],
                       selectedItem: controller.selectSex.value,
                       onChanged: (String? gender) {
                         if (gender != null) {
@@ -159,7 +159,7 @@ class SignupScreen extends GetView<AuthController> {
                       showAsterisk: true,
                       controller: addressController,
                       hintStyle: txtInterTextFieldHint,
-                      hintText: "eg 4517 Washington Ave. Manchester, Kentucky 39495",
+                      hintText: 'eg 4517 Washington Ave. Manchester, Kentucky 39495',
                       errorText: controller.signupError['address'],
                     ),
                     CustomTextField(
@@ -168,7 +168,7 @@ class SignupScreen extends GetView<AuthController> {
                       controller: postCodeController,
                       hintStyle: txtInterTextFieldHint,
                       inputType: TextInputType.number,
-                      hintText: "eg 12345",
+                      hintText: 'eg 12345',
                       errorText: controller.signupError['city'],
                     ),
                     Obx(
@@ -179,7 +179,7 @@ class SignupScreen extends GetView<AuthController> {
                         controller: stateController,
                         hintStyle: txtInterTextFieldHint,
                         // inputType: TextInputType.number,
-                        hintText: "",
+                        hintText: '',
                         errorText: controller.signupError['state'],
                         showDropDownIcon: true,
                         onTap: () {
@@ -259,7 +259,7 @@ class SignupScreen extends GetView<AuthController> {
                         controller: countryController,
                         hintStyle: txtInterTextFieldHint,
                         inputType: TextInputType.number,
-                        hintText: "",
+                        hintText: '',
                         errorText: controller.signupError['country'],
                         showDropDownIcon: true,
                         onTap: () {

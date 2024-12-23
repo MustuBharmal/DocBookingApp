@@ -8,7 +8,7 @@ class PaymentManagementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Payment Management', back: true, isVisible: false,),
+      appBar: CustomAppBar(title: 'Payment Management', back: true, isNotificationVisible: false,),
       body: Container(),
     );
   }

@@ -20,7 +20,7 @@ class ContactUsScreen extends GetView<ProfileController> {
       appBar: CustomAppBar(
         title: 'Contact Us',
         back: true,
-        isVisible: false,
+        isNotificationVisible: false,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
