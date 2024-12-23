@@ -57,7 +57,10 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                 ),
               ],
             ),
-            Divider(color: AppColors.borderColorLight,thickness: 2,),
+            Divider(
+              color: AppColors.borderColorLight,
+              thickness: 2,
+            ),
             Expanded(
               child: ListView.builder(
                 physics: ScrollPhysics(),
@@ -69,59 +72,74 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                   return Obx(() {
                     final isSelected =
                         controller.selectedService.value == item!.name;
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: SizedBox(
-                            height: 30,
-                            width: 30,
-                            child: CachedNetworkImage(
-                              imageUrl: item.icon ?? '',
-                              fit: BoxFit.contain,
-                              progressIndicatorBuilder: (context, val, pr) {
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    value: pr.progress,
+                    return InkWell(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: CachedNetworkImage(
+                                      imageUrl: item.icon ?? '',
+                                      fit: BoxFit.contain,
+                                      progressIndicatorBuilder: (context, val, pr) {
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: pr.progress,
+                                          ),
+                                        );
+                                      },
+                                      errorWidget: (context, val, obj) {
+                                        return Image.asset(AppImage.serviceIcon1);
+                                      },
+                                    ),
                                   ),
-                                );
-                              },
-                              errorWidget: (context, val, obj) {
-                                return Image.asset(AppImage.serviceIcon1);
-                              },
-                            ),
+                                  SizedBox(width: 10,),
+                                  Text(
+                                    item.name ?? '',
+                                    style: TextStyle(
+                                      color: isSelected ? Colors.blue : Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Radio(
+                                value: item.name ?? '',
+                                groupValue:
+                                HomeController.instance.selectedService.value,
+                                activeColor: Colors.blue,
+                                onChanged: (String? value) {
+                                  controller.updateSelectedImage(value!);
+                                  controller.selectedService.value = value;
+                                  searchControllers.text = value;
+                                },
+                              )
+                            ],
                           ),
-                          title: Text(
-                            item.name ?? '',
-                            style: TextStyle(
-                              color: isSelected ? Colors.blue : Colors.black,
-                            ),
+                          Divider(
+                            color: AppColors.borderColorLight,
+                            thickness: 1,
                           ),
-                          trailing: Radio(
-                            value: item.name ?? '',
-                            groupValue: HomeController.instance.selectedService.value,
-                            activeColor: Colors.blue,
-                            onChanged: (String? value) {
-                              controller.updateSelectedImage(value!);
-                              controller.selectedService.value = value;
-                              searchControllers.text = value;
-                              // Navigator.pop(context);
-                            },
-                          ),
-                          onTap: () {
-                            controller.updateSelectedImage(item.name ?? '');
-                            controller.selectedService.value = item.name ?? '';
-                            searchControllers.text = item.name ?? '';
-                            // Navigator.pop(context);
-                          },
-                        ),
-                        Divider(color: AppColors.borderColorLight,thickness: 1,),
-                      ],
+                        ],
+                      ),
+                      onTap: () {
+                        controller.updateSelectedImage(item.name ?? '');
+                        controller.selectedService.value = item.name ?? '';
+                        searchControllers.text = item.name ?? '';
+                      },
                     );
                   });
                 },
               ),
             ),
+
           ],
+
         ),
       ),
     );
