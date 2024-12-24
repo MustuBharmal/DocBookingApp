@@ -12,13 +12,27 @@ class PrescriptionFormScreen extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(children: [
-            CustomTextField(label: 'Symptoms', showAsterisk: true, controller: controller.symptomsController, hintStyle: txtInterTextFieldHint, hintText: 'Headache, Fever'),
-
-            CustomTextField(label: 'Blood Group', showAsterisk: true, controller: controller.bloodGrpController, hintStyle: txtInterTextFieldHint, hintText: 'O+'),
-          ],),
+          Column(
+            children: [
+              CustomTextField(
+                  isPassword: RxBool(false),
+                  label: 'Symptoms',
+                  showAsterisk: true,
+                  controller: controller.symptomsController,
+                  hintStyle: txtInterTextFieldHint,
+                  hintText: 'Headache, Fever'),
+              CustomTextField(
+                  isPassword: RxBool(false),
+                  label: 'Blood Group',
+                  showAsterisk: true,
+                  controller: controller.bloodGrpController,
+                  hintStyle: txtInterTextFieldHint,
+                  hintText: 'O+'),
+            ],
+          ),
           BlueButton(label: 'Submit')
         ],
       ),

@@ -34,6 +34,8 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+
+                    isPassword: RxBool(false),
                     label: 'Full Name',
                     showAsterisk: true,
                     controller: controller.nameController,
@@ -43,6 +45,8 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+
+                    isPassword: RxBool(false),
                     label: 'Email Address',
                     showAsterisk: true,
                     controller: controller.emailController,
@@ -80,6 +84,8 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+
+                    isPassword: RxBool(false),
                     label: 'Business Name',
                     showAsterisk: true,
                     controller: controller.businessNameController,
@@ -89,6 +95,8 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+
+                    isPassword: RxBool(false),
                     label: 'Business Type',
                     showAsterisk: true,
                     controller: controller.businessTypeController,

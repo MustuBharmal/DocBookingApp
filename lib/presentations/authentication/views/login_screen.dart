@@ -3,7 +3,6 @@ import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/views/forgot_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
-import 'package:doc_booking_app/presentations/authentication/widget/custom_password_textfield.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,6 +58,7 @@ class LoginScreen extends GetView<AuthController> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: CustomTextField(
+                      isPassword: RxBool(false),
                       controller: emailController,
                       hintText: 'eg. xyz@gmail.com',
                       label: ConstantString.emailAddress,
@@ -66,13 +66,13 @@ class LoginScreen extends GetView<AuthController> {
                       showAsterisk: true,
                     ),
                   ),
-                  CustomPasswordTextfield(
-                    label: ConstantString.password,
-                    showAsterisk: true,
-                    isPasswordTextField: true,
-                    textEditingController: passController,
-                    hintStyle: txtInterTextFieldHint,
+                  CustomTextField(
+                    isPassword: RxBool(true),
+                    controller: passController,
                     hintText: 'eg. 123',
+                    label: ConstantString.password,
+                    hintStyle: txtInterTextFieldHint,
+                    showAsterisk: true,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,7 +85,8 @@ class LoginScreen extends GetView<AuthController> {
                             activeColor: Colors.blue,
                             visualDensity: VisualDensity.compact,
                           ),
-                          Text(ConstantString.rememberMe, style: txtInterTextField),
+                          Text(ConstantString.rememberMe,
+                              style: txtInterTextField),
                         ],
                       ),
                       // Forgot Password
@@ -112,7 +113,8 @@ class LoginScreen extends GetView<AuthController> {
                           return;
                         }
                         controller.email = emailController.text;
-                        controller.login(emailController.text, passController.text);
+                        controller.login(
+                            emailController.text, passController.text);
                       },
                     ),
                   ),
@@ -128,7 +130,8 @@ class LoginScreen extends GetView<AuthController> {
                             onPressed: () {
                               Get.offNamed(SignupScreen.routeName);
                             },
-                            child: Text(ConstantString.signUpHere, style: blueNormalTextStyle))
+                            child: Text(ConstantString.signUpHere,
+                                style: blueNormalTextStyle))
                       ],
                     ),
                   )

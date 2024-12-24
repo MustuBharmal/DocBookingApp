@@ -35,6 +35,7 @@ class ContactUsScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+                    isPassword: RxBool(false),
                     label: 'Full Name',
                     showAsterisk: true,
                     controller: controller.nameController,
@@ -44,6 +45,8 @@ class ContactUsScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+
+                    isPassword: RxBool(false),
                     label: 'Email Address',
                     showAsterisk: true,
                     controller: controller.emailController,
@@ -69,6 +72,7 @@ class ContactUsScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 20),
                 child: CustomTextField(
+                    isPassword: RxBool(false),
                     label: 'Message',
                     maxLines: 5,
                     showAsterisk: true,

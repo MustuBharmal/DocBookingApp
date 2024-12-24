@@ -49,6 +49,7 @@ class ForgotPasswordScreen extends GetView<AuthController> {
               Padding(
                 padding: const EdgeInsets.only(top: 30.0,bottom: 30),
                 child: CustomTextField(
+                  isPassword: RxBool(false),
                     label: ConstantString.emailAddress,
                     showAsterisk: true,
                     controller: emailController,

@@ -46,6 +46,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 child: Text('Reset Password', style: headerTextStyle),
               ),
               CustomTextField(
+                  isPassword: RxBool(true),
                   label: ConstantString.newPassword,
                   showAsterisk: true,
                   controller: newPassController,
@@ -54,6 +55,7 @@ class ResetPasswordScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: CustomTextField(
+                    isPassword: RxBool(true),
                     label: ConstantString.confirmPassword,
                     showAsterisk: true,
                     controller: confirmPassController,

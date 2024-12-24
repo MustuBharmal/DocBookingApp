@@ -38,6 +38,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 25.0),
                 child: CustomTextField(
+                  isPassword: RxBool(false),
                   label: 'Full Name',
                   controller: controller.nameController,
                   showAsterisk: true,
@@ -48,6 +49,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+                  isPassword: RxBool(false),
                   label: 'Email Address',
                   controller: controller.emailController,
                   showAsterisk: true,
@@ -67,6 +69,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+                  isPassword: RxBool(false),
                   label: 'DOB',
                   controller: controller.dobController,
                   showAsterisk: true,
@@ -100,6 +103,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+                  isPassword: RxBool(false),
                   label: 'Address',
                   controller: controller.addressController,
                   showAsterisk: true,
@@ -110,6 +114,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
+                  isPassword: RxBool(false),
                   label: 'Zip Code',
                   controller: controller.zipController,
                   showAsterisk: true,

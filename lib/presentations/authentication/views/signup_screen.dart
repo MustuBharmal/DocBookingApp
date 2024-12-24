@@ -15,7 +15,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../global/styles.dart';
-import '../widget/custom_password_textfield.dart';
 
 class SignupScreen extends GetView<AuthController> {
   SignupScreen({super.key});
@@ -103,6 +102,7 @@ class SignupScreen extends GetView<AuthController> {
                       height: 25,
                     ),
                     CustomTextField(
+                      isPassword: RxBool(false),
                       label: ConstantString.fullName,
                       showAsterisk: true,
                       controller: fullNameController,
@@ -111,6 +111,7 @@ class SignupScreen extends GetView<AuthController> {
                       errorText: controller.signupError['name'],
                     ),
                     CustomTextField(
+                      isPassword: RxBool(false),
                       controller: emailController,
                       hintText: 'eg. alex@gmail.com',
                       label: ConstantString.emailAddress,
@@ -123,13 +124,13 @@ class SignupScreen extends GetView<AuthController> {
                       countries: controller.countries,
                       errorText: controller.signupError['phone'],
                     ),
-                    CustomPasswordTextfield(
-                      label: ConstantString.password,
-                      showAsterisk: true,
-                      isPasswordTextField: true,
-                      textEditingController: passController,
-                      hintStyle: txtInterTextFieldHint,
+                    CustomTextField(
+                      isPassword: RxBool(true),
+                      controller: passController,
                       hintText: 'eg. 123',
+                      label: ConstantString.password,
+                      hintStyle: txtInterTextFieldHint,
+                      showAsterisk: true,
                       errorText: controller.signupError['password'],
                     ),
                     CustomDobTextField(
@@ -155,6 +156,7 @@ class SignupScreen extends GetView<AuthController> {
                       errorText: controller.signupError['sex'],
                     ),
                     CustomTextField(
+                      isPassword: RxBool(false),
                       label: ConstantString.address,
                       showAsterisk: true,
                       controller: addressController,
@@ -163,6 +165,7 @@ class SignupScreen extends GetView<AuthController> {
                       errorText: controller.signupError['address'],
                     ),
                     CustomTextField(
+                      isPassword: RxBool(false),
                       label: ConstantString.postCode,
                       showAsterisk: true,
                       controller: postCodeController,
@@ -173,6 +176,7 @@ class SignupScreen extends GetView<AuthController> {
                     ),
                     Obx(
                       () => CustomTextField(
+                        isPassword: RxBool(false),
                         label: 'State',
                         showAsterisk: true,
                         readOnly: true,
@@ -253,6 +257,8 @@ class SignupScreen extends GetView<AuthController> {
                     ),
                     Obx(
                       () => CustomTextField(
+
+                        isPassword: RxBool(false),
                         label: 'Country',
                         showAsterisk: true,
                         readOnly: true,
