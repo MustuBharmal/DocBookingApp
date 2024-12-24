@@ -15,6 +15,8 @@ class Api {
   static String resetPassword = 'reset-password';
   static String validateOtpForgetPassword = 'validate-otp';
   static String changePassword = 'patient/changePassword';
+  static String contactUs = 'contact-us';
+  static String howToBePartner = 'how-to-partner';
   static String logOut = 'patient/logout';
   static String updateProfile = 'patient/profile';
   static String inquiry = 'inquiry';

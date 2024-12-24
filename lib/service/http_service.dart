@@ -114,14 +114,14 @@ class HttpService extends HttpOverrides {
           // Parse the string to JSON if it's a JSON string
           result = jsonDecode(response.data.toString()) as Map<String, dynamic>;
         } else {
-          LogUtil.error("Unexpected response format");
+          LogUtil.error('Unexpected response format');
         }
       } else {
         LogUtil.error("Request failed: ${response.data['message']}");
       }
     } catch (e) {
       if (showLoader) LoaderController.instance.dismissLoader();
-      LogUtil.error("Error: $e");
+      LogUtil.error('Error: $e');
       rethrow;
     }
     return result;

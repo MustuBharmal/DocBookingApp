@@ -79,6 +79,7 @@ class AppRoutes {
     GetPage(
       name: ContactUsScreen.routeName,
       page: () => const ContactUsScreen(),
+      binding: ProfileBinding()
     ),
     GetPage(
       name: AboutUsScreen.routeName,
@@ -87,6 +88,7 @@ class AppRoutes {
     GetPage(
       name: HowToBePartnerScreen.routeName,
       page: () => const HowToBePartnerScreen(),
+        binding: ProfileBinding()
     ),
     GetPage(
       name: PrescriptionScreen.routeName,
@@ -107,10 +109,6 @@ class AppRoutes {
       name: ReviewsScreen.routeName,
       page: () => const ReviewsScreen(),
     ),
-    /*GetPage(
-      name: SpecialistDetailScreen.routeName,
-      page: () => const SpecialistDetailScreen(),
-    ),*/
     GetPage(
         name: ListOfSpecialistScreen.routeName,
         page: () {

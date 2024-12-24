@@ -70,13 +70,25 @@ class ContactUsScreen extends GetView<ProfileController> {
                 padding: const EdgeInsets.only(top: 10.0, bottom: 20),
                 child: CustomTextField(
                     label: 'Message',
-                    maxLines: 6,
+                    maxLines: 5,
                     showAsterisk: true,
                     controller: controller.messageController,
                     hintStyle: txtInterTextFieldHint,
                     hintText: 'Type your Message here'),
               ),
-              BlueButton(label: 'Submit'),
+              BlueButton(
+                label: 'Submit',
+                onPressed: () {
+                  var params = {
+                    'name': controller.nameController.text,
+                    'email': controller.emailController.text,
+                    'phone': controller.phoneController.text,
+                    'communication_method': controller.prefCommMethod.value,
+                    'message': controller.messageController.text
+                  };
+                  controller.contactUs(params);
+                },
+              ),
             ],
           ),
         ),

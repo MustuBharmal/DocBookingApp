@@ -23,6 +23,8 @@ class ProfileController extends GetxController {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController zipController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
+  final TextEditingController businessTypeController = TextEditingController();
+  final TextEditingController businessNameController = TextEditingController();
   RxList<FaqModels?> listOfFaqs = RxList.empty();
   final List<String> stateList = ['Florida', 'New York', 'Los Angeles'];
   final List<String> sexOptions = ['Male', 'Female', 'Other'];
@@ -90,6 +92,7 @@ class ProfileController extends GetxController {
     selectedCountry.value = user?.country ?? '';
   }
 
+
   RxList<String> messages = [
     'Please avoid junk food and sugar drinks. Keep yourself stress-free.',
     "Yes, I will try my best to avoid it, but sometimes it's so hard!"
@@ -111,6 +114,32 @@ class ProfileController extends GetxController {
   void getFaq() async{
     try {
       listOfFaqs.value = await ProfileRepo.getFaqs();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  // contact us
+  void contactUs(Map<String,dynamic> params) async{
+    try {
+      await ProfileRepo.contactUsApi(params);
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  // how to be a partner
+  void howToBePartner(Map<String,dynamic> params) async{
+    try {
+      await ProfileRepo.contactUsApi(params);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

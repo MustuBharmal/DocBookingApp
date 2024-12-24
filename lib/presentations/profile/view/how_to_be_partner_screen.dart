@@ -1,5 +1,4 @@
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
-import 'package:doc_booking_app/widgets/custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,9 +8,10 @@ import '../../../widgets/custom_app_bar.dart';
 import '../../../widgets/country_picker/custom_phone_field.dart';
 import '../../../widgets/custom_text_field.dart';
 
-class HowToBePartnerScreen extends GetView<ProfileController>{
+class HowToBePartnerScreen extends GetView<ProfileController> {
   static const String routeName = '/how-to-be-partner-screen';
-const HowToBePartnerScreen({super.key});
+
+  const HowToBePartnerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ const HowToBePartnerScreen({super.key});
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomPhoneField(controller: controller.phoneController),
               ),
-              Padding(
+              /*Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomDropdown(
                   label: 'Business Name',
@@ -76,16 +76,46 @@ const HowToBePartnerScreen({super.key});
                     controller.selectedBusinessType.value = selectedBusinessType!;
                   },
                 ),
+              ),*/
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: CustomTextField(
+                    label: 'Business Name',
+                    showAsterisk: true,
+                    controller: controller.businessNameController,
+                    hintStyle: txtInterTextFieldHint,
+                    hintText: 'Fitness First'),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,top: 10,bottom: 20),
+                padding: const EdgeInsets.only(top: 10.0),
+                child: CustomTextField(
+                    label: 'Business Type',
+                    showAsterisk: true,
+                    controller: controller.businessTypeController,
+                    hintStyle: txtInterTextFieldHint,
+                    hintText: 'Clinic'),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 10, bottom: 20),
                 child: Text(
                   'Our support team will reach out to you within \nthree business days.',
                   style: txtInterTextField,
                 ),
               ),
-
-              BlueButton(label: 'Submit'),
+              BlueButton(
+                label: 'Submit',
+                onPressed: () {
+                  var params = {
+                    'name': controller.nameController.text,
+                    'email': controller.emailController.text,
+                    'phone': controller.phoneController.text,
+                    'business_type': controller.businessTypeController.text,
+                    'business_name': controller.businessNameController.text,
+                    'message': controller.messageController.text
+                  };
+                  controller.howToBePartner(params);
+                },
+              ),
             ],
           ),
         ),
