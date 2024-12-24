@@ -19,23 +19,41 @@ class CustomTabBar extends StatelessWidget {
           overlayColor: WidgetStateProperty.all(Colors.transparent),
           //for Remove background color when tap on button
           indicator: BoxDecoration(
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(100),
             border: Border.all(color: AppColors.primary, width: 2),
           ),
+          // padding: EdgeInsets.zero,
+
           indicatorColor: Colors.transparent,
           labelColor: AppColors.primary,
           unselectedLabelColor: Colors.grey,
           indicatorSize: TabBarIndicatorSize.tab,
-          dividerColor: Colors.transparent,
+          // dividerColor: Colors.transparent,
+          dividerHeight: 0,
 
           tabs: [
-            Tab(
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(color: AppColors.transparent, width: 2),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 2,horizontal: 2),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 38),
               child: Text(
                 tabText1,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),
-            Tab(
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(color: AppColors.transparent, width: 2),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 2,horizontal: 2),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 38),
               child: Text(
                 tabText2,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
