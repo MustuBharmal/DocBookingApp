@@ -41,7 +41,8 @@ class ConstantValue {
     ConstantString.contactUs,
     ConstantString.aboutUs,
     ConstantString.howTobBePartner,
-    ConstantString.prescription
+    ConstantString.prescription,
+    ConstantString.logout,
   ];
   static var imagePathDetailList = [
     AppImage.userMyProfile,
@@ -50,7 +51,8 @@ class ConstantValue {
     AppImage.contactUs,
     AppImage.aboutUs,
     AppImage.profile2User,
-    AppImage.prescription
+    AppImage.prescription,
+    AppImage.logout
   ];
   static const navigateDetailList = [
     UserInfoScreen.routeName,
@@ -60,6 +62,7 @@ class ConstantValue {
     AboutUsScreen.routeName,
     HowToBePartnerScreen.routeName,
     PrescriptionScreen.routeName,
+    ProfileScreen.routeName,
   ];
 
   static const textListForSpecialist = [

@@ -32,7 +32,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
             children: [
               ProfileImage(
                 initialImageUrl:
-                    'https://s3-alpha-sig.figma.com/img/df1c/b52e/f5e502e6fea97dabf492ab66036e7ec2?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=o5Buqz1bYL-0yvutHptCw9Q9Du~5NUyQg7hPUu~Up5hK5~2MlwWiNoXDE09ElYH1JGSj~Ck4JQUOZLqFwmwPwYTTRNzT0oeoaa2Ebms9K5Fx5kQHV9nVlmms6A-j2Ar10u4AbtL4ShTDFdA6WOa5uBWpoGPpUXANiqebyiDrTV9LWtz5oSds91yMhcU6l-YksInL8b9s4TKb9eb4MfXuvflFyRTn3Q3q5xSxsXFF-rghYf0hY0J0dV~ZdXGkIk50KZj5fJ50sY59U1Mn2AqxsKBcvoht0l8~RBfdFybpmbAW0k07XrNNufO2CqXsDA5hlAeenCneKfovS~4EBmLdPg__',
+                    'https://s3-alpha-sig.figma.com/img/df1c/b52e/f5e502e6fea97dabf492ab66036e7ec2?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K6IBc34oEZTfO2Fvozs1V5mOGqff6iQ2VdibX-AVW1PEa-NINVvXbtyW5GxTiM-QilLtF4umNkGK2I~ycyoL84ObJnkXqjSPG66CQxqe96IKYWBErFu5TyFkq8QbmKCBDTrbM5HGJjslognO0Zh4pqVrtsDaHVk0uNmXnBpDXJ0uPZTB~DXwEnhdGGQtbC6RAnSuSz87v5Xk80wePKvHneKP3q--U7rUvmY3oZ4-mi8K4uoVZ-3CVPpkVyx6ikPIkmQQStKqsjAgwUzzqEttW~apbi2TkvOP8rBmOralmwU8-bHRxltyYVxMRL9EuGHL2wJ9np7mcf34G1WgQKRing__',
                 isEditing: true,
               ),
               Padding(

@@ -11,29 +11,33 @@ abstract class AppImage {
 
   static String get fluShots => 'flushots'.iconPng;
 
+  static String get topContainerForSpecialists => '$imageFolderLocation/top_container_for_specialists.png';
+
+  static String get topContainerForServices => '$imageFolderLocation/top_container_for_services.png';
+
   static String get home => 'home'.iconPng;
 
   static String get signUpCamera => 'sign_up_camera'.iconPng;
 
   static String get user => 'user'.iconPng;
 
-  static String get aboutUs => 'about_us'.iconPng;
+  static String get aboutUs => 'about_us'.svg;
 
-  static String get contactUs => 'contact_us'.iconPng;
+  static String get contactUs => 'contact_us'.svg;
 
-  static String get paymentCard => 'payment_card'.iconPng;
+  static String get paymentCard => 'payment_card'.svg;
 
-  static String get prescription => 'prescription'.iconPng;
+  static String get prescription => 'prescription'.svg;
 
-  static String get profile2User => 'profile_2_user'.iconPng;
+  static String get profile2User => 'profile_2_user'.svg;
 
-  static String get faq => 'faq'.iconPng;
+  static String get faq => 'faq'.svg;
 
-  static String get userMyProfile => 'user_my_profile'.iconPng;
+  static String get userMyProfile => 'user_my_profile'.svg;
 
   static String get arrowLeft => 'arrow_left'.iconPng;
 
-  static String get editProfile => 'edit_profile'.iconPng;
+
 
   static String get mapOutline => 'map_icon'.iconPng;
 
@@ -41,6 +45,8 @@ abstract class AppImage {
   static String get camera => 'camera'.iconPng;
 
   static String get map => 'map'.svg;
+
+  static String get logout => 'logout'.svg;
 
   //Folder Location
   static const String imageFolderLocation = 'assets/images';

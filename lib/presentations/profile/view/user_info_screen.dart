@@ -23,6 +23,7 @@ class UserInfoScreen extends GetView<ProfileController> {
         actions: [
           Container(
             padding: EdgeInsets.all(6),
+            margin: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
                 color: AppColors.white,
                 shape: BoxShape.circle,

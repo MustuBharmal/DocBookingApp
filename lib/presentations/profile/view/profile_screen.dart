@@ -20,7 +20,11 @@ class ProfileScreen extends StatelessWidget {
                   text: ConstantValue.detailList[index],
                   iconPath: ConstantValue.imagePathDetailList[index],
                   onPressed: () {
-                    Get.toNamed(ConstantValue.navigateDetailList[index]);
+                    if(ConstantValue.detailList[index] != 'Logout') {
+                      Get.toNamed(ConstantValue.navigateDetailList[index]);
+                    }else{
+
+                    }
                   },
                 ),
             separatorBuilder: (context, index) => const SizedBox(

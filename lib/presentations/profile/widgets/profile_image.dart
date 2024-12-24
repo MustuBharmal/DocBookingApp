@@ -51,13 +51,17 @@ class ProfileImage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => controller.pickImage(), // Trigger image picker
                 child: CircleAvatar(
-                  radius: 18, // Size of the circle
-                  backgroundColor: AppColors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0), // Padding inside the circle
-                    child: Image.asset(
-                      AppImage.camera,
-                      fit: BoxFit.contain,
+                  backgroundColor: AppColors.white,
+                  radius: 24,
+                  child: CircleAvatar(
+                    radius: 21, // Size of the circle
+                    backgroundColor: AppColors.blue,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0), // Padding inside the circle
+                      child: Image.asset(
+                        AppImage.camera,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                 ),

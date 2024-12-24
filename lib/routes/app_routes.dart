@@ -13,6 +13,7 @@ import 'package:doc_booking_app/presentations/profile/view/contact_us_screen.dar
 import 'package:doc_booking_app/presentations/profile/view/faq_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/how_to_be_partner_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/payment_management_screen.dart';
+import 'package:doc_booking_app/presentations/profile/view/prescription_form_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_inside_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
@@ -93,10 +94,19 @@ class AppRoutes {
     GetPage(
       name: PrescriptionScreen.routeName,
       page: () => PrescriptionScreen(),
+      binding: ProfileBinding(),
     ),
     GetPage(
         name: PrescriptionInsideScreen.routeName,
-        page: () => PrescriptionInsideScreen()),
+        page: () => PrescriptionInsideScreen(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: PrescriptionFormScreen.routeName,
+      page: () => PrescriptionFormScreen(),
+      binding: ProfileBinding(),
+    ),
+
     GetPage(
       name: SpecialistScreen.routeName,
       page: () => const SpecialistScreen(),

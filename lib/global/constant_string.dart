@@ -83,4 +83,5 @@ class ConstantString {
   static const location="Location";
   static const readMore='Read More';
   static const about='About';
+  static const logout = 'Logout';
 }

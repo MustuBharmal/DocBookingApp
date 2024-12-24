@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PrescriptionFormScreen extends GetView<ProfileController> {
+  static const String routeName = '/prescription-form-screen';
   const PrescriptionFormScreen({super.key});
 
   @override

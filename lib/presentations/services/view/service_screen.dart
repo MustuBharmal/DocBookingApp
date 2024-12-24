@@ -22,7 +22,7 @@ class ServiceScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(AppImage.serviceIcon1),
+            Image.asset(AppImage.topContainerForServices),
             Container(
               padding: EdgeInsets.only(left: 10, right: 10, top: 16),
               child: GridView.builder(

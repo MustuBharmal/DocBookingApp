@@ -21,7 +21,7 @@ class SpecialistScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(AppImage.serviceIcon2),
+            Image.asset(AppImage.topContainerForSpecialists),
             Container(
               padding: EdgeInsets.only(left: 10, right: 10, top: 16),
               child: GridView.builder(
