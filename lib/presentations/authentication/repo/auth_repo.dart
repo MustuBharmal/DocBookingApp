@@ -17,7 +17,11 @@ import '../views/account_verification_screen.dart';
 abstract class AuthRepo {
   static const String _email = 'email';
   static const String _passwordKey = 'password';
-  static const String _otpKey = 'otp_code';
+  static const String _otpCodeKey = 'otp_code';
+  static const String _otpKey = 'otp';
+  static const String _newPassKey = 'newPassword';
+  static const String _confirmPassKey = 'confirmPassword';
+  static const String _resetTokenKey = 'resetToken';
 
   // login is working
   static Future<User?> signIn(String email, String password) async {
@@ -57,18 +61,19 @@ abstract class AuthRepo {
   }
 
   // otp verification
-  static Future<bool> otpVerification(String email, String otp) async {
+  static Future<User> otpVerification(String email, String otp) async {
     try {
       final Map<String, dynamic> data = {
         _email: email,
-        _otpKey: otp,
+        _otpCodeKey: otp,
+        'firebase_token': 'dddd'
       };
       LogUtil.debug(Api.otpVerification);
       final result = await HttpService.post(Api.otpVerification, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message'].toString());
-        return true;
+        return User.fromJson(result['data']);
       } else {
         throw Exception("Error: ${result['status']}");
       }
@@ -86,7 +91,6 @@ abstract class AuthRepo {
   }
 
   // forget password
-
   static Future<bool> forgetPassword(String email) async {
     try {
       final Map<String, dynamic> data = {
@@ -95,6 +99,42 @@ abstract class AuthRepo {
       LogUtil.debug(Api.forgetPassword);
       final result = await HttpService.post(
         Api.forgetPassword,
+        data,
+        token: false,
+      );
+      if (result['isLive'] == true) {
+        LogUtil.debug(result);
+        Get.snackbar('Success', result['message'].toString());
+        return true;
+      } else if (result['isLive'] == false) {
+        throw Exception("Error: ${result['message']}");
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['result']['message']?.toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  // forget password
+  static Future<bool> resetPassword(String newPass, String confirmPass) async {
+    try {
+      final Map<String, dynamic> data = {
+        _resetTokenKey: StorageUtil.getToken(),
+        _newPassKey:  newPass,
+        _confirmPassKey:  confirmPass
+      };
+      LogUtil.debug(Api.resetPassword);
+      final result = await HttpService.post(
+        Api.resetPassword,
         data,
         token: false,
       );
@@ -151,7 +191,8 @@ abstract class AuthRepo {
       };
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
-      final result = await HttpService.post(Api.signUp, data, showLoader: showLoader);
+      final result =
+          await HttpService.post(Api.signUp, data, showLoader: showLoader);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message'].toString());
@@ -172,10 +213,13 @@ abstract class AuthRepo {
     }
   }
 
-  static Future<String?> uploadProfilePic(File picture, {bool showLoader = true}) async {
+  static Future<String?> uploadProfilePic(File picture,
+      {bool showLoader = true}) async {
     try {
-      final dio.FormData data = dio.FormData.fromMap({'files': await dio.MultipartFile.fromFile(picture.path)});
-      final result = await HttpService.picPost(Api.imageUpload, data, showLoader: showLoader);
+      final dio.FormData data = dio.FormData.fromMap(
+          {'files': await dio.MultipartFile.fromFile(picture.path)});
+      final result = await HttpService.picPost(Api.imageUpload, data,
+          showLoader: showLoader);
       if (result['isLive'] == true) {
         return result['data']['store_url'];
       } else {
@@ -192,7 +236,6 @@ abstract class AuthRepo {
       }
       rethrow;
     }
-    return null;
   }
 
   // get user
@@ -225,7 +268,8 @@ abstract class AuthRepo {
     try {
       final result = await HttpService.post(Api.country, {}, showLoader: false);
       if (result['code'] == 200) {
-        final CountryResponse countryResponse = CountryResponse.fromJson(result);
+        final CountryResponse countryResponse =
+            CountryResponse.fromJson(result);
         if (countryResponse.success) {
           return countryResponse.data;
         } else {
@@ -239,8 +283,8 @@ abstract class AuthRepo {
     } catch (e) {
       if (e is dio.DioException) {
         final errData = (e).response!.data;
-        final String? errMessage = errData['message'].toString();
-        throw errMessage ?? 'Please try again';
+        final String errMessage = errData['message'].toString();
+        throw errMessage;
       }
       rethrow;
     }
@@ -248,7 +292,9 @@ abstract class AuthRepo {
 
   static Future<List<StateModel>> getState(String countryId) async {
     try {
-      final result = await HttpService.post(Api.state, {'country_id': countryId}, showLoader: false);
+      final result = await HttpService.post(
+          Api.state, {'country_id': countryId},
+          showLoader: false);
       LogUtil.debug(result);
       if (result['code'] == 200) {
         final StateResponse stateResponse = StateResponse.fromJson(result);
@@ -265,7 +311,45 @@ abstract class AuthRepo {
     } catch (e) {
       if (e is dio.DioException) {
         final errData = (e).response!.data;
-        final String? errMessage = errData['message'].toString();
+        final String? errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  // validate otp for forget password
+
+// otp verification
+  static Future<bool> validateOtpPassword(String email, String otp) async {
+    try {
+      final Map<String, dynamic> data = {
+        _email: email,
+        _otpKey: int.parse(otp),
+      };
+      LogUtil.debug(Api.validateOtpForgetPassword);
+      LogUtil.debug(data);
+      final result = await HttpService.post(
+        Api.validateOtpForgetPassword,
+        data,
+        token: false,
+      );
+      if (result['isLive'] == true) {
+        StorageUtil.deleteToken();
+        StorageUtil.writeToken(result['data']['resetToken']);
+        LogUtil.debug(result);
+        Get.snackbar('Success', result['message'].toString());
+        return true;
+      } else {
+        throw Exception("Error: ${result['status']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;

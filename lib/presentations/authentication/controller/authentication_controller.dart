@@ -37,17 +37,6 @@ class AuthController extends GetxController {
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
   RxMap<String, String> signupError = RxMap({});
 
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (timeLeft.value > 0) {
-        timeLeft.value--;
-      } else {
-        isTimerActive.value = false;
-        _timer.cancel();
-      }
-    });
-  }
-
   @override
   void onInit() {
     super.onInit();
@@ -71,8 +60,11 @@ class AuthController extends GetxController {
   void searchState(String value) {
     if (value.isNotEmpty) {
       searchedStates.clear();
-      searchedStates
-          .addAll(states.where((country) => country.name?.toLowerCase().startsWith(value.toLowerCase()) ?? false).toList());
+      searchedStates.addAll(states
+          .where((country) =>
+              country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
+              false)
+          .toList());
     } else {
       searchedStates.clear();
       searchedStates.addAll(states);
@@ -82,8 +74,11 @@ class AuthController extends GetxController {
   void searchCountry(String value) {
     if (value.isNotEmpty) {
       searchedCountries.clear();
-      searchedCountries
-          .addAll(countries.where((country) => country.name?.toLowerCase().startsWith(value.toLowerCase()) ?? false).toList());
+      searchedCountries.addAll(countries
+          .where((country) =>
+              country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
+              false)
+          .toList());
     } else {
       searchedCountries.clear();
       searchedCountries.addAll(countries);
@@ -192,7 +187,9 @@ class AuthController extends GetxController {
         return;
       } else {
         LoaderController.instance.showLoader();
-        final String? profilePic = await AuthRepo.uploadProfilePic(selectedImageSignup.value!, showLoader: false);
+        final String? profilePic = await AuthRepo.uploadProfilePic(
+            selectedImageSignup.value!,
+            showLoader: false);
         if (profilePic == null) {
           Get.snackbar('Error', 'Image Upload failed!');
           return;
@@ -250,7 +247,23 @@ class AuthController extends GetxController {
     try {
       final isOtpSent = await AuthRepo.forgetPassword(email);
       if (isOtpSent) {
-        Get.toNamed(AccountVerificationScreen.routeName);
+        Get.toNamed(AccountVerificationScreen.routeName,
+            arguments: {'condition': true});
+      }
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  Future<void> resetPassword(String newPass, String confirmPass) async {
+    try {
+      final isOtpSent = await AuthRepo.resetPassword(newPass, confirmPass);
+      if (isOtpSent) {
+        Get.offAllNamed(NavigationScreen.routeName);
       }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);

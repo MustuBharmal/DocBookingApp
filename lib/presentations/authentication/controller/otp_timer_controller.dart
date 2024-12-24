@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
+import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/authentication/views/reset_password_screen.dart';
+import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../exception/server_exception.dart';
@@ -49,9 +51,23 @@ class OTPVerificationController extends GetxController {
 
   void verifyOtp(String email, String otp) async {
     try {
-      bool isVerified = await AuthRepo.otpVerification(email, otp);
-      if(isVerified) {
-        Get.offNamed(LoginWelcomeScreen.routeName);
+      AuthController.instance.user.value =
+          await AuthRepo.otpVerification(email, otp);
+      Get.offAllNamed(NavigationScreen.routeName);
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  void validateOtpPassword(String email, String otp) async {
+    try {
+      bool isVerified = await AuthRepo.validateOtpPassword(email, otp);
+      if (isVerified) {
+        Get.toNamed(ResetPasswordScreen.routeName);
       }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);

@@ -22,6 +22,7 @@ class AccountVerificationScreen extends GetView<OTPVerificationController> {
 
   @override
   Widget build(BuildContext context) {
+    bool isForgetPassword = Get.arguments['condition'] ?? false;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(16),
@@ -94,10 +95,17 @@ class AccountVerificationScreen extends GetView<OTPVerificationController> {
               child: BlueButton(
                 label: ConstantString.verifyNow,
                 onPressed: () {
-                  controller.verifyOtp(
-                    AuthController.instance.email!,
-                    pinController.text,
-                  );
+                  if (isForgetPassword) {
+                    controller.validateOtpPassword(
+                      AuthController.instance.email!,
+                      pinController.text,
+                    );
+                  } else {
+                    controller.verifyOtp(
+                      AuthController.instance.email!,
+                      pinController.text,
+                    );
+                  }
                 },
               ),
             )

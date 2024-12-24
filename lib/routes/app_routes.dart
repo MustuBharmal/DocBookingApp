@@ -3,6 +3,7 @@ import 'package:doc_booking_app/presentations/authentication/views/forgot_passwo
 import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_welcome_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
+import 'package:doc_booking_app/presentations/authentication/views/reset_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
 import 'package:doc_booking_app/presentations/booking/views/book_time_slot_screen.dart';
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
@@ -137,6 +138,10 @@ class AppRoutes {
     GetPage(
       name: UserInfoEditScreen.routeName,
       page: () => UserInfoEditScreen(),
+    ),
+    GetPage(
+      name: ResetPasswordScreen.routeName,
+      page: () => ResetPasswordScreen(),
     )
   ];
 }
