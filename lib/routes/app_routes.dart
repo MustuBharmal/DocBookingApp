@@ -19,6 +19,7 @@ import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/user_info_screen.dart';
 import 'package:doc_booking_app/presentations/review/view/reviews_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:get/get.dart';
 
@@ -112,7 +113,10 @@ class AppRoutes {
     ),*/
     GetPage(
         name: ListOfSpecialistScreen.routeName,
-        page: () => const ListOfSpecialistScreen(),
+        page: () {
+          List<DoctorsList?> list = Get.arguments['doctorList'];
+          return ListOfSpecialistScreen(doctorList: list);
+        },
         binding: SpecialistBinding()),
     GetPage(
       name: LoginScreen.routeName,

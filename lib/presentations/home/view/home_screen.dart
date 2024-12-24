@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
@@ -76,11 +77,20 @@ class HomeScreen extends GetView<HomeController> {
                     crossAxisCount: 3, // Number of items per row
                     crossAxisSpacing: 10, // Horizontal spacing
                     mainAxisSpacing: 20, // Vertical spacing
-                    childAspectRatio: 108.67 / 122
-                ),
+                    childAspectRatio: 108.67 / 122),
                 itemBuilder: (BuildContext context, int index) {
+                  var servicesId = controller.services[index]?.id;
                   return ContainerWithIcon1(
-                    onPressed: () {},
+                    onPressed: () {
+                      List<DoctorsList?> listOfDoc = controller.doctorList
+                          .where((doctor) =>
+                              doctor?.services == servicesId.toString())
+                          .toList();
+
+                      Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+                        'doctorList': listOfDoc,
+                      });
+                    },
                     iconPath: controller.services[index]!.icon!,
                     text: controller.services[index]?.name ?? '',
                   );
@@ -93,7 +103,9 @@ class HomeScreen extends GetView<HomeController> {
               title: ConstantString.topRatedSpecialist,
               button: TextButton(
                 onPressed: () {
-                  Get.toNamed(ListOfSpecialistScreen.routeName);
+                  Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+                    'doctorList': controller.doctorList,
+                  });
                 },
                 child: Text(ConstantString.seeAll, style: subtitleStyle1),
               ),
@@ -109,7 +121,7 @@ class HomeScreen extends GetView<HomeController> {
                       CustomSpecialistContainer(
                         picPath: doctor?.profilePic ?? '',
                         name: doctor?.name ?? '',
-                        specialist: doctor?.specialization ?? '',
+                        specialist: doctor?.specialistData?.name ?? '',
                         charges: doctor?.fees ?? '',
                         // rating: doctor.rating,
                         // review: doctor.review,
@@ -117,7 +129,9 @@ class HomeScreen extends GetView<HomeController> {
                           Get.to(SpecialistDetailScreen(doctor: doctor!));
                         },
                       ),
-                      SizedBox(height: 10,)
+                      SizedBox(
+                        height: 10,
+                      )
                     ],
                   );
                 },

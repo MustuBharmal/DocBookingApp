@@ -18,7 +18,7 @@ class HomeController extends GetxController {
   Rxn<Dashboard> dashboard = Rxn(Dashboard());
   RxList<Service?> services = RxList.empty();
   RxList<DoctorsList?> doctorList = RxList.empty();
-  RxList<Specialist?> specialList = RxList.empty();
+  RxList<Specialist?> specialistsList = RxList.empty();
   RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
@@ -97,7 +97,7 @@ class HomeController extends GetxController {
 
   void getSpecialistType() async {
     try {
-      specialList.value = await HomeRepo.getSpecialistType();
+      specialistsList.value = await HomeRepo.getSpecialistType();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

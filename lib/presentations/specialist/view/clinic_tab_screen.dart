@@ -3,33 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/custom_specialist_container.dart';
-import '../../home/controller/home_controller.dart';
+import '../models/doctor_list.dart';
 
-class ClinicTabScreen extends StatelessWidget {
-  const ClinicTabScreen({super.key});
+class ClinicTabWidget extends StatelessWidget {
+  final List<DoctorsList?> doctorList;
+
+  const ClinicTabWidget({required this.doctorList, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return ListView.separated(
-        itemBuilder: (context, index) {
-          final doctorList = HomeController.instance.doctorList[index];
-          return CustomSpecialistContainer(
-            picPath: doctorList?.profilePic ?? '',
-            name: doctorList?.name ?? '',
-            specialist: doctorList?.specialization ?? '',
-            charges: doctorList?.fees ?? '',
-            onPressed: () {
-              Get.to(SpecialistDetailScreen(
-                doctor: doctorList!,
-              ));
-            },
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: 10),
-        itemCount: HomeController.instance.doctorList.length,
+    if (doctorList.isEmpty) {
+      return Center(
+        child: Text('No Doctor Available'),
       );
-    });
+    }
+    return ListView.separated(
+      itemBuilder: (context, index) {
+        final docList = doctorList[index];
+        return CustomSpecialistContainer(
+          picPath: docList?.profilePic ?? '',
+          name: docList?.name ?? '',
+          specialist: docList?.serviceData?.name ?? '',
+          charges: docList?.fees ?? '',
+          onPressed: () {
+            Get.to(SpecialistDetailScreen(
+              doctor: docList!,
+            ));
+          },
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(height: 10),
+      itemCount: doctorList.length,
+    );
   }
 }
-

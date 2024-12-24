@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/clinic_tab_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/home_tab_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/widget/custom_search_textfield.dart';
@@ -11,7 +12,9 @@ import '../../../widgets/custom_tab_bar.dart';
 import '../widget/custom_button.dart';
 
 class ListOfSpecialistScreen extends GetView<SpecialistController> {
-  const ListOfSpecialistScreen({super.key});
+  final List<DoctorsList?> doctorList;
+
+  const ListOfSpecialistScreen({required this.doctorList, super.key});
 
   static const routeName = '/list-of-specialist-screen';
 
@@ -42,8 +45,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
               Expanded(
                 child: TabBarView(
                   children: [
-                    HomeTabScreen(),
-                    ClinicTabScreen(),
+                    HomeTabWidget(doctorList: doctorList),
+                    ClinicTabWidget(doctorList: doctorList),
                   ],
                 ),
               ),

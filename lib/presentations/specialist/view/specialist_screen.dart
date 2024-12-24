@@ -2,7 +2,10 @@ import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
+import '../models/doctor_list.dart';
+import 'list_of_specialist_screen.dart';
 
 class SpecialistScreen extends StatelessWidget {
   const SpecialistScreen({super.key});
@@ -30,11 +33,24 @@ class SpecialistScreen extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: HomeController.instance.specialList.length,
+                itemCount: HomeController.instance.specialistsList.length,
                 itemBuilder: (context, index) {
-                  final specialist = HomeController.instance.specialList[index];
+                  var specialistID =
+                      HomeController.instance.specialistsList[index]?.id;
+                  final specialist =
+                      HomeController.instance.specialistsList[index];
                   return ContainerWithIcon1(
-                    onPressed: () {},
+                    onPressed: () {
+                      List<DoctorsList?> listOfDoc = HomeController
+                          .instance.doctorList
+                          .where((doctor) =>
+                              doctor?.specialization == specialistID.toString())
+                          .toList();
+
+                      Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+                        'doctorList': listOfDoc,
+                      });
+                    },
                     iconPath: specialist?.icon ?? '',
                     text: specialist?.name ?? '',
                   );
