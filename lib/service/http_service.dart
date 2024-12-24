@@ -35,6 +35,7 @@ class HttpService extends HttpOverrides {
     Map<String, dynamic> result = {};
     try {
       showLoader ? LoaderController.instance.showLoader() : null;
+      LogUtil.debug(StorageUtil.getToken());
       final dio.Response response = await _dio.get(
         path,
         queryParameters: params,

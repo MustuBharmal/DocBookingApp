@@ -26,9 +26,18 @@ mixin _$DoctorsList {
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get specialization => throw _privateConstructorUsedError;
+  String? get services => throw _privateConstructorUsedError;
   String? get fees => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
   String? get availability => throw _privateConstructorUsedError;
   String? get about => throw _privateConstructorUsedError;
+  @JsonKey(name: 'serviceModelData')
+  Service? get serviceData => throw _privateConstructorUsedError;
+  @JsonKey(name: 'specialistModelData')
+  Specialist? get specialistData => throw _privateConstructorUsedError;
+  @JsonKey(name: 'doctorTimeTableData')
+  List<DoctorTimeTable>? get doctorTimeTable =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'is_active')
   bool? get isActive => throw _privateConstructorUsedError;
 
@@ -54,10 +63,19 @@ abstract class $DoctorsListCopyWith<$Res> {
       String? name,
       String? email,
       String? specialization,
+      String? services,
       String? fees,
+      String? location,
       String? availability,
       String? about,
+      @JsonKey(name: 'serviceModelData') Service? serviceData,
+      @JsonKey(name: 'specialistModelData') Specialist? specialistData,
+      @JsonKey(name: 'doctorTimeTableData')
+      List<DoctorTimeTable>? doctorTimeTable,
       @JsonKey(name: 'is_active') bool? isActive});
+
+  $ServiceCopyWith<$Res>? get serviceData;
+  $SpecialistCopyWith<$Res>? get specialistData;
 }
 
 /// @nodoc
@@ -80,9 +98,14 @@ class _$DoctorsListCopyWithImpl<$Res, $Val extends DoctorsList>
     Object? name = freezed,
     Object? email = freezed,
     Object? specialization = freezed,
+    Object? services = freezed,
     Object? fees = freezed,
+    Object? location = freezed,
     Object? availability = freezed,
     Object? about = freezed,
+    Object? serviceData = freezed,
+    Object? specialistData = freezed,
+    Object? doctorTimeTable = freezed,
     Object? isActive = freezed,
   }) {
     return _then(_value.copyWith(
@@ -106,9 +129,17 @@ class _$DoctorsListCopyWithImpl<$Res, $Val extends DoctorsList>
           ? _value.specialization
           : specialization // ignore: cast_nullable_to_non_nullable
               as String?,
+      services: freezed == services
+          ? _value.services
+          : services // ignore: cast_nullable_to_non_nullable
+              as String?,
       fees: freezed == fees
           ? _value.fees
           : fees // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as String?,
       availability: freezed == availability
           ? _value.availability
@@ -118,11 +149,51 @@ class _$DoctorsListCopyWithImpl<$Res, $Val extends DoctorsList>
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
+      serviceData: freezed == serviceData
+          ? _value.serviceData
+          : serviceData // ignore: cast_nullable_to_non_nullable
+              as Service?,
+      specialistData: freezed == specialistData
+          ? _value.specialistData
+          : specialistData // ignore: cast_nullable_to_non_nullable
+              as Specialist?,
+      doctorTimeTable: freezed == doctorTimeTable
+          ? _value.doctorTimeTable
+          : doctorTimeTable // ignore: cast_nullable_to_non_nullable
+              as List<DoctorTimeTable>?,
       isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
+  }
+
+  /// Create a copy of DoctorsList
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ServiceCopyWith<$Res>? get serviceData {
+    if (_value.serviceData == null) {
+      return null;
+    }
+
+    return $ServiceCopyWith<$Res>(_value.serviceData!, (value) {
+      return _then(_value.copyWith(serviceData: value) as $Val);
+    });
+  }
+
+  /// Create a copy of DoctorsList
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SpecialistCopyWith<$Res>? get specialistData {
+    if (_value.specialistData == null) {
+      return null;
+    }
+
+    return $SpecialistCopyWith<$Res>(_value.specialistData!, (value) {
+      return _then(_value.copyWith(specialistData: value) as $Val);
+    });
   }
 }
 
@@ -140,10 +211,21 @@ abstract class _$$DoctorsListImplCopyWith<$Res>
       String? name,
       String? email,
       String? specialization,
+      String? services,
       String? fees,
+      String? location,
       String? availability,
       String? about,
+      @JsonKey(name: 'serviceModelData') Service? serviceData,
+      @JsonKey(name: 'specialistModelData') Specialist? specialistData,
+      @JsonKey(name: 'doctorTimeTableData')
+      List<DoctorTimeTable>? doctorTimeTable,
       @JsonKey(name: 'is_active') bool? isActive});
+
+  @override
+  $ServiceCopyWith<$Res>? get serviceData;
+  @override
+  $SpecialistCopyWith<$Res>? get specialistData;
 }
 
 /// @nodoc
@@ -164,9 +246,14 @@ class __$$DoctorsListImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? email = freezed,
     Object? specialization = freezed,
+    Object? services = freezed,
     Object? fees = freezed,
+    Object? location = freezed,
     Object? availability = freezed,
     Object? about = freezed,
+    Object? serviceData = freezed,
+    Object? specialistData = freezed,
+    Object? doctorTimeTable = freezed,
     Object? isActive = freezed,
   }) {
     return _then(_$DoctorsListImpl(
@@ -190,9 +277,17 @@ class __$$DoctorsListImplCopyWithImpl<$Res>
           ? _value.specialization
           : specialization // ignore: cast_nullable_to_non_nullable
               as String?,
+      services: freezed == services
+          ? _value.services
+          : services // ignore: cast_nullable_to_non_nullable
+              as String?,
       fees: freezed == fees
           ? _value.fees
           : fees // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as String?,
       availability: freezed == availability
           ? _value.availability
@@ -202,6 +297,18 @@ class __$$DoctorsListImplCopyWithImpl<$Res>
           ? _value.about
           : about // ignore: cast_nullable_to_non_nullable
               as String?,
+      serviceData: freezed == serviceData
+          ? _value.serviceData
+          : serviceData // ignore: cast_nullable_to_non_nullable
+              as Service?,
+      specialistData: freezed == specialistData
+          ? _value.specialistData
+          : specialistData // ignore: cast_nullable_to_non_nullable
+              as Specialist?,
+      doctorTimeTable: freezed == doctorTimeTable
+          ? _value._doctorTimeTable
+          : doctorTimeTable // ignore: cast_nullable_to_non_nullable
+              as List<DoctorTimeTable>?,
       isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
@@ -219,10 +326,17 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
       this.name,
       this.email,
       this.specialization,
+      this.services,
       this.fees,
+      this.location,
       this.availability,
       this.about,
-      @JsonKey(name: 'is_active') this.isActive});
+      @JsonKey(name: 'serviceModelData') this.serviceData,
+      @JsonKey(name: 'specialistModelData') this.specialistData,
+      @JsonKey(name: 'doctorTimeTableData')
+      final List<DoctorTimeTable>? doctorTimeTable,
+      @JsonKey(name: 'is_active') this.isActive})
+      : _doctorTimeTable = doctorTimeTable;
 
   factory _$DoctorsListImpl.fromJson(Map<String, dynamic> json) =>
       _$$DoctorsListImplFromJson(json);
@@ -239,18 +353,39 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
   @override
   final String? specialization;
   @override
+  final String? services;
+  @override
   final String? fees;
+  @override
+  final String? location;
   @override
   final String? availability;
   @override
   final String? about;
+  @override
+  @JsonKey(name: 'serviceModelData')
+  final Service? serviceData;
+  @override
+  @JsonKey(name: 'specialistModelData')
+  final Specialist? specialistData;
+  final List<DoctorTimeTable>? _doctorTimeTable;
+  @override
+  @JsonKey(name: 'doctorTimeTableData')
+  List<DoctorTimeTable>? get doctorTimeTable {
+    final value = _doctorTimeTable;
+    if (value == null) return null;
+    if (_doctorTimeTable is EqualUnmodifiableListView) return _doctorTimeTable;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey(name: 'is_active')
   final bool? isActive;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DoctorsList(profilePic: $profilePic, id: $id, name: $name, email: $email, specialization: $specialization, fees: $fees, availability: $availability, about: $about, isActive: $isActive)';
+    return 'DoctorsList(profilePic: $profilePic, id: $id, name: $name, email: $email, specialization: $specialization, services: $services, fees: $fees, location: $location, availability: $availability, about: $about, serviceData: $serviceData, specialistData: $specialistData, doctorTimeTable: $doctorTimeTable, isActive: $isActive)';
   }
 
   @override
@@ -263,9 +398,14 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('specialization', specialization))
+      ..add(DiagnosticsProperty('services', services))
       ..add(DiagnosticsProperty('fees', fees))
+      ..add(DiagnosticsProperty('location', location))
       ..add(DiagnosticsProperty('availability', availability))
       ..add(DiagnosticsProperty('about', about))
+      ..add(DiagnosticsProperty('serviceData', serviceData))
+      ..add(DiagnosticsProperty('specialistData', specialistData))
+      ..add(DiagnosticsProperty('doctorTimeTable', doctorTimeTable))
       ..add(DiagnosticsProperty('isActive', isActive));
   }
 
@@ -281,18 +421,42 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
             (identical(other.email, email) || other.email == email) &&
             (identical(other.specialization, specialization) ||
                 other.specialization == specialization) &&
+            (identical(other.services, services) ||
+                other.services == services) &&
             (identical(other.fees, fees) || other.fees == fees) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             (identical(other.availability, availability) ||
                 other.availability == availability) &&
             (identical(other.about, about) || other.about == about) &&
+            (identical(other.serviceData, serviceData) ||
+                other.serviceData == serviceData) &&
+            (identical(other.specialistData, specialistData) ||
+                other.specialistData == specialistData) &&
+            const DeepCollectionEquality()
+                .equals(other._doctorTimeTable, _doctorTimeTable) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, profilePic, id, name, email,
-      specialization, fees, availability, about, isActive);
+  int get hashCode => Object.hash(
+      runtimeType,
+      profilePic,
+      id,
+      name,
+      email,
+      specialization,
+      services,
+      fees,
+      location,
+      availability,
+      about,
+      serviceData,
+      specialistData,
+      const DeepCollectionEquality().hash(_doctorTimeTable),
+      isActive);
 
   /// Create a copy of DoctorsList
   /// with the given fields replaced by the non-null parameter values.
@@ -317,9 +481,15 @@ abstract class _DoctorsList implements DoctorsList {
       final String? name,
       final String? email,
       final String? specialization,
+      final String? services,
       final String? fees,
+      final String? location,
       final String? availability,
       final String? about,
+      @JsonKey(name: 'serviceModelData') final Service? serviceData,
+      @JsonKey(name: 'specialistModelData') final Specialist? specialistData,
+      @JsonKey(name: 'doctorTimeTableData')
+      final List<DoctorTimeTable>? doctorTimeTable,
       @JsonKey(name: 'is_active') final bool? isActive}) = _$DoctorsListImpl;
 
   factory _DoctorsList.fromJson(Map<String, dynamic> json) =
@@ -337,11 +507,24 @@ abstract class _DoctorsList implements DoctorsList {
   @override
   String? get specialization;
   @override
+  String? get services;
+  @override
   String? get fees;
+  @override
+  String? get location;
   @override
   String? get availability;
   @override
   String? get about;
+  @override
+  @JsonKey(name: 'serviceModelData')
+  Service? get serviceData;
+  @override
+  @JsonKey(name: 'specialistModelData')
+  Specialist? get specialistData;
+  @override
+  @JsonKey(name: 'doctorTimeTableData')
+  List<DoctorTimeTable>? get doctorTimeTable;
   @override
   @JsonKey(name: 'is_active')
   bool? get isActive;
