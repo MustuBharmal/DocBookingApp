@@ -1,16 +1,16 @@
-
-
+import 'package:doc_booking_app/presentations/booking/views/payment_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
-import '../../../widgets/custom_outlined_button.dart';
 import '../../../widgets/appointment_card.dart';
 
 class BookSlotsConfirmScreen extends StatelessWidget {
   static const routeName = '/book-slots-confirm-screen';
+
   const BookSlotsConfirmScreen({super.key});
 
   @override
@@ -52,7 +52,9 @@ class BookSlotsConfirmScreen extends StatelessWidget {
               ],
             ),
             BlueButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(PaymentScreen.routeName);
+              },
               label: 'Book',
             ),
           ],
@@ -61,7 +63,6 @@ class BookSlotsConfirmScreen extends StatelessWidget {
     );
   }
 }
-
 
 class AppointmentDetails extends StatelessWidget {
   final String patientName;
@@ -94,9 +95,8 @@ class AppointmentDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title, style: txtInterTextFieldHint),
-        Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: AppColors.activeBorderColor)),
+        Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.activeBorderColor)),
       ],
     );
   }
 }
-

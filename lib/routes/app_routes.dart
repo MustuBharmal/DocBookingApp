@@ -5,7 +5,9 @@ import 'package:doc_booking_app/presentations/authentication/views/login_welcome
 import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/reset_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
+import 'package:doc_booking_app/presentations/booking/binding/payment_binding.dart';
 import 'package:doc_booking_app/presentations/booking/views/book_time_slot_screen.dart';
+import 'package:doc_booking_app/presentations/booking/views/payment_screen.dart';
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/about_us_screen.dart';
@@ -21,6 +23,7 @@ import 'package:doc_booking_app/presentations/profile/view/user_info_screen.dart
 import 'package:doc_booking_app/presentations/review/view/reviews_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
+import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
 import 'package:get/get.dart';
 
@@ -34,13 +37,10 @@ import '../presentations/splash_screens/view/splash_screen.dart';
 
 class AppRoutes {
   static List<GetPage> pages = [
-    GetPage(
-        name: NavigationScreen.routeName,
-        page: () => const NavigationScreen(),
-        bindings: [
-          HomeBinding(),
-          SpecialistBinding(),
-        ]),
+    GetPage(name: NavigationScreen.routeName, page: () => const NavigationScreen(), bindings: [
+      HomeBinding(),
+      SpecialistBinding(),
+    ]),
     GetPage(
       name: SplashScreen.routeName,
       page: () => const SplashScreen(),
@@ -61,10 +61,7 @@ class AppRoutes {
       name: ProfileScreen.routeName,
       page: () => const ProfileScreen(),
     ),
-    GetPage(
-        name: UserInfoScreen.routeName,
-        page: () => const UserInfoScreen(),
-        binding: ProfileBinding()),
+    GetPage(name: UserInfoScreen.routeName, page: () => const UserInfoScreen(), binding: ProfileBinding()),
     GetPage(
       name: BookSlotsConfirmScreen.routeName,
       page: () => const BookSlotsConfirmScreen(),
@@ -73,32 +70,21 @@ class AppRoutes {
       name: PaymentManagementScreen.routeName,
       page: () => const PaymentManagementScreen(),
     ),
-    GetPage(
-        name: FAQScreen.routeName,
-        page: () => const FAQScreen(),
-        binding: ProfileBinding()),
-    GetPage(
-      name: ContactUsScreen.routeName,
-      page: () => const ContactUsScreen(),
-      binding: ProfileBinding()
-    ),
+    GetPage(name: FAQScreen.routeName, page: () => const FAQScreen(), binding: ProfileBinding()),
+    GetPage(name: ContactUsScreen.routeName, page: () => const ContactUsScreen(), binding: ProfileBinding()),
     GetPage(
       name: AboutUsScreen.routeName,
       page: () => const AboutUsScreen(),
     ),
-    GetPage(
-      name: HowToBePartnerScreen.routeName,
-      page: () => const HowToBePartnerScreen(),
-        binding: ProfileBinding()
-    ),
+    GetPage(name: HowToBePartnerScreen.routeName, page: () => const HowToBePartnerScreen(), binding: ProfileBinding()),
     GetPage(
       name: PrescriptionScreen.routeName,
       page: () => PrescriptionScreen(),
       binding: ProfileBinding(),
     ),
     GetPage(
-        name: PrescriptionInsideScreen.routeName,
-        page: () => PrescriptionInsideScreen(),
+      name: PrescriptionInsideScreen.routeName,
+      page: () => PrescriptionInsideScreen(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -106,7 +92,6 @@ class AppRoutes {
       page: () => PrescriptionFormScreen(),
       binding: ProfileBinding(),
     ),
-
     GetPage(
       name: SpecialistScreen.routeName,
       page: () => const SpecialistScreen(),
@@ -126,6 +111,18 @@ class AppRoutes {
           return ListOfSpecialistScreen(doctorList: list);
         },
         binding: SpecialistBinding()),
+    GetPage(
+      name: SpecialistDetailScreen.routeName,
+      page: () {
+        DoctorsList doctor = Get.arguments;
+        return SpecialistDetailScreen(doctor: doctor);
+      },
+    ),
+    GetPage(
+      name: PaymentScreen.routeName,
+      page: () => PaymentScreen(),
+      binding: PaymentBinding(),
+    ),
     GetPage(
       name: LoginScreen.routeName,
       page: () => LoginScreen(),

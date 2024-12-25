@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../widgets/custom_specialist_container.dart';
 import '../models/doctor_list.dart';
 
@@ -25,11 +26,7 @@ class HomeTabWidget extends StatelessWidget {
           specialist: docList?.serviceData?.name ?? '',
           charges: docList?.fees ?? '',
           onPressed: () {
-            Get.to(
-              SpecialistDetailScreen(
-                doctor: docList!,
-              ),
-            );
+            Get.toNamed(SpecialistDetailScreen.routeName, arguments: docList!);
           },
         );
       },

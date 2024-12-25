@@ -126,7 +126,7 @@ class HomeScreen extends GetView<HomeController> {
                         // rating: doctor.rating,
                         // review: doctor.review,
                         onPressed: () {
-                          Get.to(SpecialistDetailScreen(doctor: doctor!));
+                          Get.toNamed(SpecialistDetailScreen.routeName,arguments: doctor!);
                         },
                       ),
                       SizedBox(

@@ -33,6 +33,18 @@ class CustomTabBar extends StatelessWidget {
           dividerHeight: 0,
 
           tabs: [
+            /*Tab(
+              child: Text(
+                tabText1,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Tab(
+              child: Text(
+                tabText2,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),*/
             Container(
               decoration: BoxDecoration(
                 color: AppColors.white,
