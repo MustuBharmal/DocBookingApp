@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:doc_booking_app/presentations/authentication/controller/loader_controller.dart';
+import 'package:doc_booking_app/presentations/authentication/models/city_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/state_model.dart';
 import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart';
@@ -24,6 +25,7 @@ class AuthController extends GetxController {
   // RxString selectState = RxString('state1');
   Rx<CountryModel?> selectCountry = Rx(null);
   Rx<StateModel?> selectState = Rx(null);
+  Rx<CityModel?> selectCity = Rx(null);
   RxBool isObscure = true.obs;
   Rx<File?> selectedImage = Rx<File?>(null);
   Rx<File?> selectedImageSignup = Rx<File?>(null);
@@ -34,6 +36,8 @@ class AuthController extends GetxController {
   final RxList<CountryModel> searchedCountries = RxList.empty();
   final List<StateModel> states = [];
   final RxList<StateModel> searchedStates = RxList.empty();
+  final List<CityModel> cities = [];
+  final RxList<CityModel> searchedCities = RxList.empty();
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
   RxMap<String, String> signupError = RxMap({});
 
@@ -57,19 +61,35 @@ class AuthController extends GetxController {
     }
   }
 
-  void searchState(String value) {
-    if (value.isNotEmpty) {
+  // fetch all cities
+  void getCitiesAndState(String stateName) async {
+    try {
+      selectState.value = states.firstWhere((state) => state.name == stateName);
+      cities.clear();
+      cities.addAll(await AuthRepo.getCities(selectState.value!.id.toString()));
+      update(['city']);
+    } catch (e) {
+      LogUtil.error(e.toString());
+    }
+  }
+
+  void dummyFun(String stateName) async {}
+
+  /*void searchState(String value) {
+    if (value != '') {
+      LogUtil.debug(value);
       searchedStates.clear();
       searchedStates.addAll(states
-          .where((country) =>
-              country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
+          .where((state) =>
+              state.name?.toLowerCase().startsWith(value.toLowerCase()) ??
               false)
           .toList());
+      searchedStates.refresh();
     } else {
       searchedStates.clear();
       searchedStates.addAll(states);
     }
-  }
+  }*/
 
   void searchCountry(String value) {
     if (value.isNotEmpty) {
@@ -101,7 +121,22 @@ class AuthController extends GetxController {
       states.clear();
       states.addAll(await AuthRepo.getState(countryId.toString()));
       update(['state']);
-      searchState('');
+      // searchState('');
+      LogUtil.debug(states.length);
+    } catch (e) {
+      LogUtil.error(e.toString());
+    }
+  }
+
+  getStatesAndCountry(String countryName) async {
+    try {
+      selectCountry.value =
+          countries.firstWhere((country) => country.name == countryName);
+      states.clear();
+      states
+          .addAll(await AuthRepo.getState(selectCountry.value!.id.toString()));
+      update(['state']);
+      // searchState('');
       LogUtil.debug(states.length);
     } catch (e) {
       LogUtil.error(e.toString());

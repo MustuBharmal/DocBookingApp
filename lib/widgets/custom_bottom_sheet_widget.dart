@@ -21,7 +21,6 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    print(Get.height * 0.51);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 23),
       decoration: const BoxDecoration(

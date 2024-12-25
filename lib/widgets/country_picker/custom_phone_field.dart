@@ -117,7 +117,8 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(25),
+                                                borderRadius:
+                                                    BorderRadius.circular(25),
                                               ),
                                               isDense: true,
                                               hintText: 'Search',
@@ -131,8 +132,14 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
                                                 countries.addAll(
                                                   allCountries.where(
                                                     (c) {
-                                                      return c.name?.toLowerCase().startsWith(value.toLowerCase()) ??
-                                                          c.iso2?.toLowerCase().startsWith(value.toLowerCase()) ??
+                                                      return c.name
+                                                              ?.toLowerCase()
+                                                              .startsWith(value
+                                                                  .toLowerCase()) ??
+                                                          c.iso2
+                                                              ?.toLowerCase()
+                                                              .startsWith(value
+                                                                  .toLowerCase()) ??
                                                           false;
                                                     },
                                                   ),
@@ -154,7 +161,8 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
                                         itemBuilder: (ctx, index) => ListTile(
                                           onTap: () {
                                             if (widget.onChanged != null) {
-                                              widget.onChanged!(countries[index]);
+                                              widget
+                                                  .onChanged!(countries[index]);
                                             }
                                             selectedCountry = countries[index];
                                             setState(() {});
@@ -210,7 +218,8 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
                     readOnly: loading,
                     controller: widget.controller,
                     keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      prefixText: selectedCountry?.phoneCode ?? '',
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(horizontal: 10),
                     ),

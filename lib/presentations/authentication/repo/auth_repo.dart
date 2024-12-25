@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart' as dio;
+import 'package:doc_booking_app/presentations/authentication/models/city_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/state_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/user.dart';
@@ -290,6 +291,7 @@ abstract class AuthRepo {
     }
   }
 
+  // get states
   static Future<List<StateModel>> getState(String countryId) async {
     try {
       final result = await HttpService.post(
@@ -302,6 +304,35 @@ abstract class AuthRepo {
           return stateResponse.data;
         } else {
           throw Exception('Error: ${stateResponse.message}');
+        }
+      }
+      return [];
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  // get cities
+  static Future<List<CityModel>> getCities(String stateId) async {
+    try {
+      final result = await HttpService.post(
+          Api.city, {'state_id': stateId},
+          showLoader: false);
+      LogUtil.debug(result);
+      if (result['code'] == 200) {
+        final CityResponse cityResponse = CityResponse.fromJson(result);
+        if (cityResponse.success) {
+          return cityResponse.data;
+        } else {
+          throw Exception('Error: ${cityResponse.message}');
         }
       }
       return [];
