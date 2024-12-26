@@ -130,8 +130,8 @@ abstract class AuthRepo {
     try {
       final Map<String, dynamic> data = {
         _resetTokenKey: StorageUtil.getToken(),
-        _newPassKey:  newPass,
-        _confirmPassKey:  confirmPass
+        _newPassKey: newPass,
+        _confirmPassKey: confirmPass
       };
       LogUtil.debug(Api.resetPassword);
       final result = await HttpService.post(
@@ -174,6 +174,7 @@ abstract class AuthRepo {
     required String city,
     required String profilePic,
     required String password,
+    required String pinCode,
     bool showLoader = true,
   }) async {
     try {
@@ -189,6 +190,7 @@ abstract class AuthRepo {
         'city': city,
         'profile_pic': profilePic,
         'password': password,
+        'pin_code': pinCode
       };
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
@@ -199,7 +201,7 @@ abstract class AuthRepo {
         Get.snackbar('Success', result['message'].toString());
         return User.fromJson(result['data'] as Map<String, dynamic>);
       } else {
-        throw Exception("Error: ${result['message']}");
+        throw Exception("${result['data']['error']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);
@@ -207,7 +209,7 @@ abstract class AuthRepo {
     } catch (e) {
       if (e is dio.DioException) {
         final errData = (e).response!.data;
-        final String? errMessage = errData['message']?.toString();
+        final String? errMessage = errData['data']['error']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;
@@ -323,8 +325,7 @@ abstract class AuthRepo {
   // get cities
   static Future<List<CityModel>> getCities(String stateId) async {
     try {
-      final result = await HttpService.post(
-          Api.city, {'state_id': stateId},
+      final result = await HttpService.post(Api.city, {'state_id': stateId},
           showLoader: false);
       LogUtil.debug(result);
       if (result['code'] == 200) {

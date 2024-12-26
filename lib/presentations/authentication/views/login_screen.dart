@@ -128,7 +128,7 @@ class LoginScreen extends GetView<AuthController> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Get.offNamed(SignupScreen.routeName);
+                              Get.toNamed(SignupScreen.routeName);
                             },
                             child: Text(ConstantString.signUpHere,
                                 style: blueNormalTextStyle))

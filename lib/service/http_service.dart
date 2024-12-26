@@ -79,6 +79,7 @@ class HttpService extends HttpOverrides {
         result = response.data as Map<String, dynamic>;
         return result;
       }
+      result = response.data as Map<String, dynamic>;
       LogUtil.error(response.statusCode);
       if (response.data != null && response.data['data'] is Map<String, String>) {
         throw CustomErrorMap(response.data['message'] ?? '', errors: response.data['data']);
