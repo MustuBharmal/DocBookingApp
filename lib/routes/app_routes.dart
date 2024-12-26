@@ -142,7 +142,10 @@ class AppRoutes {
     ),
     GetPage(
       name: BookTimeSlotScreen.routeName,
-      page: () => BookTimeSlotScreen(),
+      page: () {
+        DoctorsList doctor = Get.arguments;
+        return BookTimeSlotScreen(doctor);
+      },
     ),
     GetPage(
       name: UserInfoEditScreen.routeName,

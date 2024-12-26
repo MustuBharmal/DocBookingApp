@@ -28,5 +28,6 @@ abstract class AppColors {
   static const Color blueGradient3 = Color(0xFFACC5FD); //#ACC5FD
   static const Color blueGradient2 = Color(0xFF2267FF); //#2267FF
   static const Color dividerBorderColor = Color(0xFFDFDFDF); //#DFDFDF
+  static const Color selectedDotColor = Color(0xFF5ADDD4); //#5ADDD4
   static const Color errorTextColor = Colors.redAccent; //#DFDFDF
 }

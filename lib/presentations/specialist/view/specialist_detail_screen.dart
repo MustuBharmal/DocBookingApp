@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
-import 'package:doc_booking_app/presentations/booking/views/book_slots_confirm_screen.dart';
+import 'package:doc_booking_app/presentations/booking/views/book_time_slot_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
@@ -199,10 +199,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   Text(
                     ConstantString.about,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textHeaderBlack),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textHeaderBlack),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 20),
@@ -211,10 +208,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       text: TextSpan(
                         text: doctor.about,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: AppColors.textHeaderGray),
+                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textHeaderGray),
                       ),
                     ),
                   ),
@@ -231,20 +225,14 @@ class SpecialistDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomIconSizeBox(
-                          iconPath: AppImage.map,
-                          iconWidth: 25,
-                          iconHeight: 25),
+                      CustomIconSizeBox(iconPath: AppImage.map, iconWidth: 25, iconHeight: 25),
                       SizedBox(
                         width: 10,
                       ),
                       Expanded(
                         child: Text(
                           '4517 Washington Ave. Manchester, Kentucky 39495',
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: AppColors.textHeaderGray,
-                              fontWeight: FontWeight.w400),
+                          style: TextStyle(fontSize: 14, color: AppColors.textHeaderGray, fontWeight: FontWeight.w400),
                         ),
                       ),
                     ],
@@ -273,7 +261,8 @@ class SpecialistDetailScreen extends StatelessWidget {
                   BlueButton(
                     label: ConstantString.bookAppointment,
                     onPressed: () {
-                      Get.toNamed(BookSlotsConfirmScreen.routeName);
+                      Get.toNamed(BookTimeSlotScreen.routeName,arguments: doctor);
+                      // Get.toNamed(BookSlotsConfirmScreen.routeName);
                     },
                   )
                 ],
