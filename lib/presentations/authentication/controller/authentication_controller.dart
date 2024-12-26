@@ -35,9 +35,7 @@ class AuthController extends GetxController {
   final List<CountryModel> countries = [];
   final RxList<CountryModel> searchedCountries = RxList.empty();
   final List<StateModel> states = [];
-  final RxList<StateModel> searchedStates = RxList.empty();
   final List<CityModel> cities = [];
-  final RxList<CityModel> searchedCities = RxList.empty();
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
   RxMap<String, String> signupError = RxMap({});
 
@@ -73,7 +71,9 @@ class AuthController extends GetxController {
     }
   }
 
-  void dummyFun(String stateName) async {}
+  void getCity(String cityName) async {
+    selectCity.value = cities.firstWhere((country) => country.name == cityName);
+  }
 
   /*void searchState(String value) {
     if (value != '') {
@@ -179,6 +179,8 @@ class AuthController extends GetxController {
     required String state,
     required String country,
     required String pinCode,
+    required double lat,
+    required double long,
   }) async {
     try {
       signupError.clear();
@@ -247,6 +249,8 @@ class AuthController extends GetxController {
             password: password,
             country: country,
             pinCode: pinCode,
+            lat: lat,
+            long: long,
             showLoader: false);
         LoaderController.instance.dismissLoader();
         if (user.value != null) {

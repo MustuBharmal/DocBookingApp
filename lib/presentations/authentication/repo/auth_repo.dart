@@ -44,9 +44,9 @@ abstract class AuthRepo {
         StorageUtil.writeToken(result['data']['access_token'].toString());
         StorageUtil.writeUserId(result['data']['user']['id'].toString());
         Get.toNamed(AccountVerificationScreen.routeName);
-        throw Exception(result['message']);
+        throw Exception("${result['data']['error']}");
       } else {
-        throw Exception("Error: ${result['status']}");
+        throw Exception("${result['data']['error']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);
@@ -175,6 +175,8 @@ abstract class AuthRepo {
     required String profilePic,
     required String password,
     required String pinCode,
+    required double lat,
+    required double long,
     bool showLoader = true,
   }) async {
     try {
@@ -190,7 +192,8 @@ abstract class AuthRepo {
         'city': city,
         'profile_pic': profilePic,
         'password': password,
-        'pin_code': pinCode
+        'pin_code': pinCode,
+        'location_json': {'lat': lat, 'lng': long}
       };
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
@@ -250,9 +253,9 @@ abstract class AuthRepo {
         LogUtil.debug(result['data']);
         return User.fromJson(result['data'] as Map<String, dynamic>);
       } else if (result['isLive'] == false) {
-        throw Exception("Error: ${result['message']}");
+        throw Exception("${result['message']}");
       } else {
-        throw Exception("Error: ${result['message']}");
+        throw Exception("${result['message']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);

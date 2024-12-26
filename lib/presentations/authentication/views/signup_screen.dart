@@ -271,7 +271,7 @@ class SignupScreen extends GetView<AuthController> {
                                   .toList()),
                               RxList.empty(),
                               cityController,
-                              controller.dummyFun,
+                              controller.getCity,
                             );
                           } else {
                             LogUtil.debug('hello');
@@ -305,7 +305,9 @@ class SignupScreen extends GetView<AuthController> {
                             city: cityController.text,
                             state: stateController.text,
                             country: countryController.text,
-                            pinCode: postCodeController.text
+                            pinCode: postCodeController.text,
+                            lat: double.parse(controller.selectCity.value?.latitude ?? '0.0') ,
+                            long: double.parse(controller.selectCity.value?.longitude ?? '0.0'),
                           );
                         },
                       ),
