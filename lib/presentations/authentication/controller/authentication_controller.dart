@@ -96,8 +96,8 @@ class AuthController extends GetxController {
       searchedCountries.clear();
       searchedCountries.addAll(countries
           .where((country) =>
-              country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
-              false)
+      country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
+          false)
           .toList());
     } else {
       searchedCountries.clear();
