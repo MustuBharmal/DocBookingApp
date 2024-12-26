@@ -207,7 +207,7 @@ abstract class AuthRepo {
     } catch (e) {
       if (e is dio.DioException) {
         final errData = (e).response!.data;
-        final String? errMessage = errData['message']?.toString();
+        final String? errMessage = errData['data']['error']?.toString();
         throw errMessage ?? 'Please try again';
       }
       rethrow;
@@ -248,9 +248,9 @@ abstract class AuthRepo {
         LogUtil.debug(result['data']);
         return User.fromJson(result['data'] as Map<String, dynamic>);
       } else if (result['isLive'] == false) {
-        throw Exception("Error: ${result['message']}");
+        throw Exception("${result['message']}");
       } else {
-        throw Exception("Error: ${result['message']}");
+        throw Exception("${result['message']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);
@@ -323,8 +323,7 @@ abstract class AuthRepo {
   // get cities
   static Future<List<CityModel>> getCities(String stateId) async {
     try {
-      final result = await HttpService.post(
-          Api.city, {'state_id': stateId},
+      final result = await HttpService.post(Api.city, {'state_id': stateId},
           showLoader: false);
       LogUtil.debug(result);
       if (result['code'] == 200) {

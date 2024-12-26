@@ -51,290 +51,290 @@ class SignupScreen extends GetView<AuthController> {
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 11),
           child: SingleChildScrollView(
-            child: Obx(
-              () => Column(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        ConstantString.signUp,
-                        style: headerTextStyle,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, bottom: 25),
-                        child: Text(ConstantString.createAccount,
-                            style: txtInterTextField),
-                      ),
-                      Obx(
-                        () => Container(
-                          height: 100,
-                          width: 100,
-                          padding: EdgeInsets.all(0),
-                          decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(21)),
-                          child: DottedBorder(
-                            color: AppColors.borderColor,
-                            radius: Radius.circular(20),
-                            borderType: BorderType.RRect,
-                            stackFit: StackFit.passthrough,
-                            dashPattern: [4, 3],
-                            borderPadding: EdgeInsets.all(1),
-                            child: Container(
-                              decoration:
-                                  controller.selectedImageSignup.value != null
-                                      ? BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(19),
-                                          image: DecorationImage(
-                                              image: FileImage(controller
-                                                  .selectedImageSignup.value!),
-                                              fit: BoxFit.cover))
-                                      : null,
-                              child: controller.selectedImageSignup.value ==
-                                      null
-                                  ? Center(
-                                      child:
-                                          SvgPicture.asset(AppImage.icCamera))
-                                  : null,
-                            ),
+            child: Column(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      ConstantString.signUp,
+                      style: headerTextStyle,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, bottom: 25),
+                      child: Text(ConstantString.createAccount,
+                          style: txtInterTextField),
+                    ),
+                    Obx(
+                      () => Container(
+                        height: 100,
+                        width: 100,
+                        padding: EdgeInsets.all(0),
+                        decoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(21)),
+                        child: DottedBorder(
+                          color: AppColors.borderColor,
+                          radius: Radius.circular(20),
+                          borderType: BorderType.RRect,
+                          stackFit: StackFit.passthrough,
+                          dashPattern: [4, 3],
+                          borderPadding: EdgeInsets.all(1),
+                          child: Container(
+                            decoration:
+                                controller.selectedImageSignup.value != null
+                                    ? BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        image: DecorationImage(
+                                            image: FileImage(controller
+                                                .selectedImageSignup.value!),
+                                            fit: BoxFit.cover))
+                                    : null,
+                            child: controller.selectedImageSignup.value == null
+                                ? Center(
+                                    child: SvgPicture.asset(AppImage.icCamera))
+                                : null,
                           ),
-                        ).onClick(() {
-                          controller.pickImageSignup();
-                        }),
-                      ),
-                      if (controller.signupError['profile_pic'] != null)
-                        Text(
-                          controller.signupError['profile_pic']!,
-                          style: TextStyle(color: AppColors.errorTextColor),
                         ),
+                      ).onClick(() {
+                        controller.pickImageSignup();
+                      }),
+                    ),
+                    if (controller.signupError['profile_pic'] != null)
                       Text(
-                        ConstantString.uploadPhoto,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF899CA8),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
+                        controller.signupError['profile_pic']!,
+                        style: TextStyle(color: AppColors.errorTextColor),
                       ),
-                      SizedBox(
-                        height: 25,
+                    Text(
+                      ConstantString.uploadPhoto,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF899CA8),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                      CustomTextField(
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    CustomTextField(
+                      isPassword: RxBool(false),
+                      label: ConstantString.fullName,
+                      showAsterisk: true,
+                      controller: fullNameController,
+                      hintStyle: txtInterTextFieldHint,
+                      hintText: 'eg. Alex',
+                      errorText: controller.signupError['name'],
+                    ),
+                    CustomTextField(
+                      isPassword: RxBool(false),
+                      controller: emailController,
+                      inputType: TextInputType.emailAddress,
+                      hintText: 'eg. alex@gmail.com',
+                      label: ConstantString.emailAddress,
+                      hintStyle: txtInterTextFieldHint,
+                      showAsterisk: true,
+                      errorText: controller.signupError['email'],
+                    ),
+                    CustomPhoneField(
+                      controller: phoneController,
+                      countries: controller.countries,
+                      errorText: controller.signupError['phone'],
+                    ),
+                    CustomTextField(
+                      isPassword: RxBool(true),
+                      controller: passController,
+                      hintText: 'eg. 123',
+                      label: ConstantString.password,
+                      hintStyle: txtInterTextFieldHint,
+                      showAsterisk: true,
+                      errorText: controller.signupError['password'],
+                    ),
+                    CustomDobTextField(
+                      hintText: 'day/month/year',
+                      hintStyle: txtInterTextFieldHint,
+                      controller: dobController,
+                      label: ConstantString.dob,
+                      showAsterisk: true,
+                      errorText: controller.signupError['dob'],
+                      validator: null,
+                    ),
+                    CustomDropdown(
+                      label: ConstantString.sex,
+                      showAsterisk: true,
+                      items: ['Male', 'Female', 'Other'],
+                      selectedItem: controller.selectSex.value,
+                      onChanged: (String? gender) {
+                        if (gender != null) {
+                          sexController.text = gender;
+                          controller.selectSex.value = gender;
+                        }
+                      },
+                      errorText: controller.signupError['sex'],
+                    ),
+                    CustomTextField(
+                      isPassword: RxBool(false),
+                      label: ConstantString.address,
+                      showAsterisk: true,
+                      controller: addressController,
+                      hintStyle: txtInterTextFieldHint,
+                      hintText:
+                          'eg 4517 Washington Ave. Manchester, Kentucky 39495',
+                      errorText: controller.signupError['address'],
+                    ),
+                    Obx(
+                      () => CustomTextField(
                         isPassword: RxBool(false),
-                        label: ConstantString.fullName,
+                        label: 'Country',
                         showAsterisk: true,
-                        controller: fullNameController,
-                        hintStyle: txtInterTextFieldHint,
-                        hintText: 'eg. Alex',
-                        errorText: controller.signupError['name'],
-                      ),
-                      CustomTextField(
-                        isPassword: RxBool(false),
-                        controller: emailController,
-                        hintText: 'eg. alex@gmail.com',
-                        label: ConstantString.emailAddress,
-                        hintStyle: txtInterTextFieldHint,
-                        showAsterisk: true,
-                        errorText: controller.signupError['email'],
-                      ),
-                      CustomPhoneField(
-                        controller: phoneController,
-                        countries: controller.countries,
-                        errorText: controller.signupError['phone'],
-                      ),
-                      CustomTextField(
-                        isPassword: RxBool(true),
-                        controller: passController,
-                        hintText: 'eg. 123',
-                        label: ConstantString.password,
-                        hintStyle: txtInterTextFieldHint,
-                        showAsterisk: true,
-                        errorText: controller.signupError['password'],
-                      ),
-                      CustomDobTextField(
-                        hintText: 'day/month/year',
-                        hintStyle: txtInterTextFieldHint,
-                        controller: dobController,
-                        label: ConstantString.dob,
-                        showAsterisk: true,
-                        errorText: controller.signupError['dob'],
-                        validator: null,
-                      ),
-                      CustomDropdown(
-                        label: ConstantString.sex,
-                        showAsterisk: true,
-                        items: ['Male', 'Female', 'Other'],
-                        selectedItem: controller.selectSex.value,
-                        onChanged: (String? gender) {
-                          if (gender != null) {
-                            sexController.text = gender;
-                            controller.selectSex.value = gender;
-                          }
-                        },
-                        errorText: controller.signupError['sex'],
-                      ),
-                      CustomTextField(
-                        isPassword: RxBool(false),
-                        label: ConstantString.address,
-                        showAsterisk: true,
-                        controller: addressController,
-                        hintStyle: txtInterTextFieldHint,
-                        hintText:
-                            'eg 4517 Washington Ave. Manchester, Kentucky 39495',
-                        errorText: controller.signupError['address'],
-                      ),
-                      /*CustomTextField(
-                        isPassword: RxBool(false),
-                        label: ConstantString.postCode,
-                        showAsterisk: true,
-                        controller: postCodeController,
+                        readOnly: true,
+                        controller: countryController,
                         hintStyle: txtInterTextFieldHint,
                         inputType: TextInputType.number,
-                        hintText: 'eg 12345',
+                        hintText: '',
+                        errorText: controller.signupError['country'],
+                        showDropDownIcon: true,
+                        onTap: () {
+                          controller.selectState.value = null;
+                          if (controller.searchedCountries.isNotEmpty) {
+                            TypeOfDialogs.showCommonBottomSheetDialog(
+                              context,
+                              'Country',
+                              RxList.from(controller.searchedCountries
+                                  .where((country) => country.name != null)
+                                  .map((country) => country.name!)
+                                  .toList()),
+                              RxList.from(controller.searchedCountries
+                                  .where((country) => country.emoji != null)
+                                  .map((country) => country.emoji!)
+                                  .toList()),
+                              countryController,
+                              controller.getStatesAndCountry,
+                            );
+                          } else {
+                            LogUtil.debug('hello');
+                          }
+                        },
+                      ),
+                    ),
+                    Obx(
+                      () => CustomTextField(
+                        isPassword: RxBool(false),
+                        label: 'State',
+                        showAsterisk: true,
+                        readOnly: true,
+                        controller: stateController,
+                        hintStyle: txtInterTextFieldHint,
+                        hintText: '',
+                        errorText: controller.signupError['state'],
+                        showDropDownIcon: true,
+                        onTap: () {
+                          controller.selectState.value = null;
+                          if (controller.states.isNotEmpty) {
+                            TypeOfDialogs.showCommonBottomSheetDialog(
+                              context,
+                              'State',
+                              RxList.from(controller.states
+                                  .where((state) => state.name != null)
+                                  .map((state) => state.name!)
+                                  .toList()),
+                              RxList.empty(),
+                              stateController,
+                              controller.getCitiesAndState,
+                            );
+                          } else {
+                            LogUtil.debug('hello');
+                          }
+                        },
+                      ),
+                    ),
+                    Obx(
+                      () => CustomTextField(
+                        isPassword: RxBool(false),
+                        label: 'City',
+                        showAsterisk: true,
+                        readOnly: true,
+                        controller: cityController,
+                        hintStyle: txtInterTextFieldHint,
+                        hintText: '',
                         errorText: controller.signupError['city'],
-                      ),*/
-                      Obx(
-                        () => CustomTextField(
-                          isPassword: RxBool(false),
-                          label: 'Country',
-                          showAsterisk: true,
-                          readOnly: true,
-                          controller: countryController,
-                          hintStyle: txtInterTextFieldHint,
-                          inputType: TextInputType.number,
-                          hintText: '',
-                          errorText: controller.signupError['country'],
-                          showDropDownIcon: true,
-                          onTap: () {
-                            controller.selectState.value = null;
-                            if (controller.searchedCountries.isNotEmpty) {
-                              TypeOfDialogs.showCommonBottomSheetDialog(
-                                context,
-                                'Country',
-                                RxList.from(controller.searchedCountries
-                                    .where((country) => country.name != null)
-                                    .map((country) => country.name!)
-                                    .toList()),
-                                RxList.from(controller.searchedCountries
-                                    .where((country) => country.emoji != null)
-                                    .map((country) => country.emoji!)
-                                    .toList()),
-                                countryController,
-                                controller.getStatesAndCountry,
-                              );
-                            } else {
-                              LogUtil.debug('hello');
-                            }
-                          },
+                        showDropDownIcon: true,
+                        onTap: () {
+                          controller.selectCity.value = null;
+                          if (controller.cities.isNotEmpty) {
+                            TypeOfDialogs.showCommonBottomSheetDialog(
+                              context,
+                              'City',
+                              RxList.from(controller.cities
+                                  .where((city) => city.name != null)
+                                  .map((city) => city.name!)
+                                  .toList()),
+                              RxList.empty(),
+                              cityController,
+                              controller.getCity,
+                            );
+                          } else {
+                            LogUtil.debug('hello');
+                          }
+                        },
+                      ),
+                    ),
+                    CustomTextField(
+                      isPassword: RxBool(false),
+                      label: ConstantString.postCode,
+                      showAsterisk: true,
+                      controller: postCodeController,
+                      hintStyle: txtInterTextFieldHint,
+                      inputType: TextInputType.number,
+                      hintText: 'eg 12345',
+                      errorText: controller.signupError['pin_code'],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 19, bottom: 20),
+                      child: BlueButton(
+                        label: ConstantString.save,
+                        onPressed: () {
+                          controller.signUp(
+                            name: fullNameController.text,
+                            email: emailController.text,
+                            phone: phoneController.text,
+                            password: passController.text,
+                            dob: dobController.text,
+                            sex: sexController.text,
+                            address: addressController.text,
+                            city: cityController.text,
+                            state: stateController.text,
+                            country: countryController.text,
+                            pinCode: postCodeController.text,
+                            lat: double.parse(controller.selectCity.value?.latitude ?? '0.0') ,
+                            long: double.parse(controller.selectCity.value?.longitude ?? '0.0'),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        ConstantString.alreadyHaveAcc,
+                        style: normalTextStyle,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.offNamed(LoginScreen.routeName);
+                        },
+                        child: Text(
+                          ConstantString.signInHere,
+                          style: blueNormalTextStyle,
                         ),
                       ),
-                      Obx(
-                        () => CustomTextField(
-                          isPassword: RxBool(false),
-                          label: 'State',
-                          showAsterisk: true,
-                          readOnly: true,
-                          controller: stateController,
-                          hintStyle: txtInterTextFieldHint,
-                          hintText: '',
-                          errorText: controller.signupError['state'],
-                          showDropDownIcon: true,
-                          onTap: () {
-                            controller.selectState.value = null;
-                            if (controller.states.isNotEmpty) {
-                              TypeOfDialogs.showCommonBottomSheetDialog(
-                                context,
-                                'State',
-                                RxList.from(controller.states
-                                    .where((state) => state.name != null)
-                                    .map((state) => state.name!)
-                                    .toList()),
-                                RxList.empty(),
-                                stateController,
-                                controller.getCitiesAndState,
-                              );
-                            } else {
-                              LogUtil.debug('hello');
-                            }
-                          },
-                        ),
-                      ),
-                      Obx(
-                        () => CustomTextField(
-                          isPassword: RxBool(false),
-                          label: 'City',
-                          showAsterisk: true,
-                          readOnly: true,
-                          controller: cityController,
-                          hintStyle: txtInterTextFieldHint,
-                          hintText: '',
-                          errorText: controller.signupError['city'],
-                          showDropDownIcon: true,
-                          onTap: () {
-                            controller.selectCity.value = null;
-                            if (controller.cities.isNotEmpty) {
-                              TypeOfDialogs.showCommonBottomSheetDialog(
-                                context,
-                                'City',
-                                RxList.from(controller.cities
-                                    .where((city) => city.name != null)
-                                    .map((city) => city.name!)
-                                    .toList()),
-                                RxList.empty(),
-                                cityController,
-                                controller.dummyFun,
-                              );
-                            } else {
-                              LogUtil.debug('hello');
-                            }
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 19, bottom: 20),
-                        child: BlueButton(
-                          label: ConstantString.save,
-                          onPressed: () {
-                            controller.signUp(
-                                name: fullNameController.text,
-                                email: emailController.text,
-                                phone: phoneController.text,
-                                password: passController.text,
-                                dob: dobController.text,
-                                sex: sexController.text,
-                                address: addressController.text,
-                                postalCode: postCodeController.text,
-                                state: stateController.text,
-                                country: countryController.text);
-                          },
-                        ),
-                      )
                     ],
                   ),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          ConstantString.alreadyHaveAcc,
-                          style: normalTextStyle,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Get.offNamed(LoginScreen.routeName);
-                          },
-                          child: Text(
-                            ConstantString.signInHere,
-                            style: blueNormalTextStyle,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ),

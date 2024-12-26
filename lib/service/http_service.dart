@@ -42,12 +42,15 @@ class HttpService extends HttpOverrides {
         options: token ? dio.Options(headers: {'own-access-token': 'Bearer ${StorageUtil.getToken().toString()}'}) : null,
       );
       showLoader ? LoaderController.instance.dismissLoader() : null;
+      result = response.data as Map<String, dynamic>;
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
-      } else {
+      }
+      else {
         if (response.data != null && response.data['data'] is Map<String, String>) {
           throw CustomErrorMap(response.data['message'] ?? '', errors: response.data['data']);
         }
+
         LogUtil.error(response.data);
         LogUtil.error(response.data['message']);
       }
@@ -79,6 +82,7 @@ class HttpService extends HttpOverrides {
         result = response.data as Map<String, dynamic>;
         return result;
       }
+      result = response.data as Map<String, dynamic>;
       LogUtil.error(response.statusCode);
       if (response.data != null && response.data['data'] is Map<String, String>) {
         throw CustomErrorMap(response.data['message'] ?? '', errors: response.data['data']);

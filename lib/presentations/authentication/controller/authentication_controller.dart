@@ -35,9 +35,7 @@ class AuthController extends GetxController {
   final List<CountryModel> countries = [];
   final RxList<CountryModel> searchedCountries = RxList.empty();
   final List<StateModel> states = [];
-  final RxList<StateModel> searchedStates = RxList.empty();
   final List<CityModel> cities = [];
-  final RxList<CityModel> searchedCities = RxList.empty();
   Rx<CountryModel?> selectedCountrySingUp = Rx(null);
   RxMap<String, String> signupError = RxMap({});
 
@@ -73,7 +71,9 @@ class AuthController extends GetxController {
     }
   }
 
-  void dummyFun(String stateName) async {}
+  void getCity(String cityName) async {
+    selectCity.value = cities.firstWhere((country) => country.name == cityName);
+  }
 
   /*void searchState(String value) {
     if (value != '') {
@@ -167,17 +167,21 @@ class AuthController extends GetxController {
     } finally {}
   }
 
-  Future<void> signUp(
-      {required String name,
-      required String email,
-      required String phone,
-      required String password,
-      required String dob,
-      required String address,
-      required String postalCode,
-      required String sex,
-      required String state,
-      required String country}) async {
+  Future<void> signUp({
+    required String name,
+    required String email,
+    required String phone,
+    required String password,
+    required String dob,
+    required String address,
+    required String city,
+    required String sex,
+    required String state,
+    required String country,
+    required String pinCode,
+    required double lat,
+    required double long,
+  }) async {
     try {
       signupError.clear();
       if (name.isEmpty) {
@@ -209,11 +213,14 @@ class AuthController extends GetxController {
       if (country.isEmpty) {
         signupError['country'] = 'Please select country!';
       }
-      if (postalCode.isEmpty) {
-        signupError['city'] = 'Please enter Postal Code!';
+      if (city.isEmpty) {
+        signupError['city'] = 'Please select city!';
       }
       if (address.isEmpty) {
         signupError['address'] = 'Please enter address!';
+      }
+      if (pinCode.isEmpty) {
+        signupError['pin_code'] = 'Please Postal Code!';
       }
       if (selectedImageSignup.value == null) {
         signupError['profile_pic'] = 'Please select image';
@@ -237,10 +244,13 @@ class AuthController extends GetxController {
             address: address,
             sex: sex,
             state: state,
-            city: postalCode,
+            city: city,
             profilePic: profilePic,
             password: password,
             country: country,
+            pinCode: pinCode,
+            lat: lat,
+            long: long,
             showLoader: false);
         LoaderController.instance.dismissLoader();
         if (user.value != null) {
