@@ -19,7 +19,7 @@ class PrescriptionChatScreen extends GetView<ProfileController> {
               padding: EdgeInsets.all(10),
               itemCount: controller.messages.length,
               itemBuilder: (context, index) {
-                final isUserMessage = index % 2 != 0; // Alternate alignment
+                final isUserMessage = controller.messages[index].startsWith('You:'); // Alternate alignment
                 return Align(
                   alignment: isUserMessage
                       ? Alignment.centerRight
@@ -28,10 +28,17 @@ class PrescriptionChatScreen extends GetView<ProfileController> {
                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
+                      color: isUserMessage
+                          ? AppColors.primary.withOpacity(0.1)
+                          : AppColors.borderColor.withOpacity(0.1),
                       border: Border.all(color: isUserMessage ?AppColors.primary : AppColors.borderColor),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text(controller.messages[index]),
+                    child: Text(controller.messages[index].substring(5),style: TextStyle(
+                      color: isUserMessage
+                          ? AppColors.primary
+                          : AppColors.borderColor,
+                    ),),
                   ),
                 );
               },
@@ -54,7 +61,7 @@ class PrescriptionChatScreen extends GetView<ProfileController> {
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
                     decoration: InputDecoration(
-                      hintText: "Type your message",
+                      hintText: 'Type your message',
                       hintStyle: txtInterTextFieldHint,
                       border: InputBorder.none
                     ),
@@ -63,8 +70,12 @@ class PrescriptionChatScreen extends GetView<ProfileController> {
                 IconButton(
                   icon: Icon(Icons.send, color: AppColors.primary),
                   onPressed: () {
-                    controller.addMessage(controller.chatController.text);
-                    controller.chatController.clear();
+                    // Send the message through the ProfileController
+                    final message = controller.chatController.text.trim();
+                    if (message.isNotEmpty) {
+                      controller.sendMessage(message);
+                      controller.chatController.clear();
+                    }
                   },
                 )
               ],
