@@ -1,4 +1,5 @@
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,7 @@ import '../../../widgets/blue_button.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../../../widgets/country_picker/custom_phone_field.dart';
 import '../../../widgets/custom_text_field.dart';
+import '../../authentication/controller/authentication_controller.dart';
 
 class HowToBePartnerScreen extends GetView<ProfileController> {
   static const String routeName = '/how-to-be-partner-screen';
@@ -34,29 +36,32 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
-
                     isPassword: RxBool(false),
                     label: 'Full Name',
                     showAsterisk: true,
                     controller: controller.nameController,
                     hintStyle: txtInterTextFieldHint,
+                    errorText: ProfileController.instance.profileError['name'],
                     hintText: 'John Doe'),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomTextField(
-
                     isPassword: RxBool(false),
                     label: 'Email Address',
                     showAsterisk: true,
                     readOnly: true,
                     controller: controller.emailController,
                     hintStyle: txtInterTextFieldHint,
+                    errorText: ProfileController.instance.profileError['email'],
                     hintText: 'john.doe@gmail.com'),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: CustomPhoneField(controller: controller.phoneController),
+                child: CustomPhoneField(
+                  controller: controller.phoneController,
+                  countries: AuthController.instance.countries,
+                ),
               ),
               /*Padding(
                 padding: const EdgeInsets.only(top: 10.0),
@@ -82,27 +87,33 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
                   },
                 ),
               ),*/
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: CustomTextField(
-
-                    isPassword: RxBool(false),
-                    label: 'Business Name',
-                    showAsterisk: true,
-                    controller: controller.businessNameController,
-                    hintStyle: txtInterTextFieldHint,
-                    hintText: 'Fitness First'),
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: CustomTextField(
+                      isPassword: RxBool(false),
+                      label: 'Business Name',
+                      showAsterisk: true,
+                      controller: controller.businessNameController,
+                      hintStyle: txtInterTextFieldHint,
+                      errorText: ProfileController
+                          .instance.profileError['business_name'],
+                      hintText: 'Fitness First'),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: CustomTextField(
-
-                    isPassword: RxBool(false),
-                    label: 'Business Type',
-                    showAsterisk: true,
-                    controller: controller.businessTypeController,
-                    hintStyle: txtInterTextFieldHint,
-                    hintText: 'Clinic'),
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: CustomTextField(
+                      isPassword: RxBool(false),
+                      label: 'Business Type',
+                      showAsterisk: true,
+                      controller: controller.businessTypeController,
+                      hintStyle: txtInterTextFieldHint,
+                      errorText: ProfileController
+                          .instance.profileError['business_type'],
+                      hintText: 'Clinic'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, top: 10, bottom: 20),
@@ -114,6 +125,7 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
               BlueButton(
                 label: 'Submit',
                 onPressed: () {
+                  controller.htbPartnerValidation();
                   var params = {
                     'name': controller.nameController.text,
                     'email': controller.emailController.text,
@@ -122,6 +134,7 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
                     'business_name': controller.businessNameController.text,
                     'message': controller.messageController.text
                   };
+                  LogUtil.debug(params);
                   controller.howToBePartner(params);
                 },
               ),

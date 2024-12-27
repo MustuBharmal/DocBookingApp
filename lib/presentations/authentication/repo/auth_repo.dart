@@ -13,6 +13,7 @@ import '../../../global/apis.dart';
 import '../../../service/http_service.dart';
 import '../../../util/log_utils.dart';
 import '../../../util/storage_util.dart';
+import '../controller/authentication_controller.dart';
 import '../views/account_verification_screen.dart';
 
 abstract class AuthRepo {
@@ -47,6 +48,33 @@ abstract class AuthRepo {
         throw Exception("${result['data']['error']}");
       } else {
         throw Exception("${result['data']['error']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  static Future<bool> signOut() async {
+    try {
+      LogUtil.debug(Api.logOut);
+      final result = await HttpService.post(Api.logOut, {}, token: true);
+      if (result['status'] == 'success') {
+        AuthController.instance.user.value = null;
+        StorageUtil.deleteToken();
+        StorageUtil.deleteUserId();
+        StorageUtil.deleteUserData();
+        LogUtil.debug('User logged out successfully');
+        return true;
+      } else {
+        throw Exception("${result['message'] ?? 'Logout failed'}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);
@@ -198,7 +226,7 @@ abstract class AuthRepo {
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
       final result =
-      await HttpService.post(Api.signUp, data, showLoader: showLoader);
+          await HttpService.post(Api.signUp, data, showLoader: showLoader);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message'].toString());
@@ -275,7 +303,7 @@ abstract class AuthRepo {
       final result = await HttpService.post(Api.country, {}, showLoader: false);
       if (result['code'] == 200) {
         final CountryResponse countryResponse =
-        CountryResponse.fromJson(result);
+            CountryResponse.fromJson(result);
         if (countryResponse.success) {
           return countryResponse.data;
         } else {
