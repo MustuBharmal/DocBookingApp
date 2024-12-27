@@ -118,70 +118,84 @@ class SignupScreen extends GetView<AuthController> {
                     SizedBox(
                       height: 25,
                     ),
-                    CustomTextField(
-                      isPassword: RxBool(false),
-                      label: ConstantString.fullName,
-                      showAsterisk: true,
-                      controller: fullNameController,
-                      hintStyle: txtInterTextFieldHint,
-                      hintText: 'eg. Alex',
-                      errorText: controller.signupError['name'],
+                    Obx(
+                        () => CustomTextField(
+                        isPassword: RxBool(false),
+                        label: ConstantString.fullName,
+                        showAsterisk: true,
+                        controller: fullNameController,
+                        hintStyle: txtInterTextFieldHint,
+                        hintText: 'eg. Alex',
+                        errorText: controller.signupError['name'],
+                      ),
                     ),
-                    CustomTextField(
-                      isPassword: RxBool(false),
-                      controller: emailController,
-                      inputType: TextInputType.emailAddress,
-                      hintText: 'eg. alex@gmail.com',
-                      label: ConstantString.emailAddress,
-                      hintStyle: txtInterTextFieldHint,
-                      showAsterisk: true,
-                      errorText: controller.signupError['email'],
+                    Obx(
+                        () => CustomTextField(
+                        isPassword: RxBool(false),
+                        controller: emailController,
+                        inputType: TextInputType.emailAddress,
+                        hintText: 'eg. alex@gmail.com',
+                        label: ConstantString.emailAddress,
+                        hintStyle: txtInterTextFieldHint,
+                        showAsterisk: true,
+                        errorText: controller.signupError['email'],
+                      ),
                     ),
-                    CustomPhoneField(
-                      controller: phoneController,
-                      countries: controller.countries,
-                      errorText: controller.signupError['phone'],
+                    Obx(
+                      () => CustomPhoneField(
+                        controller: phoneController,
+                        countries: controller.countries,
+                        errorText: controller.signupError['phone'],
+                      ),
                     ),
-                    CustomTextField(
-                      isPassword: RxBool(true),
-                      controller: passController,
-                      hintText: 'eg. 123',
-                      label: ConstantString.password,
-                      hintStyle: txtInterTextFieldHint,
-                      showAsterisk: true,
-                      errorText: controller.signupError['password'],
+                    Obx(
+                        () => CustomTextField(
+                        isPassword: RxBool(true),
+                        controller: passController,
+                        hintText: 'eg. 123',
+                        label: ConstantString.password,
+                        hintStyle: txtInterTextFieldHint,
+                        showAsterisk: true,
+                        errorText: controller.signupError['password'],
+                      ),
                     ),
-                    CustomDobTextField(
-                      hintText: 'day/month/year',
-                      hintStyle: txtInterTextFieldHint,
-                      controller: dobController,
-                      label: ConstantString.dob,
-                      showAsterisk: true,
-                      errorText: controller.signupError['dob'],
-                      validator: null,
+                    Obx(
+                      () => CustomDobTextField(
+                        hintText: 'day/month/year',
+                        hintStyle: txtInterTextFieldHint,
+                        controller: dobController,
+                        label: ConstantString.dob,
+                        showAsterisk: true,
+                        errorText: controller.signupError['dob'],
+                        validator: null,
+                      ),
                     ),
-                    CustomDropdown(
-                      label: ConstantString.sex,
-                      showAsterisk: true,
-                      items: ['Male', 'Female', 'Other'],
-                      selectedItem: controller.selectSex.value,
-                      onChanged: (String? gender) {
-                        if (gender != null) {
-                          sexController.text = gender;
-                          controller.selectSex.value = gender;
-                        }
-                      },
-                      errorText: controller.signupError['sex'],
+                    Obx(
+                      ()=> CustomDropdown(
+                        label: ConstantString.sex,
+                        showAsterisk: true,
+                        items: ['Male', 'Female', 'Other'],
+                        selectedItem: controller.selectSex.value,
+                        onChanged: (String? gender) {
+                          if (gender != null) {
+                            sexController.text = gender;
+                            controller.selectSex.value = gender;
+                          }
+                        },
+                        errorText: controller.signupError['sex'],
+                      ),
                     ),
-                    CustomTextField(
-                      isPassword: RxBool(false),
-                      label: ConstantString.address,
-                      showAsterisk: true,
-                      controller: addressController,
-                      hintStyle: txtInterTextFieldHint,
-                      hintText:
-                          'eg 4517 Washington Ave. Manchester, Kentucky 39495',
-                      errorText: controller.signupError['address'],
+                    Obx(
+                        () => CustomTextField(
+                        isPassword: RxBool(false),
+                        label: ConstantString.address,
+                        showAsterisk: true,
+                        controller: addressController,
+                        hintStyle: txtInterTextFieldHint,
+                        hintText:
+                            'eg 4517 Washington Ave. Manchester, Kentucky 39495',
+                        errorText: controller.signupError['address'],
+                      ),
                     ),
                     Obx(
                       () => CustomTextField(
@@ -280,15 +294,17 @@ class SignupScreen extends GetView<AuthController> {
                         },
                       ),
                     ),
-                    CustomTextField(
-                      isPassword: RxBool(false),
-                      label: ConstantString.postCode,
-                      showAsterisk: true,
-                      controller: postCodeController,
-                      hintStyle: txtInterTextFieldHint,
-                      inputType: TextInputType.number,
-                      hintText: 'eg 12345',
-                      errorText: controller.signupError['pin_code'],
+                    Obx(
+                        ()=> CustomTextField(
+                        isPassword: RxBool(false),
+                        label: ConstantString.postCode,
+                        showAsterisk: true,
+                        controller: postCodeController,
+                        hintStyle: txtInterTextFieldHint,
+                        inputType: TextInputType.number,
+                        hintText: 'eg 12345',
+                        errorText: controller.signupError['pin_code'],
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 19, bottom: 20),
