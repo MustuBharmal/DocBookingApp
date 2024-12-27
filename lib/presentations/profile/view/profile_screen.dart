@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
                   text: ConstantValue.detailList[index],
                   iconPath: ConstantValue.imagePathDetailList[index],
                   onPressed: () {
-                    if (ConstantValue.detailList[index] != 'Logout') {
+                    if (ConstantValue.detailList[index] == 'Logout') {
                       AuthController.instance.logout();
                       //Get.toNamed(ConstantValue.navigateDetailList[index]);
                     } else {}
