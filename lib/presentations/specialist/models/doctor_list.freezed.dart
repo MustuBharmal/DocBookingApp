@@ -14,6 +14,277 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+DoctorListResponse _$DoctorListResponseFromJson(Map<String, dynamic> json) {
+  return _DoctorListResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DoctorListResponse {
+  @JsonKey(name: 'code')
+  int? get code => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isLive')
+  bool get success => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'message')
+  String? get message => throw _privateConstructorUsedError;
+  @JsonKey(name: 'data')
+  List<DoctorsList> get data => throw _privateConstructorUsedError;
+
+  /// Serializes this DoctorListResponse to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of DoctorListResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $DoctorListResponseCopyWith<DoctorListResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DoctorListResponseCopyWith<$Res> {
+  factory $DoctorListResponseCopyWith(
+          DoctorListResponse value, $Res Function(DoctorListResponse) then) =
+      _$DoctorListResponseCopyWithImpl<$Res, DoctorListResponse>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'code') int? code,
+      @JsonKey(name: 'isLive') bool success,
+      @JsonKey(name: 'status') String? status,
+      @JsonKey(name: 'message') String? message,
+      @JsonKey(name: 'data') List<DoctorsList> data});
+}
+
+/// @nodoc
+class _$DoctorListResponseCopyWithImpl<$Res, $Val extends DoctorListResponse>
+    implements $DoctorListResponseCopyWith<$Res> {
+  _$DoctorListResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of DoctorListResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = freezed,
+    Object? success = null,
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as int?,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<DoctorsList>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$DoctorListResponseImplCopyWith<$Res>
+    implements $DoctorListResponseCopyWith<$Res> {
+  factory _$$DoctorListResponseImplCopyWith(_$DoctorListResponseImpl value,
+          $Res Function(_$DoctorListResponseImpl) then) =
+      __$$DoctorListResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'code') int? code,
+      @JsonKey(name: 'isLive') bool success,
+      @JsonKey(name: 'status') String? status,
+      @JsonKey(name: 'message') String? message,
+      @JsonKey(name: 'data') List<DoctorsList> data});
+}
+
+/// @nodoc
+class __$$DoctorListResponseImplCopyWithImpl<$Res>
+    extends _$DoctorListResponseCopyWithImpl<$Res, _$DoctorListResponseImpl>
+    implements _$$DoctorListResponseImplCopyWith<$Res> {
+  __$$DoctorListResponseImplCopyWithImpl(_$DoctorListResponseImpl _value,
+      $Res Function(_$DoctorListResponseImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DoctorListResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? code = freezed,
+    Object? success = null,
+    Object? status = freezed,
+    Object? message = freezed,
+    Object? data = null,
+  }) {
+    return _then(_$DoctorListResponseImpl(
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as int?,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<DoctorsList>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$DoctorListResponseImpl
+    with DiagnosticableTreeMixin
+    implements _DoctorListResponse {
+  const _$DoctorListResponseImpl(
+      {@JsonKey(name: 'code') this.code,
+      @JsonKey(name: 'isLive') this.success = false,
+      @JsonKey(name: 'status') this.status,
+      @JsonKey(name: 'message') this.message,
+      @JsonKey(name: 'data') final List<DoctorsList> data = const []})
+      : _data = data;
+
+  factory _$DoctorListResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DoctorListResponseImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'code')
+  final int? code;
+  @override
+  @JsonKey(name: 'isLive')
+  final bool success;
+  @override
+  @JsonKey(name: 'status')
+  final String? status;
+  @override
+  @JsonKey(name: 'message')
+  final String? message;
+  final List<DoctorsList> _data;
+  @override
+  @JsonKey(name: 'data')
+  List<DoctorsList> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DoctorListResponse(code: $code, success: $success, status: $status, message: $message, data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DoctorListResponse'))
+      ..add(DiagnosticsProperty('code', code))
+      ..add(DiagnosticsProperty('success', success))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DoctorListResponseImpl &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, code, success, status, message,
+      const DeepCollectionEquality().hash(_data));
+
+  /// Create a copy of DoctorListResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DoctorListResponseImplCopyWith<_$DoctorListResponseImpl> get copyWith =>
+      __$$DoctorListResponseImplCopyWithImpl<_$DoctorListResponseImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$DoctorListResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DoctorListResponse implements DoctorListResponse {
+  const factory _DoctorListResponse(
+          {@JsonKey(name: 'code') final int? code,
+          @JsonKey(name: 'isLive') final bool success,
+          @JsonKey(name: 'status') final String? status,
+          @JsonKey(name: 'message') final String? message,
+          @JsonKey(name: 'data') final List<DoctorsList> data}) =
+      _$DoctorListResponseImpl;
+
+  factory _DoctorListResponse.fromJson(Map<String, dynamic> json) =
+      _$DoctorListResponseImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'code')
+  int? get code;
+  @override
+  @JsonKey(name: 'isLive')
+  bool get success;
+  @override
+  @JsonKey(name: 'status')
+  String? get status;
+  @override
+  @JsonKey(name: 'message')
+  String? get message;
+  @override
+  @JsonKey(name: 'data')
+  List<DoctorsList> get data;
+
+  /// Create a copy of DoctorListResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DoctorListResponseImplCopyWith<_$DoctorListResponseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 DoctorsList _$DoctorsListFromJson(Map<String, dynamic> json) {
   return _DoctorsList.fromJson(json);
 }
@@ -36,7 +307,7 @@ mixin _$DoctorsList {
   @JsonKey(name: 'specialistModelData')
   Specialist? get specialistData => throw _privateConstructorUsedError;
   @JsonKey(name: 'doctorTimeTableData')
-  List<DoctorTimeTable>? get doctorTimeTable =>
+  List<DoctorTimeTable> get doctorTimeTable =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'is_active')
   bool? get isActive => throw _privateConstructorUsedError;
@@ -71,7 +342,7 @@ abstract class $DoctorsListCopyWith<$Res> {
       @JsonKey(name: 'serviceModelData') Service? serviceData,
       @JsonKey(name: 'specialistModelData') Specialist? specialistData,
       @JsonKey(name: 'doctorTimeTableData')
-      List<DoctorTimeTable>? doctorTimeTable,
+      List<DoctorTimeTable> doctorTimeTable,
       @JsonKey(name: 'is_active') bool? isActive});
 
   $ServiceCopyWith<$Res>? get serviceData;
@@ -105,7 +376,7 @@ class _$DoctorsListCopyWithImpl<$Res, $Val extends DoctorsList>
     Object? about = freezed,
     Object? serviceData = freezed,
     Object? specialistData = freezed,
-    Object? doctorTimeTable = freezed,
+    Object? doctorTimeTable = null,
     Object? isActive = freezed,
   }) {
     return _then(_value.copyWith(
@@ -157,10 +428,10 @@ class _$DoctorsListCopyWithImpl<$Res, $Val extends DoctorsList>
           ? _value.specialistData
           : specialistData // ignore: cast_nullable_to_non_nullable
               as Specialist?,
-      doctorTimeTable: freezed == doctorTimeTable
+      doctorTimeTable: null == doctorTimeTable
           ? _value.doctorTimeTable
           : doctorTimeTable // ignore: cast_nullable_to_non_nullable
-              as List<DoctorTimeTable>?,
+              as List<DoctorTimeTable>,
       isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
@@ -219,7 +490,7 @@ abstract class _$$DoctorsListImplCopyWith<$Res>
       @JsonKey(name: 'serviceModelData') Service? serviceData,
       @JsonKey(name: 'specialistModelData') Specialist? specialistData,
       @JsonKey(name: 'doctorTimeTableData')
-      List<DoctorTimeTable>? doctorTimeTable,
+      List<DoctorTimeTable> doctorTimeTable,
       @JsonKey(name: 'is_active') bool? isActive});
 
   @override
@@ -253,7 +524,7 @@ class __$$DoctorsListImplCopyWithImpl<$Res>
     Object? about = freezed,
     Object? serviceData = freezed,
     Object? specialistData = freezed,
-    Object? doctorTimeTable = freezed,
+    Object? doctorTimeTable = null,
     Object? isActive = freezed,
   }) {
     return _then(_$DoctorsListImpl(
@@ -305,10 +576,10 @@ class __$$DoctorsListImplCopyWithImpl<$Res>
           ? _value.specialistData
           : specialistData // ignore: cast_nullable_to_non_nullable
               as Specialist?,
-      doctorTimeTable: freezed == doctorTimeTable
+      doctorTimeTable: null == doctorTimeTable
           ? _value._doctorTimeTable
           : doctorTimeTable // ignore: cast_nullable_to_non_nullable
-              as List<DoctorTimeTable>?,
+              as List<DoctorTimeTable>,
       isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
@@ -334,7 +605,7 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
       @JsonKey(name: 'serviceModelData') this.serviceData,
       @JsonKey(name: 'specialistModelData') this.specialistData,
       @JsonKey(name: 'doctorTimeTableData')
-      final List<DoctorTimeTable>? doctorTimeTable,
+      final List<DoctorTimeTable> doctorTimeTable = const [],
       @JsonKey(name: 'is_active') this.isActive})
       : _doctorTimeTable = doctorTimeTable;
 
@@ -368,15 +639,13 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
   @override
   @JsonKey(name: 'specialistModelData')
   final Specialist? specialistData;
-  final List<DoctorTimeTable>? _doctorTimeTable;
+  final List<DoctorTimeTable> _doctorTimeTable;
   @override
   @JsonKey(name: 'doctorTimeTableData')
-  List<DoctorTimeTable>? get doctorTimeTable {
-    final value = _doctorTimeTable;
-    if (value == null) return null;
+  List<DoctorTimeTable> get doctorTimeTable {
     if (_doctorTimeTable is EqualUnmodifiableListView) return _doctorTimeTable;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_doctorTimeTable);
   }
 
   @override
@@ -489,7 +758,7 @@ abstract class _DoctorsList implements DoctorsList {
       @JsonKey(name: 'serviceModelData') final Service? serviceData,
       @JsonKey(name: 'specialistModelData') final Specialist? specialistData,
       @JsonKey(name: 'doctorTimeTableData')
-      final List<DoctorTimeTable>? doctorTimeTable,
+      final List<DoctorTimeTable> doctorTimeTable,
       @JsonKey(name: 'is_active') final bool? isActive}) = _$DoctorsListImpl;
 
   factory _DoctorsList.fromJson(Map<String, dynamic> json) =
@@ -524,7 +793,7 @@ abstract class _DoctorsList implements DoctorsList {
   Specialist? get specialistData;
   @override
   @JsonKey(name: 'doctorTimeTableData')
-  List<DoctorTimeTable>? get doctorTimeTable;
+  List<DoctorTimeTable> get doctorTimeTable;
   @override
   @JsonKey(name: 'is_active')
   bool? get isActive;

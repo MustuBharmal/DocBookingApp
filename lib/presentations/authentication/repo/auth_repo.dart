@@ -44,9 +44,9 @@ abstract class AuthRepo {
         StorageUtil.writeToken(result['data']['access_token'].toString());
         StorageUtil.writeUserId(result['data']['user']['id'].toString());
         Get.toNamed(AccountVerificationScreen.routeName);
-        throw Exception(result['message']);
+        throw Exception("${result['data']['error']}");
       } else {
-        throw Exception("Error: ${result['status']}");
+        throw Exception("${result['data']['error']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);
@@ -130,8 +130,8 @@ abstract class AuthRepo {
     try {
       final Map<String, dynamic> data = {
         _resetTokenKey: StorageUtil.getToken(),
-        _newPassKey:  newPass,
-        _confirmPassKey:  confirmPass
+        _newPassKey: newPass,
+        _confirmPassKey: confirmPass
       };
       LogUtil.debug(Api.resetPassword);
       final result = await HttpService.post(
@@ -174,6 +174,9 @@ abstract class AuthRepo {
     required String city,
     required String profilePic,
     required String password,
+    required String pinCode,
+    required double lat,
+    required double long,
     bool showLoader = true,
   }) async {
     try {
@@ -189,17 +192,19 @@ abstract class AuthRepo {
         'city': city,
         'profile_pic': profilePic,
         'password': password,
+        'pin_code': pinCode,
+        'location_json': {'lat': lat, 'lng': long}
       };
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
       final result =
-          await HttpService.post(Api.signUp, data, showLoader: showLoader);
+      await HttpService.post(Api.signUp, data, showLoader: showLoader);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message'].toString());
         return User.fromJson(result['data'] as Map<String, dynamic>);
       } else {
-        throw Exception("Error: ${result['message']}");
+        throw Exception("${result['data']['error']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);
@@ -270,7 +275,7 @@ abstract class AuthRepo {
       final result = await HttpService.post(Api.country, {}, showLoader: false);
       if (result['code'] == 200) {
         final CountryResponse countryResponse =
-            CountryResponse.fromJson(result);
+        CountryResponse.fromJson(result);
         if (countryResponse.success) {
           return countryResponse.data;
         } else {
