@@ -47,8 +47,8 @@ class CustomSpecialistContainer extends StatelessWidget {
             Row(
               children: [
                 CachedNetworkImage(
-                  width: Get.width * 0.35,
-                  height: Get.height * 0.2,
+                  width: Get.width * 0.18,
+                  height: Get.height * 0.1,
                   imageUrl: picPath,
                   fit: BoxFit.contain,
                   progressIndicatorBuilder: (context, val, pr) {

@@ -37,12 +37,12 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {
   void fillData() async {
     await Future.delayed(Duration.zero);
     LogUtil.debug(widget.doctorData.doctorTimeTable);
-    thisWeek.forEach((date) {
+    for (var date in thisWeek) {
       timeTable[date] = widget.doctorData.doctorTimeTable.where((tt) {
         LogUtil.debug('${tt.day?.toLowerCase()}:::|||${DateFormat('EEEE').format(date).toLowerCase()}');
         return tt.day?.toLowerCase() == DateFormat('EEEE').format(date).toLowerCase();
       }).toList();
-    });
+    }
     setState(() {});
   }
 

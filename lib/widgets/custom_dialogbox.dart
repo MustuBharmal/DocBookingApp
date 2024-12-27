@@ -1,4 +1,4 @@
-import 'package:doc_booking_app/widgets/custom_common_Bottom_sheet.dart';
+import 'package:doc_booking_app/widgets/custom_common_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'custom_bottom_sheet_widget.dart';

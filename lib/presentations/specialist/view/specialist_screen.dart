@@ -1,7 +1,6 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 import '../models/doctor_list.dart';
