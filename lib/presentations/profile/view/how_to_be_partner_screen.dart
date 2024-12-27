@@ -123,21 +123,22 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
                 ),
               ),
               BlueButton(
-                label: 'Submit',
-                onPressed: () {
-                  controller.htbPartnerValidation();
-                  var params = {
-                    'name': controller.nameController.text,
-                    'email': controller.emailController.text,
-                    'phone': controller.phoneController.text,
-                    'business_type': controller.businessTypeController.text,
-                    'business_name': controller.businessNameController.text,
-                    'message': controller.messageController.text
-                  };
-                  LogUtil.debug(params);
-                  controller.howToBePartner(params);
-                },
-              ),
+                  label: 'Submit',
+                  onPressed: () {
+                    if (!ProfileController.instance.htbValidation()) {
+                      return;
+                    }
+                    var params = {
+                      'name': controller.nameController.text,
+                      'email': controller.emailController.text,
+                      'phone': controller.phoneController.text,
+                      'business_type': controller.businessTypeController.text,
+                      'business_name': controller.businessNameController.text,
+                      'message': controller.messageController.text
+                    };
+                    LogUtil.debug(params);
+                    controller.howToBePartner(params);
+                  }),
             ],
           ),
         ),

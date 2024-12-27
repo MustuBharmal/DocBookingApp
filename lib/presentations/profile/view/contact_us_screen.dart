@@ -106,7 +106,9 @@ class ContactUsScreen extends GetView<ProfileController> {
               BlueButton(
                 label: 'Submit',
                 onPressed: () {
-                  controller.contactUsValidation();
+                  if (!controller.contactUsValidation()) {
+                    return;
+                  }
                   var params = {
                     'name': controller.nameController.text,
                     'email': controller.emailController.text,

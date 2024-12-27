@@ -232,8 +232,8 @@ class ProfileController extends GetxController {
     } finally {}
   }
 
-  void contactUsValidation() {
-    ProfileController.instance.profileError.clear();
+  bool contactUsValidation() {
+    profileError.clear();
     if (nameController.text.isEmpty) {
       profileError['name'] = 'Please enter name';
     }
@@ -249,9 +249,7 @@ class ProfileController extends GetxController {
     if (messageController.text.isEmpty) {
       profileError['message'] = 'Please enter message';
     }
-    if (profileError.isNotEmpty) {
-      return;
-    }
+    return profileError.isEmpty;
   }
 
   // how to be a partner
@@ -267,8 +265,9 @@ class ProfileController extends GetxController {
     } finally {}
   }
 
-  void htbPartnerValidation() {
-    ProfileController.instance.profileError.clear();
+  bool htbValidation() {
+    profileError.clear();
+
     if (nameController.text.isEmpty) {
       profileError['name'] = 'Please enter name';
     }
@@ -279,16 +278,14 @@ class ProfileController extends GetxController {
       profileError['phone'] = 'Please enter phone';
     }
     if (businessNameController.text.isEmpty) {
-      profileError['business_name'] = 'Please enter business_name';
+      profileError['business_name'] = 'Please enter business name';
     }
     if (businessTypeController.text.isEmpty) {
-      profileError['business_type'] = 'Please enter business_type';
+      profileError['business_type'] = 'Please enter business type';
     }
     if (messageController.text.isEmpty) {
       profileError['message'] = 'Please enter message';
     }
-    if (ProfileController.instance.profileError.isNotEmpty) {
-      return;
-    }
+    return profileError.isEmpty;
   }
 }
