@@ -15,7 +15,7 @@ class AppointmentCard extends StatelessWidget {
     return Center(
       child: Container(
         width: Get.width * 0.890,
-        height: Get.height * 0.225,
+        height: Get.height * 0.250,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(

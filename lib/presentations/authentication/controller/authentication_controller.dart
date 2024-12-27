@@ -275,7 +275,8 @@ class AuthController extends GetxController {
         LoaderController.instance.dismissLoader();
         if (user.value != null) {
           this.email = email;
-          Get.toNamed(AccountVerificationScreen.routeName);
+          Get.toNamed(AccountVerificationScreen.routeName,
+              arguments: {'condition': false});
         }
       }
     } on CustomErrorMap catch (e) {
