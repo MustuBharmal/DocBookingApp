@@ -1,6 +1,7 @@
 import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../widgets/custom_container_with_logo2.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,10 +20,10 @@ class ProfileScreen extends StatelessWidget {
                   text: ConstantValue.detailList[index],
                   iconPath: ConstantValue.imagePathDetailList[index],
                   onPressed: () {
-                    if (ConstantValue.detailList[index] == 'Logout') {
-                      AuthController.instance.logout();
-                      //Get.toNamed(ConstantValue.navigateDetailList[index]);
-                    } else {}
+                    if (ConstantValue.detailList[index] != 'Logout') {
+
+                      Get.toNamed(ConstantValue.navigateDetailList[index]);
+                    } else {AuthController.instance.logout();}
                   },
                 ),
             separatorBuilder: (context, index) => const SizedBox(
