@@ -6,12 +6,14 @@ import 'package:doc_booking_app/presentations/authentication/models/city_model.d
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/models/state_model.dart';
 import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart';
+import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
 import 'package:doc_booking_app/service/http_service.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../exception/server_exception.dart';
+import '../../../util/storage_util.dart';
 import '../../home/view/navigation_screen.dart';
 import '../models/user.dart';
 import '../views/account_verification_screen.dart';
@@ -96,8 +98,8 @@ class AuthController extends GetxController {
       searchedCountries.clear();
       searchedCountries.addAll(countries
           .where((country) =>
-      country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
-          false)
+              country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
+              false)
           .toList());
     } else {
       searchedCountries.clear();
@@ -164,6 +166,24 @@ class AuthController extends GetxController {
       Get.snackbar('Error', 'No internet connection');
     } catch (e) {
       Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  Future<void> logout() async {
+    try {
+      bool isLoggedOut = await AuthRepo.signOut();
+      if (isLoggedOut) {
+        Get.offAllNamed(LoginScreen.routeName);
+        Get.snackbar('Success', 'You have been logged out.');
+      } else {
+        Get.snackbar('Error', 'Failed to log out. Please try again.');
+      }
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Logout failed', '$e');
     } finally {}
   }
 

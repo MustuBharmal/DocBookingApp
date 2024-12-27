@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../global/styles.dart';
+import '../../authentication/controller/authentication_controller.dart';
 
 class ContactUsScreen extends GetView<ProfileController> {
   static const String routeName = '/contact-us-screen';
@@ -32,58 +33,80 @@ class ContactUsScreen extends GetView<ProfileController> {
                 'Let us know about your query',
                 style: txtInterTextField,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: CustomTextField(
-                    isPassword: RxBool(false),
-                    label: 'Full Name',
-                    showAsterisk: true,
-                    controller: controller.nameController,
-                    hintStyle: txtInterTextFieldHint,
-                    hintText: 'John Doe'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: CustomTextField(
-
-                    isPassword: RxBool(false),
-                    label: 'Email Address',
-                    showAsterisk: true,
-                    readOnly: true,
-                    controller: controller.emailController,
-                    hintStyle: txtInterTextFieldHint,
-                    hintText: 'john.doe@gmail.com'),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: CustomPhoneField(controller: controller.phoneController),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: CustomDropdown(
-                  label: 'Preferred Communication Method',
-                  showAsterisk: true,
-                  selectedItem: controller.prefCommMethod.value,
-                  items: controller.prefCommMethodList,
-                  onChanged: (prefCommMethod) {
-                    controller.prefCommMethod.value = prefCommMethod!;
-                  },
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: CustomTextField(
+                      isPassword: RxBool(false),
+                      label: 'Full Name',
+                      showAsterisk: true,
+                      controller: controller.nameController,
+                      hintStyle: txtInterTextFieldHint,
+                      errorText:
+                          ProfileController.instance.profileError['name'],
+                      hintText: 'John Doe'),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 20),
-                child: CustomTextField(
-                    isPassword: RxBool(false),
-                    label: 'Message',
-                    maxLines: 5,
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: CustomTextField(
+                      isPassword: RxBool(false),
+                      label: 'Email Address',
+                      showAsterisk: true,
+                      readOnly: true,
+                      errorText:
+                          ProfileController.instance.profileError['email'],
+                      controller: controller.emailController,
+                      hintStyle: txtInterTextFieldHint,
+                      hintText: 'john.doe@gmail.com'),
+                ),
+              ),
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: CustomPhoneField(
+                    controller: controller.phoneController,
+                    errorText: ProfileController.instance.profileError['phone'],
+                    countries: AuthController.instance.countries,
+                  ),
+                ),
+              ),
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: CustomDropdown(
+                    label: 'Preferred Communication Method',
                     showAsterisk: true,
-                    controller: controller.messageController,
-                    hintStyle: txtInterTextFieldHint,
-                    hintText: 'Type your Message here'),
+                    errorText: ProfileController
+                        .instance.profileError['communication_method'],
+                    selectedItem: controller.prefCommMethod.value,
+                    items: controller.prefCommMethodList,
+                    onChanged: (prefCommMethod) {
+                      controller.prefCommMethod.value = prefCommMethod!;
+                    },
+                  ),
+                ),
+              ),
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 20),
+                  child: CustomTextField(
+                      isPassword: RxBool(false),
+                      label: 'Message',
+                      maxLines: 5,
+                      showAsterisk: true,
+                      errorText:
+                          ProfileController.instance.profileError['message'],
+                      controller: controller.messageController,
+                      hintStyle: txtInterTextFieldHint,
+                      hintText: 'Type your Message here'),
+                ),
               ),
               BlueButton(
                 label: 'Submit',
                 onPressed: () {
+                  controller.contactUsValidation();
                   var params = {
                     'name': controller.nameController.text,
                     'email': controller.emailController.text,

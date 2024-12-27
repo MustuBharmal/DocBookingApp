@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
 import 'package:doc_booking_app/presentations/profile/repo/profile_repo.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ import '../../../exception/server_exception.dart';
 import '../../authentication/models/city_model.dart';
 import '../../authentication/models/country_model.dart';
 import '../../authentication/models/state_model.dart';
+import '../../authentication/repo/auth_repo.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find<ProfileController>();
@@ -23,6 +25,7 @@ class ProfileController extends GetxController {
   final user = AuthController.instance.user.value;
   RxString imageUrl = RxString('');
   RxBool isEditingProfile = RxBool(false);
+  RxMap<String, String> profileError = RxMap({});
 
 
 
@@ -60,8 +63,6 @@ class ProfileController extends GetxController {
   RxString selectedBusinessName = RxString('Fitness First');
   RxString selectedBusinessType = RxString('Clinic');
   RxString selectedSex = RxString('');
-
-
 
   // Function to pick an image
   Future<void> pickImage() async {
@@ -102,6 +103,7 @@ class ProfileController extends GetxController {
     initializeControllers();
     _initializeSocketConnection();
     getFaq();
+    LogUtil.debug(profileError);
   }
   @override
   void onClose() {
@@ -112,7 +114,8 @@ class ProfileController extends GetxController {
 
 
   initializeControllers() {
-    imageUrl.value = user?.profilePic ?? 'https://s3-alpha-sig.figma.com/img/df1c/b52e/f5e502e6fea97dabf492ab66036e7ec2?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K6IBc34oEZTfO2Fvozs1V5mOGqff6iQ2VdibX-AVW1PEa-NINVvXbtyW5GxTiM-QilLtF4umNkGK2I~ycyoL84ObJnkXqjSPG66CQxqe96IKYWBErFu5TyFkq8QbmKCBDTrbM5HGJjslognO0Zh4pqVrtsDaHVk0uNmXnBpDXJ0uPZTB~DXwEnhdGGQtbC6RAnSuSz87v5Xk80wePKvHneKP3q--U7rUvmY3oZ4-mi8K4uoVZ-3CVPpkVyx6ikPIkmQQStKqsjAgwUzzqEttW~apbi2TkvOP8rBmOralmwU8-bHRxltyYVxMRL9EuGHL2wJ9np7mcf34G1WgQKRing__';
+    imageUrl.value = user?.profilePic ??
+        'https://s3-alpha-sig.figma.com/img/df1c/b52e/f5e502e6fea97dabf492ab66036e7ec2?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K6IBc34oEZTfO2Fvozs1V5mOGqff6iQ2VdibX-AVW1PEa-NINVvXbtyW5GxTiM-QilLtF4umNkGK2I~ycyoL84ObJnkXqjSPG66CQxqe96IKYWBErFu5TyFkq8QbmKCBDTrbM5HGJjslognO0Zh4pqVrtsDaHVk0uNmXnBpDXJ0uPZTB~DXwEnhdGGQtbC6RAnSuSz87v5Xk80wePKvHneKP3q--U7rUvmY3oZ4-mi8K4uoVZ-3CVPpkVyx6ikPIkmQQStKqsjAgwUzzqEttW~apbi2TkvOP8rBmOralmwU8-bHRxltyYVxMRL9EuGHL2wJ9np7mcf34G1WgQKRing__';
     selectedSex.value = user!.sex!;
 
     nameController.text = user?.name ?? '';
@@ -204,7 +207,7 @@ class ProfileController extends GetxController {
   }
 
   // get faq
-  void getFaq() async{
+  void getFaq() async {
     try {
       listOfFaqs.value = await ProfileRepo.getFaqs();
     } on ServerException catch (e) {
@@ -217,7 +220,7 @@ class ProfileController extends GetxController {
   }
 
   // contact us
-  void contactUs(Map<String,dynamic> params) async{
+  void contactUs(Map<String, dynamic> params) async {
     try {
       await ProfileRepo.contactUsApi(params);
     } on ServerException catch (e) {
@@ -229,10 +232,32 @@ class ProfileController extends GetxController {
     } finally {}
   }
 
+  void contactUsValidation() {
+    ProfileController.instance.profileError.clear();
+    if (nameController.text.isEmpty) {
+      profileError['name'] = 'Please enter name';
+    }
+    if (emailController.text.isEmpty) {
+      profileError['email'] = 'Please enter email';
+    }
+    if (phoneController.text.isEmpty) {
+      profileError['phone'] = 'Please enter phone';
+    }
+    if (prefCommMethod.isEmpty) {
+      profileError['communication_method'] = 'Please enter business_type';
+    }
+    if (messageController.text.isEmpty) {
+      profileError['message'] = 'Please enter message';
+    }
+    if (profileError.isNotEmpty) {
+      return;
+    }
+  }
+
   // how to be a partner
-  void howToBePartner(Map<String,dynamic> params) async{
+  void howToBePartner(Map<String, dynamic> params) async {
     try {
-      await ProfileRepo.contactUsApi(params);
+      await ProfileRepo.howToBePartner(params);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
@@ -240,5 +265,30 @@ class ProfileController extends GetxController {
     } catch (e) {
       Get.snackbar('Login failed', '$e');
     } finally {}
+  }
+
+  void htbPartnerValidation() {
+    ProfileController.instance.profileError.clear();
+    if (nameController.text.isEmpty) {
+      profileError['name'] = 'Please enter name';
+    }
+    if (emailController.text.isEmpty) {
+      profileError['email'] = 'Please enter email';
+    }
+    if (phoneController.text.isEmpty) {
+      profileError['phone'] = 'Please enter phone';
+    }
+    if (businessNameController.text.isEmpty) {
+      profileError['business_name'] = 'Please enter business_name';
+    }
+    if (businessTypeController.text.isEmpty) {
+      profileError['business_type'] = 'Please enter business_type';
+    }
+    if (messageController.text.isEmpty) {
+      profileError['message'] = 'Please enter message';
+    }
+    if (ProfileController.instance.profileError.isNotEmpty) {
+      return;
+    }
   }
 }
