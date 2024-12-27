@@ -67,7 +67,7 @@ class CustomDropdown extends StatelessWidget {
               ),
               contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
             ),
-            icon: SvgPicture.asset(AppImage.arrowDown),
+            icon: SvgPicture.asset(AppImage.arrowDown,width: 10,height: 10,),
             items: items
                 .map((item) => DropdownMenuItem<String>(
                       value: item,

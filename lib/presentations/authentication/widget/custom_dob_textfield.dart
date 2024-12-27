@@ -50,7 +50,7 @@ class CustomDobTextField extends StatelessWidget {
             readOnly: true,
             validator: validator,
             decoration: InputDecoration(
-              labelText: label,
+              // labelText: label,
               hintText: hintText,
               hintStyle: hintStyle,
               border: OutlineInputBorder(),

@@ -35,6 +35,7 @@ class SignupScreen extends GetView<AuthController> {
   final TextEditingController countryController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return PopScope(

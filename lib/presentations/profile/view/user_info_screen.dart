@@ -7,6 +7,7 @@ import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../authentication/controller/authentication_controller.dart';
 import '../widgets/profile_field.dart';
 import '../widgets/profile_image.dart';
 
@@ -57,9 +58,8 @@ class UserInfoScreen extends GetView<ProfileController> {
       children: [
         const SizedBox(height: 20),
         ProfileImage(
-          initialImageUrl:
-              'https://s3-alpha-sig.figma.com/img/df1c/b52e/f5e502e6fea97dabf492ab66036e7ec2?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=o5Buqz1bYL-0yvutHptCw9Q9Du~5NUyQg7hPUu~Up5hK5~2MlwWiNoXDE09ElYH1JGSj~Ck4JQUOZLqFwmwPwYTTRNzT0oeoaa2Ebms9K5Fx5kQHV9nVlmms6A-j2Ar10u4AbtL4ShTDFdA6WOa5uBWpoGPpUXANiqebyiDrTV9LWtz5oSds91yMhcU6l-YksInL8b9s4TKb9eb4MfXuvflFyRTn3Q3q5xSxsXFF-rghYf0hY0J0dV~ZdXGkIk50KZj5fJ50sY59U1Mn2AqxsKBcvoht0l8~RBfdFybpmbAW0k07XrNNufO2CqXsDA5hlAeenCneKfovS~4EBmLdPg__',
-          isEditing: false,
+          initialImageUrl: controller.imageUrl.value,
+              isEditing: false,
         ),
         const SizedBox(height: 25),
         ProfileField(
@@ -74,8 +74,13 @@ class UserInfoScreen extends GetView<ProfileController> {
         ProfileField(label: 'Sex', value: controller.selectedSex.value),
         ProfileField(
             label: 'Address', value: controller.addressController.text),
-        ProfileField(label: 'Zip Code', value: controller.zipController.text),
-        ProfileField(label: 'State', value: controller.selectedState.value),
+
+        ProfileField(label: 'Country', value: controller.countryController.text),
+        ProfileField(label: 'State', value: controller.stateController.text),
+        ProfileField(label: 'City', value: controller.cityController.text),
+
+        // ProfileField(label: 'Zip Code', value: controller.postCodeController.text),
+
       ],
     );
   }

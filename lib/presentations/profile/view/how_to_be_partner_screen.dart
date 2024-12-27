@@ -49,6 +49,7 @@ class HowToBePartnerScreen extends GetView<ProfileController> {
                     isPassword: RxBool(false),
                     label: 'Email Address',
                     showAsterisk: true,
+                    readOnly: true,
                     controller: controller.emailController,
                     hintStyle: txtInterTextFieldHint,
                     hintText: 'john.doe@gmail.com'),

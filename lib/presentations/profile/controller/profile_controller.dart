@@ -10,24 +10,38 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../exception/server_exception.dart';
+import '../../authentication/models/city_model.dart';
+import '../../authentication/models/country_model.dart';
+import '../../authentication/models/state_model.dart';
+import '../../authentication/repo/auth_repo.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find<ProfileController>();
-  RxBool isEditingProfile = RxBool(false);
+
+
+  final user = AuthController.instance.user.value;
   RxString imageUrl = RxString('');
+  RxBool isEditingProfile = RxBool(false);
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController zipController = TextEditingController();
+
   final TextEditingController messageController = TextEditingController();
   final TextEditingController businessTypeController = TextEditingController();
   final TextEditingController businessNameController = TextEditingController();
+  final TextEditingController postCodeController = TextEditingController();
+  final TextEditingController stateController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+
+  Rx<CountryModel?> selectCountry = Rx(null);
+  Rx<StateModel?> selectState = Rx(null);
+  Rx<CityModel?> selectCity = Rx(null);
+
   RxList<FaqModels?> listOfFaqs = RxList.empty();
-  final List<String> stateList = ['Florida', 'New York', 'Los Angeles'];
-  final List<String> sexOptions = ['Male', 'Female', 'Other'];
   final List<String> prefCommMethodList = ['Whatsapp', 'Telephone', 'Message'];
   final List<String> businessNamesList = [
     'Fitness First',
@@ -41,10 +55,9 @@ class ProfileController extends GetxController {
   ];
   RxString selectedBusinessName = RxString('Fitness First');
   RxString selectedBusinessType = RxString('Clinic');
-  RxString selectedState = RxString('New York');
-  RxString selectedSex = RxString('Male');
-  RxString selectedCountry = RxString('');
-  RxString selectedCity = RxString('');
+  RxString selectedSex = RxString('');
+
+
 
   // Function to pick an image
   Future<void> pickImage() async {
@@ -79,17 +92,21 @@ class ProfileController extends GetxController {
     getFaq();
   }
 
+
   initializeControllers() {
-    final user = AuthController.instance.user.value;
+    imageUrl.value = user?.profilePic ?? 'https://s3-alpha-sig.figma.com/img/df1c/b52e/f5e502e6fea97dabf492ab66036e7ec2?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K6IBc34oEZTfO2Fvozs1V5mOGqff6iQ2VdibX-AVW1PEa-NINVvXbtyW5GxTiM-QilLtF4umNkGK2I~ycyoL84ObJnkXqjSPG66CQxqe96IKYWBErFu5TyFkq8QbmKCBDTrbM5HGJjslognO0Zh4pqVrtsDaHVk0uNmXnBpDXJ0uPZTB~DXwEnhdGGQtbC6RAnSuSz87v5Xk80wePKvHneKP3q--U7rUvmY3oZ4-mi8K4uoVZ-3CVPpkVyx6ikPIkmQQStKqsjAgwUzzqEttW~apbi2TkvOP8rBmOralmwU8-bHRxltyYVxMRL9EuGHL2wJ9np7mcf34G1WgQKRing__';
+    selectedSex.value = user!.sex!;
+
     nameController.text = user?.name ?? '';
     emailController.text = user?.email ?? '';
     dobController.text = user?.dob ?? '';
     addressController.text = user?.address ?? '';
     phoneController.text = user?.phone ?? '';
     selectedSex.value = user?.sex ?? '';
-    selectedState.value = user?.state ?? '';
-    selectedCity.value = user?.city ?? '';
-    selectedCountry.value = user?.country ?? '';
+    cityController.text = user?.city ?? '';
+    countryController.text = user?.country ?? '';
+    stateController.text = user?.state ?? '';
+    // postCodeController.value = user?.postCode ?? '';
   }
 
 
