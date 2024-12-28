@@ -34,7 +34,20 @@ class PrescriptionFormScreen extends GetView<ProfileController> {
                   hintText: 'O+'),
             ],
           ),
-          BlueButton(label: 'Submit')
+          BlueButton(label: 'Submit',onPressed: (){
+            if (!ProfileController.instance.prescriptionFormValidation()) {
+              return;
+            }
+            var params = {
+              'patient_id': ProfileController.instance.user!.id,
+              'doctor_id': '1',
+              'blood_group': controller.bloodGrpController.text,
+              'symptoms': controller.symptomsController.text,
+            };
+            controller.prescriptionForm(params);
+            controller.symptomsController.clear();
+            controller.bloodGrpController.clear();
+          },)
         ],
       ),
     );

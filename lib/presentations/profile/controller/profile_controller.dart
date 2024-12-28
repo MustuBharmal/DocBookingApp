@@ -189,8 +189,8 @@ class ProfileController extends GetxController {
       // Emit the message to the server
       final msg = {
         'message': message,
-        'doctor_id': 'doctor123', // Replace with actual doctor ID
-        'patient_id': 'patient456', // Replace with actual patient ID
+        'doctor_id': '1', // Replace with actual doctor ID
+        'patient_id': user!.id, // Replace with actual patient ID
         'sent_by': 'patient', // Could be 'doctor' or 'patient'
       };
 
@@ -265,6 +265,31 @@ class ProfileController extends GetxController {
     } finally {}
   }
 
+
+  // prescription form api
+  void prescriptionForm(Map<String, dynamic> params) async {
+    try {
+      await ProfileRepo.prescriptionForm(params);
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  bool prescriptionFormValidation() {
+    profileError.clear();
+
+    if (bloodGrpController.text.isEmpty) {
+      profileError['blood_group'] = 'Please enter blood group';
+    }
+    if (symptomsController.text.isEmpty) {
+      profileError['symptoms'] = 'Please enter symptoms';
+    }
+    return profileError.isEmpty;
+  }
   bool htbValidation() {
     profileError.clear();
 
