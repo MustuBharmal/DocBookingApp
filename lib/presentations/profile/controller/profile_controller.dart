@@ -308,9 +308,6 @@ class ProfileController extends GetxController {
     if (businessTypeController.text.isEmpty) {
       profileError['business_type'] = 'Please enter business type';
     }
-    if (messageController.text.isEmpty) {
-      profileError['message'] = 'Please enter message';
-    }
     return profileError.isEmpty;
   }
 }

@@ -42,6 +42,8 @@ abstract class ProfileRepo {
       await HttpService.post(Api.prescriptionForm, params, token: true);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
+        Get.back();
+        Get.back();
         Get.snackbar('Success', result['message'].toString());
         return true;
       } else {

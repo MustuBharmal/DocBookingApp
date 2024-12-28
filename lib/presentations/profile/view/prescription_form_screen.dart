@@ -22,6 +22,7 @@ class PrescriptionFormScreen extends GetView<ProfileController> {
                   isPassword: RxBool(false),
                   label: 'Symptoms',
                   showAsterisk: true,
+
                   controller: controller.symptomsController,
                   hintStyle: txtInterTextFieldHint,
                   hintText: 'Headache, Fever'),
