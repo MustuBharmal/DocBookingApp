@@ -27,7 +27,9 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
       child: Scaffold(
         appBar: const CustomAppBar(title: 'Search', back: true),
         body: Container(
-          padding: controller.isMapView.value ? EdgeInsets.only(top: 16) : const EdgeInsets.all(16),
+          padding: controller.isMapView.value
+              ? EdgeInsets.only(top: 16)
+              : const EdgeInsets.all(16),
           child: Obx(
             () => Column(
               children: [
@@ -36,7 +38,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                     padding: const EdgeInsets.only(top: 10),
                     child: CustomSearchTextfield(
                       hintText: ConstantString.searchByName,
-                      controller: SpecialistController.instance.searchController.value,
+                      controller:
+                          SpecialistController.instance.searchController.value,
                     ),
                   ),
                   const CustomTabBar(
@@ -68,14 +71,28 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                   Expanded(
                       child: Stack(
                     children: [
-                      MapScreen(controller.userLocation!.latitude!, controller.userLocation!.longitude!),
+                      MapScreen(controller.userLocation!.latitude!,
+                          controller.userLocation!.longitude!),
                       Align(
                         alignment: Alignment.topCenter,
                         child: const CustomTabBar(
                           tabText1: 'Home',
                           tabText2: 'Clinic',
                         ),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 113, right: 16),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: CustomButton(
+                            onPressed: controller.goToListScreen,
+                            height: Get.height * 0.05,
+                            width: Get.width * 0.33,
+                            iconPath: AppImage.map,
+                            label: ConstantString.listView,
+                          ),
+                        ),
+                      ),
                     ],
                   ))
               ],

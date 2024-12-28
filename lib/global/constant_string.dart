@@ -77,6 +77,7 @@ class ConstantString {
   static const save="Save";
   static const seeAll="See All";
   static const mapView="Map View";
+  static const listView="List View";
   static const rating="Rating";
   static const patient="Patient";
   static const review="Review";

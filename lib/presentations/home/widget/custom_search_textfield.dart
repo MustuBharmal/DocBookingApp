@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +41,11 @@ class CustomSearchTextField extends StatelessWidget {
                 width: deviceWidth * 0.15,
                 child: Row(
                   children: [
-                    Expanded(
-                      child: CustomIconSizeBox(
-                        iconPath:
-                            HomeController.instance.selectedImagePath.value,
-                        iconWidth: Get.width * 0.067,
-                        iconHeight: Get.width * 0.067,
-                      ),
+                    CachedNetworkImage(
+                      width: Get.width * 0.067,
+                      height: Get.width * 0.067,
+                      fit: BoxFit.contain,
+                      imageUrl: HomeController.instance.selectedImagePath.value,
                     ),
                     Expanded(
                         child: CustomIconSizeBox(

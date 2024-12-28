@@ -16,7 +16,6 @@ import '../../../exception/server_exception.dart';
 import '../../authentication/models/city_model.dart';
 import '../../authentication/models/country_model.dart';
 import '../../authentication/models/state_model.dart';
-import '../../authentication/repo/auth_repo.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find<ProfileController>();
@@ -230,8 +229,40 @@ class ProfileController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
-
-  bool contactUsValidation() {
+    bool userEditProfileValidation(){
+      if (nameController.text.isEmpty) {
+        profileError['name'] = 'Please enter name';
+      }
+      if (emailController.text.isEmpty) {
+        profileError['email'] = 'Please enter email';
+      }
+      if (dobController.text.isEmpty) {
+        profileError['dob'] = 'Please enter Date of birth!';
+      }
+      if (selectedSex.isEmpty) {
+        profileError['sex'] = 'Please select gender!';
+      }
+      if (stateController.text.isEmpty) {
+        profileError['state'] = 'Please select state!';
+      }
+      if (countryController.text.isEmpty) {
+        profileError['country'] = 'Please select country!';
+      }
+      if (cityController.text.isEmpty) {
+        profileError['city'] = 'Please select city!';
+      }
+      if (addressController.text.isEmpty) {
+        profileError['address'] = 'Please enter address!';
+      }
+      // if (pinCode.isEmpty) {
+      //   signupError['pin_code'] = 'Please Postal Code!';
+      // }
+      if (imageUrl.isEmpty) {
+        profileError['profile_pic'] = 'Please select image';
+      }
+    return profileError.isEmpty;
+    }
+   bool contactUsValidation() {
     profileError.clear();
     if (nameController.text.isEmpty) {
       profileError['name'] = 'Please enter name';

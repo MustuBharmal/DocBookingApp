@@ -31,196 +31,203 @@ class UserInfoEditScreen extends GetView<ProfileController> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ProfileImage(
-                initialImageUrl: controller.imageUrl.value,
-                isEditing: true,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25.0),
-                child: CustomTextField(
-                  isPassword: RxBool(false),
-                  label: 'Full Name',
-                  controller: controller.nameController,
-                  showAsterisk: true,
-                  hintStyle: txtInterTextFieldHint,
-                  hintText: 'Alex Doe',
-                ),
-              ),
-              CustomTextField(
-                isPassword: RxBool(false),
-                label: 'Email Address',
-                readOnly: true,
-                controller: controller.emailController,
-                showAsterisk: true,
-                hintStyle: txtInterTextFieldHint,
-                hintText: 'alex.doe@gmail.com',
-              ),
-              CustomPhoneField(
-                controller: controller.phoneController,
-                countries: AuthController.instance.countries,
-                errorText: AuthController.instance.signupError['phone'],
-              ),
-              CustomDobTextField(
-                hintText: 'day/month/year',
-                hintStyle: txtInterTextFieldHint,
-                controller: controller.dobController,
-                label: ConstantString.dob,
-                showAsterisk: true,
-                errorText: AuthController.instance.signupError['dob'],
-                validator: null,
-              ),
-              CustomDropdown(
-                label: ConstantString.sex,
-                showAsterisk: true,
-                items: ['Male', 'Female', 'Other'],
-                selectedItem: controller.selectedSex.value,
-                onChanged: (String? gender) {
-                  if (gender != null) {
-                    controller.selectedSex.value = gender;
-                  }
-                },
-                errorText: AuthController.instance.signupError['sex'],
-              ),
-              Obx(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Obx(
+              () => Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ProfileImage(
+                    initialImageUrl: controller.imageUrl.value,
+                    isEditing: true,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25.0),
+                    child: CustomTextField(
+                      isPassword: RxBool(false),
+                      label: 'Full Name',
+                      controller: controller.nameController,
+                      showAsterisk: true,
+                      errorText: controller.profileError['name'],
+                      hintStyle: txtInterTextFieldHint,
+                      hintText: 'Alex Doe',
+                    ),
+                  ),
+                  CustomTextField(
+                    isPassword: RxBool(false),
+                    label: 'Email Address',
+                    readOnly: true,
+                    errorText: controller.profileError['email'],
+                    controller: controller.emailController,
+                    showAsterisk: true,
+                    hintStyle: txtInterTextFieldHint,
+                    hintText: 'alex.doe@gmail.com',
+                  ),
+                  CustomPhoneField(
+                    controller: controller.phoneController,
+                    countries: AuthController.instance.countries,
+                    errorText: controller.profileError['phone'],
+                  ),
+                  CustomDobTextField(
+                    hintText: 'day/month/year',
+                    hintStyle: txtInterTextFieldHint,
+                    controller: controller.dobController,
+                    label: ConstantString.dob,
+                    showAsterisk: true,
+                    errorText: controller.profileError['dob'],
+                    validator: null,
+                  ),
+                  CustomDropdown(
+                    label: ConstantString.sex,
+                    showAsterisk: true,
+                    items: ['Male', 'Female', 'Other'],
+                    selectedItem: controller.selectedSex.value,
+                    onChanged: (String? gender) {
+                      if (gender != null) {
+                        controller.selectedSex.value = gender;
+                      }
+                    },
+                    errorText: controller.profileError['sex'],
+                  ),
+                  Obx(
                     () => CustomTextField(
-                  isPassword: RxBool(false),
-                  label: 'Country',
-                  showAsterisk: true,
-                  readOnly: true,
-                  controller: controller.countryController,
-                  hintStyle: txtInterTextFieldHint,
-                  inputType: TextInputType.number,
-                  hintText: '',
-                  errorText: AuthController.instance.signupError['country'],
-                  showDropDownIcon: true,
-                  onTap: () {
-                    controller.selectState.value = null;
-                    if (AuthController.instance.searchedCountries.isNotEmpty) {
-                      TypeOfDialogs.showCommonBottomSheetDialog(
-                        context,
-                        'Country',
-                        RxList.from(AuthController.instance.searchedCountries
-                            .where((country) => country.name != null)
-                            .map((country) => country.name!)
-                            .toList()),
-                        RxList.from(AuthController.instance.searchedCountries
-                            .where((country) => country.emoji != null)
-                            .map((country) => country.emoji!)
-                            .toList()),
-                        controller.countryController,
-                        AuthController.instance.getStatesAndCountry,
-                      );
-                    } else {
-                      LogUtil.debug('hello');
-                    }
-                  },
-                ),
-              ),
-              Obx(
+                      isPassword: RxBool(false),
+                      label: 'Country',
+                      showAsterisk: true,
+                      readOnly: true,
+                      controller: controller.countryController,
+                      hintStyle: txtInterTextFieldHint,
+                      inputType: TextInputType.number,
+                      hintText: '',
+                      errorText: controller.profileError['country'],
+                      showDropDownIcon: true,
+                      onTap: () {
+                        controller.selectState.value = null;
+                        if (AuthController
+                            .instance.searchedCountries.isNotEmpty) {
+                          TypeOfDialogs.showCommonBottomSheetDialog(
+                            context,
+                            'Country',
+                            RxList.from(AuthController
+                                .instance.searchedCountries
+                                .where((country) => country.name != null)
+                                .map((country) => country.name!)
+                                .toList()),
+                            RxList.from(AuthController
+                                .instance.searchedCountries
+                                .where((country) => country.emoji != null)
+                                .map((country) => country.emoji!)
+                                .toList()),
+                            controller.countryController,
+                            AuthController.instance.getStatesAndCountry,
+                          );
+                        } else {
+                          LogUtil.debug('hello');
+                        }
+                      },
+                    ),
+                  ),
+                  Obx(
                     () => CustomTextField(
-                  isPassword: RxBool(false),
-                  label: 'State',
-                  showAsterisk: true,
-                  readOnly: true,
-                  controller: controller.stateController,
-                  hintStyle: txtInterTextFieldHint,
-                  hintText: '',
-                  errorText: AuthController.instance.signupError['state'],
-                  showDropDownIcon: true,
-                  onTap: () {
-                    controller.selectState.value = null;
-                    if (AuthController.instance.states.isNotEmpty) {
-                      TypeOfDialogs.showCommonBottomSheetDialog(
-                        context,
-                        'State',
-                        RxList.from(AuthController.instance.states
-                            .where((state) => state.name != null)
-                            .map((state) => state.name!)
-                            .toList()),
-                        RxList.empty(),
-                        controller.stateController,
-                        AuthController.instance.getCitiesAndState,
-                      );
-                    } else {
-                      LogUtil.debug('hello');
-                    }
-                  },
-                ),
-              ),
-              Obx(
+                      isPassword: RxBool(false),
+                      label: 'State',
+                      showAsterisk: true,
+                      readOnly: true,
+                      controller: controller.stateController,
+                      hintStyle: txtInterTextFieldHint,
+                      hintText: '',
+                      errorText: controller.profileError['state'],
+                      showDropDownIcon: true,
+                      onTap: () {
+                        controller.selectState.value = null;
+                        if (AuthController.instance.states.isNotEmpty) {
+                          TypeOfDialogs.showCommonBottomSheetDialog(
+                            context,
+                            'State',
+                            RxList.from(AuthController.instance.states
+                                .where((state) => state.name != null)
+                                .map((state) => state.name!)
+                                .toList()),
+                            RxList.empty(),
+                            controller.stateController,
+                            AuthController.instance.getCitiesAndState,
+                          );
+                        } else {
+                          LogUtil.debug('hello');
+                        }
+                      },
+                    ),
+                  ),
+                  Obx(
                     () => CustomTextField(
-                  isPassword: RxBool(false),
-                  label: 'City',
-                  showAsterisk: true,
-                  readOnly: true,
-                  controller: controller.cityController,
-                  hintStyle: txtInterTextFieldHint,
-                  hintText: '',
-                  errorText: AuthController.instance.signupError['city'],
-                  showDropDownIcon: true,
-                  onTap: () {
-                    controller.selectCity.value = null;
-                    if (AuthController.instance.cities.isNotEmpty) {
-                      TypeOfDialogs.showCommonBottomSheetDialog(
-                        context,
-                        'City',
-                        RxList.from(AuthController.instance.cities
-                            .where((city) => city.name != null)
-                            .map((city) => city.name!)
-                            .toList()),
-                        RxList.empty(),
-                        controller.cityController,
-                        AuthController.instance.getCity,
-                      );
-                    } else {
-                      LogUtil.debug('hello');
-                    }
-                  },
-                ),
-              ),
+                      isPassword: RxBool(false),
+                      label: 'City',
+                      showAsterisk: true,
+                      readOnly: true,
+                      controller: controller.cityController,
+                      hintStyle: txtInterTextFieldHint,
+                      hintText: '',
+                      errorText: controller.profileError['city'],
+                      showDropDownIcon: true,
+                      onTap: () {
+                        controller.selectCity.value = null;
+                        if (AuthController.instance.cities.isNotEmpty) {
+                          TypeOfDialogs.showCommonBottomSheetDialog(
+                            context,
+                            'City',
+                            RxList.from(AuthController.instance.cities
+                                .where((city) => city.name != null)
+                                .map((city) => city.name!)
+                                .toList()),
+                            RxList.empty(),
+                            controller.cityController,
+                            AuthController.instance.getCity,
+                          );
+                        } else {
+                          LogUtil.debug('hello');
+                        }
+                      },
+                    ),
+                  ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: CustomTextField(
-                  isPassword: RxBool(false),
-                  label: 'Address',
-                  controller: controller.addressController,
-                  showAsterisk: true,
-                  hintStyle: txtInterTextFieldHint,
-                  hintText: 'Street 2334 , New York',
-                ),
-              ),
-              CustomTextField(
-                isPassword: RxBool(false),
-                label: ConstantString.postCode,
-                showAsterisk: true,
-                controller: controller.postCodeController,
-                hintStyle: txtInterTextFieldHint,
-                inputType: TextInputType.number,
-                hintText: 'eg 12345',
-                errorText: AuthController.instance.signupError['pin_code'],
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 10.0),
-              //   child: CustomTextField(
-              //     isPassword: RxBool(false),
-              //     label: 'Zip Code',
-              //     controller: controller.zipController,
-              //     showAsterisk: true,
-              //     hintStyle: txtInterTextFieldHint,
-              //     hintText: '53542',
-              //   ),
-              // ),
-              /*Padding(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: CustomTextField(
+                      isPassword: RxBool(false),
+                      label: 'Address',
+                      controller: controller.addressController,
+                      showAsterisk: true,
+                      errorText: controller.profileError['address'],
+                      hintStyle: txtInterTextFieldHint,
+                      hintText: 'Street 2334 , New York',
+                    ),
+                  ),
+                  CustomTextField(
+                    isPassword: RxBool(false),
+                    label: ConstantString.postCode,
+                    showAsterisk: true,
+                    controller: controller.postCodeController,
+                    hintStyle: txtInterTextFieldHint,
+                    inputType: TextInputType.number,
+                    hintText: 'eg 12345',
+                    errorText: controller.profileError['pin_code'],
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 10.0),
+                  //   child: CustomTextField(
+                  //     isPassword: RxBool(false),
+                  //     label: 'Zip Code',
+                  //     controller: controller.zipController,
+                  //     showAsterisk: true,
+                  //     hintStyle: txtInterTextFieldHint,
+                  //     hintText: '53542',
+                  //   ),
+                  // ),
+                  /*Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomDropdown(
                   label: 'State',
                   items: controller.stateList
-                  *//*.map(
+                  */ /*.map(
                             (item) => DropdownMenuItem<String>(
                               value: item,
                               child: Text(
@@ -229,7 +236,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                               ),
                             ),
                           )
-                          .toList()*//*
+                          .toList()*/ /*
                   ,
                   selectedItem: controller.selectedState.value,
                   showAsterisk: true,
@@ -238,19 +245,22 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                   },
                 ),
               ),*/
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: BlueButton(
-                  label: 'Save',
-                  onPressed: () {
-                    // Save profile logic
-                    controller.isEditingProfile.value = false;
-                  },
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
+                    child: BlueButton(
+                      label: 'Save',
+                      onPressed: () {
+                        if (!controller.userEditProfileValidation()) {
+                          return;
+                        }
+                        // Save profile logic
+                        controller.isEditingProfile.value = false;
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            )),
       ),
     );
   }

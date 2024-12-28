@@ -44,19 +44,19 @@ class HomeController extends GetxController {
     selectedIndex.value = index;
   }
 
-  RxString selectedImagePath = AppImage.servicesInactive.obs;
+  Rx<String> selectedImagePath = ''.obs;
 
-  final Map<String, String> serviceImages = {
-    'Phlebotomy': AppImage.homeCategory1,
-    'Vitamin IV': AppImage.homeCategory2,
-    'Vitamin Booster': AppImage.homeCategory3,
-    'TRT Administration': AppImage.homeCategory4,
-    'Bloodletting': AppImage.homeCategory5,
-    'Flu Shots': AppImage.homeCategory6,
-  };
+  // final Map<String, String> serviceImages = {
+  //   'Phlebotomy': AppImage.homeCategory1,
+  //   'Vitamin IV': AppImage.homeCategory2,
+  //   'Vitamin Booster': AppImage.homeCategory3,
+  //   'TRT Administration': AppImage.homeCategory4,
+  //   'Bloodletting': AppImage.homeCategory5,
+  //   'Flu Shots': AppImage.homeCategory6,
+  // };
 
-  void updateSelectedImage(String service) {
-    selectedImagePath.value = serviceImages[service] ?? AppImage.stethoscope;
+  void updateSelectedImage(Service service) {
+    selectedImagePath.value = service.icon!;
   }
 
   void dashboardData() async {
@@ -74,6 +74,7 @@ class HomeController extends GetxController {
   void getServices() async {
     try {
       services.value = await HomeRepo.getServices();
+      selectedImagePath.value = services[0]!.icon ?? AppImage.stethoscope;
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

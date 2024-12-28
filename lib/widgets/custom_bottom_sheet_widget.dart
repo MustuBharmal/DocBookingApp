@@ -86,7 +86,8 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                                     child: CachedNetworkImage(
                                       imageUrl: item.icon ?? '',
                                       fit: BoxFit.contain,
-                                      progressIndicatorBuilder: (context, val, pr) {
+                                      progressIndicatorBuilder:
+                                          (context, val, pr) {
                                         return Center(
                                           child: CircularProgressIndicator(
                                             value: pr.progress,
@@ -94,28 +95,34 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                                         );
                                       },
                                       errorWidget: (context, val, obj) {
-                                        return Image.asset(AppImage.serviceIcon1);
+                                        return Image.asset(
+                                            AppImage.serviceIcon1);
                                       },
                                     ),
                                   ),
-                                  SizedBox(width: 10,),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     item.name ?? '',
                                     style: TextStyle(
-                                      color: isSelected ? Colors.blue : Colors.black,
+                                      color: isSelected
+                                          ? Colors.blue
+                                          : Colors.black,
                                     ),
                                   ),
                                 ],
                               ),
                               Radio(
                                 value: item.name ?? '',
-                                groupValue:
-                                HomeController.instance.selectedService.value,
+                                groupValue: HomeController
+                                    .instance.selectedService.value,
                                 activeColor: Colors.blue,
                                 onChanged: (String? value) {
-                                  controller.updateSelectedImage(value!);
-                                  controller.selectedService.value = value;
-                                  searchControllers.text = value;
+                                  controller.updateSelectedImage(item);
+                                  controller.selectedService.value =
+                                      item.name ?? '';
+                                  searchControllers.text = item.name ?? '';
                                 },
                               )
                             ],
@@ -127,7 +134,7 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                         ],
                       ),
                       onTap: () {
-                        controller.updateSelectedImage(item.name ?? '');
+                        controller.updateSelectedImage(item);
                         controller.selectedService.value = item.name ?? '';
                         searchControllers.text = item.name ?? '';
                       },
@@ -136,9 +143,7 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                 },
               ),
             ),
-
           ],
-
         ),
       ),
     );

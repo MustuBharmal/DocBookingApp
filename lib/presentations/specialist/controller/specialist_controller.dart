@@ -18,12 +18,26 @@ class SpecialistController extends GetxController {
     });
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    isMapView.value = false;
+  }
+
+  void goToListScreen() {
+    if (isMapView.value) {
+      isMapView.toggle();
+      return;
+    }
+    Get.back();
+  }
+
   Future<void> goToMapScreen() async {
     if (isMapView.value) {
       isMapView.toggle();
       return;
     }
-    Location location =  Location();
+    Location location = Location();
 
     bool serviceEnabled;
     PermissionStatus permissionGranted;
