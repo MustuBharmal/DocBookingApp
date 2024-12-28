@@ -52,7 +52,7 @@ class CustomTabBar extends StatelessWidget {
                 border: Border.all(color: AppColors.transparent, width: 2),
               ),
               margin: EdgeInsets.symmetric(vertical: 2,horizontal: 2),
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 38),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
               child: Text(
                 tabText1,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
@@ -65,7 +65,7 @@ class CustomTabBar extends StatelessWidget {
                 border: Border.all(color: AppColors.transparent, width: 2),
               ),
               margin: EdgeInsets.symmetric(vertical: 2,horizontal: 2),
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 38),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
               child: Text(
                 tabText2,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
