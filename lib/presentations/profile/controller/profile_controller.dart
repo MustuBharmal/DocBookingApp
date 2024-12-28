@@ -103,7 +103,6 @@ class ProfileController extends GetxController {
     initializeControllers();
     _initializeSocketConnection();
     getFaq();
-    LogUtil.debug(profileError);
   }
   @override
   void onClose() {

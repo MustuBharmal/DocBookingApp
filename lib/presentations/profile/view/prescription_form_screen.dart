@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class PrescriptionFormScreen extends GetView<ProfileController> {
   static const String routeName = '/prescription-form-screen';
+
   const PrescriptionFormScreen({super.key});
 
   @override
@@ -18,37 +19,45 @@ class PrescriptionFormScreen extends GetView<ProfileController> {
         children: [
           Column(
             children: [
-              CustomTextField(
-                  isPassword: RxBool(false),
-                  label: 'Symptoms',
-                  showAsterisk: true,
-
-                  controller: controller.symptomsController,
-                  hintStyle: txtInterTextFieldHint,
-                  hintText: 'Headache, Fever'),
-              CustomTextField(
-                  isPassword: RxBool(false),
-                  label: 'Blood Group',
-                  showAsterisk: true,
-                  controller: controller.bloodGrpController,
-                  hintStyle: txtInterTextFieldHint,
-                  hintText: 'O+'),
+              Obx(
+                () => CustomTextField(
+                    isPassword: RxBool(false),
+                    label: 'Symptoms',
+                    showAsterisk: true,
+                    errorText: controller.profileError['blood_group'],
+                    controller: controller.symptomsController,
+                    hintStyle: txtInterTextFieldHint,
+                    hintText: 'Headache, Fever'),
+              ),
+              Obx(
+                () => CustomTextField(
+                    isPassword: RxBool(false),
+                    label: 'Blood Group',
+                    showAsterisk: true,
+                    errorText: controller.profileError['symptoms'],
+                    controller: controller.bloodGrpController,
+                    hintStyle: txtInterTextFieldHint,
+                    hintText: 'O+'),
+              )
             ],
           ),
-          BlueButton(label: 'Submit',onPressed: (){
-            if (!ProfileController.instance.prescriptionFormValidation()) {
-              return;
-            }
-            var params = {
-              'patient_id': ProfileController.instance.user!.id,
-              'doctor_id': '1',
-              'blood_group': controller.bloodGrpController.text,
-              'symptoms': controller.symptomsController.text,
-            };
-            controller.prescriptionForm(params);
-            controller.symptomsController.clear();
-            controller.bloodGrpController.clear();
-          },)
+          BlueButton(
+            label: 'Submit',
+            onPressed: () {
+              if (!ProfileController.instance.prescriptionFormValidation()) {
+                return;
+              }
+              var params = {
+                'patient_id': ProfileController.instance.user!.id,
+                'doctor_id': '1',
+                'blood_group': controller.bloodGrpController.text,
+                'symptoms': controller.symptomsController.text,
+              };
+              controller.prescriptionForm(params);
+              controller.symptomsController.clear();
+              controller.bloodGrpController.clear();
+            },
+          )
         ],
       ),
     );
