@@ -5,7 +5,9 @@ import 'package:doc_booking_app/presentations/authentication/views/login_welcome
 import 'package:doc_booking_app/presentations/authentication/views/onboarding_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/reset_password_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
+import 'package:doc_booking_app/presentations/booking/binding/booking_binding.dart';
 import 'package:doc_booking_app/presentations/booking/binding/payment_binding.dart';
+import 'package:doc_booking_app/presentations/booking/controller/booking_controller.dart';
 import 'package:doc_booking_app/presentations/booking/views/book_time_slot_screen.dart';
 import 'package:doc_booking_app/presentations/booking/views/payment_screen.dart';
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
@@ -141,12 +143,12 @@ class AppRoutes {
       binding: OtpVerificationBinding(),
     ),
     GetPage(
-      name: BookTimeSlotScreen.routeName,
-      page: () {
-        DoctorsList doctor = Get.arguments;
-        return BookTimeSlotScreen(doctor);
-      },
-    ),
+        name: BookTimeSlotScreen.routeName,
+        page: () {
+          BookingController.instance.fillData(Get.arguments);
+          return BookTimeSlotScreen();
+        },
+        binding: BookingBinding()),
     GetPage(
       name: UserInfoEditScreen.routeName,
       page: () => UserInfoEditScreen(),

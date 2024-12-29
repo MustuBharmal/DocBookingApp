@@ -12,6 +12,16 @@ abstract class CustomDateUtils {
     return result;
   }
 
+  static List<DateTime> getNext7DaysRange() {
+    List<DateTime> result = [];
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    for (int i = 0; i < 7; i++) {
+      result.add(today.add(Duration(days: i)));
+    }
+    return result;
+  }
+
   static String getDay(DateTime date) => DateFormat('EEE').format(date);
 
   static String getDate(DateTime date) => DateFormat('dd').format(date);

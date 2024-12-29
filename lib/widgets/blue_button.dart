@@ -1,6 +1,6 @@
-
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BlueButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -14,6 +14,7 @@ class BlueButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
+        constraints: BoxConstraints(maxHeight: 55, maxWidth: Get.width),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
