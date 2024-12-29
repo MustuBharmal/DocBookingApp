@@ -17,18 +17,18 @@ abstract class BookingRepo {
   static Future<BookingData?> getPaymentSecret(String patientId, String doctorId, String doctorTimeTableId, String amount) async {
     try {
       final Map<String, dynamic> data = {
-        "patient_id": "34",
-        "doctor_id": "6",
-        "doctor_time_table_id": "17",
-        "amount": "100",
-        "payment_type": "1",
-        "payment_card_id": "1"
-       /* _patientId: patientId,
+        // "patient_id": "34",
+        // "doctor_id": "6",
+        // "doctor_time_table_id": "17",
+        // "amount": "100",
+        // "payment_type": "1",
+        // "payment_card_id": "1"
+        _patientId: patientId,
         _doctorId: doctorId,
         _doctorTimeTableId: doctorTimeTableId,
         _amount: amount,
         _paymentType: '1',
-        _paymentCardId: '1'*/
+        _paymentCardId: '1'
       };
       final result = await HttpService.post(Api.booking, data);
       LogUtil.debug(data);

@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/authentication/controller/loader_controller.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../../exception/server_exception.dart';
@@ -16,6 +19,7 @@ class SpecialistController extends GetxController {
   RxBool isMapView = RxBool(false);
   LocationData? userLocation;
   RxList<DoctorsList?> doctorList = RxList.empty();
+  Rx<Set<Marker>> markers = Rx({});
 
   @override
   void onInit() {
@@ -44,6 +48,8 @@ class SpecialistController extends GetxController {
       isMapView.toggle();
       return;
     }
+    LoaderController.instance.showLoader();
+
     Location location = Location();
 
     bool serviceEnabled;
@@ -68,15 +74,25 @@ class SpecialistController extends GetxController {
 
     userLocation = await location.getLocation();
     if (userLocation != null) {
-      isMapView.toggle();
-      getNearByDoc(
-          id, userLocation?.latitude ?? 0.0, userLocation?.longitude ?? 0.0);
+      getNearByDoc(id, userLocation?.latitude ?? double.tryParse(AuthController.instance.user.value?.latitude ?? '0') ?? 0,
+          userLocation?.longitude ?? double.tryParse(AuthController.instance.user.value?.longitude ?? '0') ?? 0);
     }
+    LoaderController.instance.dismissLoader();
+    isMapView.toggle();
   }
 
   void getNearByDoc(int serviceId, double lat, double long) async {
     try {
-      doctorList.value = await SpecialistRepo.getDoctors(serviceId, lat, long);
+      doctorList.clear();
+      doctorList.addAll(await SpecialistRepo.getDoctors(serviceId, lat, long));
+      Set<Marker> newMarkers = {};
+      doctorList.forEach((d) {
+        double? lat = double.tryParse(d?.latitude ?? '0');
+        double? lng = double.tryParse(d?.longitude ?? '0');
+        if (lat != null && lng != null) {
+          newMarkers.add(Marker(markerId: MarkerId(d?.id?.toString() ?? '0'), position: LatLng(lat, lng)));
+        }
+      });
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/booking/models/booking_response.dart';
 import 'package:doc_booking_app/presentations/booking/repo/booking_repo.dart';
@@ -45,7 +47,7 @@ class BookingController extends GetxController {
       // 1. create payment intent on the server
       final BookingData? bookingData = await BookingRepo.getPaymentSecret(AuthController.instance.user.value?.id.toString() ?? '',
           doctorData?.id?.toString() ?? '', selectedTT.value?.id?.toString() ?? '', doctorData?.fees?.toString() ?? '');
-      LogUtil.debug(bookingData);
+
       // 2. initialize the payment sheet
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(

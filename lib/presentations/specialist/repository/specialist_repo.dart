@@ -7,22 +7,27 @@ import '../../../util/log_utils.dart';
 import '../models/doctor_list.dart';
 
 class SpecialistRepo {
-  static Future<List<DoctorsList?>> getDoctors(int serviceId, double lat, double long) async {
+  static Future<List<DoctorsList>> getDoctors(int serviceId, double lat, double long) async {
     try {
       Map<String, dynamic> data = {
-        'userLatitude': lat,
-        'userLongitude': long,
-        'service_id': serviceId,
-        'radius': 50
+        'userLatitude': 85.06249589385241,
+        'userLongitude': -178.81930852609128,
+        'service_id': 5,
+        // 'userLatitude': lat,
+        // 'userLongitude': long,
+        // 'service_id': serviceId,
+        'radius': 50,
       };
-      List<DoctorsList?> listOfSpecialist = [];
+      // List<DoctorsList?> listOfSpecialist = [];
       LogUtil.debug(Api.nearByDoctors);
-      final result =
-          await HttpService.post(Api.nearByDoctors, data, showLoader: false);
+      final result = await HttpService.post(Api.nearByDoctors, data, showLoader: false);
+      LogUtil.debug(result);
       if (result['isLive'] == true) {
-        listOfSpecialist = List<DoctorsList>.from(
-            result['data']!.map((x) => DoctorsList.fromJson(x)));
-        return listOfSpecialist;
+        final response = DoctorListResponse.fromJson(result);
+        return response.data;
+        /*listOfSpecialist = List<DoctorsList>.from(
+            result['data']!.map((x) => DoctorsList.fromJson(x)));*/
+        // return listOfSpecialist;
       } else {
         throw Exception("Error: ${result['message']}");
       }

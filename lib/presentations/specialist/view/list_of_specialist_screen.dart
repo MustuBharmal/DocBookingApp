@@ -22,81 +22,82 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: const CustomAppBar(title: 'Search', back: true),
-        body: Container(
-          padding: controller.isMapView.value
-              ? EdgeInsets.only(top: 16)
-              : const EdgeInsets.all(16),
-          child: Obx(
-            () => Column(
-              children: [
-                if (!controller.isMapView.value) ...[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: CustomSearchTextfield(
-                      hintText: ConstantString.searchByName,
-                      controller:
-                          SpecialistController.instance.searchController.value,
-                    ),
-                  ),
-                  const CustomTabBar(
-                    tabText1: 'Home',
-                    tabText2: 'Clinic',
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        HomeTabWidget(doctorList: doctorList),
-                        ClinicTabWidget(doctorList: doctorList),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 23, right: 16),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: CustomButton(
-                        onPressed: () => controller
-                            .goToMapScreen(doctorList[0]?.serviceData?.id ?? 0),
-                        height: Get.height * 0.05,
-                        width: Get.width * 0.33,
-                        iconPath: AppImage.map,
-                        label: ConstantString.mapView,
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
+        controller.isMapView(false);
+      },
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: const CustomAppBar(title: 'Search', back: true),
+          body: Obx(
+            () => Container(
+              padding: controller.isMapView.value ? EdgeInsets.only(top: 16) : const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  if (!controller.isMapView.value) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: CustomSearchTextfield(
+                        hintText: ConstantString.searchByName,
+                        controller: SpecialistController.instance.searchController.value,
                       ),
                     ),
-                  ),
-                ] else
-                  Expanded(
-                      child: Stack(
-                    children: [
-                      MapScreen(controller.userLocation!.latitude!,
-                          controller.userLocation!.longitude!),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: const CustomTabBar(
-                          tabText1: 'Home',
-                          tabText2: 'Clinic',
+                    const CustomTabBar(
+                      tabText1: 'Home',
+                      tabText2: 'Clinic',
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          HomeTabWidget(doctorList: doctorList),
+                          ClinicTabWidget(doctorList: doctorList),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 23, right: 16),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: CustomButton(
+                          onPressed: () => controller.goToMapScreen(doctorList[0]?.serviceData?.id ?? 0),
+                          height: Get.height * 0.05,
+                          width: Get.width * 0.33,
+                          iconPath: AppImage.map,
+                          label: ConstantString.mapView,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 113, right: 16),
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: CustomButton(
-                            onPressed: controller.goToListScreen,
-                            height: Get.height * 0.05,
-                            width: Get.width * 0.33,
-                            iconPath: AppImage.map,
-                            label: ConstantString.listView,
+                    ),
+                  ] else
+                    Expanded(
+                        child: Stack(
+                      children: [
+                        MapScreen(controller.userLocation!.latitude!, controller.userLocation!.longitude!),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: const CustomTabBar(
+                            tabText1: 'Home',
+                            tabText2: 'Clinic',
                           ),
                         ),
-                      ),
-                    ],
-                  ))
-              ],
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 113, right: 16),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: CustomButton(
+                              onPressed: controller.goToListScreen,
+                              height: Get.height * 0.05,
+                              width: Get.width * 0.33,
+                              iconPath: AppImage.map,
+                              label: ConstantString.listView,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ))
+                ],
+              ),
             ),
           ),
         ),
