@@ -31,6 +31,7 @@ import 'package:get/get.dart';
 
 import '../presentations/authentication/binding/otp_verification_binding.dart';
 import '../presentations/booking/views/book_slots_confirm_screen.dart';
+import '../presentations/home/view/notification_screen.dart';
 import '../presentations/profile/binding/profile_binding.dart';
 import '../presentations/profile/view/user_info_edit_screen.dart';
 import '../presentations/specialist/binding/specialist_binding.dart';
@@ -128,6 +129,10 @@ class AppRoutes {
     GetPage(
       name: LoginScreen.routeName,
       page: () => LoginScreen(),
+    ),
+    GetPage(
+      name: NotificationScreen.routeName,
+      page: () => NotificationScreen(),
     ),
     GetPage(
       name: SignupScreen.routeName,
