@@ -27,4 +27,5 @@ class Api {
   static String adminTemplateGet = 'admin/template/get';
   static String uploadMultipleImages = 'common/upload_image_multi';
   static String prescriptionForm = 'patient/prescription';
+  static String booking = 'patient/booking';
 }

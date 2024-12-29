@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/global/constant_values.dart';
 import 'package:doc_booking_app/global/extensions.dart';
+import 'package:doc_booking_app/presentations/home/view/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,10 @@ class NavigationScreen extends GetView<HomeController> {
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
+
+          onPressed: (){
+            Get.toNamed(NotificationScreen.routeName);
+          },
         ),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
