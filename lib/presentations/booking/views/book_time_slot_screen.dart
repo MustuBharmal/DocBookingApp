@@ -32,7 +32,10 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
     return Scaffold(
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(16),
-        child: BlueButton(label: 'Confirm Appointment'),
+        child: BlueButton(
+          label: 'Confirm Appointment',
+          onPressed: controller.confirmBooking,
+        ),
       ),
       body: Obx(
         () => Column(
@@ -165,20 +168,22 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                   if (tt == null) {
                     return Container();
                   }
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(100),
-                      border: tt.id == controller.selectedTT.value?.id
-                          ? Border.all(color: AppColors.primary, width: 2)
-                          : Border.all(color: AppColors.borderColorLight, width: 1),
-                    ),
-                    child: Center(child: Text(tt.startTime ?? '')),
-                  ).onClick(() {
-                    controller.selectedTT.value = tt;
-                    LogUtil.debug('${tt.id}||${controller.selectedTT.value?.id}');
-                    // setState(() {});
-                  });
+                  return Obx(
+                    () => Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(100),
+                        border: tt.id == controller.selectedTT.value?.id
+                            ? Border.all(color: AppColors.primary, width: 2)
+                            : Border.all(color: AppColors.borderColorLight, width: 1),
+                      ),
+                      child: Center(child: Text(tt.startTime ?? '')),
+                    ).onClick(() {
+                      controller.selectedTT.value = tt;
+                      LogUtil.debug('${tt.id}||${controller.selectedTT.value?.id}');
+                      // setState(() {});
+                    }),
+                  );
                 },
                 itemCount: controller.timeTable[controller.selectedDate.value]?.length ?? 0,
               ),

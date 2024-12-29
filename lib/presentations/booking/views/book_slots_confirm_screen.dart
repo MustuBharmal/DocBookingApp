@@ -1,3 +1,5 @@
+import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/booking/controller/booking_controller.dart';
 import 'package:doc_booking_app/presentations/booking/views/payment_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
@@ -8,7 +10,7 @@ import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
 import '../../../widgets/appointment_card.dart';
 
-class BookSlotsConfirmScreen extends StatelessWidget {
+class BookSlotsConfirmScreen extends GetView<BookingController> {
   static const routeName = '/book-slots-confirm-screen';
 
   const BookSlotsConfirmScreen({super.key});
@@ -25,7 +27,11 @@ class BookSlotsConfirmScreen extends StatelessWidget {
           children: [
             Column(
               children: [
-                AppointmentCard(),
+                AppointmentCard(
+                  doctorData: controller.doctorData,
+                  selectedDate: controller.selectedDate.value,
+                  selectedTimeSlot: controller.selectedTT.value,
+                ),
                 const SizedBox(height: 25),
                 Container(
                   padding: EdgeInsets.all(20),
@@ -42,9 +48,9 @@ class BookSlotsConfirmScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
                       AppointmentDetails(
-                        patientName: 'John Doe',
-                        location: '13 street, South California',
-                        totalAmount: '\$150',
+                        patientName: AuthController.instance.user.value?.name ?? '',
+                        location: AuthController.instance.user.value?.address ?? '',
+                        totalAmount: '\$ ${controller.doctorData?.fees}',
                       ),
                     ],
                   ),
@@ -53,7 +59,8 @@ class BookSlotsConfirmScreen extends StatelessWidget {
             ),
             BlueButton(
               onPressed: () {
-                Get.toNamed(PaymentScreen.routeName);
+                controller.pay();
+                // Get.toNamed(PaymentScreen.routeName);
               },
               label: 'Book',
             ),

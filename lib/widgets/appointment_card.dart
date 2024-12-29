@@ -1,4 +1,7 @@
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_time_table.dart';
+import 'package:doc_booking_app/util/custom_date_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -8,7 +11,11 @@ import '../global/images.dart';
 import '../global/styles.dart';
 
 class AppointmentCard extends StatelessWidget {
-  const AppointmentCard({super.key});
+  final DoctorsList? doctorData;
+  final DoctorTimeTable? selectedTimeSlot;
+  final DateTime selectedDate;
+
+  const AppointmentCard({required this.doctorData, required this.selectedDate, required this.selectedTimeSlot, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +38,14 @@ class AppointmentCard extends StatelessWidget {
             Row(
               children: [
                 RoundedImage(
-                  imagePath: AppImage.femaleDoctor2,
+                  imagePath: doctorData?.profilePic,
                   size: 60,
                   borderRadius: 12,
                 ),
                 const SizedBox(width: 12),
-                const TitleSubtitle(
-                  title: 'Peater Parker',
-                  subtitle: 'Psychiatrist',
+                TitleSubtitle(
+                  title: doctorData?.name ?? '',
+                  subtitle: doctorData?.serviceData?.name ?? '',
                 ),
               ],
             ),
@@ -54,16 +61,15 @@ class AppointmentCard extends StatelessWidget {
                 BadgeWidget(
                   image: AppImage.alarm,
                   color: Colors.white,
-                  text: '10:30pm',
+                  text: selectedTimeSlot?.startTime ?? '',
                 ),
               ],
             ),
-
             const SizedBox(height: 8),
             BadgeWidget(
               image: AppImage.calendar,
               color: AppColors.white,
-              text: 'October 10, 2024',
+              text: CustomDateUtils.getDayAndDate(selectedDate),
             ),
           ],
         ),
@@ -71,9 +77,6 @@ class AppointmentCard extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class BadgeWidget extends StatelessWidget {
   final String image;
@@ -98,15 +101,14 @@ class BadgeWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset(image,colorFilter: ColorFilter.mode(color!, BlendMode.srcIn),),
+          SvgPicture.asset(
+            image,
+            colorFilter: ColorFilter.mode(color!, BlendMode.srcIn),
+          ),
           const SizedBox(width: 8),
           Text(
             text,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 11,
-                fontWeight: FontWeight.w400
-            ),
+            style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w400),
           ),
         ],
       ),
@@ -114,10 +116,8 @@ class BadgeWidget extends StatelessWidget {
   }
 }
 
-
-
 class RoundedImage extends StatelessWidget {
-  final String imagePath;
+  final String? imagePath;
   final double size;
   final double borderRadius;
 
@@ -130,7 +130,18 @@ class RoundedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: SizedBox(
+        height: size,
+        width: size,
+        child: CachedNetworkImage(
+          imageUrl: imagePath ?? '',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+    /*return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
@@ -140,11 +151,9 @@ class RoundedImage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-    );
+    );*/
   }
 }
-
-
 
 class TitleSubtitle extends StatelessWidget {
   final String title;
@@ -165,10 +174,7 @@ class TitleSubtitle extends StatelessWidget {
           title,
           style: txtInterTitle16White,
         ),
-        Text(
-            subtitle,
-            style:txtInterSubtitle13White
-        ),
+        Text(subtitle, style: txtInterSubtitle13White),
       ],
     );
   }
