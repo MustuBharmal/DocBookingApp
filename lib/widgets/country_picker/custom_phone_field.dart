@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/models/country_model.dart';
 import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
@@ -50,7 +51,12 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
       countries.clear();
       countries.addAll(allCountries);
       if (countries.isNotEmpty) {
-        selectedCountry = countries.first;
+        if (AuthController.instance.user.value != null) {
+          selectedCountry = countries.firstWhere((country) =>
+              country.name == AuthController.instance.user.value?.country);
+        } else {
+          selectedCountry = countries.first;
+        }
       }
       setState(() {});
     } catch (e) {

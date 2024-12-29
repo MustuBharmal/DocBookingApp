@@ -1,17 +1,12 @@
-// import 'package:country_picker/country_picker.dart';
-
 import 'dart:io';
-
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
 import 'package:doc_booking_app/presentations/profile/repo/profile_repo.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-
+import 'package:socket_io_client/socket_io_client.dart' as io;
 import '../../../exception/server_exception.dart';
 import '../../authentication/models/city_model.dart';
 import '../../authentication/models/country_model.dart';
@@ -19,15 +14,9 @@ import '../../authentication/models/state_model.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find<ProfileController>();
-
-
-  final user = AuthController.instance.user.value;
   RxString imageUrl = RxString('');
   RxBool isEditingProfile = RxBool(false);
   RxMap<String, String> profileError = RxMap({});
-
-
-
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -38,7 +27,7 @@ class ProfileController extends GetxController {
   final TextEditingController messageController = TextEditingController();
   final TextEditingController businessTypeController = TextEditingController();
   final TextEditingController businessNameController = TextEditingController();
-  final TextEditingController postCodeController = TextEditingController();
+  final TextEditingController pinCodeController = TextEditingController();
   final TextEditingController stateController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
@@ -46,7 +35,7 @@ class ProfileController extends GetxController {
   Rx<CountryModel?> selectCountry = Rx(null);
   Rx<StateModel?> selectState = Rx(null);
   Rx<CityModel?> selectCity = Rx(null);
-
+  final ImagePicker _picker = ImagePicker();
   RxList<FaqModels?> listOfFaqs = RxList.empty();
   final List<String> prefCommMethodList = ['Whatsapp', 'Telephone', 'Message'];
   final List<String> businessNamesList = [
@@ -62,16 +51,15 @@ class ProfileController extends GetxController {
   RxString selectedBusinessName = RxString('Fitness First');
   RxString selectedBusinessType = RxString('Clinic');
   RxString selectedSex = RxString('');
+  Rx<File?> selectedImage = Rx<File?>(null);
 
   // Function to pick an image
   Future<void> pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage =
-        await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedImage != null) {
-      imageUrl.value = pickedImage
-          .path; // Update the reactive variable with the new image path
+    final XFile? image = await _picker.pickImage(
+      source: ImageSource.camera,
+    );
+    if (image != null) {
+      selectedImage.value = File(image.path);
     }
   }
 
@@ -90,11 +78,10 @@ class ProfileController extends GetxController {
   final TextEditingController bloodGrpController = TextEditingController();
 
   // Socket.IO instance
-  late IO.Socket socket;
+  late io.Socket socket;
 
   // Reactive list of messages
   RxList<String> messages = <String>[].obs;
-
 
   @override
   onInit() {
@@ -103,6 +90,7 @@ class ProfileController extends GetxController {
     _initializeSocketConnection();
     getFaq();
   }
+
   @override
   void onClose() {
     chatController.dispose();
@@ -110,30 +98,29 @@ class ProfileController extends GetxController {
     super.onClose();
   }
 
-
   initializeControllers() {
+    final user = AuthController.instance.user.value;
     imageUrl.value = user?.profilePic ??
         'https://s3-alpha-sig.figma.com/img/df1c/b52e/f5e502e6fea97dabf492ab66036e7ec2?Expires=1736121600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K6IBc34oEZTfO2Fvozs1V5mOGqff6iQ2VdibX-AVW1PEa-NINVvXbtyW5GxTiM-QilLtF4umNkGK2I~ycyoL84ObJnkXqjSPG66CQxqe96IKYWBErFu5TyFkq8QbmKCBDTrbM5HGJjslognO0Zh4pqVrtsDaHVk0uNmXnBpDXJ0uPZTB~DXwEnhdGGQtbC6RAnSuSz87v5Xk80wePKvHneKP3q--U7rUvmY3oZ4-mi8K4uoVZ-3CVPpkVyx6ikPIkmQQStKqsjAgwUzzqEttW~apbi2TkvOP8rBmOralmwU8-bHRxltyYVxMRL9EuGHL2wJ9np7mcf34G1WgQKRing__';
     selectedSex.value = user!.sex!;
 
-    nameController.text = user?.name ?? '';
-    emailController.text = user?.email ?? '';
-    dobController.text = user?.dob ?? '';
-    addressController.text = user?.address ?? '';
-    phoneController.text = user?.phone ?? '';
-    selectedSex.value = user?.sex ?? '';
-    cityController.text = user?.city ?? '';
-    countryController.text = user?.country ?? '';
-    stateController.text = user?.state ?? '';
-    // postCodeController.value = user?.postCode ?? '';
+    nameController.text = user.name ?? '';
+    emailController.text = user.email ?? '';
+    dobController.text = user.dob ?? '';
+    addressController.text = user.address ?? '';
+    phoneController.text = user.phone ?? '';
+    selectedSex.value = user.sex ?? '';
+    cityController.text = user.city ?? '';
+    countryController.text = user.country ?? '';
+    stateController.text = user.state ?? '';
+    pinCodeController.text = user.pinCode ?? '';
   }
 
-
   void _initializeSocketConnection() {
-    const String socketUrl = "https://crazylense.com";
-    const String socketPath = "/applicationinterface-socket";
+    const String socketUrl = 'https://crazylense.com';
+    const String socketPath = '/applicationinterface-socket';
 
-    socket = IO.io(socketUrl, <String, dynamic>{
+    socket = io.io(socketUrl, <String, dynamic>{
       'path': socketPath,
       'transports': ['websocket'],
       'query': {'debug': true},
@@ -145,32 +132,32 @@ class ProfileController extends GetxController {
 
     // Listen for connection events
     socket.onConnect((_) {
-      print("Connected to server");
+      print('Connected to server');
     });
 
     // Listen for disconnection events
     socket.onDisconnect((_) {
-      print("Disconnected from server");
+      print('Disconnected from server');
     });
 
     // Handle reconnection attempts
     socket.on('reconnect_attempt', (attempt) {
-      print("Reconnection Attempt #$attempt");
+      print('Reconnection Attempt #$attempt');
     });
 
     // Handle reconnection success
     socket.on('reconnect', (_) {
-      print("Reconnected to the server");
+      print('Reconnected to the server');
     });
 
     // Handle reconnection failure
     socket.on('reconnect_failed', (_) {
-      print("Reconnection failed");
+      print('Reconnection failed');
     });
 
     // Listen for connection errors
     socket.onConnectError((error) {
-      print("Connection Error: $error");
+      print('Connection Error: $error');
     });
 
     // Listen for incoming messages
@@ -178,7 +165,6 @@ class ProfileController extends GetxController {
       if (data != null && data['message'] != null) {
         messages.add(data['message']);
       }
-
     });
   }
 
@@ -188,7 +174,7 @@ class ProfileController extends GetxController {
       final msg = {
         'message': message,
         'doctor_id': '1', // Replace with actual doctor ID
-        'patient_id': user!.id, // Replace with actual patient ID
+        'patient_id': AuthController.instance.user.value!.id, // Replace with actual patient ID
         'sent_by': 'patient', // Could be 'doctor' or 'patient'
       };
 
@@ -233,7 +219,7 @@ class ProfileController extends GetxController {
   void updateProfile(Map<String, dynamic> params) async {
     try {
       await ProfileRepo.updateProfileApi(params);
-      AuthController.instance.getUser();
+
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
@@ -242,40 +228,42 @@ class ProfileController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
-    bool userEditProfileValidation(){
-      if (nameController.text.isEmpty) {
-        profileError['name'] = 'Please enter name';
-      }
-      if (emailController.text.isEmpty) {
-        profileError['email'] = 'Please enter email';
-      }
-      if (dobController.text.isEmpty) {
-        profileError['dob'] = 'Please enter Date of birth!';
-      }
-      if (selectedSex.isEmpty) {
-        profileError['sex'] = 'Please select gender!';
-      }
-      if (stateController.text.isEmpty) {
-        profileError['state'] = 'Please select state!';
-      }
-      if (countryController.text.isEmpty) {
-        profileError['country'] = 'Please select country!';
-      }
-      if (cityController.text.isEmpty) {
-        profileError['city'] = 'Please select city!';
-      }
-      if (addressController.text.isEmpty) {
-        profileError['address'] = 'Please enter address!';
-      }
-      // if (pinCode.isEmpty) {
-      //   signupError['pin_code'] = 'Please Postal Code!';
-      // }
-      if (imageUrl.isEmpty) {
-        profileError['profile_pic'] = 'Please select image';
-      }
-    return profileError.isEmpty;
+
+  bool userEditProfileValidation() {
+    if (nameController.text.isEmpty) {
+      profileError['name'] = 'Please enter name';
     }
-   bool contactUsValidation() {
+    if (emailController.text.isEmpty) {
+      profileError['email'] = 'Please enter email';
+    }
+    if (dobController.text.isEmpty) {
+      profileError['dob'] = 'Please enter Date of birth!';
+    }
+    if (selectedSex.isEmpty) {
+      profileError['sex'] = 'Please select gender!';
+    }
+    if (stateController.text.isEmpty) {
+      profileError['state'] = 'Please select state!';
+    }
+    if (countryController.text.isEmpty) {
+      profileError['country'] = 'Please select country!';
+    }
+    if (cityController.text.isEmpty) {
+      profileError['city'] = 'Please select city!';
+    }
+    if (addressController.text.isEmpty) {
+      profileError['address'] = 'Please enter address!';
+    }
+    if (pinCodeController.text.isEmpty) {
+      profileError['pin_code'] = 'Please Postal Code!';
+    }
+    if (imageUrl.isEmpty) {
+      profileError['profile_pic'] = 'Please select image';
+    }
+    return profileError.isEmpty;
+  }
+
+  bool contactUsValidation() {
     profileError.clear();
     if (nameController.text.isEmpty) {
       profileError['name'] = 'Please enter name';
@@ -308,7 +296,6 @@ class ProfileController extends GetxController {
     } finally {}
   }
 
-
   // prescription form api
   void prescriptionForm(Map<String, dynamic> params) async {
     try {
@@ -333,6 +320,7 @@ class ProfileController extends GetxController {
     }
     return profileError.isEmpty;
   }
+
   bool htbValidation() {
     profileError.clear();
 

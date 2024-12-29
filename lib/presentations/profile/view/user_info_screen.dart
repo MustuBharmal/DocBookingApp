@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/extensions.dart';
 import 'package:doc_booking_app/global/images.dart';
@@ -7,9 +8,7 @@ import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../authentication/controller/authentication_controller.dart';
 import '../widgets/profile_field.dart';
-import '../widgets/profile_image.dart';
 
 class UserInfoScreen extends GetView<ProfileController> {
   static const routeName = '/user-info-screen';
@@ -57,9 +56,26 @@ class UserInfoScreen extends GetView<ProfileController> {
     return ListView(
       children: [
         const SizedBox(height: 20),
-        ProfileImage(
-          initialImageUrl: controller.imageUrl.value,
-              isEditing: false,
+        Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: Get.width * .35,
+          ),
+          width: Get.width * .3,
+          height: Get.height * .135,
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(14)),
+            child: CachedNetworkImage(
+              imageUrl: controller.imageUrl.value,
+              fit: BoxFit.contain,
+              placeholder: (context, url) => Center(
+                child: CircularProgressIndicator(),
+              ),
+              errorWidget: (context, url, error) => Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+            ),
+          ),
         ),
         const SizedBox(height: 25),
         ProfileField(
@@ -75,12 +91,12 @@ class UserInfoScreen extends GetView<ProfileController> {
         ProfileField(
             label: 'Address', value: controller.addressController.text),
 
-        ProfileField(label: 'Country', value: controller.countryController.text),
+        ProfileField(
+            label: 'Country', value: controller.countryController.text),
         ProfileField(label: 'State', value: controller.stateController.text),
         ProfileField(label: 'City', value: controller.cityController.text),
 
         // ProfileField(label: 'Zip Code', value: controller.postCodeController.text),
-
       ],
     );
   }

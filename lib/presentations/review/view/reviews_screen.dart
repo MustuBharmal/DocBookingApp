@@ -9,7 +9,7 @@ class ReviewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Reviews", back: true, isNotificationVisible: false),
+      appBar: CustomAppBar(title: 'Reviews', back: true, isNotificationVisible: false),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as dio;
+import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,9 @@ import '../../../exception/server_exception.dart';
 import '../../../global/apis.dart';
 import '../../../service/http_service.dart';
 import '../../../util/log_utils.dart';
+import '../../authentication/controller/authentication_controller.dart';
+import '../../authentication/controller/loader_controller.dart';
+import '../../authentication/repo/auth_repo.dart';
 
 abstract class ProfileRepo {
   static Future<List<FaqModels?>> getFaqs() async {
@@ -39,7 +43,7 @@ abstract class ProfileRepo {
     try {
       LogUtil.debug(Api.prescriptionForm);
       final result =
-      await HttpService.post(Api.prescriptionForm, params, token: true);
+          await HttpService.post(Api.prescriptionForm, params, token: true);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.back();
@@ -64,12 +68,18 @@ abstract class ProfileRepo {
 
   static Future<bool> updateProfileApi(Map<String, dynamic> params) async {
     try {
-      // LogUtil.debug(Api.updateProfile);
-      final result = await HttpService.post(Api.updateProfile, params,token: true);
+      LogUtil.debug(params);
+      final result =
+          await HttpService.post(Api.updateProfile, params, token: true, showLoader: false);
+
       if (result['isLive'] == true) {
         LogUtil.debug(result);
+        AuthController.instance.user.value = await AuthRepo.getUser();
+        LoaderController.instance.dismissLoader();
+
         Get.back();
         Get.snackbar('Success', result['message']);
+        ProfileController.instance.initializeControllers();
         return true;
       } else {
         throw Exception("Error: ${result['message']}");

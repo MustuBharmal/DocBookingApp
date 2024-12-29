@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../exception/server_exception.dart';
-import '../../../util/storage_util.dart';
 import '../../home/view/navigation_screen.dart';
 import '../models/user.dart';
 import '../views/account_verification_screen.dart';
@@ -76,22 +75,6 @@ class AuthController extends GetxController {
   void getCity(String cityName) async {
     selectCity.value = cities.firstWhere((country) => country.name == cityName);
   }
-
-  /*void searchState(String value) {
-    if (value != '') {
-      LogUtil.debug(value);
-      searchedStates.clear();
-      searchedStates.addAll(states
-          .where((state) =>
-              state.name?.toLowerCase().startsWith(value.toLowerCase()) ??
-              false)
-          .toList());
-      searchedStates.refresh();
-    } else {
-      searchedStates.clear();
-      searchedStates.addAll(states);
-    }
-  }*/
 
   void searchCountry(String value) {
     if (value.isNotEmpty) {

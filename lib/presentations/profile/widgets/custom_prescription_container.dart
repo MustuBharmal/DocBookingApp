@@ -31,7 +31,7 @@ class CustomPrescriptionContainer extends StatelessWidget {
           height: 60,
           decoration: ShapeDecoration(
             image: const DecorationImage(
-              image: NetworkImage("https://via.placeholder.com/60x60"),
+              image: NetworkImage('https://via.placeholder.com/60x60'),
               fit: BoxFit.cover,
             ),
             shape: RoundedRectangleBorder(

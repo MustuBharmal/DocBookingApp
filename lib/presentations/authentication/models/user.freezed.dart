@@ -21,7 +21,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
-  String? get profilePic => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
@@ -35,6 +34,10 @@ mixin _$User {
   String? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'password')
   String? get password => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pin_code')
+  String? get pinCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_pic')
+  String? get profilePic => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_verified')
   String? get isVerified => throw _privateConstructorUsedError;
 
@@ -54,7 +57,6 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String? profilePic,
       String? name,
       String? email,
       String? phone,
@@ -67,6 +69,8 @@ abstract class $UserCopyWith<$Res> {
       String? createdAt,
       String? updatedAt,
       @JsonKey(name: 'password') String? password,
+      @JsonKey(name: 'pin_code') String? pinCode,
+      @JsonKey(name: 'profile_pic') String? profilePic,
       @JsonKey(name: 'is_verified') String? isVerified});
 }
 
@@ -86,7 +90,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
-    Object? profilePic = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? phone = freezed,
@@ -99,6 +102,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? password = freezed,
+    Object? pinCode = freezed,
+    Object? profilePic = freezed,
     Object? isVerified = freezed,
   }) {
     return _then(_value.copyWith(
@@ -106,10 +111,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      profilePic: freezed == profilePic
-          ? _value.profilePic
-          : profilePic // ignore: cast_nullable_to_non_nullable
-              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -157,6 +158,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePic: freezed == profilePic
+          ? _value.profilePic
+          : profilePic // ignore: cast_nullable_to_non_nullable
               as String?,
       isVerified: freezed == isVerified
           ? _value.isVerified
@@ -175,7 +184,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String? profilePic,
       String? name,
       String? email,
       String? phone,
@@ -188,6 +196,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? createdAt,
       String? updatedAt,
       @JsonKey(name: 'password') String? password,
+      @JsonKey(name: 'pin_code') String? pinCode,
+      @JsonKey(name: 'profile_pic') String? profilePic,
       @JsonKey(name: 'is_verified') String? isVerified});
 }
 
@@ -204,7 +214,6 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? profilePic = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? phone = freezed,
@@ -217,6 +226,8 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? password = freezed,
+    Object? pinCode = freezed,
+    Object? profilePic = freezed,
     Object? isVerified = freezed,
   }) {
     return _then(_$UserImpl(
@@ -224,10 +235,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      profilePic: freezed == profilePic
-          ? _value.profilePic
-          : profilePic // ignore: cast_nullable_to_non_nullable
-              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -276,6 +283,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePic: freezed == profilePic
+          ? _value.profilePic
+          : profilePic // ignore: cast_nullable_to_non_nullable
+              as String?,
       isVerified: freezed == isVerified
           ? _value.isVerified
           : isVerified // ignore: cast_nullable_to_non_nullable
@@ -289,7 +304,6 @@ class __$$UserImplCopyWithImpl<$Res>
 class _$UserImpl implements _User {
   const _$UserImpl(
       {this.id = 0,
-      this.profilePic,
       this.name,
       this.email,
       this.phone,
@@ -302,6 +316,8 @@ class _$UserImpl implements _User {
       this.createdAt,
       this.updatedAt,
       @JsonKey(name: 'password') this.password,
+      @JsonKey(name: 'pin_code') this.pinCode,
+      @JsonKey(name: 'profile_pic') this.profilePic,
       @JsonKey(name: 'is_verified') this.isVerified});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -310,8 +326,6 @@ class _$UserImpl implements _User {
   @override
   @JsonKey()
   final int id;
-  @override
-  final String? profilePic;
   @override
   final String? name;
   @override
@@ -338,12 +352,18 @@ class _$UserImpl implements _User {
   @JsonKey(name: 'password')
   final String? password;
   @override
+  @JsonKey(name: 'pin_code')
+  final String? pinCode;
+  @override
+  @JsonKey(name: 'profile_pic')
+  final String? profilePic;
+  @override
   @JsonKey(name: 'is_verified')
   final String? isVerified;
 
   @override
   String toString() {
-    return 'User(id: $id, profilePic: $profilePic, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, password: $password, isVerified: $isVerified)';
+    return 'User(id: $id, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, password: $password, pinCode: $pinCode, profilePic: $profilePic, isVerified: $isVerified)';
   }
 
   @override
@@ -352,8 +372,6 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.profilePic, profilePic) ||
-                other.profilePic == profilePic) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -369,6 +387,9 @@ class _$UserImpl implements _User {
                 other.updatedAt == updatedAt) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.pinCode, pinCode) || other.pinCode == pinCode) &&
+            (identical(other.profilePic, profilePic) ||
+                other.profilePic == profilePic) &&
             (identical(other.isVerified, isVerified) ||
                 other.isVerified == isVerified));
   }
@@ -378,7 +399,6 @@ class _$UserImpl implements _User {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      profilePic,
       name,
       email,
       phone,
@@ -391,6 +411,8 @@ class _$UserImpl implements _User {
       createdAt,
       updatedAt,
       password,
+      pinCode,
+      profilePic,
       isVerified);
 
   /// Create a copy of User
@@ -412,7 +434,6 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {final int id,
-      final String? profilePic,
       final String? name,
       final String? email,
       final String? phone,
@@ -425,14 +446,14 @@ abstract class _User implements User {
       final String? createdAt,
       final String? updatedAt,
       @JsonKey(name: 'password') final String? password,
+      @JsonKey(name: 'pin_code') final String? pinCode,
+      @JsonKey(name: 'profile_pic') final String? profilePic,
       @JsonKey(name: 'is_verified') final String? isVerified}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
   int get id;
-  @override
-  String? get profilePic;
   @override
   String? get name;
   @override
@@ -458,6 +479,12 @@ abstract class _User implements User {
   @override
   @JsonKey(name: 'password')
   String? get password;
+  @override
+  @JsonKey(name: 'pin_code')
+  String? get pinCode;
+  @override
+  @JsonKey(name: 'profile_pic')
+  String? get profilePic;
   @override
   @JsonKey(name: 'is_verified')
   String? get isVerified;

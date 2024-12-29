@@ -29,19 +29,16 @@ TextStyle txtInterTextField = TextStyle(
 TextStyle txtInterTextFieldHint = TextStyle(
   color: AppColors.grey,
   fontSize: 14,
-  fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
 );
 TextStyle txtInterDropDownValue = TextStyle(
   color: AppColors.black,
   fontSize: 14,
-  fontFamily: 'Inter',
   fontWeight: FontWeight.w400,
 );
 TextStyle txtInterMedium13 = TextStyle(
   color: AppColors.black,
   fontSize: 15,
-  fontFamily: 'Inter',
   fontWeight: FontWeight.w500,
 );
 TextStyle txtInterMedium12 = TextStyle(

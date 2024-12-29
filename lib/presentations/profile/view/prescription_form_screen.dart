@@ -5,6 +5,8 @@ import 'package:doc_booking_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../authentication/controller/authentication_controller.dart';
+
 class PrescriptionFormScreen extends GetView<ProfileController> {
   static const String routeName = '/prescription-form-screen';
 
@@ -48,7 +50,7 @@ class PrescriptionFormScreen extends GetView<ProfileController> {
                 return;
               }
               var params = {
-                'patient_id': ProfileController.instance.user!.id,
+                'patient_id': AuthController.instance.user.value!.id,
                 'doctor_id': '1',
                 'blood_group': controller.bloodGrpController.text,
                 'symptoms': controller.symptomsController.text,

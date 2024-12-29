@@ -69,7 +69,6 @@ abstract class HomeRepo {
       LogUtil.debug(Api.doctors);
       final result = await HttpService.post(Api.doctors, data, showLoader: false);
       if (result['isLive'] == true) {
-        LogUtil.debug(result);
         listOfSpecialist = List<DoctorsList>.from(result['data']!.map((x) => DoctorsList.fromJson(x)));
         return listOfSpecialist;
       } else {

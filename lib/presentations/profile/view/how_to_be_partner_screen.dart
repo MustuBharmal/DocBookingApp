@@ -1,5 +1,4 @@
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
