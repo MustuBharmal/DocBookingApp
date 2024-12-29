@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
-import '../../../util/date_util.dart';
 import '../controller/home_controller.dart';
 import '../models/notification_model.dart';
 import '../../../widgets/custom_app_bar.dart';
@@ -19,68 +18,51 @@ class NotificationScreen extends GetView<HomeController> {
         back: true,
         isNotificationVisible: false,
       ),
-      body: Obx(() {
-        // Fetch notifications from controller
-        final todayNotifications = controller.todayNotifications;
-        final olderNotifications = controller.olderNotifications;
-
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Today Section
-                if (todayNotifications.isNotEmpty) ...[
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Obx(() => controller.unreadNotifications.isNotEmpty
+                  ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   SectionHeader(
                     title: 'Today',
-                    actionText: 'Mark all as read',
+                    actionText: 'Mark All as Read',
                     onActionPressed: () {
-                      // Handle "Mark all as read"
+                      controller.markAsReadNotification();
                     },
                   ),
-                  ...todayNotifications.map((notification) {
-                    return NotificationCard(
-                      notification: notification!,
-                      timeAgo: DateUtil.timeAgo(notification.createdAt!),
-                    );
-                  }),
+                  ...controller.unreadNotifications
+                      .map((notification) => NotificationCard(
+                    notification: notification,
+                    isUnread: true,
+                    controller: controller,
+                  ))
                 ],
-
-                // Older Section
-                if (olderNotifications.isNotEmpty) ...[
-                  const SizedBox(height: 24),
-                  const SectionHeader(
-                    title: 'Older',
-                    actionText: null,
-                  ),
-                  ...olderNotifications.map((notification) {
-                    return NotificationCard(
-                      notification: notification!,
-                      timeAgo: DateUtil.timeAgo(notification.createdAt!),
-                    );
-                  }),
+              )
+                  : const SizedBox.shrink()),
+              const SizedBox(height: 16),
+              Obx(() => controller.readNotifications.isNotEmpty
+                  ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SectionHeader(title: 'Older'),
+                  ...controller.readNotifications
+                      .map((notification) => NotificationCard(
+                    notification: notification,
+                    isUnread: false,
+                    controller: controller,
+                  ))
                 ],
-
-                // No Notifications
-                if (todayNotifications.isEmpty && olderNotifications.isEmpty)
-                  const Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 32),
-                      child: Text(
-                        'No notifications available.',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+              )
+                  : const SizedBox.shrink()),
+            ],
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }
@@ -108,7 +90,7 @@ class SectionHeader extends StatelessWidget {
             title,
             style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
           if (actionText != null)
@@ -130,55 +112,52 @@ class SectionHeader extends StatelessWidget {
 }
 
 class NotificationCard extends StatelessWidget {
-  final NotificationModel notification;
-  final String timeAgo;
+  final NotificationModel? notification;
+  final bool isUnread;
+  final HomeController controller;
 
   const NotificationCard({
     super.key,
     required this.notification,
-    required this.timeAgo,
+    required this.isUnread,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 16.0),
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.borderColor),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Text(
-          //   notification.title ?? '',
-          //   style: const TextStyle(
-          //     fontSize: 15,
-          //     fontWeight: FontWeight.w600,
-          //   ),
-          // ),
-          // const SizedBox(height: 8),
-          Text(
-            notification.message ?? '',
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black87,
-              fontWeight: FontWeight.w400,
+    return Row(
+      children: [
+        if (isUnread) Padding(
+          padding: const EdgeInsets.only(right: 5.0),
+          child: const Icon(Icons.circle, color: Colors.blue, size: 7),
+        ),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 16.0),
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  notification!.message!,
+                  style: (isUnread)
+                      ? TextStyle(fontSize: 14, fontWeight: FontWeight.w600)
+                      : TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  controller.timeAgo(notification!.createdAt!),
+                  style: TextStyle(fontSize: 12, color: AppColors.grey),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            timeAgo,
-            style: const TextStyle(
-              fontSize: 13,
-              color: Colors.grey,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

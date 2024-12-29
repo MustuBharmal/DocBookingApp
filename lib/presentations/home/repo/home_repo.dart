@@ -17,7 +17,7 @@ abstract class HomeRepo {
       Map<String, dynamic> data = {};
       LogUtil.debug(Api.dashboard);
       final result =
-          await HttpService.post(Api.dashboard, data, showLoader: false);
+      await HttpService.post(Api.dashboard, data, showLoader: false);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         return Dashboard.fromJson(result['data'] as Map<String, dynamic>);
@@ -37,16 +37,45 @@ abstract class HomeRepo {
     }
   }
 
+
+  static Future<bool?> markAsReadNotificationApi(List<int?> notificationIds) async {
+    try {
+      LogUtil.debug(Api.prescriptionForm);
+      final result =
+      await HttpService.post(Api.markAsRead, {
+        'notificationIds': notificationIds,
+      }, token: true);
+      if (result['isLive'] == true) {
+        LogUtil.debug(result);
+        Get.back();
+        Get.snackbar('Success', result['message'].toString());
+        return true;
+      } else {
+        throw Exception("Error: ${result['status']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
   static Future<List<Service?>> getServices() async {
     try {
       Map<String, dynamic> data = {};
       List<Service?> listOfServices = [];
       LogUtil.debug(Api.services);
       final result =
-          await HttpService.get(Api.services, data, showLoader: false);
+      await HttpService.get(Api.services, data, showLoader: false);
       if (result['isLive'] == true) {
         listOfServices =
-            List<Service>.from(result['data']!.map((x) => Service.fromJson(x)));
+        List<Service>.from(result['data']!.map((x) => Service.fromJson(x)));
         LogUtil.debug(result);
         Get.snackbar('Success', result['message']);
         return listOfServices;
@@ -72,7 +101,7 @@ abstract class HomeRepo {
       List<DoctorsList> listOfSpecialist = [];
       LogUtil.debug(Api.doctors);
       final result =
-          await HttpService.post(Api.doctors, data, showLoader: false);
+      await HttpService.post(Api.doctors, data, showLoader: false);
       if (result['isLive'] == true) {
         listOfSpecialist = List<DoctorsList>.from(
             result['data']!.map((x) => DoctorsList.fromJson(x)));
@@ -124,11 +153,13 @@ abstract class HomeRepo {
     try {
       LogUtil.debug(Api.notification);
       final result =
-          await HttpService.post(Api.notification, {}, showLoader: false);
+      await HttpService.post(Api.notification, {}, showLoader: false);
       if (result['code'] == 200) {
         final NotificationResponse notificationResponse =
-            NotificationResponse.fromJson(result);
+        NotificationResponse.fromJson(result);
         if (notificationResponse.success) {
+          LogUtil.debug('hellllllo');
+          LogUtil.debug(notificationResponse.data);
           return notificationResponse.data;
         } else {
           throw Exception('Error: ${notificationResponse.message}');
