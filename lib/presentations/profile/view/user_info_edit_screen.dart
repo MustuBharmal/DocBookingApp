@@ -201,27 +201,17 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                       hintText: 'Street 2334 , New York',
                     ),
                   ),
-                  CustomTextField(
-                    isPassword: RxBool(false),
-                    label: ConstantString.postCode,
-                    showAsterisk: true,
-                    controller: controller.postCodeController,
-                    hintStyle: txtInterTextFieldHint,
-                    inputType: TextInputType.number,
-                    hintText: 'eg 12345',
-                    errorText: controller.profileError['pin_code'],
-                  ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 10.0),
-                  //   child: CustomTextField(
-                  //     isPassword: RxBool(false),
-                  //     label: 'Zip Code',
-                  //     controller: controller.zipController,
-                  //     showAsterisk: true,
-                  //     hintStyle: txtInterTextFieldHint,
-                  //     hintText: '53542',
-                  //   ),
+                  // CustomTextField(
+                  //   isPassword: RxBool(false),
+                  //   label: ConstantString.postCode,
+                  //   showAsterisk: true,
+                  //   controller: controller.postCodeController,
+                  //   hintStyle: txtInterTextFieldHint,
+                  //   inputType: TextInputType.number,
+                  //   hintText: 'eg 12345',
+                  //   errorText: controller.profileError['pin_code'],
                   // ),
+
                   /*Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: CustomDropdown(
@@ -253,6 +243,20 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                         if (!controller.userEditProfileValidation()) {
                           return;
                         }
+                        var params = {
+                          'name': controller.nameController.text,
+                          'email': controller.emailController.text,
+                          'sex': controller.selectedSex.value,
+                          'dob': controller.dobController.text,
+                          'phone': controller.phoneController.text,
+                          'address': controller.addressController.text,
+                          'country': controller.countryController.text,
+                          'state': controller.stateController.text,
+                          'city': controller.cityController.text,
+                          'profile_pic': controller.imageUrl.value,
+                        };
+                        controller.updateProfile(params);
+
                         // Save profile logic
                         controller.isEditingProfile.value = false;
                       },

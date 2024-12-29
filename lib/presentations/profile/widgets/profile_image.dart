@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,9 +22,6 @@ class ProfileImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProfileController controller = Get.put(ProfileController());
 
-    // Set initial image URL
-    controller.imageUrl.value = initialImageUrl;
-
     return Center(
       child: Stack(
         alignment: Alignment.center, // Align the stack to center
@@ -31,18 +29,16 @@ class ProfileImage extends StatelessWidget {
         children: [
           // Reactive Circle Avatar for Profile Image
           Obx(() => Container(
-            width: 118, // Match width
-            height: 118, // Match height
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              image: DecorationImage(
-                image: controller.imageUrl.value.startsWith('http')
-                    ? NetworkImage(controller.imageUrl.value)
-                    : FileImage(File(controller.imageUrl.value)) as ImageProvider,
-                fit: BoxFit.cover, // Image fits inside container
-              ),
-            ),
-          )),
+                width: 118, // Match width
+                height: 118, // Match height
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: CachedNetworkImage(
+                  fit: BoxFit.contain,
+                  imageUrl: controller.imageUrl.value,
+                ),
+              )),
 
           // Camera Icon for Editing
           if (isEditing)
@@ -57,7 +53,8 @@ class ProfileImage extends StatelessWidget {
                     radius: 21, // Size of the circle
                     backgroundColor: AppColors.blue,
                     child: Padding(
-                      padding: const EdgeInsets.all(4.0), // Padding inside the circle
+                      padding: const EdgeInsets.all(4.0),
+                      // Padding inside the circle
                       child: Image.asset(
                         AppImage.camera,
                         fit: BoxFit.contain,

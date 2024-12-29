@@ -62,6 +62,30 @@ abstract class ProfileRepo {
     }
   }
 
+  static Future<bool> updateProfileApi(Map<String, dynamic> params) async {
+    try {
+      // LogUtil.debug(Api.updateProfile);
+      final result = await HttpService.post(Api.updateProfile, params,token: true);
+      if (result['isLive'] == true) {
+        LogUtil.debug(result);
+        Get.back();
+        Get.snackbar('Success', result['message']);
+        return true;
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        var errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
 
   static Future<bool> contactUsApi(Map<String, dynamic> params) async {
     try {

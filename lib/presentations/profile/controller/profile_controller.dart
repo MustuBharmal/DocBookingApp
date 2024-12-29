@@ -229,6 +229,19 @@ class ProfileController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
+
+  void updateProfile(Map<String, dynamic> params) async {
+    try {
+      await ProfileRepo.updateProfileApi(params);
+      AuthController.instance.getUser();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
     bool userEditProfileValidation(){
       if (nameController.text.isEmpty) {
         profileError['name'] = 'Please enter name';
