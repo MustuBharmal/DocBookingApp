@@ -49,15 +49,6 @@ class HomeController extends GetxController {
 
   Rx<String> selectedImagePath = ''.obs;
 
-  // final Map<String, String> serviceImages = {
-  //   'Phlebotomy': AppImage.homeCategory1,
-  //   'Vitamin IV': AppImage.homeCategory2,
-  //   'Vitamin Booster': AppImage.homeCategory3,
-  //   'TRT Administration': AppImage.homeCategory4,
-  //   'Bloodletting': AppImage.homeCategory5,
-  //   'Flu Shots': AppImage.homeCategory6,
-  // };
-
   void updateSelectedImage(Service service) {
     selectedImagePath.value = service.icon!;
   }
@@ -110,6 +101,26 @@ class HomeController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
+
+  // Separate notifications into Today and Older
+  List<NotificationModel?> get todayNotifications {
+    final now = DateTime.now();
+    return notificationList.where((notification) {
+      final createdAt = DateTime.parse(notification!.createdAt!);
+      return createdAt.year == now.year &&
+          createdAt.month == now.month &&
+          createdAt.day == now.day;
+    }).toList();
+  }
+
+  List<NotificationModel?> get olderNotifications {
+    final now = DateTime.now();
+    return notificationList.where((notification) {
+      final createdAt = DateTime.parse(notification!.createdAt!);
+      return createdAt.isBefore(DateTime(now.year, now.month, now.day));
+    }).toList();
+  }
+
 
   void getNotification() async {
     try {

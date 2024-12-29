@@ -59,7 +59,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: CustomButton(
-                        onPressed: controller.goToMapScreen,
+                        onPressed: () => controller
+                            .goToMapScreen(doctorList[0]?.serviceData?.id ?? 0),
                         height: Get.height * 0.05,
                         width: Get.width * 0.33,
                         iconPath: AppImage.map,

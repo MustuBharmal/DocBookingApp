@@ -1,11 +1,10 @@
-import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
-import 'package:doc_booking_app/presentations/home/models/notification_model.dart';
-import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-
 import '../../../global/app_color.dart';
+import '../../../util/date_util.dart';
+import '../controller/home_controller.dart';
+import '../models/notification_model.dart';
+import '../../../widgets/custom_app_bar.dart';
 
 class NotificationScreen extends GetView<HomeController> {
   static const String routeName = '/notification-screen';
@@ -20,32 +19,68 @@ class NotificationScreen extends GetView<HomeController> {
         back: true,
         isNotificationVisible: false,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SectionHeader(
-                title: 'Today',
-                actionText: 'Mark all as read',
-                onActionPressed: () {
-                  // Handle "Mark all as read"
-                },
-              ),
-              ...controller.notificationList.map((notification) =>
-                  NotificationCard(notification: notification!)),
-              const SizedBox(height: 24),
-              const SectionHeader(
-                title: 'Older',
-                actionText: null,
-              ),
-              // ...controller.notificationList.map((notification) =>
-              //     NotificationCard(notification: notification!)),
-            ],
+      body: Obx(() {
+        // Fetch notifications from controller
+        final todayNotifications = controller.todayNotifications;
+        final olderNotifications = controller.olderNotifications;
+
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Today Section
+                if (todayNotifications.isNotEmpty) ...[
+                  SectionHeader(
+                    title: 'Today',
+                    actionText: 'Mark all as read',
+                    onActionPressed: () {
+                      // Handle "Mark all as read"
+                    },
+                  ),
+                  ...todayNotifications.map((notification) {
+                    return NotificationCard(
+                      notification: notification!,
+                      timeAgo: DateUtil.timeAgo(notification.createdAt!),
+                    );
+                  }),
+                ],
+
+                // Older Section
+                if (olderNotifications.isNotEmpty) ...[
+                  const SizedBox(height: 24),
+                  const SectionHeader(
+                    title: 'Older',
+                    actionText: null,
+                  ),
+                  ...olderNotifications.map((notification) {
+                    return NotificationCard(
+                      notification: notification!,
+                      timeAgo: DateUtil.timeAgo(notification.createdAt!),
+                    );
+                  }),
+                ],
+
+                // No Notifications
+                if (todayNotifications.isEmpty && olderNotifications.isEmpty)
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 32),
+                      child: Text(
+                        'No notifications available.',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
@@ -73,7 +108,7 @@ class SectionHeader extends StatelessWidget {
             title,
             style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
           if (actionText != null)
@@ -83,7 +118,7 @@ class SectionHeader extends StatelessWidget {
                 actionText!,
                 style: TextStyle(
                   color: AppColors.grey,
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -96,10 +131,12 @@ class SectionHeader extends StatelessWidget {
 
 class NotificationCard extends StatelessWidget {
   final NotificationModel notification;
+  final String timeAgo;
 
   const NotificationCard({
     super.key,
     required this.notification,
+    required this.timeAgo,
   });
 
   @override
@@ -109,24 +146,33 @@ class NotificationCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppColors.borderColor)),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.borderColor),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Text(
+          //   notification.title ?? '',
+          //   style: const TextStyle(
+          //     fontSize: 15,
+          //     fontWeight: FontWeight.w600,
+          //   ),
+          // ),
+          // const SizedBox(height: 8),
           Text(
-            notification.title ?? '',
+            notification.message ?? '',
             style: const TextStyle(
               fontSize: 14,
+              color: Colors.black87,
               fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            DateFormat('dd/MM/yyyy')
-                .format(DateTime.parse(notification.createdAt ?? '')),
+            timeAgo,
             style: const TextStyle(
-              fontSize: 12,
+              fontSize: 13,
               color: Colors.grey,
               fontWeight: FontWeight.w400,
             ),
