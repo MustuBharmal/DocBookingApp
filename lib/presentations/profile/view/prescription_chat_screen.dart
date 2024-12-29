@@ -7,6 +7,7 @@ import '../../../global/app_color.dart';
 
 class PrescriptionChatScreen extends GetView<ProfileController> {
   static const String routeName = '/prescription-chat-screen';
+
   const PrescriptionChatScreen({super.key});
 
   @override
@@ -15,30 +16,28 @@ class PrescriptionChatScreen extends GetView<ProfileController> {
       children: [
         Expanded(
           child: Obx(
-                () => ListView.builder(
+            () => ListView.builder(
               padding: EdgeInsets.all(10),
               itemCount: controller.messages.length,
+              reverse: true,
               itemBuilder: (context, index) {
-                final isUserMessage = controller.messages[index].startsWith('You:'); // Alternate alignment
+                final isUserMessage = controller.messages[index].sentBy == 'patient'; // Alternate alignment
                 return Align(
-                  alignment: isUserMessage
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
+                  alignment: isUserMessage ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: isUserMessage
-                          ? AppColors.primary.withOpacity(0.1)
-                          : AppColors.borderColor.withOpacity(0.1),
-                      border: Border.all(color: isUserMessage ?AppColors.primary : AppColors.borderColor),
+                      color: isUserMessage ? AppColors.primary.withOpacity(0.1) : AppColors.primary.withOpacity(0.1),
+                      border: Border.all(color: isUserMessage ? AppColors.primary : AppColors.primary),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text(controller.messages[index].substring(5),style: TextStyle(
-                      color: isUserMessage
-                          ? AppColors.primary
-                          : AppColors.borderColor,
-                    ),),
+                    child: Text(
+                      controller.messages[index].message ?? '',
+                      style: TextStyle(
+                        color: isUserMessage ? AppColors.primary : AppColors.primary,
+                      ),
+                    ),
                   ),
                 );
               },
@@ -49,10 +48,7 @@ class PrescriptionChatScreen extends GetView<ProfileController> {
           padding: const EdgeInsets.all(10.0),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.borderColor),
-              borderRadius: BorderRadius.circular(20)
-            ),
+            decoration: BoxDecoration(border: Border.all(color: AppColors.borderColor), borderRadius: BorderRadius.circular(20)),
             child: Row(
               children: [
                 Expanded(
@@ -61,10 +57,7 @@ class PrescriptionChatScreen extends GetView<ProfileController> {
                     maxLines: null,
                     keyboardType: TextInputType.multiline,
                     decoration: InputDecoration(
-                      hintText: 'Type your message',
-                      hintStyle: txtInterTextFieldHint,
-                      border: InputBorder.none
-                    ),
+                        hintText: 'Type your message', hintStyle: txtInterTextFieldHint, border: InputBorder.none),
                   ),
                 ),
                 IconButton(

@@ -1,12 +1,19 @@
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
+import 'package:doc_booking_app/presentations/profile/models/message_model.dart';
 import 'package:doc_booking_app/presentations/profile/repo/profile_repo.dart';
+import 'package:doc_booking_app/presentations/profile/view/prescription_inside_screen.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
+
 import '../../../exception/server_exception.dart';
 import '../../authentication/models/city_model.dart';
 import '../../authentication/models/country_model.dart';
@@ -38,16 +45,8 @@ class ProfileController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   RxList<FaqModels?> listOfFaqs = RxList.empty();
   final List<String> prefCommMethodList = ['Whatsapp', 'Telephone', 'Message'];
-  final List<String> businessNamesList = [
-    'Fitness First',
-    'Travelling',
-    'Psychology'
-  ];
-  final List<String> businessTypesList = [
-    'Clinic',
-    'Hospital',
-    'Small Hospital'
-  ];
+  final List<String> businessNamesList = ['Fitness First', 'Travelling', 'Psychology'];
+  final List<String> businessTypesList = ['Clinic', 'Hospital', 'Small Hospital'];
   RxString selectedBusinessName = RxString('Fitness First');
   RxString selectedBusinessType = RxString('Clinic');
   RxString selectedSex = RxString('');
@@ -81,13 +80,13 @@ class ProfileController extends GetxController {
   late io.Socket socket;
 
   // Reactive list of messages
-  RxList<String> messages = <String>[].obs;
+  RxList<MessageModel> messages = RxList.empty();
+  DoctorsList? selectedDoctor;
 
   @override
   onInit() {
     super.onInit();
     initializeControllers();
-    _initializeSocketConnection();
     getFaq();
   }
 
@@ -116,9 +115,10 @@ class ProfileController extends GetxController {
     pinCodeController.text = user.pinCode ?? '';
   }
 
-  void _initializeSocketConnection() {
+  void initializeSocketConnection(DoctorsList doctor) {
     const String socketUrl = 'https://crazylense.com';
     const String socketPath = '/applicationinterface-socket';
+    selectedDoctor = doctor;
 
     socket = io.io(socketUrl, <String, dynamic>{
       'path': socketPath,
@@ -132,7 +132,13 @@ class ProfileController extends GetxController {
 
     // Listen for connection events
     socket.onConnect((_) {
-      print('Connected to server');
+      socket.emit('setup', {'user_id': doctor.id});
+      socket.emit('get_message', {
+        'doctor_id': selectedDoctor?.id,
+        'patient_id': AuthController.instance.user.value!.id,
+      });
+
+      Get.toNamed(PrescriptionInsideScreen.routeName);
     });
 
     // Listen for disconnection events
@@ -161,10 +167,37 @@ class ProfileController extends GetxController {
     });
 
     // Listen for incoming messages
-    socket.on('receiveMessage', (data) {
-      if (data != null && data['message'] != null) {
-        messages.add(data['message']);
+    socket.on('get_message_response', (data) {
+      if (data is List) {
+        messages.clear();
+        // final List<Map<String, dynamic>> listOfMessage = data as List<Map<String, dynamic>>;
+        List<MessageModel> fetched = [];
+        data.forEach((msg) {
+          final message = MessageModel.fromJson(msg);
+          fetched.add(message);
+        });
+        fetched.sort((a, b) {
+          DateTime? dateA = DateTime.tryParse(a.createdAt ?? '');
+          DateTime? dateB = DateTime.tryParse(b.createdAt ?? '');
+          if (dateA != null && dateB != null) {
+            return dateA.compareTo(dateB);
+          } else {
+            return 0;
+          }
+        });
+        messages.addAll(fetched.reversed);
+      } else {
+        log(data);
       }
+      // if (data != null && data['message'] != null) {
+      //   messages.add(data['message']);
+      // }
+    });
+
+    socket.onAny((event, data) {
+      LogUtil.debug(event);
+      LogUtil.debug(data.runtimeType);
+      log(data.toString());
     });
   }
 
@@ -173,16 +206,28 @@ class ProfileController extends GetxController {
       // Emit the message to the server
       final msg = {
         'message': message,
-        'doctor_id': '1', // Replace with actual doctor ID
-        'patient_id': AuthController.instance.user.value!.id, // Replace with actual patient ID
-        'sent_by': 'patient', // Could be 'doctor' or 'patient'
+        'doctor_id': selectedDoctor?.id,
+        'patient_id': AuthController.instance.user.value!.id,
+        'sent_by': 'patient',
       };
 
       socket.emit('sendMessage', msg);
-
+      // messages.add(MessageModel(message: message, sentBy: 'patient'));
       // Add the sent message to the local list
-      messages.add('You: $message');
+      // messages.add('You: $message');
     }
+  }
+
+  disconnectSocket() async {
+    messages.clear();
+    socket.disconnect();
+    socket.dispose();
+  }
+
+  @override
+  void dispose() {
+    disconnectSocket();
+    super.dispose();
   }
 
   // Update phone number
@@ -219,7 +264,6 @@ class ProfileController extends GetxController {
   void updateProfile(Map<String, dynamic> params) async {
     try {
       await ProfileRepo.updateProfileApi(params);
-
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

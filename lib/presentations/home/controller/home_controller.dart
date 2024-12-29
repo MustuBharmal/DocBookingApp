@@ -18,7 +18,7 @@ class HomeController extends GetxController {
   RxInt selectedIndex = RxInt(0);
   Rxn<Dashboard> dashboard = Rxn(Dashboard());
   RxList<Service?> services = RxList.empty();
-  RxList<DoctorsList?> doctorList = RxList.empty();
+  RxList<DoctorsList> doctorList = RxList.empty();
   RxList<Specialist?> specialistsList = RxList.empty();
   RxList<NotificationModel?> notificationList = RxList.empty();
   RxString selectedService = ''.obs;

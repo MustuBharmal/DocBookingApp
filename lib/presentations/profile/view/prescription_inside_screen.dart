@@ -14,29 +14,37 @@ class PrescriptionInsideScreen extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: 'Prescription',
-          back: true,
-          isNotificationVisible: false,
-        ),
-        body: Column(
-          children: [
-            const CustomTabBar(
-              tabText1: 'Notes',
-              tabText2: 'Forms',
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  PrescriptionChatScreen(), // Chat Screen
-                  PrescriptionFormScreen(), // Form Screen
-                ],
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop,result){
+        if(didPop){
+          controller.disconnectSocket();
+        }
+      },
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: CustomAppBar(
+            title: 'Prescription',
+            back: true,
+            isNotificationVisible: false,
+          ),
+          body: Column(
+            children: [
+              const CustomTabBar(
+                tabText1: 'Notes',
+                tabText2: 'Forms',
               ),
-            ),
-          ],
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    PrescriptionChatScreen(), // Chat Screen
+                    PrescriptionFormScreen(), // Form Screen
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

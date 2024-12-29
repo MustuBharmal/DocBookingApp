@@ -66,10 +66,10 @@ abstract class HomeRepo {
     }
   }
 
-  static Future<List<DoctorsList?>> getDoctors() async {
+  static Future<List<DoctorsList>> getDoctors() async {
     try {
       Map<String, dynamic> data = {};
-      List<DoctorsList?> listOfSpecialist = [];
+      List<DoctorsList> listOfSpecialist = [];
       LogUtil.debug(Api.doctors);
       final result =
           await HttpService.post(Api.doctors, data, showLoader: false);
