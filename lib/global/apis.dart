@@ -28,4 +28,5 @@ class Api {
   static String uploadMultipleImages = 'common/upload_image_multi';
   static String prescriptionForm = 'patient/prescription';
   static String booking = 'patient/booking';
+  static String notification = 'patient/notification';
 }

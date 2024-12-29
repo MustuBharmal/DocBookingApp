@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/models/dashboard.dart';
+import 'package:doc_booking_app/presentations/home/models/notification_model.dart';
 import 'package:doc_booking_app/presentations/home/repo/home_repo.dart';
 import 'package:doc_booking_app/presentations/services/models/service.dart';
 import 'package:doc_booking_app/presentations/specialist/models/specialist.dart';
@@ -19,6 +20,7 @@ class HomeController extends GetxController {
   RxList<Service?> services = RxList.empty();
   RxList<DoctorsList?> doctorList = RxList.empty();
   RxList<Specialist?> specialistsList = RxList.empty();
+  RxList<NotificationModel?> notificationList = RxList.empty();
   RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
@@ -36,6 +38,7 @@ class HomeController extends GetxController {
       getServices();
       getSpecialist();
       getSpecialistType();
+      getNotification();
     });
   }
 
@@ -99,6 +102,18 @@ class HomeController extends GetxController {
   void getSpecialistType() async {
     try {
       specialistsList.value = await HomeRepo.getSpecialistType();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  void getNotification() async {
+    try {
+      notificationList.value = await HomeRepo.getNotification();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
