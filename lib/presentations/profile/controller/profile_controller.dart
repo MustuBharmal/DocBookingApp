@@ -172,10 +172,10 @@ class ProfileController extends GetxController {
         messages.clear();
         // final List<Map<String, dynamic>> listOfMessage = data as List<Map<String, dynamic>>;
         List<MessageModel> fetched = [];
-        data.forEach((msg) {
+        for (var msg in data) {
           final message = MessageModel.fromJson(msg);
           fetched.add(message);
-        });
+        }
         fetched.sort((a, b) {
           DateTime? dateA = DateTime.tryParse(a.createdAt ?? '');
           DateTime? dateB = DateTime.tryParse(b.createdAt ?? '');

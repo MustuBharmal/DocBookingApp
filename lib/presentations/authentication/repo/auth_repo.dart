@@ -24,15 +24,19 @@ abstract class AuthRepo {
   static const String _newPassKey = 'newPassword';
   static const String _confirmPassKey = 'confirmPassword';
   static const String _resetTokenKey = 'resetToken';
+  static const String _fcmTokenKey = 'firebase_token';
 
   // login is working
-  static Future<User?> signIn(String email, String password) async {
+  static Future<User?> signIn(
+      String email, String password, String fcmToken) async {
     try {
       final Map<String, dynamic> data = {
         _email: email,
         _passwordKey: password,
+        _fcmTokenKey: fcmToken
       };
       LogUtil.debug(Api.signIn);
+      LogUtil.debug(data);
       final result = await HttpService.post(Api.signIn, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/booking/models/booking_response.dart';
 import 'package:doc_booking_app/presentations/booking/repo/booking_repo.dart';
@@ -27,7 +25,8 @@ class BookingController extends GetxController {
     if (doctorData != null) {
       for (var date in thisWeek) {
         timeTable[date] = doctorData!.doctorTimeTable.where((tt) {
-          return tt.day?.toLowerCase() == DateFormat('EEEE').format(date).toLowerCase();
+          return tt.day?.toLowerCase() ==
+              DateFormat('EEEE').format(date).toLowerCase();
         }).toList();
       }
     }
@@ -42,11 +41,14 @@ class BookingController extends GetxController {
   pay() async {
     Stripe.publishableKey =
         'pk_test_51IG3cNJAdLfZdFr6WbUo1H26tJfV9Hjo9Fh8QYfwCasaoR1qoVH4dNU0YX7Lo2jjS1uCdZ1PpirQlEyumsKed99n00njVKEQhY';
-    await Stripe.instance.applySettings();
+    // await Stripe.instance.applySettings();
     try {
       // 1. create payment intent on the server
-      final BookingData? bookingData = await BookingRepo.getPaymentSecret(AuthController.instance.user.value?.id.toString() ?? '',
-          doctorData?.id?.toString() ?? '', selectedTT.value?.id?.toString() ?? '', doctorData?.fees?.toString() ?? '');
+      final BookingData? bookingData = await BookingRepo.getPaymentSecret(
+          AuthController.instance.user.value?.id.toString() ?? '',
+          doctorData?.id?.toString() ?? '',
+          selectedTT.value?.id?.toString() ?? '',
+          doctorData?.fees?.toString() ?? '');
 
       // 2. initialize the payment sheet
       await Stripe.instance.initPaymentSheet(
@@ -70,7 +72,8 @@ class BookingController extends GetxController {
           style: ThemeMode.light,
         ),
       );
-      final PaymentSheetPaymentOption? paymentResult = await Stripe.instance.presentPaymentSheet();
+      final PaymentSheetPaymentOption? paymentResult =
+          await Stripe.instance.presentPaymentSheet();
       if (paymentResult != null) {
         LogUtil.debug(paymentResult.toJson());
       }

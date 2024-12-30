@@ -38,16 +38,18 @@ class ServiceScreen extends StatelessWidget {
                   var servicesId = HomeController.instance.services[index]?.id;
                   return ContainerWithIcon1(
                     onPressed: () {
-                      List<DoctorsList?> listOfDoc = HomeController.instance.doctorList
+                      List<DoctorsList?> listOfDoc = HomeController
+                          .instance.doctorList
                           .where((doctor) =>
-                      doctor?.services == servicesId.toString())
+                              doctor.services == servicesId.toString())
                           .toList();
 
                       Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
                         'doctorList': listOfDoc,
                       });
                     },
-                    iconPath: HomeController.instance.services[index]?.icon ?? '',
+                    iconPath:
+                        HomeController.instance.services[index]?.icon ?? '',
                     text: HomeController.instance.services[index]?.name ?? '',
                   );
                 },

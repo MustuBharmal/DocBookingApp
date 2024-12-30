@@ -158,7 +158,6 @@ abstract class HomeRepo {
         final NotificationResponse notificationResponse =
         NotificationResponse.fromJson(result);
         if (notificationResponse.success) {
-          LogUtil.debug('hellllllo');
           LogUtil.debug(notificationResponse.data);
           return notificationResponse.data;
         } else {

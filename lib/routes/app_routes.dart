@@ -88,12 +88,12 @@ class AppRoutes {
     GetPage(
       name: PrescriptionInsideScreen.routeName,
       page: () => PrescriptionInsideScreen(),
-      binding: ProfileBinding(),
+      // binding: ProfileBinding(),
     ),
     GetPage(
       name: PrescriptionFormScreen.routeName,
       page: () => PrescriptionFormScreen(),
-      binding: ProfileBinding(),
+      // binding: ProfileBinding(),
     ),
     GetPage(
       name: SpecialistScreen.routeName,

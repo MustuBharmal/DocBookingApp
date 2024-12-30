@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
-import 'package:doc_booking_app/presentations/profile/view/prescription_inside_screen.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
