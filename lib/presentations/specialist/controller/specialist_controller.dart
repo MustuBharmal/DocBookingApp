@@ -21,6 +21,8 @@ class SpecialistController extends GetxController {
   RxList<DoctorsList?> doctorList = RxList.empty();
   Rx<Set<Marker>> markers = Rx({});
 
+  Rx<DoctorsList?> selectedDoctor = Rx(null);
+
   @override
   void onInit() {
     super.onInit();
@@ -90,9 +92,16 @@ class SpecialistController extends GetxController {
         double? lat = double.tryParse(d?.latitude ?? '0');
         double? lng = double.tryParse(d?.longitude ?? '0');
         if (lat != null && lng != null) {
-          newMarkers.add(Marker(markerId: MarkerId(d?.id?.toString() ?? '0'), position: LatLng(lat, lng)));
+          newMarkers.add(Marker(
+              markerId: MarkerId(d?.id?.toString() ?? '0'),
+              position: LatLng(lat, lng),
+              onTap: () {
+                LogUtil.debug(d?.name);
+                selectedDoctor.value = d;
+              }));
         }
       }
+      markers.value = newMarkers;
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

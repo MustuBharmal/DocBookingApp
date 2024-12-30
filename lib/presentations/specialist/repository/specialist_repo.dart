@@ -10,12 +10,12 @@ class SpecialistRepo {
   static Future<List<DoctorsList>> getDoctors(int serviceId, double lat, double long) async {
     try {
       Map<String, dynamic> data = {
-        'userLatitude': 85.06249589385241,
-        'userLongitude': -178.81930852609128,
-        'service_id': 5,
-        // 'userLatitude': lat,
-        // 'userLongitude': long,
-        // 'service_id': serviceId,
+        // 'userLatitude': 85.06249589385241,
+        // 'userLongitude': -178.81930852609128,
+        // 'service_id': 5,
+        'userLatitude': lat,
+        'userLongitude': long,
+        'service_id': serviceId,
         'radius': 50,
       };
       // List<DoctorsList?> listOfSpecialist = [];
