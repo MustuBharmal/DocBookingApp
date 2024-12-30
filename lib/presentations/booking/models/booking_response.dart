@@ -22,7 +22,7 @@ class BookingData with _$BookingData {
     @JsonKey(name: 'stripe_customer_id') String? stripeCustomerId,
     @JsonKey(name: 'payment_intent_client_secret') String? paymentIntentClientSecret,
     @JsonKey(name: 'payment_intent_data') Map<String, dynamic>? paymentIntentData,
-    @JsonKey(name: 'ephemeralKey') Map<String, dynamic>? ephemeralKey,
+    @JsonKey(name: 'ephemeral_key_data') Map<String, dynamic>? ephemeralKey,
     @JsonKey(name: 'booking_id') int? booking_id,
     @JsonKey(name: 'booking_code') String? booking_code,
     @JsonKey(name: 'amount') String? amount,
