@@ -46,6 +46,7 @@ class ServiceScreen extends StatelessWidget {
 
                       Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
                         'doctorList': listOfDoc,
+                        'serviceId':servicesId
                       });
                     },
                     iconPath:
