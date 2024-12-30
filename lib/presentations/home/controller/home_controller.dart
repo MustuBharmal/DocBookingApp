@@ -8,6 +8,7 @@ import 'package:doc_booking_app/presentations/services/models/service.dart';
 import 'package:doc_booking_app/presentations/specialist/models/specialist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../exception/server_exception.dart';
 import '../../specialist/models/doctor_list.dart';
@@ -21,6 +22,15 @@ class HomeController extends GetxController {
   RxList<DoctorsList?> doctorList = RxList.empty();
   RxList<Specialist?> specialistsList = RxList.empty();
   RxList<NotificationModel?> notificationList = RxList.empty();
+
+  // Separated Notifications
+  RxList<NotificationModel?> unreadNotifications = RxList.empty();
+  RxList<NotificationModel?> readNotifications = RxList.empty();
+
+  // Notification IDs
+  RxList<int?> unreadNotificationIds = RxList.empty();
+  RxList<int?> readNotificationIds = RxList.empty();
+
   RxString selectedService = ''.obs;
   final List<String> appBarTitle = const [
     'Home',
@@ -29,17 +39,27 @@ class HomeController extends GetxController {
     'My Profile',
   ];
 
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     Future.delayed(Duration(seconds: 2), () {
+      selectedImagePath.value = AppImage.stethoscope;
       dashboardData();
       getServices();
       getSpecialist();
       getSpecialistType();
       getNotification();
     });
+  }
+
+  void categorizeNotifications() {
+    unreadNotifications.value = notificationList.where((n) => n?.isRead == '0').toList();
+    readNotifications.value = notificationList.where((n) => n?.isRead == '1').toList();
+
+    unreadNotificationIds.value = unreadNotifications.map((n) => n?.id).toList();
+    readNotificationIds.value = readNotifications.map((n) => n?.id).toList();
   }
 
   void navigateTo(int index) {
@@ -77,7 +97,6 @@ class HomeController extends GetxController {
   void getServices() async {
     try {
       services.value = await HomeRepo.getServices();
-      selectedImagePath.value = services[0]!.icon ?? AppImage.stethoscope;
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
@@ -110,10 +129,61 @@ class HomeController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
+  void markAsReadNotification() async {
+    try {
+      HomeRepo.markAsReadNotificationApi(unreadNotificationIds.value);
+      getNotification();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+
+
+  // Separate notifications into Today and Older
+  List<NotificationModel?> get todayNotifications {
+    final now = DateTime.now();
+    return notificationList.where((notification) {
+      final createdAt = DateTime.parse(notification!.createdAt!);
+      return createdAt.year == now.year &&
+          createdAt.month == now.month &&
+          createdAt.day == now.day;
+    }).toList();
+  }
+
+  List<NotificationModel?> get olderNotifications {
+    final now = DateTime.now();
+    return notificationList.where((notification) {
+      final createdAt = DateTime.parse(notification!.createdAt!);
+      return createdAt.isBefore(DateTime(now.year, now.month, now.day));
+    }).toList();
+  }
+
+  // Calculate relative time
+  String timeAgo(String createdAt) {
+    final createdTime = DateTime.parse(createdAt);
+    final now = DateTime.now();
+    final difference = now.difference(createdTime);
+
+    if (difference.inSeconds < 60) {
+      return '${difference.inSeconds} seconds ago';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} minutes ago';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} hours ago';
+    } else {
+      return DateFormat('dd MMM yyyy').format(createdTime);
+    }
+  }
 
   void getNotification() async {
     try {
       notificationList.value = await HomeRepo.getNotification();
+      categorizeNotifications();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

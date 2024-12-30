@@ -25,6 +25,7 @@ class Api {
   static String venueFacility = 'common/venue-facility';
   static String imageUpload = 'upload_image?type=profile';
   static String adminTemplateGet = 'admin/template/get';
+  static String markAsRead = 'patient/mark-as-read-notification';
   static String uploadMultipleImages = 'common/upload_image_multi';
   static String prescriptionForm = 'patient/prescription';
   static String booking = 'patient/booking';

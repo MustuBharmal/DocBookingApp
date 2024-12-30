@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../widgets/custom_dialogbox.dart';
 import '../../../widgets/custom_icon_sizebox.dart';
@@ -41,12 +42,17 @@ class CustomSearchTextField extends StatelessWidget {
                 width: deviceWidth * 0.15,
                 child: Row(
                   children: [
-                    CachedNetworkImage(
-                      width: Get.width * 0.067,
-                      height: Get.width * 0.067,
-                      fit: BoxFit.contain,
-                      imageUrl: HomeController.instance.selectedImagePath.value,
-                    ),
+                    (HomeController.instance.selectedImagePath.value ==
+                            AppImage.stethoscope)
+                        ? SvgPicture.asset(
+                            HomeController.instance.selectedImagePath.value)
+                        : CachedNetworkImage(
+                            width: Get.width * 0.067,
+                            height: Get.width * 0.067,
+                            fit: BoxFit.contain,
+                            imageUrl:
+                                HomeController.instance.selectedImagePath.value,
+                          ),
                     Expanded(
                         child: CustomIconSizeBox(
                             iconPath: AppImage.arrowDown,

@@ -37,6 +37,35 @@ abstract class HomeRepo {
     }
   }
 
+
+  static Future<bool?> markAsReadNotificationApi(List<int?> notificationIds) async {
+    try {
+      LogUtil.debug(Api.prescriptionForm);
+      final result =
+      await HttpService.post(Api.markAsRead, {
+        'notificationIds': notificationIds,
+      }, token: true);
+      if (result['isLive'] == true) {
+        LogUtil.debug(result);
+        Get.back();
+        Get.snackbar('Success', result['message'].toString());
+        return true;
+      } else {
+        throw Exception("Error: ${result['status']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
   static Future<List<Service?>> getServices() async {
     try {
       Map<String, dynamic> data = {};
@@ -129,6 +158,8 @@ abstract class HomeRepo {
         final NotificationResponse notificationResponse =
             NotificationResponse.fromJson(result);
         if (notificationResponse.success) {
+          LogUtil.debug('hellllllo');
+          LogUtil.debug(notificationResponse.data);
           return notificationResponse.data;
         } else {
           throw Exception('Error: ${notificationResponse.message}');
