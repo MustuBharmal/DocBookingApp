@@ -132,7 +132,7 @@ class ProfileController extends GetxController {
 
     // Listen for connection events
     socket.onConnect((_) {
-      socket.emit('setup', {'user_id': doctor.id});
+      socket.emit('setup', {'user_id': AuthController.instance.user.value!.id});
       socket.emit('get_message', {
         'doctor_id': selectedDoctor?.id,
         'patient_id': AuthController.instance.user.value!.id,

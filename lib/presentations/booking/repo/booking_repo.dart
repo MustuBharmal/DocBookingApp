@@ -37,7 +37,6 @@ abstract class BookingRepo {
         final response = BookingResponse.fromJson(result);
         if (response.success) {
           LogUtil.debug(response.data);
-          LogUtil.debug(response.data?.paymentIntentClientSecret ?? 'no data');
           return response.data;
         }
       } else if (result['isLive'] == false) {

@@ -86,13 +86,13 @@ class SpecialistController extends GetxController {
       doctorList.clear();
       doctorList.addAll(await SpecialistRepo.getDoctors(serviceId, lat, long));
       Set<Marker> newMarkers = {};
-      doctorList.forEach((d) {
+      for (var d in doctorList) {
         double? lat = double.tryParse(d?.latitude ?? '0');
         double? lng = double.tryParse(d?.longitude ?? '0');
         if (lat != null && lng != null) {
           newMarkers.add(Marker(markerId: MarkerId(d?.id?.toString() ?? '0'), position: LatLng(lat, lng)));
         }
-      });
+      }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

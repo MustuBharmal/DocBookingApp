@@ -40,10 +40,13 @@ import '../presentations/splash_screens/view/splash_screen.dart';
 
 class AppRoutes {
   static List<GetPage> pages = [
-    GetPage(name: NavigationScreen.routeName, page: () => const NavigationScreen(), bindings: [
-      HomeBinding(),
-      SpecialistBinding(),
-    ]),
+    GetPage(
+        name: NavigationScreen.routeName,
+        page: () => const NavigationScreen(),
+        bindings: [
+          HomeBinding(),
+          SpecialistBinding(),
+        ]),
     GetPage(
       name: SplashScreen.routeName,
       page: () => const SplashScreen(),
@@ -64,7 +67,10 @@ class AppRoutes {
       name: ProfileScreen.routeName,
       page: () => const ProfileScreen(),
     ),
-    GetPage(name: UserInfoScreen.routeName, page: () => const UserInfoScreen(), binding: ProfileBinding()),
+    GetPage(
+        name: UserInfoScreen.routeName,
+        page: () => const UserInfoScreen(),
+        binding: ProfileBinding()),
     GetPage(
       name: BookSlotsConfirmScreen.routeName,
       page: () => const BookSlotsConfirmScreen(),
@@ -73,13 +79,22 @@ class AppRoutes {
       name: PaymentManagementScreen.routeName,
       page: () => const PaymentManagementScreen(),
     ),
-    GetPage(name: FAQScreen.routeName, page: () => const FAQScreen(), binding: ProfileBinding()),
-    GetPage(name: ContactUsScreen.routeName, page: () => const ContactUsScreen(), binding: ProfileBinding()),
+    GetPage(
+        name: FAQScreen.routeName,
+        page: () => const FAQScreen(),
+        binding: ProfileBinding()),
+    GetPage(
+        name: ContactUsScreen.routeName,
+        page: () => const ContactUsScreen(),
+        binding: ProfileBinding()),
     GetPage(
       name: AboutUsScreen.routeName,
       page: () => const AboutUsScreen(),
     ),
-    GetPage(name: HowToBePartnerScreen.routeName, page: () => const HowToBePartnerScreen(), binding: ProfileBinding()),
+    GetPage(
+        name: HowToBePartnerScreen.routeName,
+        page: () => const HowToBePartnerScreen(),
+        binding: ProfileBinding()),
     GetPage(
       name: PrescriptionScreen.routeName,
       page: () => PrescriptionScreen(),
@@ -111,7 +126,11 @@ class AppRoutes {
         name: ListOfSpecialistScreen.routeName,
         page: () {
           List<DoctorsList?> list = Get.arguments['doctorList'];
-          return ListOfSpecialistScreen(doctorList: list);
+          int serviceId = Get.arguments['serviceId'];
+          return ListOfSpecialistScreen(
+            doctorList: list,
+            serviceId: serviceId,
+          );
         },
         binding: SpecialistBinding()),
     GetPage(

@@ -89,6 +89,7 @@ class HomeScreen extends GetView<HomeController> {
 
                       Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
                         'doctorList': listOfDoc,
+                        'serviceId':servicesId
                       });
                     },
                     iconPath: controller.services[index]!.icon!,

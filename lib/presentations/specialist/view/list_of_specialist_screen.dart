@@ -15,8 +15,10 @@ import '../widget/custom_button.dart';
 
 class ListOfSpecialistScreen extends GetView<SpecialistController> {
   final List<DoctorsList?> doctorList;
+  final int? serviceId;
 
-  const ListOfSpecialistScreen({required this.doctorList, super.key});
+  const ListOfSpecialistScreen(
+      {required this.doctorList, this.serviceId, super.key});
 
   static const routeName = '/list-of-specialist-screen';
 
@@ -33,7 +35,9 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
           appBar: const CustomAppBar(title: 'Search', back: true),
           body: Obx(
             () => Container(
-              padding: controller.isMapView.value ? EdgeInsets.only(top: 16) : const EdgeInsets.all(16),
+              padding: controller.isMapView.value
+                  ? EdgeInsets.only(top: 16)
+                  : const EdgeInsets.all(16),
               child: Column(
                 children: [
                   if (!controller.isMapView.value) ...[
@@ -41,7 +45,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                       padding: const EdgeInsets.only(top: 10),
                       child: CustomSearchTextfield(
                         hintText: ConstantString.searchByName,
-                        controller: SpecialistController.instance.searchController.value,
+                        controller: SpecialistController
+                            .instance.searchController.value,
                       ),
                     ),
                     const CustomTabBar(
@@ -61,7 +66,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: CustomButton(
-                          onPressed: () => controller.goToMapScreen(doctorList[0]?.serviceData?.id ?? 0),
+                          onPressed: () =>
+                              controller.goToMapScreen(serviceId ?? 0),
                           height: Get.height * 0.05,
                           width: Get.width * 0.33,
                           iconPath: AppImage.map,
@@ -73,7 +79,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                     Expanded(
                         child: Stack(
                       children: [
-                        MapScreen(controller.userLocation!.latitude!, controller.userLocation!.longitude!),
+                        MapScreen(controller.userLocation!.latitude!,
+                            controller.userLocation!.longitude!),
                         Align(
                           alignment: Alignment.topCenter,
                           child: const CustomTabBar(
@@ -82,7 +89,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 113, right: 16),
+                          padding:
+                              const EdgeInsets.only(bottom: 113, right: 16),
                           child: Align(
                             alignment: Alignment.bottomRight,
                             child: CustomButton(
