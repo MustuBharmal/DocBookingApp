@@ -11,18 +11,21 @@ import 'package:get/get.dart';
 
 import '../../../global/images.dart';
 import '../../../widgets/custom_tab_bar.dart';
-import '../widget/custom_button.dart';
+import '../../specialist/widget/custom_button.dart';
+import '../controller/service_controller.dart';
 
-class ListOfSpecialistScreen extends GetView<SpecialistController> {
+class ListOfServicesDoctorScreen extends GetView<ServicesController> {
   final List<DoctorsList?> doctorList;
   final int? serviceId;
 
-  const ListOfSpecialistScreen({required this.doctorList, this.serviceId, super.key});
+  const ListOfServicesDoctorScreen({required this.doctorList, this.serviceId, super.key});
 
-  static const routeName = '/list-of-specialist-screen';
+  static const routeName = '/list-of-services-doctor-screen';
 
   @override
   Widget build(BuildContext context) {
+    controller.doctorList.clear();
+    controller.doctorList.addAll(doctorList);
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (didPop, result) {
@@ -31,13 +34,13 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
       child: DefaultTabController(
         length: 2,
         child: Obx(
-            ()=> Scaffold(
+              ()=> Scaffold(
             bottomNavigationBar: controller.isMapView.value && controller.selectedDoctor.value != null
                 ? Text(controller.selectedDoctor.value?.name ?? '')
                 : null,
             appBar: const CustomAppBar(title: 'Search', back: true),
             body: Obx(
-              () => Container(
+                  () => Container(
                 padding: controller.isMapView.value ? EdgeInsets.only(top: 16) : const EdgeInsets.all(16),
                 child: Column(
                   children: [
@@ -56,8 +59,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            HomeTabWidget(doctorList: doctorList),
-                            ClinicTabWidget(doctorList: doctorList),
+                            HomeTabWidget(doctorList: controller.doctorList),
+                            ClinicTabWidget(doctorList: controller.doctorList),
                           ],
                         ),
                       ),

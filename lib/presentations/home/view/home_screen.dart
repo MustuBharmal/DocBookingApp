@@ -2,6 +2,7 @@ import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_screen.dart';
+import 'package:doc_booking_app/presentations/services/view/list_services_doctor.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
@@ -44,11 +45,11 @@ class HomeScreen extends GetView<HomeController> {
           const SizedBox(
             height: 20,
           ),
-          /*const SectionHeader(
-            title: ConstantString.upcomingAppointments,
-            spacing: 20,
-            childWidget: AppointmentCard(),
-          ),*/
+          // const SectionHeader(
+          //   title: ConstantString.upcomingAppointments,
+          //   spacing: 20,
+          //   childWidget: AppointmentCard(),
+          // ),
           const SizedBox(
             height: 20,
           ),
@@ -87,9 +88,9 @@ class HomeScreen extends GetView<HomeController> {
                               doctor.services == servicesId.toString())
                           .toList();
 
-                      Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+                      Get.toNamed(ListOfServicesDoctorScreen.routeName, arguments: {
                         'doctorList': listOfDoc,
-                        'serviceId':servicesId
+                        'serviceId': servicesId
                       });
                     },
                     iconPath: controller.services[index]!.icon!,
@@ -104,9 +105,12 @@ class HomeScreen extends GetView<HomeController> {
               title: ConstantString.topRatedSpecialist,
               button: TextButton(
                 onPressed: () {
-                  Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
-                    'doctorList': controller.doctorList,
-                  });
+                  Get.toNamed(
+                    ListOfSpecialistScreen.routeName,
+                    arguments: {
+                      'doctorList': controller.doctorList,
+                    },
+                  );
                 },
                 child: Text(ConstantString.seeAll, style: subtitleStyle1),
               ),

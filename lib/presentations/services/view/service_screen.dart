@@ -1,11 +1,11 @@
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
+import 'package:doc_booking_app/presentations/services/view/list_services_doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../global/images.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 import '../../specialist/models/doctor_list.dart';
-import '../../specialist/view/list_of_specialist_screen.dart';
 
 class ServiceScreen extends StatelessWidget {
   const ServiceScreen({super.key});
@@ -44,7 +44,7 @@ class ServiceScreen extends StatelessWidget {
                               doctor.services == servicesId.toString())
                           .toList();
 
-                      Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+                      Get.toNamed(ListOfServicesDoctorScreen.routeName, arguments: {
                         'doctorList': listOfDoc,
                         'serviceId':servicesId
                       });

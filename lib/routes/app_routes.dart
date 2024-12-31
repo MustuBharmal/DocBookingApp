@@ -23,6 +23,8 @@ import 'package:doc_booking_app/presentations/profile/view/prescription_screen.d
 import 'package:doc_booking_app/presentations/profile/view/profile_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/user_info_screen.dart';
 import 'package:doc_booking_app/presentations/review/view/reviews_screen.dart';
+import 'package:doc_booking_app/presentations/services/binding/service_binding.dart';
+import 'package:doc_booking_app/presentations/services/view/list_services_doctor.dart';
 import 'package:doc_booking_app/presentations/services/view/service_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
@@ -123,16 +125,29 @@ class AppRoutes {
       page: () => const ReviewsScreen(),
     ),
     GetPage(
-        name: ListOfSpecialistScreen.routeName,
-        page: () {
-          List<DoctorsList?> list = Get.arguments['doctorList'];
-          int serviceId = Get.arguments['serviceId'];
-          return ListOfSpecialistScreen(
-            doctorList: list,
-            serviceId: serviceId,
-          );
-        },
-        binding: SpecialistBinding()),
+      name: ListOfSpecialistScreen.routeName,
+      page: () {
+        List<DoctorsList?> list = Get.arguments['doctorList'];
+        int serviceId = Get.arguments['serviceId'];
+        return ListOfSpecialistScreen(
+          doctorList: list,
+          serviceId: serviceId,
+        );
+      },
+      binding: SpecialistBinding(),
+    ),
+    GetPage(
+      name: ListOfServicesDoctorScreen.routeName,
+      page: () {
+        List<DoctorsList?> list = Get.arguments['doctorList'];
+        int serviceId = Get.arguments['serviceId'];
+        return ListOfServicesDoctorScreen(
+          doctorList: list,
+          serviceId: serviceId,
+        );
+      },
+      binding: ServiceBinding(),
+    ),
     GetPage(
       name: SpecialistDetailScreen.routeName,
       page: () {
