@@ -88,10 +88,11 @@ class HomeScreen extends GetView<HomeController> {
                               doctor.services == servicesId.toString())
                           .toList();
 
-                      Get.toNamed(ListOfServicesDoctorScreen.routeName, arguments: {
-                        'doctorList': listOfDoc,
-                        'serviceId': servicesId
-                      });
+                      Get.toNamed(ListOfServicesDoctorScreen.routeName,
+                          arguments: {
+                            'doctorList': listOfDoc,
+                            'serviceId': servicesId
+                          });
                     },
                     iconPath: controller.services[index]!.icon!,
                     text: controller.services[index]?.name ?? '',
@@ -132,7 +133,10 @@ class HomeScreen extends GetView<HomeController> {
                         // review: doctor.review,
                         onPressed: () {
                           Get.toNamed(SpecialistDetailScreen.routeName,
-                              arguments: doctor);
+                              arguments: {
+                                'doctor': doctor,
+                                'serviceType': 'Clinic'
+                              });
                         },
                       ),
                       SizedBox(
