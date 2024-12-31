@@ -304,6 +304,8 @@ mixin _$DoctorsList {
   String? get about => throw _privateConstructorUsedError;
   String? get latitude => throw _privateConstructorUsedError;
   String? get longitude => throw _privateConstructorUsedError;
+  @JsonKey(name: 'address_data')
+  String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: 'service_type')
   List<String>? get serviceType => throw _privateConstructorUsedError;
   @JsonKey(name: 'serviceModelData')
@@ -345,6 +347,7 @@ abstract class $DoctorsListCopyWith<$Res> {
       String? about,
       String? latitude,
       String? longitude,
+      @JsonKey(name: 'address_data') String? address,
       @JsonKey(name: 'service_type') List<String>? serviceType,
       @JsonKey(name: 'serviceModelData') Service? serviceData,
       @JsonKey(name: 'specialistModelData') Specialist? specialistData,
@@ -383,6 +386,7 @@ class _$DoctorsListCopyWithImpl<$Res, $Val extends DoctorsList>
     Object? about = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? address = freezed,
     Object? serviceType = freezed,
     Object? serviceData = freezed,
     Object? specialistData = freezed,
@@ -437,6 +441,10 @@ class _$DoctorsListCopyWithImpl<$Res, $Val extends DoctorsList>
       longitude: freezed == longitude
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String?,
       serviceType: freezed == serviceType
           ? _value.serviceType
@@ -511,6 +519,7 @@ abstract class _$$DoctorsListImplCopyWith<$Res>
       String? about,
       String? latitude,
       String? longitude,
+      @JsonKey(name: 'address_data') String? address,
       @JsonKey(name: 'service_type') List<String>? serviceType,
       @JsonKey(name: 'serviceModelData') Service? serviceData,
       @JsonKey(name: 'specialistModelData') Specialist? specialistData,
@@ -549,6 +558,7 @@ class __$$DoctorsListImplCopyWithImpl<$Res>
     Object? about = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? address = freezed,
     Object? serviceType = freezed,
     Object? serviceData = freezed,
     Object? specialistData = freezed,
@@ -604,6 +614,10 @@ class __$$DoctorsListImplCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
       serviceType: freezed == serviceType
           ? _value._serviceType
           : serviceType // ignore: cast_nullable_to_non_nullable
@@ -644,6 +658,7 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
       this.about,
       this.latitude,
       this.longitude,
+      @JsonKey(name: 'address_data') this.address,
       @JsonKey(name: 'service_type') final List<String>? serviceType,
       @JsonKey(name: 'serviceModelData') this.serviceData,
       @JsonKey(name: 'specialistModelData') this.specialistData,
@@ -681,6 +696,9 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
   final String? latitude;
   @override
   final String? longitude;
+  @override
+  @JsonKey(name: 'address_data')
+  final String? address;
   final List<String>? _serviceType;
   @override
   @JsonKey(name: 'service_type')
@@ -713,7 +731,7 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DoctorsList(profilePic: $profilePic, id: $id, name: $name, email: $email, specialization: $specialization, services: $services, fees: $fees, location: $location, availability: $availability, about: $about, latitude: $latitude, longitude: $longitude, serviceType: $serviceType, serviceData: $serviceData, specialistData: $specialistData, doctorTimeTable: $doctorTimeTable, isActive: $isActive)';
+    return 'DoctorsList(profilePic: $profilePic, id: $id, name: $name, email: $email, specialization: $specialization, services: $services, fees: $fees, location: $location, availability: $availability, about: $about, latitude: $latitude, longitude: $longitude, address: $address, serviceType: $serviceType, serviceData: $serviceData, specialistData: $specialistData, doctorTimeTable: $doctorTimeTable, isActive: $isActive)';
   }
 
   @override
@@ -733,6 +751,7 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
       ..add(DiagnosticsProperty('about', about))
       ..add(DiagnosticsProperty('latitude', latitude))
       ..add(DiagnosticsProperty('longitude', longitude))
+      ..add(DiagnosticsProperty('address', address))
       ..add(DiagnosticsProperty('serviceType', serviceType))
       ..add(DiagnosticsProperty('serviceData', serviceData))
       ..add(DiagnosticsProperty('specialistData', specialistData))
@@ -764,6 +783,7 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
+            (identical(other.address, address) || other.address == address) &&
             const DeepCollectionEquality()
                 .equals(other._serviceType, _serviceType) &&
             (identical(other.serviceData, serviceData) ||
@@ -792,6 +812,7 @@ class _$DoctorsListImpl with DiagnosticableTreeMixin implements _DoctorsList {
       about,
       latitude,
       longitude,
+      address,
       const DeepCollectionEquality().hash(_serviceType),
       serviceData,
       specialistData,
@@ -828,6 +849,7 @@ abstract class _DoctorsList implements DoctorsList {
       final String? about,
       final String? latitude,
       final String? longitude,
+      @JsonKey(name: 'address_data') final String? address,
       @JsonKey(name: 'service_type') final List<String>? serviceType,
       @JsonKey(name: 'serviceModelData') final Service? serviceData,
       @JsonKey(name: 'specialistModelData') final Specialist? specialistData,
@@ -863,6 +885,9 @@ abstract class _DoctorsList implements DoctorsList {
   String? get latitude;
   @override
   String? get longitude;
+  @override
+  @JsonKey(name: 'address_data')
+  String? get address;
   @override
   @JsonKey(name: 'service_type')
   List<String>? get serviceType;

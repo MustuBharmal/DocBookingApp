@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'doctor_list.freezed.dart';
+
 part 'doctor_list.g.dart';
 
 @freezed
@@ -17,7 +18,8 @@ class DoctorListResponse with _$DoctorListResponse {
     @JsonKey(name: 'data') @Default([]) List<DoctorsList> data,
   }) = _DoctorListResponse;
 
-  factory DoctorListResponse.fromJson(Map<String, Object?> json) => _$DoctorListResponseFromJson(json);
+  factory DoctorListResponse.fromJson(Map<String, Object?> json) =>
+      _$DoctorListResponseFromJson(json);
 }
 
 @freezed
@@ -35,12 +37,16 @@ class DoctorsList with _$DoctorsList {
     String? about,
     String? latitude,
     String? longitude,
+    @JsonKey(name: 'address_data') String? address,
     @JsonKey(name: 'service_type') List<String>? serviceType,
     @JsonKey(name: 'serviceModelData') Service? serviceData,
     @JsonKey(name: 'specialistModelData') Specialist? specialistData,
-    @JsonKey(name: 'doctorTimeTableData') @Default([]) List<DoctorTimeTable> doctorTimeTable,
+    @JsonKey(name: 'doctorTimeTableData')
+    @Default([])
+    List<DoctorTimeTable> doctorTimeTable,
     @JsonKey(name: 'is_active') bool? isActive,
   }) = _DoctorsList;
 
-  factory DoctorsList.fromJson(Map<String, Object?> json) => _$DoctorsListFromJson(json);
+  factory DoctorsList.fromJson(Map<String, Object?> json) =>
+      _$DoctorsListFromJson(json);
 }

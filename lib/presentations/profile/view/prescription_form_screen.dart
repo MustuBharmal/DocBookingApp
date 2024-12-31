@@ -1,5 +1,5 @@
 import 'package:doc_booking_app/global/styles.dart';
-import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/presentations/profile/controller/prescription_controller.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_text_field.dart';
@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 import '../../authentication/controller/authentication_controller.dart';
 
-class PrescriptionFormScreen extends GetView<ProfileController> {
+class PrescriptionFormScreen extends GetView<PrescriptionController> {
   static const String routeName = '/prescription-form-screen';
 
   const PrescriptionFormScreen({super.key});
@@ -47,7 +47,7 @@ class PrescriptionFormScreen extends GetView<ProfileController> {
           BlueButton(
             label: 'Submit',
             onPressed: () {
-              if (!ProfileController.instance.prescriptionFormValidation()) {
+              if (!controller.prescriptionFormValidation()) {
                 return;
               }
               var params = {

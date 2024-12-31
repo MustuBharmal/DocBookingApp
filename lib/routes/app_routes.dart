@@ -12,6 +12,7 @@ import 'package:doc_booking_app/presentations/booking/views/book_time_slot_scree
 import 'package:doc_booking_app/presentations/booking/views/payment_screen.dart';
 import 'package:doc_booking_app/presentations/home/binding/home_binding.dart';
 import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
+import 'package:doc_booking_app/presentations/profile/binding/prescription_binding.dart';
 import 'package:doc_booking_app/presentations/profile/view/about_us_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/contact_us_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/faq_screen.dart';
@@ -96,7 +97,7 @@ class AppRoutes {
     GetPage(
       name: PrescriptionScreen.routeName,
       page: () => PrescriptionScreen(),
-      binding: ProfileBinding(),
+      binding: PrescriptionBinding(),
     ),
     GetPage(
       name: PrescriptionInsideScreen.routeName,

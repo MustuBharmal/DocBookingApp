@@ -243,7 +243,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          '4517 Washington Ave. Manchester, Kentucky 39495',
+                          doctor.address ?? '',
                           style: TextStyle(
                               fontSize: 14,
                               color: AppColors.textHeaderGray,

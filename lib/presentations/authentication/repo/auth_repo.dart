@@ -207,8 +207,8 @@ abstract class AuthRepo {
     required String profilePic,
     required String password,
     required String pinCode,
-    required double lat,
-    required double long,
+    // required double lat,
+    // required double long,
     bool showLoader = true,
   }) async {
     try {
@@ -225,7 +225,7 @@ abstract class AuthRepo {
         'profile_pic': profilePic,
         'password': password,
         'pin_code': pinCode,
-        'location_json': {'lat': lat, 'lng': long}
+        // 'location_json': {'lat': lat, 'lng': long}
       };
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);

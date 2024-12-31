@@ -1,18 +1,12 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
-import 'package:doc_booking_app/presentations/profile/models/message_model.dart';
 import 'package:doc_booking_app/presentations/profile/repo/profile_repo.dart';
-import 'package:doc_booking_app/presentations/profile/view/prescription_inside_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../../../exception/server_exception.dart';
 import '../../authentication/models/city_model.dart';
@@ -59,7 +53,6 @@ class ProfileController extends GetxController {
   RxString selectedBusinessType = RxString('Clinic');
   RxString selectedSex = RxString('');
   Rx<File?> selectedImage = Rx<File?>(null);
-  String? currDocId;
 
   // Function to pick an image
   Future<void> pickImage() async {
@@ -71,39 +64,17 @@ class ProfileController extends GetxController {
     }
   }
 
-  // Country state (default is US)
-  // var selectedCountry = CountryParser.parseCountryCode('US').obs;
-
   // Phone number state
   RxString phoneNumber = RxString('');
 
   RxString prefCommMethod = RxString('Whatsapp');
 
-  // prescription inside data
-
-  final TextEditingController chatController = TextEditingController();
-  final TextEditingController symptomsController = TextEditingController();
-  final TextEditingController bloodGrpController = TextEditingController();
-
-  // Socket.IO instance
-  late io.Socket socket;
-
-  // Reactive list of messages
-  RxList<MessageModel> messages = RxList.empty();
-  DoctorsList? selectedDoctor;
-
   @override
   onInit() {
     super.onInit();
     initializeControllers();
+    selectedImage = Rx<File?>(null);
     getFaq();
-  }
-
-  @override
-  void onClose() {
-    chatController.dispose();
-    socket.dispose();
-    super.onClose();
   }
 
   initializeControllers() {
@@ -122,121 +93,6 @@ class ProfileController extends GetxController {
     countryController.text = user.country ?? '';
     stateController.text = user.state ?? '';
     pinCodeController.text = user.pinCode ?? '';
-  }
-
-  void initializeSocketConnection(DoctorsList doctor) {
-    const String socketUrl = 'https://crazylense.com';
-    const String socketPath = '/applicationinterface-socket';
-    selectedDoctor = doctor;
-
-    socket = io.io(socketUrl, <String, dynamic>{
-      'path': socketPath,
-      'transports': ['websocket'],
-      'query': {'debug': true},
-      'reconnection': true,
-      'reconnectionAttempts': 5,
-      'reconnectionDelay': 1000,
-      'reconnectionDelayMax': 5000,
-    });
-
-    // Listen for connection events
-    socket.onConnect((_) {
-      socket.emit('setup', {'user_id': AuthController.instance.user.value!.id});
-      socket.emit('get_message', {
-        'doctor_id': selectedDoctor?.id,
-        'patient_id': AuthController.instance.user.value!.id,
-      });
-      currDocId = selectedDoctor?.id.toString();
-      Get.toNamed(PrescriptionInsideScreen.routeName);
-    });
-
-    // Listen for disconnection events
-    socket.onDisconnect((_) {
-      print('Disconnected from server');
-    });
-
-    // Handle reconnection attempts
-    socket.on('reconnect_attempt', (attempt) {
-      print('Reconnection Attempt #$attempt');
-    });
-
-    // Handle reconnection success
-    socket.on('reconnect', (_) {
-      print('Reconnected to the server');
-    });
-
-    // Handle reconnection failure
-    socket.on('reconnect_failed', (_) {
-      print('Reconnection failed');
-    });
-
-    // Listen for connection errors
-    socket.onConnectError((error) {
-      print('Connection Error: $error');
-    });
-
-    // Listen for incoming messages
-    socket.on('get_message_response', (data) {
-      if (data is List) {
-        messages.clear();
-        // final List<Map<String, dynamic>> listOfMessage = data as List<Map<String, dynamic>>;
-        List<MessageModel> fetched = [];
-        for (var msg in data) {
-          final message = MessageModel.fromJson(msg);
-          fetched.add(message);
-        }
-        fetched.sort((a, b) {
-          DateTime? dateA = DateTime.tryParse(a.createdAt ?? '');
-          DateTime? dateB = DateTime.tryParse(b.createdAt ?? '');
-          if (dateA != null && dateB != null) {
-            return dateA.compareTo(dateB);
-          } else {
-            return 0;
-          }
-        });
-        messages.addAll(fetched.reversed);
-      } else {
-        log(data);
-      }
-      // if (data != null && data['message'] != null) {
-      //   messages.add(data['message']);
-      // }
-    });
-
-    socket.onAny((event, data) {
-      LogUtil.debug(event);
-      LogUtil.debug(data.runtimeType);
-      log(data.toString());
-    });
-  }
-
-  void sendMessage(String message) {
-    if (message.trim().isNotEmpty) {
-      // Emit the message to the server
-      final msg = {
-        'message': message,
-        'doctor_id': selectedDoctor?.id,
-        'patient_id': AuthController.instance.user.value!.id,
-        'sent_by': 'patient',
-      };
-
-      socket.emit('sendMessage', msg);
-      // messages.add(MessageModel(message: message, sentBy: 'patient'));
-      // Add the sent message to the local list
-      // messages.add('You: $message');
-    }
-  }
-
-  disconnectSocket() async {
-    messages.clear();
-    socket.disconnect();
-    socket.dispose();
-  }
-
-  @override
-  void dispose() {
-    disconnectSocket();
-    super.dispose();
   }
 
   // Update phone number
@@ -347,31 +203,6 @@ class ProfileController extends GetxController {
     } catch (e) {
       Get.snackbar('Login failed', '$e');
     } finally {}
-  }
-
-  // prescription form api
-  void prescriptionForm(Map<String, dynamic> params) async {
-    try {
-      await ProfileRepo.prescriptionForm(params);
-    } on ServerException catch (e) {
-      Get.snackbar('Error', e.message);
-    } on SocketException {
-      Get.snackbar('Error', 'No internet connection');
-    } catch (e) {
-      Get.snackbar('Login failed', '$e');
-    } finally {}
-  }
-
-  bool prescriptionFormValidation() {
-    profileError.clear();
-
-    if (bloodGrpController.text.isEmpty) {
-      profileError['blood_group'] = 'Please enter blood group';
-    }
-    if (symptomsController.text.isEmpty) {
-      profileError['symptoms'] = 'Please enter symptoms';
-    }
-    return profileError.isEmpty;
   }
 
   bool htbValidation() {

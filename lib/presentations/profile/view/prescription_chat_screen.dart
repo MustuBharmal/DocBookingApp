@@ -1,11 +1,11 @@
 import 'package:doc_booking_app/global/styles.dart';
-import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/presentations/profile/controller/prescription_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../global/app_color.dart';
 
-class PrescriptionChatScreen extends GetView<ProfileController> {
+class PrescriptionChatScreen extends GetView<PrescriptionController> {
   static const String routeName = '/prescription-chat-screen';
 
   const PrescriptionChatScreen({super.key});

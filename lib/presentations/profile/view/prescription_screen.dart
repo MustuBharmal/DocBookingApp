@@ -1,12 +1,12 @@
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
-import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/presentations/profile/controller/prescription_controller.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../widgets/custom_prescription_container.dart';
 
-class PrescriptionScreen extends GetView<ProfileController> {
+class PrescriptionScreen extends GetView<PrescriptionController> {
   static const String routeName = '/prescription-screen';
 
   const PrescriptionScreen({super.key});

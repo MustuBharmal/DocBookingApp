@@ -333,8 +333,8 @@ class SignupScreen extends GetView<AuthController> {
                             state: stateController.text,
                             country: countryController.text,
                             pinCode: postCodeController.text,
-                            lat: double.parse(controller.selectCity.value?.latitude ?? '0.0') ,
-                            long: double.parse(controller.selectCity.value?.longitude ?? '0.0'),
+                            // lat: double.parse(controller.selectCity.value?.latitude ?? '0.0') ,
+                            // long: double.parse(controller.selectCity.value?.longitude ?? '0.0'),
                           );
                         },
                       ),
