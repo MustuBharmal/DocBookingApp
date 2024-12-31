@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/map_screen/map_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/clinic_tab_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/home_tab_screen.dart';
@@ -11,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../../global/images.dart';
 import '../../../widgets/custom_tab_bar.dart';
+import '../../home/view/notification_screen.dart';
 import '../../specialist/widget/custom_button.dart';
 import '../controller/service_controller.dart';
 
@@ -18,50 +18,68 @@ class ListOfServicesDoctorScreen extends GetView<ServicesController> {
   final List<DoctorsList?> doctorList;
   final int? serviceId;
 
-  const ListOfServicesDoctorScreen({required this.doctorList, this.serviceId, super.key});
+  const ListOfServicesDoctorScreen(
+      {required this.doctorList, this.serviceId, super.key});
 
   static const routeName = '/list-of-services-doctor-screen';
 
   @override
   Widget build(BuildContext context) {
-    controller.doctorList.clear();
-    controller.doctorList.addAll(doctorList);
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (didPop, result) {
         controller.isMapView(false);
+        controller.searchController.clear();
       },
       child: DefaultTabController(
         length: 2,
         child: Obx(
-              ()=> Scaffold(
-            bottomNavigationBar: controller.isMapView.value && controller.selectedDoctor.value != null
+          () => Scaffold(
+            bottomNavigationBar: controller.isMapView.value &&
+                    controller.selectedDoctor.value != null
                 ? Text(controller.selectedDoctor.value?.name ?? '')
                 : null,
-            appBar: const CustomAppBar(title: 'Search', back: true),
+            appBar: CustomAppBar(
+              title: 'Search',
+              back: true,
+              onPressed: () {
+                Get.toNamed(NotificationScreen.routeName);
+              },
+            ),
             body: Obx(
-                  () => Container(
-                padding: controller.isMapView.value ? EdgeInsets.only(top: 16) : const EdgeInsets.all(16),
+              () => Container(
+                padding: controller.isMapView.value
+                    ? EdgeInsets.only(top: 16)
+                    : const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     if (!controller.isMapView.value) ...[
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
-                        child: CustomSearchTextfield(
+                        child: CustomSearchTextField(
                           hintText: ConstantString.searchByName,
-                          controller: SpecialistController.instance.searchController.value,
+                          controller: controller.searchController,
+                          onChanged: (value) {
+                            controller.searchList(value);
+                          },
                         ),
                       ),
                       const CustomTabBar(
                         tabText1: 'Home',
                         tabText2: 'Clinic',
                       ),
-                      Expanded(
-                        child: TabBarView(
-                          children: [
-                            HomeTabWidget(doctorList: controller.doctorList),
-                            ClinicTabWidget(doctorList: controller.doctorList),
-                          ],
+                      Obx(
+                        () => Expanded(
+                          child: TabBarView(
+                            children: [
+                              HomeTabWidget(
+                                  doctorList:
+                                      controller.searchDoctorList.value),
+                              ClinicTabWidget(
+                                  doctorList:
+                                      controller.searchDoctorList.value),
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
@@ -69,7 +87,8 @@ class ListOfServicesDoctorScreen extends GetView<ServicesController> {
                         child: Align(
                           alignment: Alignment.bottomRight,
                           child: CustomButton(
-                            onPressed: () => controller.goToMapScreen(serviceId ?? 0),
+                            onPressed: () =>
+                                controller.goToMapScreen(serviceId ?? 0),
                             height: Get.height * 0.05,
                             width: Get.width * 0.33,
                             iconPath: AppImage.map,
@@ -81,7 +100,8 @@ class ListOfServicesDoctorScreen extends GetView<ServicesController> {
                       Expanded(
                         child: Stack(
                           children: [
-                            MapScreen(controller.userLocation!.latitude!, controller.userLocation!.longitude!),
+                            MapScreen(controller.userLocation!.latitude!,
+                                controller.userLocation!.longitude!),
                             Align(
                               alignment: Alignment.topCenter,
                               child: const CustomTabBar(
@@ -90,7 +110,8 @@ class ListOfServicesDoctorScreen extends GetView<ServicesController> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 113, right: 16),
+                              padding:
+                                  const EdgeInsets.only(bottom: 113, right: 16),
                               child: Align(
                                 alignment: Alignment.bottomRight,
                                 child: CustomButton(

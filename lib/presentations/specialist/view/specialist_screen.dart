@@ -48,8 +48,7 @@ class SpecialistScreen extends StatelessWidget {
 
                       Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
                         'doctorList': listOfDoc,
-                        'specializationId':specialistID
-
+                        'specializationId': specialistID
                       });
                     },
                     iconPath: specialist?.icon ?? '',

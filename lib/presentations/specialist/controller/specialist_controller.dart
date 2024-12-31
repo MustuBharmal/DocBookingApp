@@ -19,6 +19,7 @@ class SpecialistController extends GetxController {
   RxBool isMapView = RxBool(false);
   LocationData? userLocation;
   RxList<DoctorsList?> doctorList = RxList.empty();
+  RxList<DoctorsList?> searchDoctorList = RxList.empty();
   Rx<Set<Marker>> markers = Rx({});
 
   Rx<DoctorsList?> selectedDoctor = Rx(null);
@@ -26,9 +27,10 @@ class SpecialistController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    searchController.value.addListener(() {
-      // filterSpecialists();
-    });
+    doctorList.clear();
+    doctorList.addAll(Get.arguments['doctorList']);
+    searchDoctorList.clear();
+    searchDoctorList.addAll(doctorList);
   }
 
   @override
@@ -110,14 +112,21 @@ class SpecialistController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
-/*void filterSpecialists() {
-    String query = searchController.value.text.toLowerCase();
-    if (query.isEmpty) {
-      filteredSpecialists.value = specialists;
+
+  void searchList(String query) {
+    query.toLowerCase();
+    print(query);
+    if (query == '') {
+      searchDoctorList.clear();
+      searchDoctorList.addAll(doctorList);
     } else {
-      filteredSpecialists.value = specialists
-          .where((specialist) => specialist.name.toLowerCase().contains(query))
-          .toList();
+      searchDoctorList.clear();
+      searchDoctorList.addAll(doctorList
+          .where((item) =>
+          item!.name!.toLowerCase().startsWith(query.toLowerCase()))
+          .toList());
+      LogUtil.debug(searchDoctorList.length);
+      searchDoctorList.refresh();
     }
-  }*/
+  }
 }

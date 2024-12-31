@@ -23,7 +23,6 @@ class NavigationScreen extends GetView<HomeController> {
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,
-
           onPressed: (){
             Get.toNamed(NotificationScreen.routeName);
           },

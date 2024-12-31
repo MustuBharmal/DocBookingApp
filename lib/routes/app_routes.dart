@@ -29,7 +29,6 @@ import 'package:doc_booking_app/presentations/services/view/service_screen.dart'
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
-import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:get/get.dart';
 
 import '../presentations/authentication/binding/otp_verification_binding.dart';
@@ -44,12 +43,12 @@ import '../presentations/splash_screens/view/splash_screen.dart';
 class AppRoutes {
   static List<GetPage> pages = [
     GetPage(
-        name: NavigationScreen.routeName,
-        page: () => const NavigationScreen(),
-        bindings: [
-          HomeBinding(),
-          SpecialistBinding(),
-        ]),
+      name: NavigationScreen.routeName,
+      page: () => const NavigationScreen(),
+      bindings: [
+        HomeBinding(),
+      ],
+    ),
     GetPage(
       name: SplashScreen.routeName,
       page: () => const SplashScreen(),
@@ -62,10 +61,6 @@ class AppRoutes {
       name: LoginWelcomeScreen.routeName,
       page: () => const LoginWelcomeScreen(),
     ),
-    /* GetPage(
-        name: HomeScreen.routeName,
-        page: () => const HomeScreen(),
-        binding: HomeBinding()),*/
     GetPage(
       name: ProfileScreen.routeName,
       page: () => const ProfileScreen(),
@@ -130,7 +125,6 @@ class AppRoutes {
       page: () {
         List<DoctorsList?> list = Get.arguments['doctorList'];
         int? specializationId = Get.arguments['specializationId'];
-
         return ListOfSpecialistScreen(
           doctorList: list,
           specializationId: specializationId,

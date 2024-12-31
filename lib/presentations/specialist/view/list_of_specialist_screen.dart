@@ -17,7 +17,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
   final List<DoctorsList?> doctorList;
   final int? specializationId;
 
-  const ListOfSpecialistScreen({required this.doctorList, this.specializationId, super.key});
+  const ListOfSpecialistScreen(
+      {required this.doctorList, this.specializationId, super.key});
 
   static const routeName = '/list-of-specialist-screen';
 
@@ -33,34 +34,45 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
       child: DefaultTabController(
         length: 2,
         child: Obx(
-            ()=> Scaffold(
-            bottomNavigationBar: controller.isMapView.value && controller.selectedDoctor.value != null
+          () => Scaffold(
+            bottomNavigationBar: controller.isMapView.value &&
+                    controller.selectedDoctor.value != null
                 ? Text(controller.selectedDoctor.value?.name ?? '')
                 : null,
             appBar: const CustomAppBar(title: 'Search', back: true),
             body: Obx(
               () => Container(
-                padding: controller.isMapView.value ? EdgeInsets.only(top: 16) : const EdgeInsets.all(16),
+                padding: controller.isMapView.value
+                    ? EdgeInsets.only(top: 16)
+                    : const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     if (!controller.isMapView.value) ...[
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
-                        child: CustomSearchTextfield(
+                        child: CustomSearchTextField(
                           hintText: ConstantString.searchByName,
-                          controller: SpecialistController.instance.searchController.value,
+                          controller: SpecialistController
+                              .instance.searchController.value,
+                          onChanged: (value) {
+                            controller.searchList(value);
+                          },
                         ),
                       ),
                       const CustomTabBar(
                         tabText1: 'Home',
                         tabText2: 'Clinic',
                       ),
-                      Expanded(
-                        child: TabBarView(
-                          children: [
-                            HomeTabWidget(doctorList: controller.doctorList),
-                            ClinicTabWidget(doctorList: controller.doctorList),
-                          ],
+                      Obx(
+                          ()=> Expanded(
+                          child: TabBarView(
+                            children: [
+                              HomeTabWidget(
+                                  doctorList: controller.searchDoctorList.value),
+                              ClinicTabWidget(
+                                  doctorList: controller.searchDoctorList.value),
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
@@ -68,7 +80,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                         child: Align(
                           alignment: Alignment.bottomRight,
                           child: CustomButton(
-                            onPressed: () => controller.goToMapScreen(specializationId ?? 0),
+                            onPressed: () =>
+                                controller.goToMapScreen(specializationId ?? 0),
                             height: Get.height * 0.05,
                             width: Get.width * 0.33,
                             iconPath: AppImage.map,
@@ -80,7 +93,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                       Expanded(
                         child: Stack(
                           children: [
-                            MapScreen(controller.userLocation!.latitude!, controller.userLocation!.longitude!),
+                            MapScreen(controller.userLocation!.latitude!,
+                                controller.userLocation!.longitude!),
                             Align(
                               alignment: Alignment.topCenter,
                               child: const CustomTabBar(
@@ -89,7 +103,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 113, right: 16),
+                              padding:
+                                  const EdgeInsets.only(bottom: 113, right: 16),
                               child: Align(
                                 alignment: Alignment.bottomRight,
                                 child: CustomButton(

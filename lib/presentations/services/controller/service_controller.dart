@@ -14,11 +14,12 @@ import '../repo/services_repo.dart';
 
 class ServicesController extends GetxController {
   static ServicesController get instance => Get.find<ServicesController>();
-  Rx<TextEditingController> searchController = TextEditingController().obs;
+  TextEditingController searchController = TextEditingController();
   RxList filteredSpecialists = [].obs;
   RxBool isMapView = RxBool(false);
   LocationData? userLocation;
   RxList<DoctorsList?> doctorList = RxList.empty();
+  RxList<DoctorsList?> searchDoctorList = RxList.empty();
   Rx<Set<Marker>> markers = Rx({});
 
   Rx<DoctorsList?> selectedDoctor = Rx(null);
@@ -26,15 +27,17 @@ class ServicesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    searchController.value.addListener(() {
-      // filterSpecialists();
-    });
+    doctorList.clear();
+    doctorList.addAll(Get.arguments['doctorList']);
+    searchDoctorList.clear();
+    searchDoctorList.addAll(doctorList);
   }
 
   @override
   void onClose() {
     super.onClose();
     isMapView.value = false;
+    searchController.clear();
   }
 
   void goToListScreen() {
@@ -94,7 +97,8 @@ class ServicesController extends GetxController {
   void getNearByDoc(int serviceId, double lat, double long) async {
     try {
       doctorList.clear();
-      doctorList.addAll(await ServicesRepo.getDoctorsByServices(serviceId, lat, long));
+      doctorList.addAll(
+          await ServicesRepo.getDoctorsByServices(serviceId, lat, long));
       Set<Marker> newMarkers = {};
       for (var d in doctorList) {
         double? lat = double.tryParse(d?.latitude ?? '0');
@@ -118,14 +122,21 @@ class ServicesController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
-/*void filterSpecialists() {
-    String query = searchController.value.text.toLowerCase();
-    if (query.isEmpty) {
-      filteredSpecialists.value = specialists;
+
+  void searchList(String query) {
+    query.toLowerCase();
+    print(query);
+    if (query == '') {
+      searchDoctorList.clear();
+      searchDoctorList.addAll(doctorList);
     } else {
-      filteredSpecialists.value = specialists
-          .where((specialist) => specialist.name.toLowerCase().contains(query))
-          .toList();
+      searchDoctorList.clear();
+      searchDoctorList.addAll(doctorList
+          .where((item) =>
+              item!.name!.toLowerCase().startsWith(query.toLowerCase()))
+          .toList());
+      LogUtil.debug(searchDoctorList.length);
+      searchDoctorList.refresh();
     }
-  }*/
+  }
 }
