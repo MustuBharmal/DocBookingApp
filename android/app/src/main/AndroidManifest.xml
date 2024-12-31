@@ -4,6 +4,7 @@
     <application
         android:label="Doctor's Appointment App"
         android:name="${applicationName}"
+        android:theme="@style/AppTheme">
         android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBkNNDCaVQzqiagUx-_4BW0f3cuJtweBas"/>
