@@ -29,6 +29,7 @@ import 'package:doc_booking_app/presentations/services/view/service_screen.dart'
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_screen.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:get/get.dart';
 
 import '../presentations/authentication/binding/otp_verification_binding.dart';
@@ -128,10 +129,11 @@ class AppRoutes {
       name: ListOfSpecialistScreen.routeName,
       page: () {
         List<DoctorsList?> list = Get.arguments['doctorList'];
-        int serviceId = Get.arguments['serviceId'];
+        int? specializationId = Get.arguments['specializationId'];
+
         return ListOfSpecialistScreen(
           doctorList: list,
-          serviceId: serviceId,
+          specializationId: specializationId,
         );
       },
       binding: SpecialistBinding(),

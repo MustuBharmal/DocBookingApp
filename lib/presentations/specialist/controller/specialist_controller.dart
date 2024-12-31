@@ -83,10 +83,10 @@ class SpecialistController extends GetxController {
     isMapView.toggle();
   }
 
-  void getNearByDoc(int serviceId, double lat, double long) async {
+  void getNearByDoc(int specializationId, double lat, double long) async {
     try {
       doctorList.clear();
-      doctorList.addAll(await SpecialistRepo.getDoctors(serviceId, lat, long));
+      doctorList.addAll(await SpecialistRepo.getDoctorsBySpecialization(specializationId, lat, long));
       Set<Marker> newMarkers = {};
       for (var d in doctorList) {
         double? lat = double.tryParse(d?.latitude ?? '0');

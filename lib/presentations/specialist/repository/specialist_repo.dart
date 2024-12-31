@@ -7,15 +7,12 @@ import '../../../util/log_utils.dart';
 import '../models/doctor_list.dart';
 
 class SpecialistRepo {
-  static Future<List<DoctorsList>> getDoctors(int serviceId, double lat, double long) async {
+  static Future<List<DoctorsList>> getDoctorsBySpecialization(int serviceId, double lat, double long) async {
     try {
       Map<String, dynamic> data = {
-        // 'userLatitude': 85.06249589385241,
-        // 'userLongitude': -178.81930852609128,
-        // 'service_id': 5,
         'userLatitude': lat,
         'userLongitude': long,
-        'service_id': serviceId,
+        'specialization_id': serviceId,
         'radius': 50,
       };
       // List<DoctorsList?> listOfSpecialist = [];
@@ -25,9 +22,6 @@ class SpecialistRepo {
       if (result['isLive'] == true) {
         final response = DoctorListResponse.fromJson(result);
         return response.data;
-        /*listOfSpecialist = List<DoctorsList>.from(
-            result['data']!.map((x) => DoctorsList.fromJson(x)));*/
-        // return listOfSpecialist;
       } else {
         throw Exception("Error: ${result['message']}");
       }

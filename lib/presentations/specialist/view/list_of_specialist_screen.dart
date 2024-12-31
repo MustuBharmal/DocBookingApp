@@ -15,14 +15,16 @@ import '../widget/custom_button.dart';
 
 class ListOfSpecialistScreen extends GetView<SpecialistController> {
   final List<DoctorsList?> doctorList;
-  final int? serviceId;
+  final int? specializationId;
 
-  const ListOfSpecialistScreen({required this.doctorList, this.serviceId, super.key});
+  const ListOfSpecialistScreen({required this.doctorList, this.specializationId, super.key});
 
   static const routeName = '/list-of-specialist-screen';
 
   @override
   Widget build(BuildContext context) {
+    controller.doctorList.clear();
+    controller.doctorList.addAll(doctorList);
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (didPop, result) {
@@ -56,8 +58,8 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            HomeTabWidget(doctorList: doctorList),
-                            ClinicTabWidget(doctorList: doctorList),
+                            HomeTabWidget(doctorList: controller.doctorList),
+                            ClinicTabWidget(doctorList: controller.doctorList),
                           ],
                         ),
                       ),
@@ -66,7 +68,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                         child: Align(
                           alignment: Alignment.bottomRight,
                           child: CustomButton(
-                            onPressed: () => controller.goToMapScreen(serviceId ?? 0),
+                            onPressed: () => controller.goToMapScreen(specializationId ?? 0),
                             height: Get.height * 0.05,
                             width: Get.width * 0.33,
                             iconPath: AppImage.map,
