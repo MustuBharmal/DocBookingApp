@@ -7,6 +7,7 @@ import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 class SpecialistDetailScreen extends StatelessWidget {
@@ -94,7 +95,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    doctor.specialization?.capitalizeFirst ?? '',
+                    doctor.specialistData?.name?.capitalizeFirst ?? '',
                     style: TextStyle(
                       fontSize: 16,
                       color: AppColors.textHeaderGray,
@@ -203,13 +204,16 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 20),
-                    child: RichText(
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                      text: TextSpan(
-                        text: doctor.about,
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textHeaderGray),
-                      ),
+                    // child: RichText(
+                    //   maxLines: 5,
+                    //   overflow: TextOverflow.ellipsis,
+                    //   text: TextSpan(
+                    //     text: doctor.about,
+                    //     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textHeaderGray),
+                    //   ),
+                    // ),
+                    child: Html(
+                      data: doctor.about ?? '',
                     ),
                   ),
                   Text(
