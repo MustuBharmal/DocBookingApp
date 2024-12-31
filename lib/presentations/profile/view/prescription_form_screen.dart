@@ -1,5 +1,6 @@
 import 'package:doc_booking_app/global/styles.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -51,10 +52,11 @@ class PrescriptionFormScreen extends GetView<ProfileController> {
               }
               var params = {
                 'patient_id': AuthController.instance.user.value!.id,
-                'doctor_id': '1',
+                'doctor_id': controller.currDocId,
                 'blood_group': controller.bloodGrpController.text,
                 'symptoms': controller.symptomsController.text,
               };
+              LogUtil.debug(params);
               controller.prescriptionForm(params);
               controller.symptomsController.clear();
               controller.bloodGrpController.clear();

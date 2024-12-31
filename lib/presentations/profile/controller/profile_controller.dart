@@ -45,12 +45,21 @@ class ProfileController extends GetxController {
   final ImagePicker _picker = ImagePicker();
   RxList<FaqModels?> listOfFaqs = RxList.empty();
   final List<String> prefCommMethodList = ['Whatsapp', 'Telephone', 'Message'];
-  final List<String> businessNamesList = ['Fitness First', 'Travelling', 'Psychology'];
-  final List<String> businessTypesList = ['Clinic', 'Hospital', 'Small Hospital'];
+  final List<String> businessNamesList = [
+    'Fitness First',
+    'Travelling',
+    'Psychology'
+  ];
+  final List<String> businessTypesList = [
+    'Clinic',
+    'Hospital',
+    'Small Hospital'
+  ];
   RxString selectedBusinessName = RxString('Fitness First');
   RxString selectedBusinessType = RxString('Clinic');
   RxString selectedSex = RxString('');
   Rx<File?> selectedImage = Rx<File?>(null);
+  String? currDocId;
 
   // Function to pick an image
   Future<void> pickImage() async {
@@ -137,7 +146,7 @@ class ProfileController extends GetxController {
         'doctor_id': selectedDoctor?.id,
         'patient_id': AuthController.instance.user.value!.id,
       });
-
+      currDocId = selectedDoctor?.id.toString();
       Get.toNamed(PrescriptionInsideScreen.routeName);
     });
 
