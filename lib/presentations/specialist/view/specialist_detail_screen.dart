@@ -12,8 +12,10 @@ import 'package:get/get.dart';
 
 class SpecialistDetailScreen extends StatelessWidget {
   final DoctorsList doctor;
+  final String serviceType;
 
-  const SpecialistDetailScreen({required this.doctor, super.key});
+  const SpecialistDetailScreen(
+      {required this.doctor, this.serviceType = 'Clinic', super.key});
 
   static const routeName = '/specialist_detail-screen';
 
@@ -200,7 +202,10 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   Text(
                     ConstantString.about,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textHeaderBlack),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textHeaderBlack),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 20),
@@ -229,14 +234,20 @@ class SpecialistDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomIconSizeBox(iconPath: AppImage.map, iconWidth: 25, iconHeight: 25),
+                      CustomIconSizeBox(
+                          iconPath: AppImage.map,
+                          iconWidth: 25,
+                          iconHeight: 25),
                       SizedBox(
                         width: 10,
                       ),
                       Expanded(
                         child: Text(
                           '4517 Washington Ave. Manchester, Kentucky 39495',
-                          style: TextStyle(fontSize: 14, color: AppColors.textHeaderGray, fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: AppColors.textHeaderGray,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ],
@@ -265,7 +276,10 @@ class SpecialistDetailScreen extends StatelessWidget {
                   BlueButton(
                     label: ConstantString.bookAppointment,
                     onPressed: () {
-                      Get.toNamed(BookTimeSlotScreen.routeName,arguments: doctor);
+                      Get.toNamed(BookTimeSlotScreen.routeName, arguments: {
+                        'doctor': doctor,
+                        'serviceType': serviceType
+                      });
                       // Get.toNamed(BookSlotsConfirmScreen.routeName);
                     },
                   )

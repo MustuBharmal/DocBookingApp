@@ -147,8 +147,9 @@ class AppRoutes {
     GetPage(
       name: SpecialistDetailScreen.routeName,
       page: () {
-        DoctorsList doctor = Get.arguments;
-        return SpecialistDetailScreen(doctor: doctor);
+        DoctorsList doctor = Get.arguments['doctor'];
+        String serviceType = Get.arguments['serviceType'];
+        return SpecialistDetailScreen(doctor: doctor, serviceType:serviceType);
       },
     ),
     GetPage(
@@ -180,7 +181,7 @@ class AppRoutes {
     GetPage(
         name: BookTimeSlotScreen.routeName,
         page: () {
-          BookingController.instance.fillData(Get.arguments);
+          BookingController.instance.fillData(Get.arguments['doctor'],Get.arguments['serviceType'] );
           return BookTimeSlotScreen();
         },
         binding: BookingBinding()),

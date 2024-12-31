@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/booking/controller/booking_controller.dart';
-import 'package:doc_booking_app/presentations/booking/views/payment_screen.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,8 @@ class BookSlotsConfirmScreen extends GetView<BookingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Book Appointment', back: true, isNotificationVisible: false),
+      appBar: CustomAppBar(
+          title: 'Book Appointment', back: true, isNotificationVisible: false),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -31,6 +31,7 @@ class BookSlotsConfirmScreen extends GetView<BookingController> {
                   doctorData: controller.doctorData,
                   selectedDate: controller.selectedDate.value,
                   selectedTimeSlot: controller.selectedTT.value,
+                  serviceType: controller.serviceType,
                 ),
                 const SizedBox(height: 25),
                 Container(
@@ -44,12 +45,17 @@ class BookSlotsConfirmScreen extends GetView<BookingController> {
                     children: [
                       const Text(
                         'More Info',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Inter'),
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Inter'),
                       ),
                       const SizedBox(height: 20),
                       AppointmentDetails(
-                        patientName: AuthController.instance.user.value?.name ?? '',
-                        location: AuthController.instance.user.value?.address ?? '',
+                        patientName:
+                            AuthController.instance.user.value?.name ?? '',
+                        location:
+                            AuthController.instance.user.value?.address ?? '',
                         totalAmount: '\$ ${controller.doctorData?.fees}',
                       ),
                     ],
@@ -102,7 +108,11 @@ class AppointmentDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title, style: txtInterTextFieldHint),
-        Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.activeBorderColor)),
+        Text(value,
+            style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: AppColors.activeBorderColor)),
       ],
     );
   }

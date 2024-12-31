@@ -26,7 +26,8 @@ class ClinicTabWidget extends StatelessWidget {
           specialist: docList?.serviceData?.name ?? '',
           charges: docList?.fees ?? '',
           onPressed: () {
-            Get.toNamed(SpecialistDetailScreen.routeName,arguments: docList!);
+            Get.toNamed(SpecialistDetailScreen.routeName,
+                arguments: {'doctor': docList!, 'serviceType': 'Clinic'});
           },
         );
       },

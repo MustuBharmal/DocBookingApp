@@ -64,13 +64,20 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                         tabText2: 'Clinic',
                       ),
                       Obx(
-                          ()=> Expanded(
+                        () => Expanded(
                           child: TabBarView(
                             children: [
                               HomeTabWidget(
-                                  doctorList: controller.searchDoctorList.value),
+                                  doctorList: controller.searchDoctorList.value
+                                      .where((doctor) =>
+                                          doctor!.serviceType!.contains('home'))
+                                      .toList()),
                               ClinicTabWidget(
-                                  doctorList: controller.searchDoctorList.value),
+                                  doctorList:
+                                  controller.searchDoctorList.value
+                                      .where((doctor) =>
+                                      doctor!.serviceType!.contains('clinic'))
+                                      .toList()),
                             ],
                           ),
                         ),

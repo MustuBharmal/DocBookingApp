@@ -35,6 +35,7 @@ class DoctorsList with _$DoctorsList {
     String? about,
     String? latitude,
     String? longitude,
+    @JsonKey(name: 'service_type') List<String>? serviceType,
     @JsonKey(name: 'serviceModelData') Service? serviceData,
     @JsonKey(name: 'specialistModelData') Specialist? specialistData,
     @JsonKey(name: 'doctorTimeTableData') @Default([]) List<DoctorTimeTable> doctorTimeTable,
