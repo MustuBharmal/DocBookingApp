@@ -264,36 +264,46 @@ class SignupScreen extends GetView<AuthController> {
                       ),
                     ),
                     Obx(
-                      () => CustomTextField(
+                          () => CustomTextField(
                         isPassword: RxBool(false),
                         label: 'City',
                         showAsterisk: true,
-                        readOnly: true,
                         controller: cityController,
                         hintStyle: txtInterTextFieldHint,
-                        hintText: '',
+                        hintText: 'eg. Rajkot',
                         errorText: controller.signupError['city'],
-                        showDropDownIcon: true,
-                        onTap: () {
-                          controller.selectCity.value = null;
-                          if (controller.cities.isNotEmpty) {
-                            TypeOfDialogs.showCommonBottomSheetDialog(
-                              context,
-                              'City',
-                              RxList.from(controller.cities
-                                  .where((city) => city.name != null)
-                                  .map((city) => city.name!)
-                                  .toList()),
-                              RxList.empty(),
-                              cityController,
-                              controller.getCity,
-                            );
-                          } else {
-                            LogUtil.debug('hello');
-                          }
-                        },
                       ),
                     ),
+
+                    // CustomTextField(
+                    //     isPassword: RxBool(false),
+                    //     label: 'City',
+                    //     showAsterisk: true,
+                    //     readOnly: true,
+                    //     controller: cityController,
+                    //     hintStyle: txtInterTextFieldHint,
+                    //     hintText: '',
+                    //     errorText: controller.signupError['city'],
+                    //     // showDropDownIcon: true,
+                    //     // onTap: () {
+                    //     //   controller.selectCity.value = null;
+                    //     //   if (controller.cities.isNotEmpty) {
+                    //     //     TypeOfDialogs.showCommonBottomSheetDialog(
+                    //     //       context,
+                    //     //       'City',
+                    //     //       RxList.from(controller.cities
+                    //     //           .where((city) => city.name != null)
+                    //     //           .map((city) => city.name!)
+                    //     //           .toList()),
+                    //     //       RxList.empty(),
+                    //     //       cityController,
+                    //     //       controller.getCity,
+                    //     //     );
+                    //     //   } else {
+                    //     //     LogUtil.debug('hello');
+                    //     //   }
+                    //     // },
+                    //   ),
                     Obx(
                         ()=> CustomTextField(
                         isPassword: RxBool(false),

@@ -77,7 +77,7 @@ abstract class HomeRepo {
         listOfServices =
         List<Service>.from(result['data']!.map((x) => Service.fromJson(x)));
         LogUtil.debug(result);
-        Get.snackbar('Success', result['message']);
+        // Get.snackbar('Success', result['message']);
         return listOfServices;
       } else {
         throw Exception("Error: ${result['message']}");

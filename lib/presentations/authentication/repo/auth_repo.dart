@@ -105,7 +105,7 @@ abstract class AuthRepo {
       final result = await HttpService.post(Api.otpVerification, data);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
-        Get.snackbar('Success', result['message'].toString());
+        // Get.snackbar('Success', result['message'].toString());
         return User.fromJson(result['data']);
       } else {
         throw Exception("Error: ${result['status']}");

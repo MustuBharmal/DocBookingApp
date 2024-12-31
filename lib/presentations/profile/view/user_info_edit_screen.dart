@@ -223,36 +223,47 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                     ),
                   ),
                   Obx(
-                    () => CustomTextField(
+                        () => CustomTextField(
                       isPassword: RxBool(false),
                       label: 'City',
                       showAsterisk: true,
-                      readOnly: true,
                       controller: controller.cityController,
                       hintStyle: txtInterTextFieldHint,
-                      hintText: '',
+                      hintText: 'eg. Rajkot',
                       errorText: controller.profileError['city'],
-                      showDropDownIcon: true,
-                      onTap: () {
-                        controller.selectCity.value = null;
-                        if (AuthController.instance.cities.isNotEmpty) {
-                          TypeOfDialogs.showCommonBottomSheetDialog(
-                            context,
-                            'City',
-                            RxList.from(AuthController.instance.cities
-                                .where((city) => city.name != null)
-                                .map((city) => city.name!)
-                                .toList()),
-                            RxList.empty(),
-                            controller.cityController,
-                            AuthController.instance.getCity,
-                          );
-                        } else {
-                          LogUtil.debug('hello');
-                        }
-                      },
                     ),
                   ),
+                  // Obx(
+                  //   () => CustomTextField(
+                  //     isPassword: RxBool(false),
+                  //     label: 'City',
+                  //     showAsterisk: true,
+                  //     readOnly: true,
+                  //     controller: controller.cityController,
+                  //     hintStyle: txtInterTextFieldHint,
+                  //     hintText: '',
+                  //     errorText: controller.profileError['city'],
+                  //     showDropDownIcon: true,
+                  //     onTap: () {
+                  //       controller.selectCity.value = null;
+                  //       if (AuthController.instance.cities.isNotEmpty) {
+                  //         TypeOfDialogs.showCommonBottomSheetDialog(
+                  //           context,
+                  //           'City',
+                  //           RxList.from(AuthController.instance.cities
+                  //               .where((city) => city.name != null)
+                  //               .map((city) => city.name!)
+                  //               .toList()),
+                  //           RxList.empty(),
+                  //           controller.cityController,
+                  //           AuthController.instance.getCity,
+                  //         );
+                  //       } else {
+                  //         LogUtil.debug('hello');
+                  //       }
+                  //     },
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: CustomTextField(
