@@ -1,9 +1,5 @@
-import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
-import 'package:doc_booking_app/presentations/specialist/models/doctor_time_table.dart';
-import 'package:doc_booking_app/util/custom_date_utils.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class PaymentController extends GetxController {
   static PaymentController get instance => Get.find<PaymentController>();
@@ -16,7 +12,6 @@ class PaymentController extends GetxController {
     super.onInit();
     initStripe();
   }
-
 
   initStripe() async {
     Stripe.publishableKey =

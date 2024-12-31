@@ -41,6 +41,11 @@ _$DoctorsListImpl _$$DoctorsListImplFromJson(Map<String, dynamic> json) =>
       location: json['location'] as String?,
       availability: json['availability'] as String?,
       about: json['about'] as String?,
+      latitude: json['latitude'] as String?,
+      longitude: json['longitude'] as String?,
+      serviceType: (json['service_type'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       serviceData: json['serviceModelData'] == null
           ? null
           : Service.fromJson(json['serviceModelData'] as Map<String, dynamic>),
@@ -67,6 +72,9 @@ Map<String, dynamic> _$$DoctorsListImplToJson(_$DoctorsListImpl instance) =>
       'location': instance.location,
       'availability': instance.availability,
       'about': instance.about,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'service_type': instance.serviceType,
       'serviceModelData': instance.serviceData,
       'specialistModelData': instance.specialistData,
       'doctorTimeTableData': instance.doctorTimeTable,

@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/map_screen/map_screen.dart';
-import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/clinic_tab_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/view/home_tab_screen.dart';
@@ -11,25 +10,26 @@ import 'package:get/get.dart';
 
 import '../../../global/images.dart';
 import '../../../widgets/custom_tab_bar.dart';
-import '../widget/custom_button.dart';
+import '../../home/view/notification_screen.dart';
+import '../../specialist/widget/custom_button.dart';
+import '../controller/service_controller.dart';
 
-class ListOfSpecialistScreen extends GetView<SpecialistController> {
+class ListOfServicesDoctorScreen extends GetView<ServicesController> {
   final List<DoctorsList?> doctorList;
-  final int? specializationId;
+  final int? serviceId;
 
-  const ListOfSpecialistScreen(
-      {required this.doctorList, this.specializationId, super.key});
+  const ListOfServicesDoctorScreen(
+      {required this.doctorList, this.serviceId, super.key});
 
-  static const routeName = '/list-of-specialist-screen';
+  static const routeName = '/list-of-services-doctor-screen';
 
   @override
   Widget build(BuildContext context) {
-    controller.doctorList.clear();
-    controller.doctorList.addAll(doctorList);
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (didPop, result) {
         controller.isMapView(false);
+        controller.searchController.clear();
       },
       child: DefaultTabController(
         length: 2,
@@ -39,7 +39,13 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                     controller.selectedDoctor.value != null
                 ? Text(controller.selectedDoctor.value?.name ?? '')
                 : null,
-            appBar: const CustomAppBar(title: 'Search', back: true),
+            appBar: CustomAppBar(
+              title: 'Search',
+              back: true,
+              onPressed: () {
+                Get.toNamed(NotificationScreen.routeName);
+              },
+            ),
             body: Obx(
               () => Container(
                 padding: controller.isMapView.value
@@ -52,8 +58,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                         padding: const EdgeInsets.only(top: 10),
                         child: CustomSearchTextField(
                           hintText: ConstantString.searchByName,
-                          controller: SpecialistController
-                              .instance.searchController.value,
+                          controller: controller.searchController,
                           onChanged: (value) {
                             controller.searchList(value);
                           },
@@ -70,7 +75,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                               HomeTabWidget(
                                   doctorList: controller.searchDoctorList.value
                                       .where((doctor) =>
-                                          doctor!.serviceType!.contains('home'))
+                                      doctor!.serviceType!.contains('home'))
                                       .toList()),
                               ClinicTabWidget(
                                   doctorList:
@@ -88,7 +93,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                           alignment: Alignment.bottomRight,
                           child: CustomButton(
                             onPressed: () =>
-                                controller.goToMapScreen(specializationId ?? 0),
+                                controller.goToMapScreen(serviceId ?? 0),
                             height: Get.height * 0.05,
                             width: Get.width * 0.33,
                             iconPath: AppImage.map,

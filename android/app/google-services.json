@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "940698519949",
+    "project_id": "live-doctor-app",
+    "storage_bucket": "live-doctor-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940698519949:android:10361d2853a5aa085215c4",
+        "android_client_info": {
+          "package_name": "com.youth_revisited.doctor_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw1rEMZFiKplUxWzZSg7r-w9zyhR0hinI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

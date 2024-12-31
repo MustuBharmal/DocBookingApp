@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapScreen extends StatefulWidget {
@@ -22,19 +24,25 @@ class _MapScreenState extends State<MapScreen> {
     super.initState();
     userLocation = CameraPosition(
       target: LatLng(widget.lat, widget.lng),
-      zoom: 14.4746,
+      zoom: 14,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return userLocation != null
-        ? GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: userLocation!,
-            onMapCreated: (GoogleMapController controller) {
-              mapController.complete(controller);
-            })
+        ? Obx(
+            () => GoogleMap(
+                mapType: MapType.normal,
+                markers: SpecialistController.instance.markers.value,
+                myLocationEnabled: true,
+                myLocationButtonEnabled: false,
+                // minMaxZoomPreference: MinMaxZoomPreference(10, 14),
+                initialCameraPosition: userLocation!,
+                onMapCreated: (GoogleMapController controller) {
+                  mapController.complete(controller);
+                }),
+          )
         : Container();
   }
 }

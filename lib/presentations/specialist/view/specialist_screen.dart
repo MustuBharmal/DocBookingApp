@@ -43,11 +43,12 @@ class SpecialistScreen extends StatelessWidget {
                       List<DoctorsList?> listOfDoc = HomeController
                           .instance.doctorList
                           .where((doctor) =>
-                              doctor?.specialization == specialistID.toString())
+                              doctor.specialization == specialistID.toString())
                           .toList();
 
                       Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
                         'doctorList': listOfDoc,
+                        'specializationId': specialistID
                       });
                     },
                     iconPath: specialist?.icon ?? '',

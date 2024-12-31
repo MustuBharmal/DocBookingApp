@@ -14,8 +14,14 @@ class AppointmentCard extends StatelessWidget {
   final DoctorsList? doctorData;
   final DoctorTimeTable? selectedTimeSlot;
   final DateTime selectedDate;
+  final String? serviceType;
 
-  const AppointmentCard({required this.doctorData, required this.selectedDate, required this.selectedTimeSlot, super.key});
+  const AppointmentCard(
+      {required this.doctorData,
+      required this.selectedDate,
+      required this.selectedTimeSlot,
+      required this.serviceType,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +62,7 @@ class AppointmentCard extends StatelessWidget {
                 BadgeWidget(
                   image: AppImage.firstAid,
                   color: Colors.white,
-                  text: 'Home Visit',
+                  text: '$serviceType Visit',
                 ),
                 BadgeWidget(
                   image: AppImage.alarm,
@@ -108,7 +114,8 @@ class BadgeWidget extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             text,
-            style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w400),
+            style: const TextStyle(
+                color: Colors.white, fontSize: 11, fontWeight: FontWeight.w400),
           ),
         ],
       ),

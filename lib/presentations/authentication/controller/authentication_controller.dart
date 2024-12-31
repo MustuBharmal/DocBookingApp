@@ -9,6 +9,7 @@ import 'package:doc_booking_app/presentations/authentication/repo/auth_repo.dart
 import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
 import 'package:doc_booking_app/service/http_service.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -50,6 +51,18 @@ class AuthController extends GetxController {
   void onClose() {
     _timer.cancel(); // Stop the timer when the controller is disposed
     super.onClose();
+  }
+
+  Future<String?> getFcmToken() async {
+    try {
+      FirebaseMessaging messaging = FirebaseMessaging.instance;
+      String? token = await messaging.getToken();
+      print('FCM Token: $token');
+      return token;
+    } catch (e) {
+      print('Error getting FCM token: $e');
+      return null;
+    }
   }
 
   // Function to pick an image from the gallery
@@ -142,7 +155,11 @@ class AuthController extends GetxController {
 
   Future<void> login(String email, String password) async {
     try {
-      user.value = await AuthRepo.signIn(email, password);
+      String? fcmToken = await getFcmToken();
+      if (fcmToken != null) {
+        user.value = await AuthRepo.signIn(email, password, fcmToken);
+      }
+
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

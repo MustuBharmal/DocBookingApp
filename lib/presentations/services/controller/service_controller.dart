@@ -9,12 +9,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../../exception/server_exception.dart';
-import '../models/doctor_list.dart';
-import '../repository/specialist_repo.dart';
+import '../../specialist/models/doctor_list.dart';
+import '../repo/services_repo.dart';
 
-class SpecialistController extends GetxController {
-  static SpecialistController get instance => Get.find<SpecialistController>();
-  Rx<TextEditingController> searchController = TextEditingController().obs;
+class ServicesController extends GetxController {
+  static ServicesController get instance => Get.find<ServicesController>();
+  TextEditingController searchController = TextEditingController();
   RxList filteredSpecialists = [].obs;
   RxBool isMapView = RxBool(false);
   LocationData? userLocation;
@@ -37,6 +37,7 @@ class SpecialistController extends GetxController {
   void onClose() {
     super.onClose();
     isMapView.value = false;
+    searchController.clear();
   }
 
   void goToListScreen() {
@@ -78,17 +79,26 @@ class SpecialistController extends GetxController {
 
     userLocation = await location.getLocation();
     if (userLocation != null) {
-      getNearByDoc(id, userLocation?.latitude ?? double.tryParse(AuthController.instance.user.value?.latitude ?? '0') ?? 0,
-          userLocation?.longitude ?? double.tryParse(AuthController.instance.user.value?.longitude ?? '0') ?? 0);
+      getNearByDoc(
+          id,
+          userLocation?.latitude ??
+              double.tryParse(
+                  AuthController.instance.user.value?.latitude ?? '0') ??
+              0,
+          userLocation?.longitude ??
+              double.tryParse(
+                  AuthController.instance.user.value?.longitude ?? '0') ??
+              0);
     }
     LoaderController.instance.dismissLoader();
     isMapView.toggle();
   }
 
-  void getNearByDoc(int specializationId, double lat, double long) async {
+  void getNearByDoc(int serviceId, double lat, double long) async {
     try {
       doctorList.clear();
-      doctorList.addAll(await SpecialistRepo.getDoctorsBySpecialization(specializationId, lat, long));
+      doctorList.addAll(
+          await ServicesRepo.getDoctorsByServices(serviceId, lat, long));
       Set<Marker> newMarkers = {};
       for (var d in doctorList) {
         double? lat = double.tryParse(d?.latitude ?? '0');
@@ -123,7 +133,7 @@ class SpecialistController extends GetxController {
       searchDoctorList.clear();
       searchDoctorList.addAll(doctorList
           .where((item) =>
-          item!.name!.toLowerCase().startsWith(query.toLowerCase()))
+              item!.name!.toLowerCase().startsWith(query.toLowerCase()))
           .toList());
       LogUtil.debug(searchDoctorList.length);
       searchDoctorList.refresh();

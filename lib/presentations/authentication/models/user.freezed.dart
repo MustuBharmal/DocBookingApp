@@ -32,6 +32,8 @@ mixin _$User {
   String? get city => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
+  String? get latitude => throw _privateConstructorUsedError;
+  String? get longitude => throw _privateConstructorUsedError;
   @JsonKey(name: 'password')
   String? get password => throw _privateConstructorUsedError;
   @JsonKey(name: 'pin_code')
@@ -68,6 +70,8 @@ abstract class $UserCopyWith<$Res> {
       String? city,
       String? createdAt,
       String? updatedAt,
+      String? latitude,
+      String? longitude,
       @JsonKey(name: 'password') String? password,
       @JsonKey(name: 'pin_code') String? pinCode,
       @JsonKey(name: 'profile_pic') String? profilePic,
@@ -101,6 +105,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? city = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? password = freezed,
     Object? pinCode = freezed,
     Object? profilePic = freezed,
@@ -155,6 +161,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -195,6 +209,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? city,
       String? createdAt,
       String? updatedAt,
+      String? latitude,
+      String? longitude,
       @JsonKey(name: 'password') String? password,
       @JsonKey(name: 'pin_code') String? pinCode,
       @JsonKey(name: 'profile_pic') String? profilePic,
@@ -225,6 +241,8 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? city = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
     Object? password = freezed,
     Object? pinCode = freezed,
     Object? profilePic = freezed,
@@ -279,6 +297,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
       password: freezed == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -315,6 +341,8 @@ class _$UserImpl implements _User {
       this.city,
       this.createdAt,
       this.updatedAt,
+      this.latitude,
+      this.longitude,
       @JsonKey(name: 'password') this.password,
       @JsonKey(name: 'pin_code') this.pinCode,
       @JsonKey(name: 'profile_pic') this.profilePic,
@@ -349,6 +377,10 @@ class _$UserImpl implements _User {
   @override
   final String? updatedAt;
   @override
+  final String? latitude;
+  @override
+  final String? longitude;
+  @override
   @JsonKey(name: 'password')
   final String? password;
   @override
@@ -363,7 +395,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, password: $password, pinCode: $pinCode, profilePic: $profilePic, isVerified: $isVerified)';
+    return 'User(id: $id, name: $name, email: $email, phone: $phone, sex: $sex, dob: $dob, address: $address, country: $country, state: $state, city: $city, createdAt: $createdAt, updatedAt: $updatedAt, latitude: $latitude, longitude: $longitude, password: $password, pinCode: $pinCode, profilePic: $profilePic, isVerified: $isVerified)';
   }
 
   @override
@@ -385,6 +417,10 @@ class _$UserImpl implements _User {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.pinCode, pinCode) || other.pinCode == pinCode) &&
@@ -410,6 +446,8 @@ class _$UserImpl implements _User {
       city,
       createdAt,
       updatedAt,
+      latitude,
+      longitude,
       password,
       pinCode,
       profilePic,
@@ -445,6 +483,8 @@ abstract class _User implements User {
       final String? city,
       final String? createdAt,
       final String? updatedAt,
+      final String? latitude,
+      final String? longitude,
       @JsonKey(name: 'password') final String? password,
       @JsonKey(name: 'pin_code') final String? pinCode,
       @JsonKey(name: 'profile_pic') final String? profilePic,
@@ -476,6 +516,10 @@ abstract class _User implements User {
   String? get createdAt;
   @override
   String? get updatedAt;
+  @override
+  String? get latitude;
+  @override
+  String? get longitude;
   @override
   @JsonKey(name: 'password')
   String? get password;

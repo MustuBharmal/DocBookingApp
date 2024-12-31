@@ -28,7 +28,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   initStripe() async {
     Stripe.publishableKey =
         'pk_test_51IG3cNJAdLfZdFr6WbUo1H26tJfV9Hjo9Fh8QYfwCasaoR1qoVH4dNU0YX7Lo2jjS1uCdZ1PpirQlEyumsKed99n00njVKEQhY';
-    await Stripe.instance.applySettings();
+    // await Stripe.instance.applySettings();
     cardController.addListener(() => update());
     paymentInitialised = true;
     safeSetState(() {});

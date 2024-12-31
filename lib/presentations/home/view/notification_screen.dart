@@ -26,38 +26,38 @@ class NotificationScreen extends GetView<HomeController> {
             children: [
               Obx(() => controller.unreadNotifications.isNotEmpty
                   ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SectionHeader(
-                          title: 'Today',
-                          actionText: 'Mark All as Read',
-                          onActionPressed: () {
-                            controller.markAsReadNotification();
-                          },
-                        ),
-                        ...controller.unreadNotifications
-                            .map((notification) => NotificationCard(
-                                  notification: notification,
-                                  isUnread: true,
-                                  controller: controller,
-                                ))
-                      ],
-                    )
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SectionHeader(
+                    title: 'Today',
+                    actionText: 'Mark All as Read',
+                    onActionPressed: () {
+                      controller.markAsReadNotification();
+                    },
+                  ),
+                  ...controller.unreadNotifications
+                      .map((notification) => NotificationCard(
+                    notification: notification,
+                    isUnread: true,
+                    controller: controller,
+                  ))
+                ],
+              )
                   : const SizedBox.shrink()),
               const SizedBox(height: 16),
               Obx(() => controller.readNotifications.isNotEmpty
                   ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SectionHeader(title: 'Older'),
-                        ...controller.readNotifications
-                            .map((notification) => NotificationCard(
-                                  notification: notification,
-                                  isUnread: false,
-                                  controller: controller,
-                                ))
-                      ],
-                    )
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SectionHeader(title: 'Older'),
+                  ...controller.readNotifications
+                      .map((notification) => NotificationCard(
+                    notification: notification,
+                    isUnread: false,
+                    controller: controller,
+                  ))
+                ],
+              )
                   : const SizedBox.shrink()),
             ],
           ),

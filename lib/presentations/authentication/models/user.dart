@@ -18,6 +18,8 @@ class User with _$User {
     String? city,
     String? createdAt,
     String? updatedAt,
+    String? latitude,
+    String? longitude,
     @JsonKey(name: 'password') String? password,
     @JsonKey(name: 'pin_code') String? pinCode,
     @JsonKey(name: 'profile_pic') String? profilePic,

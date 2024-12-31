@@ -1,6 +1,8 @@
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
+import 'package:doc_booking_app/presentations/profile/view/prescription_screen.dart';
+import 'package:doc_booking_app/presentations/services/view/list_services_doctor.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
@@ -9,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
-import '../../../widgets/appointment_card.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
 import '../../../widgets/custom_specialist_container.dart';
 import '../../specialist/view/list_of_specialist_screen.dart';
@@ -44,11 +45,11 @@ class HomeScreen extends GetView<HomeController> {
           const SizedBox(
             height: 20,
           ),
-          /*const SectionHeader(
-            title: ConstantString.upcomingAppointments,
-            spacing: 20,
-            childWidget: AppointmentCard(),
-          ),*/
+          // const SectionHeader(
+          //   title: ConstantString.upcomingAppointments,
+          //   spacing: 20,
+          //   childWidget: AppointmentCard(),
+          // ),
           const SizedBox(
             height: 20,
           ),
@@ -84,12 +85,14 @@ class HomeScreen extends GetView<HomeController> {
                     onPressed: () {
                       List<DoctorsList?> listOfDoc = controller.doctorList
                           .where((doctor) =>
-                              doctor?.services == servicesId.toString())
+                              doctor.services == servicesId.toString())
                           .toList();
 
-                      Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
-                        'doctorList': listOfDoc,
-                      });
+                      Get.toNamed(ListOfServicesDoctorScreen.routeName,
+                          arguments: {
+                            'doctorList': listOfDoc,
+                            'serviceId': servicesId
+                          });
                     },
                     iconPath: controller.services[index]!.icon!,
                     text: controller.services[index]?.name ?? '',
@@ -103,9 +106,12 @@ class HomeScreen extends GetView<HomeController> {
               title: ConstantString.topRatedSpecialist,
               button: TextButton(
                 onPressed: () {
-                  Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
-                    'doctorList': controller.doctorList,
-                  });
+                  Get.toNamed(
+                    ListOfSpecialistScreen.routeName,
+                    arguments: {
+                      'doctorList': controller.doctorList,
+                    },
+                  );
                 },
                 child: Text(ConstantString.seeAll, style: subtitleStyle1),
               ),
@@ -119,14 +125,18 @@ class HomeScreen extends GetView<HomeController> {
                   return Column(
                     children: [
                       CustomSpecialistContainer(
-                        picPath: doctor?.profilePic ?? '',
-                        name: doctor?.name ?? '',
-                        specialist: doctor?.specialistData?.name ?? '',
-                        charges: doctor?.fees ?? '',
+                        picPath: doctor.profilePic ?? '',
+                        name: doctor.name ?? '',
+                        specialist: doctor.specialistData?.name ?? '',
+                        charges: doctor.fees ?? '',
                         // rating: doctor.rating,
                         // review: doctor.review,
                         onPressed: () {
-                          Get.toNamed(SpecialistDetailScreen.routeName,arguments: doctor!);
+                          Get.toNamed(SpecialistDetailScreen.routeName,
+                              arguments: {
+                                'doctor': doctor,
+                                'serviceType': 'Clinic'
+                              });
                         },
                       ),
                       SizedBox(
@@ -332,20 +342,32 @@ class BookingOptions extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        CustomContainerWithText(
-          text: ConstantString.visitLocalClinic,
+        InkWell(
+          onTap: () {
+            HomeController.instance.navigateTo(1);
+          },
+          child: CustomContainerWithText(
+            text: ConstantString.visitLocalClinic,
+          ),
         ),
         SizedBox(
           height: 10,
         ),
-        CustomContainerWithText(
-          text: ConstantString.arrHomeVisit,
+        InkWell(
+          onTap: () => Get.toNamed(ListOfSpecialistScreen.routeName,
+              arguments: {'doctorList': HomeController.instance.doctorList}),
+          child: CustomContainerWithText(
+            text: ConstantString.arrHomeVisit,
+          ),
         ),
         SizedBox(
           height: 10,
         ),
-        CustomContainerWithText(
-          text: ConstantString.chatWSpeciaList,
+        InkWell(
+          onTap: () => Get.toNamed(PrescriptionScreen.routeName),
+          child: CustomContainerWithText(
+            text: ConstantString.chatWSpeciaList,
+          ),
         ),
       ],
     );

@@ -19,7 +19,7 @@ class HomeController extends GetxController {
   RxInt selectedIndex = RxInt(0);
   Rxn<Dashboard> dashboard = Rxn(Dashboard());
   RxList<Service?> services = RxList.empty();
-  RxList<DoctorsList?> doctorList = RxList.empty();
+  RxList<DoctorsList> doctorList = RxList.empty();
   RxList<Specialist?> specialistsList = RxList.empty();
   RxList<NotificationModel?> notificationList = RxList.empty();
 
@@ -39,7 +39,6 @@ class HomeController extends GetxController {
     'My Profile',
   ];
 
-
   @override
   void onInit() {
     // TODO: implement onInit
@@ -55,10 +54,13 @@ class HomeController extends GetxController {
   }
 
   void categorizeNotifications() {
-    unreadNotifications.value = notificationList.where((n) => n?.isRead == '0').toList();
-    readNotifications.value = notificationList.where((n) => n?.isRead == '1').toList();
+    unreadNotifications.value =
+        notificationList.where((n) => n?.isRead == '0').toList();
+    readNotifications.value =
+        notificationList.where((n) => n?.isRead == '1').toList();
 
-    unreadNotificationIds.value = unreadNotifications.map((n) => n?.id).toList();
+    unreadNotificationIds.value =
+        unreadNotifications.map((n) => n?.id).toList();
     readNotificationIds.value = readNotifications.map((n) => n?.id).toList();
   }
 
@@ -129,9 +131,10 @@ class HomeController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
+
   void markAsReadNotification() async {
     try {
-      HomeRepo.markAsReadNotificationApi(unreadNotificationIds.value);
+      HomeRepo.markAsReadNotificationApi(unreadNotificationIds);
       getNotification();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
@@ -141,8 +144,6 @@ class HomeController extends GetxController {
       Get.snackbar('Login failed', '$e');
     } finally {}
   }
-
-
 
   // Separate notifications into Today and Older
   List<NotificationModel?> get todayNotifications {

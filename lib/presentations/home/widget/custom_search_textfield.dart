@@ -29,7 +29,7 @@ class CustomSearchTextField extends StatelessWidget {
       child: Row(
         children: [
           Obx(
-            () => InkWell(
+                () => InkWell(
               onTap: () {
                 TypeOfDialogs.showBottomSheetDialog(
                   Get.context!,
@@ -43,16 +43,16 @@ class CustomSearchTextField extends StatelessWidget {
                 child: Row(
                   children: [
                     (HomeController.instance.selectedImagePath.value ==
-                            AppImage.stethoscope)
+                        AppImage.stethoscope)
                         ? SvgPicture.asset(
-                            HomeController.instance.selectedImagePath.value)
+                        HomeController.instance.selectedImagePath.value)
                         : CachedNetworkImage(
-                            width: Get.width * 0.067,
-                            height: Get.width * 0.067,
-                            fit: BoxFit.contain,
-                            imageUrl:
-                                HomeController.instance.selectedImagePath.value,
-                          ),
+                      width: Get.width * 0.067,
+                      height: Get.width * 0.067,
+                      fit: BoxFit.contain,
+                      imageUrl:
+                      HomeController.instance.selectedImagePath.value,
+                    ),
                     Expanded(
                         child: CustomIconSizeBox(
                             iconPath: AppImage.arrowDown,

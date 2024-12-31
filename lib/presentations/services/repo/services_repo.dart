@@ -4,20 +4,21 @@ import '../../../exception/server_exception.dart';
 import '../../../global/apis.dart';
 import '../../../service/http_service.dart';
 import '../../../util/log_utils.dart';
-import '../models/doctor_list.dart';
+import '../../specialist/models/doctor_list.dart';
 
-class SpecialistRepo {
-  static Future<List<DoctorsList>> getDoctorsBySpecialization(int serviceId, double lat, double long) async {
+class ServicesRepo {
+  static Future<List<DoctorsList>> getDoctorsByServices(
+      int serviceId, double lat, double long) async {
     try {
       Map<String, dynamic> data = {
         'userLatitude': lat,
         'userLongitude': long,
-        'specialization_id': serviceId,
+        'service_id': serviceId,
         'radius': 50,
       };
-      // List<DoctorsList?> listOfSpecialist = [];
       LogUtil.debug(Api.nearByDoctors);
-      final result = await HttpService.post(Api.nearByDoctors, data, showLoader: false);
+      final result =
+          await HttpService.post(Api.nearByDoctors, data, showLoader: false);
       LogUtil.debug(result);
       if (result['isLive'] == true) {
         final response = DoctorListResponse.fromJson(result);

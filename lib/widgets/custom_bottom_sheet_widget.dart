@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 
 import '../global/app_color.dart';
 import '../global/images.dart';
+import '../presentations/specialist/models/doctor_list.dart';
+import '../presentations/specialist/view/list_of_specialist_screen.dart';
 
 class CustomBottomSheetWidget extends GetView<HomeController> {
   final String header;
@@ -45,6 +47,15 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    List<DoctorsList?> listOfDoc = controller.doctorList
+                        .where((doctor) =>
+                    doctor.serviceData!.name == controller.selectedService.value)
+                        .toList();
+
+                    Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+                      'doctorList': listOfDoc,
+                    });
+
                   },
                   child: Text(
                     ConstantString.done,
