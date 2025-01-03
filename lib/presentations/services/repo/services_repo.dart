@@ -38,4 +38,30 @@ class ServicesRepo {
       rethrow;
     }
   }
+
+  static Future<List<DoctorsList>> getSpecifiedDoctors(Map<String, dynamic> data) async {
+    try {
+      List<DoctorsList> listOfSpecialist = [];
+      LogUtil.debug(Api.doctors);
+      final result =
+      await HttpService.post(Api.doctors, data, showLoader: false);
+      if (result['isLive'] == true) {
+        listOfSpecialist = List<DoctorsList>.from(
+            result['data']!.map((x) => DoctorsList.fromJson(x)));
+        return listOfSpecialist;
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        var errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
 }

@@ -24,8 +24,6 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.doctorList.clear();
-    controller.doctorList.addAll(doctorList);
     return PopScope(
       canPop: true,
       onPopInvokedWithResult: (didPop, result) {

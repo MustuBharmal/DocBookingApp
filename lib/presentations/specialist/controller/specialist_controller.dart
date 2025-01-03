@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../../exception/server_exception.dart';
+import '../../services/repo/services_repo.dart';
 import '../models/doctor_list.dart';
 import '../repository/specialist_repo.dart';
 
@@ -25,10 +26,15 @@ class SpecialistController extends GetxController {
   Rx<DoctorsList?> selectedDoctor = Rx(null);
 
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
+    Map<String, dynamic> data = {
+      'specialization': Get.arguments['specializationId'],
+    };
+    print(Get.arguments['specializationId']);
     doctorList.clear();
-    doctorList.addAll(Get.arguments['doctorList']);
+    doctorList.addAll(await ServicesRepo.getSpecifiedDoctors(data));
+    LogUtil.debug(doctorList.length);
     searchDoctorList.clear();
     searchDoctorList.addAll(doctorList);
   }

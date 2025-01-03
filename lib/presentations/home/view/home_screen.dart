@@ -45,11 +45,6 @@ class HomeScreen extends GetView<HomeController> {
           const SizedBox(
             height: 20,
           ),
-          // const SectionHeader(
-          //   title: ConstantString.upcomingAppointments,
-          //   spacing: 20,
-          //   childWidget: AppointmentCard(),
-          // ),
           const SizedBox(
             height: 20,
           ),
