@@ -103,8 +103,10 @@ abstract class AuthRepo {
       };
       LogUtil.debug(Api.otpVerification);
       final result = await HttpService.post(Api.otpVerification, data);
+      LogUtil.debug(result);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
+        StorageUtil.writeToken(result['data']['access_token']);
         // Get.snackbar('Success', result['message'].toString());
         return User.fromJson(result['data']);
       } else {

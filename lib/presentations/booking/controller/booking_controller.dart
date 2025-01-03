@@ -33,6 +33,19 @@ class BookingController extends GetxController {
       }
     }
   }
+  // @override
+  // void onInit() {
+  //
+  //   super.onInit();
+  //   Map<String, dynamic> data = {
+  //     'services': Get.arguments['serviceId'],
+  //   };
+  //   // doctorList.clear();
+  //   // doctorList.addAll(await ServicesRepo.getSpecifiedDoctors(data));
+  //   // LogUtil.debug(doctorList.length);
+  //   // searchDoctorList.clear();
+  //   // searchDoctorList.addAll(doctorList);
+  // }
 
   void confirmBooking() async {
     if (selectedTT.value != null) {
