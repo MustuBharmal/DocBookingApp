@@ -1,3 +1,4 @@
+import 'package:card_stack_widget/card_stack_widget.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
@@ -7,8 +8,10 @@ import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart
 import 'package:doc_booking_app/presentations/specialist/view/specialist_detail_screen.dart';
 import 'package:doc_booking_app/widgets/custom_container_with_text.dart';
 import 'package:doc_booking_app/widgets/custom_header_text.dart';
+import 'package:doc_booking_app/widgets/upcoming_appointment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
 import '../../../widgets/custom_container_with_logo1.dart';
@@ -25,128 +28,146 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Hello, ${AuthController.instance.user.value?.name?.capitalizeFirst ?? ''}",
-            style: TextStyle(
-              color: AppColors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const CustomSearchTextField(
-            hintText: 'Search by service or location',
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const SectionHeader(
-            title: ConstantString.bookNow,
-            spacing: 12,
-            childWidget: BookingOptions(),
-          ),
-          Obx(
-            () => SectionHeader(
-              title: ConstantString.topServices,
-              button: TextButton(
-                onPressed: () {
-                  controller.navigateTo(1);
-                },
-                child: Text(ConstantString.seeAll, style: subtitleStyle1),
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Hello, ${AuthController.instance.user.value?.name?.capitalizeFirst ?? ''}",
+              style: TextStyle(
+                color: AppColors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
               ),
-              spacing: 20,
-              childWidget: GridView.builder(
-                itemCount: controller.services.length > 3
-                    ? 3
-                    : controller.services.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, // Number of items per row
-                    crossAxisSpacing: 10, // Horizontal spacing
-                    mainAxisSpacing: 20, // Vertical spacing
-                    childAspectRatio: 108.67 / 122),
-                itemBuilder: (BuildContext context, int index) {
-                  var servicesId = controller.services[index]?.id;
-                  return ContainerWithIcon1(
-                    onPressed: () {
-                      List<DoctorsList?> listOfDoc = controller.doctorList
-                          .where((doctor) =>
-                              doctor.services == servicesId.toString())
-                          .toList();
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const CustomSearchTextField(
+              hintText: 'Search by service or location',
+            ),
+            if (controller.dashboard.value?.upcomingAppointments.isNotEmpty == true) ...[
+              const SizedBox(
+                height: 20,
+              ),
+              SectionHeader(title: ConstantString.upcomingAppointments, spacing: 12, childWidget: Container()),
+              SizedBox(
+                height: controller.dashboard.value!.upcomingAppointments.length > 1 ? Get.height * 0.350 : Get.height * 0.250,
+                child: CardStackWidget(
+                  opacityChangeOnDrag: false,
+                  swipeOrientation: CardOrientation.down,
+                  cardDismissOrientation: CardOrientation.down,
+                  positionFactor: 0.5,
+                  scaleFactor: 0.8,
+                  alignment: Alignment.topCenter,
+                  reverseOrder: false,
+                  animateCardScale: true,
+                  dismissedCardDuration: const Duration(milliseconds: 150),
+                  cardList: (controller.dashboard.value?.upcomingAppointments
+                          .map((appointment) => CardModel(
+                                child: UpcomingAppointmentCard(appointmentData: appointment),
+                                gradient: LinearGradient(
+                                  colors: [AppColors.blueGradient2, AppColors.blueGradient3],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                radius: Radius.circular(20),
+                              ))
+                          .toList() ??
+                      []),
+                ),
+              ),
+            ],
+            const SizedBox(
+              height: 20,
+            ),
+            const SectionHeader(
+              title: ConstantString.bookNow,
+              spacing: 12,
+              childWidget: BookingOptions(),
+            ),
+            Obx(
+              () => SectionHeader(
+                title: ConstantString.topServices,
+                button: TextButton(
+                  onPressed: () {
+                    controller.navigateTo(1);
+                  },
+                  child: Text(ConstantString.seeAll, style: subtitleStyle1),
+                ),
+                spacing: 20,
+                childWidget: GridView.builder(
+                  itemCount: controller.services.length > 3 ? 3 : controller.services.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // Number of items per row
+                      crossAxisSpacing: 10, // Horizontal spacing
+                      mainAxisSpacing: 20, // Vertical spacing
+                      childAspectRatio: 108.67 / 122),
+                  itemBuilder: (BuildContext context, int index) {
+                    var servicesId = controller.services[index]?.id;
+                    return ContainerWithIcon1(
+                      onPressed: () {
+                        List<DoctorsList?> listOfDoc =
+                            controller.doctorList.where((doctor) => doctor.services == servicesId.toString()).toList();
 
-                      Get.toNamed(ListOfServicesDoctorScreen.routeName,
-                          arguments: {
-                            'doctorList': listOfDoc,
-                            'serviceId': servicesId
-                          });
-                    },
-                    iconPath: controller.services[index]!.icon!,
-                    text: controller.services[index]?.name ?? '',
-                  );
-                },
+                        Get.toNamed(ListOfServicesDoctorScreen.routeName,
+                            arguments: {'doctorList': listOfDoc, 'serviceId': servicesId});
+                      },
+                      iconPath: controller.services[index]!.icon!,
+                      text: controller.services[index]?.name ?? '',
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-          Obx(
-            () => SectionHeader(
-              title: ConstantString.topRatedSpecialist,
-              button: TextButton(
-                onPressed: () {
-                  Get.toNamed(
-                    ListOfSpecialistScreen.routeName,
-                    arguments: {
-                      'doctorList': controller.doctorList,
-                    },
-                  );
-                },
-                child: Text(ConstantString.seeAll, style: subtitleStyle1),
-              ),
-              spacing: 0,
-              childWidget: ListView.builder(
-                shrinkWrap: true,
-                primary: true,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final doctor = controller.doctorList[index];
-                  return Column(
-                    children: [
-                      CustomSpecialistContainer(
-                        picPath: doctor.profilePic ?? '',
-                        name: doctor.name ?? '',
-                        specialist: doctor.specialistData?.name ?? '',
-                        charges: doctor.fees ?? '',
-                        // rating: doctor.rating,
-                        // review: doctor.review,
-                        onPressed: () {
-                          Get.toNamed(SpecialistDetailScreen.routeName,
-                              arguments: {
-                                'doctor': doctor,
-                                'serviceType': 'Clinic'
-                              });
-                        },
-                      ),
-                      SizedBox(
-                        height: 10,
-                      )
-                    ],
-                  );
-                },
-                itemCount: controller.doctorList.length >= 3
-                    ? 3
-                    : controller.doctorList.length,
+            Obx(
+              () => SectionHeader(
+                title: ConstantString.topRatedSpecialist,
+                button: TextButton(
+                  onPressed: () {
+                    Get.toNamed(
+                      ListOfSpecialistScreen.routeName,
+                      arguments: {
+                        'doctorList': controller.doctorList,
+                      },
+                    );
+                  },
+                  child: Text(ConstantString.seeAll, style: subtitleStyle1),
+                ),
+                spacing: 0,
+                childWidget: ListView.builder(
+                  shrinkWrap: true,
+                  primary: true,
+                  physics: ScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final doctor = controller.doctorList[index];
+                    return Column(
+                      children: [
+                        CustomSpecialistContainer(
+                          picPath: doctor.profilePic ?? '',
+                          name: doctor.name ?? '',
+                          specialist: doctor.specialistData?.name ?? '',
+                          charges: doctor.fees ?? '',
+                          // rating: doctor.rating,
+                          // review: doctor.review,
+                          onPressed: () {
+                            Get.toNamed(SpecialistDetailScreen.routeName, arguments: {'doctor': doctor, 'serviceType': 'Clinic'});
+                          },
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    );
+                  },
+                  itemCount: controller.doctorList.length >= 3 ? 3 : controller.doctorList.length,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -349,8 +370,8 @@ class BookingOptions extends StatelessWidget {
           height: 10,
         ),
         InkWell(
-          onTap: () => Get.toNamed(ListOfSpecialistScreen.routeName,
-              arguments: {'doctorList': HomeController.instance.doctorList}),
+          onTap: () =>
+              Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {'doctorList': HomeController.instance.doctorList}),
           child: CustomContainerWithText(
             text: ConstantString.arrHomeVisit,
           ),

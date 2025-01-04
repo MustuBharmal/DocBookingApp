@@ -1,7 +1,10 @@
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/authentication/controller/loader_controller.dart';
 import 'package:doc_booking_app/presentations/booking/models/booking_response.dart';
 import 'package:doc_booking_app/presentations/booking/repo/booking_repo.dart';
 import 'package:doc_booking_app/presentations/booking/views/book_slots_confirm_screen.dart';
+import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
+import 'package:doc_booking_app/presentations/home/view/navigation_screen.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_time_table.dart';
 import 'package:doc_booking_app/util/custom_date_utils.dart';
@@ -27,12 +30,12 @@ class BookingController extends GetxController {
     if (doctorData != null) {
       for (var date in thisWeek) {
         timeTable[date] = doctorData!.doctorTimeTable.where((tt) {
-          return tt.day?.toLowerCase() ==
-              DateFormat('EEEE').format(date).toLowerCase();
+          return tt.day?.toLowerCase() == DateFormat('EEEE').format(date).toLowerCase();
         }).toList();
       }
     }
   }
+
   // @override
   // void onInit() {
   //
@@ -54,16 +57,15 @@ class BookingController extends GetxController {
   }
 
   pay() async {
-    Stripe.publishableKey ='pk_test_51Qd3YTKXQInmSPzPKO11uJ7TrRcg7n9HXDxZNPmh7M39w4MEQVYvSISYm6SBhNT1UvL0Egrg15iacLtNcAfXmjTC00tAAJ44pu';
-        // 'pk_test_51IG3cNJAdLfZdFr6WbUo1H26tJfV9Hjo9Fh8QYfwCasaoR1qoVH4dNU0YX7Lo2jjS1uCdZ1PpirQlEyumsKed99n00njVKEQhY';
+    Stripe.publishableKey =
+        'pk_test_51Qd3YTKXQInmSPzPKO11uJ7TrRcg7n9HXDxZNPmh7M39w4MEQVYvSISYm6SBhNT1UvL0Egrg15iacLtNcAfXmjTC00tAAJ44pu';
+    // 'pk_test_51IG3cNJAdLfZdFr6WbUo1H26tJfV9Hjo9Fh8QYfwCasaoR1qoVH4dNU0YX7Lo2jjS1uCdZ1PpirQlEyumsKed99n00njVKEQhY';
     await Stripe.instance.applySettings();
     try {
       // 1. create payment intent on the server
-      final BookingData? bookingData = await BookingRepo.getPaymentSecret(
-          AuthController.instance.user.value?.id.toString() ?? '',
-          doctorData?.id?.toString() ?? '',
-          selectedTT.value?.id?.toString() ?? '',
-          doctorData?.fees?.toString() ?? '');
+      LoaderController.instance.showLoader();
+      final BookingData? bookingData = await BookingRepo.getPaymentSecret(AuthController.instance.user.value?.id.toString() ?? '',
+          doctorData?.id?.toString() ?? '', selectedTT.value?.id?.toString() ?? '', doctorData?.fees?.toString() ?? '');
 
       // 2. initialize the payment sheet
       if (bookingData?.paymentIntentClientSecret == null) {
@@ -102,10 +104,20 @@ class BookingController extends GetxController {
           style: ThemeMode.light,
         ),
       );
-      final PaymentSheetPaymentOption? paymentResult =
-          await Stripe.instance.presentPaymentSheet();
+      final PaymentSheetPaymentOption? paymentResult = await Stripe.instance.presentPaymentSheet();
       if (paymentResult != null) {
-        LogUtil.debug(paymentResult.toJson());
+        await Future.delayed(Duration(seconds: 1));
+        final bookingDetails = await BookingRepo.getBookingDetails(bookingData?.booking_id.toString() ?? '');
+        LoaderController.instance.showLoader();
+        if (bookingDetails?.isPaymentDone ?? false) {
+          Get.snackbar('Success', 'Your booking done!');
+        } else {
+          Get.snackbar('Error', 'Your booking failed!');
+        }
+
+        HomeController.instance.selectedIndex.value = 0;
+        HomeController.instance.dashboardData();
+        Get.until((routes) => routes.settings.name == NavigationScreen.routeName);
       }
     } catch (e) {
       Get.snackbar('Error', '$e');

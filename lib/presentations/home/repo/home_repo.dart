@@ -19,7 +19,7 @@ abstract class HomeRepo {
       final result =
       await HttpService.post(Api.dashboard, data, showLoader: false);
       if (result['isLive'] == true) {
-        LogUtil.debug(result);
+        // LogUtil.debug(result);
         return Dashboard.fromJson(result['data'] as Map<String, dynamic>);
       } else {
         throw Exception("Error: ${result['message']}");
@@ -40,13 +40,13 @@ abstract class HomeRepo {
 
   static Future<bool?> markAsReadNotificationApi(List<int?> notificationIds) async {
     try {
-      LogUtil.debug(Api.prescriptionForm);
+      // LogUtil.debug(Api.prescriptionForm);
       final result =
       await HttpService.post(Api.markAsRead, {
         'notificationIds': notificationIds,
       }, token: true);
       if (result['isLive'] == true) {
-        LogUtil.debug(result);
+        // LogUtil.debug(result);
         Get.back();
         Get.snackbar('Success', result['message'].toString());
         return true;
@@ -70,19 +70,19 @@ abstract class HomeRepo {
     try {
       Map<String, dynamic> data = {};
       List<Service?> listOfServices = [];
-      LogUtil.debug(Api.services);
+      // LogUtil.debug(Api.services);
       final result =
       await HttpService.get(Api.services, data, showLoader: false);
       if (result['isLive'] == true) {
         listOfServices =
         List<Service>.from(result['data']!.map((x) => Service.fromJson(x)));
-        LogUtil.debug(result);
+        // LogUtil.debug(result);
         return listOfServices;
       } else {
         throw Exception("Error: ${result['message']}");
       }
     } on ServerException catch (e) {
-      LogUtil.error(e);
+      // LogUtil.error(e);
       rethrow;
     } catch (e) {
       if (e is dio.DioException) {

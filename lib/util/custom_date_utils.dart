@@ -24,7 +24,7 @@ abstract class CustomDateUtils {
 
   static String getDay(DateTime date) => DateFormat('EEE').format(date);
 
-  static String getDayAndDate(DateTime date) => DateFormat('EEE dd, MMM yy').format(date);
+  static String getDayAndDate(DateTime? date) => date != null ? DateFormat('EEE dd, MMM yy').format(date) : '';
 
   static String getDate(DateTime date) => DateFormat('dd').format(date);
 

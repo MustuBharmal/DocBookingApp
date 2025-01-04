@@ -4,6 +4,7 @@ import 'package:doc_booking_app/presentations/home/controller/home_controller.da
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../../../widgets/custom_dialogbox.dart';
 import '../../../widgets/custom_icon_sizebox.dart';
 
@@ -29,7 +30,7 @@ class CustomSearchTextField extends StatelessWidget {
       child: Row(
         children: [
           Obx(
-                () => InkWell(
+            () => InkWell(
               onTap: () {
                 TypeOfDialogs.showBottomSheetDialog(
                   Get.context!,
@@ -42,22 +43,17 @@ class CustomSearchTextField extends StatelessWidget {
                 width: deviceWidth * 0.15,
                 child: Row(
                   children: [
-                    (HomeController.instance.selectedImagePath.value ==
-                        AppImage.stethoscope)
-                        ? SvgPicture.asset(
-                        HomeController.instance.selectedImagePath.value)
+                    (HomeController.instance.selectedImagePath.value == AppImage.stethoscope)
+                        ? SvgPicture.asset(HomeController.instance.selectedImagePath.value)
                         : CachedNetworkImage(
-                      width: Get.width * 0.067,
-                      height: Get.width * 0.067,
-                      fit: BoxFit.contain,
-                      imageUrl:
-                      HomeController.instance.selectedImagePath.value,
-                    ),
+                            width: Get.width * 0.067,
+                            height: Get.width * 0.067,
+                            fit: BoxFit.contain,
+                            imageUrl: HomeController.instance.selectedImagePath.value,
+                          ),
                     Expanded(
                         child: CustomIconSizeBox(
-                            iconPath: AppImage.arrowDown,
-                            iconWidth: deviceWidth * 0.028,
-                            iconHeight: Get.height * 0.008)),
+                            iconPath: AppImage.arrowDown, iconWidth: deviceWidth * 0.028, iconHeight: Get.height * 0.008)),
                   ],
                 ),
               ),

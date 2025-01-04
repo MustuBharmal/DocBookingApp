@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:doc_booking_app/exception/server_exception.dart';
 import 'package:doc_booking_app/global/apis.dart';
+import 'package:doc_booking_app/presentations/booking/models/booking_details_response.dart';
 import 'package:doc_booking_app/presentations/booking/models/booking_response.dart';
 import 'package:doc_booking_app/service/http_service.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
@@ -12,8 +13,8 @@ abstract class BookingRepo {
   static const String _amount = 'amount';
   static const String _paymentType = 'payment_type';
   static const String _paymentCardId = 'payment_card_id';
+  static const String _bookingId = 'booking_id';
 
-  // login is working
   static Future<BookingData?> getPaymentSecret(String patientId, String doctorId, String doctorTimeTableId, String amount) async {
     try {
       final Map<String, dynamic> data = {
@@ -30,13 +31,42 @@ abstract class BookingRepo {
         _paymentType: '1',
         _paymentCardId: '1'
       };
-      final result = await HttpService.post(Api.booking, data);
+      final result = await HttpService.post(Api.booking, data, showLoader: false);
       LogUtil.debug(data);
       LogUtil.debug(result);
       if (result['isLive'] == true) {
         final response = BookingResponse.fromJson(result);
         if (response.success) {
           LogUtil.debug(response.data);
+          return response.data;
+        }
+      } else if (result['isLive'] == false) {
+        throw Exception("${result['data']['error']}");
+      } else {
+        throw Exception("${result['data']['error']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        final errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+    return null;
+  }
+
+  static Future<BookingDetailsData?> getBookingDetails(String bookingId) async {
+    try {
+      final Map<String, dynamic> data = {_bookingId: bookingId};
+      final result = await HttpService.post(Api.bookingDetails, data,showLoader: false);
+      if (result['isLive'] == true) {
+        LogUtil.debug(result);
+        final response = BookingDetailsResponse.fromJson(result);
+        if (response.success) {
           return response.data;
         }
       } else if (result['isLive'] == false) {

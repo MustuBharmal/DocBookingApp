@@ -54,13 +54,10 @@ class HomeController extends GetxController {
   }
 
   void categorizeNotifications() {
-    unreadNotifications.value =
-        notificationList.where((n) => n?.isRead == '0').toList();
-    readNotifications.value =
-        notificationList.where((n) => n?.isRead == '1').toList();
+    unreadNotifications.value = notificationList.where((n) => n?.isRead == '0').toList();
+    readNotifications.value = notificationList.where((n) => n?.isRead == '1').toList();
 
-    unreadNotificationIds.value =
-        unreadNotifications.map((n) => n?.id).toList();
+    unreadNotificationIds.value = unreadNotifications.map((n) => n?.id).toList();
     readNotificationIds.value = readNotifications.map((n) => n?.id).toList();
   }
 
@@ -87,6 +84,15 @@ class HomeController extends GetxController {
   void dashboardData() async {
     try {
       dashboard.value = await HomeRepo.dashboardApi();
+      // List<UpcomingAppointmentsData> appointments = dashboard.value?.upcomingAppointments ?? [];
+      // if (appointments.isNotEmpty && dashboard.value != null) {
+      //   dashboard.value = dashboard.value!.copyWith(upcomingAppointments: [
+      //     ...appointments,
+      //     ...appointments,
+      //     ...appointments,
+      //     ...appointments,
+      //   ]);
+      // }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
@@ -150,9 +156,7 @@ class HomeController extends GetxController {
     final now = DateTime.now();
     return notificationList.where((notification) {
       final createdAt = DateTime.parse(notification!.createdAt!);
-      return createdAt.year == now.year &&
-          createdAt.month == now.month &&
-          createdAt.day == now.day;
+      return createdAt.year == now.year && createdAt.month == now.month && createdAt.day == now.day;
     }).toList();
   }
 
