@@ -42,6 +42,7 @@ class ListOfServicesDoctorScreen extends GetView<ServicesController> {
             appBar: CustomAppBar(
               title: 'Search',
               back: true,
+              isNotificationVisible: false,
               onPressed: () {
                 Get.toNamed(NotificationScreen.routeName);
               },

@@ -37,7 +37,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
                     controller.selectedDoctor.value != null
                 ? Text(controller.selectedDoctor.value?.name ?? '')
                 : null,
-            appBar: const CustomAppBar(title: 'Search', back: true),
+            appBar: const CustomAppBar(title: 'Search', back: true,isNotificationVisible: false,),
             body: Obx(
               () => Container(
                 padding: controller.isMapView.value

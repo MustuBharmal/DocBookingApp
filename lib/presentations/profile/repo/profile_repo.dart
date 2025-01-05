@@ -78,6 +78,7 @@ abstract class ProfileRepo {
         LoaderController.instance.dismissLoader();
 
         Get.back();
+        Get.back();
         Get.snackbar('Success', result['message']);
         ProfileController.instance.initializeControllers();
         return true;

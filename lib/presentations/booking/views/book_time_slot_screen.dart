@@ -93,7 +93,9 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                           return Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: controller.selectedDate.value.isAtSameMomentAs(controller.thisWeek[index])
+                                  color: controller.selectedDate.value
+                                          .isAtSameMomentAs(
+                                              controller.thisWeek[index])
                                       ? AppColors.white
                                       : AppColors.transparent,
                                   borderRadius: BorderRadius.circular(12)),
@@ -101,20 +103,28 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                               child: Column(
                                 children: [
                                   Text(
-                                    CustomDateUtils.getDay(controller.thisWeek[index]),
+                                    CustomDateUtils.getDay(
+                                        controller.thisWeek[index]),
                                     style: TextStyle(
-                                        color: controller.selectedDate.value.isAtSameMomentAs(controller.thisWeek[index])
+                                        color: controller.selectedDate.value
+                                                .isAtSameMomentAs(
+                                                    controller.thisWeek[index])
                                             ? AppColors.primary
-                                            : controller.thisWeek[index].isBefore(controller.today)
+                                            : controller.thisWeek[index]
+                                                    .isBefore(controller.today)
                                                 ? AppColors.grey
                                                 : AppColors.white),
                                   ),
                                   Text(
-                                    CustomDateUtils.getDate(controller.thisWeek[index]),
+                                    CustomDateUtils.getDate(
+                                        controller.thisWeek[index]),
                                     style: TextStyle(
-                                        color: controller.selectedDate.value.isAtSameMomentAs(controller.thisWeek[index])
+                                        color: controller.selectedDate.value
+                                                .isAtSameMomentAs(
+                                                    controller.thisWeek[index])
                                             ? AppColors.primary
-                                            : controller.thisWeek[index].isBefore(controller.today)
+                                            : controller.thisWeek[index]
+                                                    .isBefore(controller.today)
                                                 ? AppColors.grey
                                                 : AppColors.white,
                                         fontWeight: FontWeight.w600,
@@ -124,7 +134,11 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                                   Container(
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: controller.timeTable[controller.thisWeek[index]]?.isNotEmpty ?? false
+                                        color: controller
+                                                    .timeTable[controller
+                                                        .thisWeek[index]]
+                                                    ?.isNotEmpty ??
+                                                false
                                             ? AppColors.selectedDotColor
                                             : AppColors.transparent),
                                     height: 6,
@@ -135,7 +149,8 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                             ).onClick(() {
                               // if (!thisWeek[index].isBefore(today)) {
                               // setState(() {
-                              controller.selectedDate.value = controller.thisWeek[index];
+                              controller.selectedDate.value =
+                                  controller.thisWeek[index];
                               // });
                               // }
                             }),
@@ -162,9 +177,13 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                 // physics: NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, childAspectRatio: 3, crossAxisSpacing: 10, mainAxisSpacing: 10),
+                    crossAxisCount: 3,
+                    childAspectRatio: 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
                 itemBuilder: (ctx, index) {
-                  final tt = controller.timeTable[controller.selectedDate.value]?[index];
+                  final tt = controller.timeTable[controller.selectedDate.value]
+                      ?[index];
                   if (tt == null) {
                     return Container();
                   }
@@ -175,17 +194,21 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                         borderRadius: BorderRadius.circular(100),
                         border: tt.id == controller.selectedTT.value?.id
                             ? Border.all(color: AppColors.primary, width: 2)
-                            : Border.all(color: AppColors.borderColorLight, width: 1),
+                            : Border.all(
+                                color: AppColors.borderColorLight, width: 1),
                       ),
                       child: Center(child: Text(tt.startTime ?? '')),
                     ).onClick(() {
                       controller.selectedTT.value = tt;
-                      LogUtil.debug('${tt.id}||${controller.selectedTT.value?.id}');
+                      LogUtil.debug(
+                          '${tt.id}||${controller.selectedTT.value?.id}');
                       // setState(() {});
                     }),
                   );
                 },
-                itemCount: controller.timeTable[controller.selectedDate.value]?.length ?? 0,
+                itemCount: controller
+                        .timeTable[controller.selectedDate.value]?.length ??
+                    0,
               ),
             )
           ],

@@ -49,8 +49,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: "About Us",
+        title: 'About Us',
         back: true,
+        isNotificationVisible: false,
       ),
       body: Stack(
         children: [_buildBody()],

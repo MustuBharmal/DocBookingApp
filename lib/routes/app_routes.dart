@@ -102,7 +102,7 @@ class AppRoutes {
     GetPage(
       name: PrescriptionInsideScreen.routeName,
       page: () => PrescriptionInsideScreen(),
-      // binding: ProfileBinding(),
+      binding: PrescriptionBinding(),
     ),
     GetPage(
       name: PrescriptionFormScreen.routeName,
