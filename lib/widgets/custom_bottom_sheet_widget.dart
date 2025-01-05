@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
+import 'package:doc_booking_app/presentations/services/view/list_services_doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../global/app_color.dart';
 import '../global/images.dart';
 import '../presentations/specialist/models/doctor_list.dart';
-import '../presentations/specialist/view/list_of_specialist_screen.dart';
 
 class CustomBottomSheetWidget extends GetView<HomeController> {
   final String header;
@@ -49,13 +49,14 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                     Navigator.pop(context);
                     List<DoctorsList?> listOfDoc = controller.doctorList
                         .where((doctor) =>
-                    doctor.serviceData!.name == controller.selectedService.value)
+                            doctor.serviceData?.id ==
+                            controller.selectedService.value?.id)
                         .toList();
-
-                    Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
-                      'doctorList': listOfDoc,
-                    });
-
+                    Get.toNamed(ListOfServicesDoctorScreen.routeName,
+                        arguments: {
+                          'doctorList': listOfDoc,
+                          'serviceId': controller.selectedService.value?.id
+                        });
                   },
                   child: Text(
                     ConstantString.done,
@@ -81,7 +82,7 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                   final item = HomeController.instance.services[index];
                   return Obx(() {
                     final isSelected =
-                        controller.selectedService.value == item!.name;
+                        controller.selectedService.value == item!;
                     return InkWell(
                       child: Column(
                         children: [
@@ -127,12 +128,11 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                               Radio(
                                 value: item.name ?? '',
                                 groupValue: HomeController
-                                    .instance.selectedService.value,
+                                    .instance.selectedService.value?.name,
                                 activeColor: Colors.blue,
                                 onChanged: (String? value) {
                                   controller.updateSelectedImage(item);
-                                  controller.selectedService.value =
-                                      item.name ?? '';
+                                  controller.selectedService.value = item;
                                   searchControllers.text = item.name ?? '';
                                 },
                               )
@@ -146,7 +146,7 @@ class CustomBottomSheetWidget extends GetView<HomeController> {
                       ),
                       onTap: () {
                         controller.updateSelectedImage(item);
-                        controller.selectedService.value = item.name ?? '';
+                        controller.selectedService.value = item;
                         searchControllers.text = item.name ?? '';
                       },
                     );

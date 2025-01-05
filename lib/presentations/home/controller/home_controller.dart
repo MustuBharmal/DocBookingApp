@@ -31,7 +31,7 @@ class HomeController extends GetxController {
   RxList<int?> unreadNotificationIds = RxList.empty();
   RxList<int?> readNotificationIds = RxList.empty();
 
-  RxString selectedService = ''.obs;
+  Rxn<Service> selectedService = Rxn(Service());
   final List<String> appBarTitle = const [
     'Home',
     'Services',
