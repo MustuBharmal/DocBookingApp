@@ -8,14 +8,20 @@ import 'package:doc_booking_app/util/log_utils.dart';
 
 abstract class BookingRepo {
   static const String _patientId = 'patient_id';
-  static const String _doctorId = 'doctor_id';
+  // static const String _doctorId = 'doctor_id';
   static const String _doctorTimeTableId = 'doctor_time_table_id';
   static const String _amount = 'amount';
   static const String _paymentType = 'payment_type';
   static const String _paymentCardId = 'payment_card_id';
   static const String _bookingId = 'booking_id';
 
-  static Future<BookingData?> getPaymentSecret(String patientId, String doctorId, String doctorTimeTableId, String amount) async {
+  static Future<BookingData?> getPaymentSecret(
+      String patientId,
+      String doctorId,
+      String doctorTimeTableId,
+      String amount,
+      String doctorType,
+      String bookingDate) async {
     try {
       final Map<String, dynamic> data = {
         // "patient_id": "34",
@@ -25,13 +31,15 @@ abstract class BookingRepo {
         // "payment_type": "1",
         // "payment_card_id": "1"
         _patientId: patientId,
-        _doctorId: doctorId,
+        doctorType == 'doctor' ? 'doctor_id' : 'clinic_id': doctorId,
         _doctorTimeTableId: doctorTimeTableId,
         _amount: amount,
         _paymentType: '1',
-        _paymentCardId: '1'
+        _paymentCardId: '1',
+        'booking_date_time': bookingDate
       };
-      final result = await HttpService.post(Api.booking, data, showLoader: false);
+      final result =
+          await HttpService.post(Api.booking, data, showLoader: false);
       LogUtil.debug(data);
       LogUtil.debug(result);
       if (result['isLive'] == true) {
@@ -62,7 +70,8 @@ abstract class BookingRepo {
   static Future<BookingDetailsData?> getBookingDetails(String bookingId) async {
     try {
       final Map<String, dynamic> data = {_bookingId: bookingId};
-      final result = await HttpService.post(Api.bookingDetails, data,showLoader: false);
+      final result =
+          await HttpService.post(Api.bookingDetails, data, showLoader: false);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         final response = BookingDetailsResponse.fromJson(result);

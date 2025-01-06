@@ -30,7 +30,8 @@ class BookingController extends GetxController {
     if (doctorData != null) {
       for (var date in thisWeek) {
         timeTable[date] = doctorData!.doctorTimeTable.where((tt) {
-          return tt.day?.toLowerCase() == DateFormat('EEEE').format(date).toLowerCase();
+          return tt.day?.toLowerCase() ==
+              DateFormat('EEEE').format(date).toLowerCase();
         }).toList();
       }
     }
@@ -64,8 +65,13 @@ class BookingController extends GetxController {
     try {
       // 1. create payment intent on the server
       LoaderController.instance.showLoader();
-      final BookingData? bookingData = await BookingRepo.getPaymentSecret(AuthController.instance.user.value?.id.toString() ?? '',
-          doctorData?.id?.toString() ?? '', selectedTT.value?.id?.toString() ?? '', doctorData?.fees?.toString() ?? '');
+      final BookingData? bookingData = await BookingRepo.getPaymentSecret(
+          AuthController.instance.user.value?.id.toString() ?? '',
+          doctorData?.id?.toString() ?? '',
+          selectedTT.value?.id?.toString() ?? '',
+          doctorData?.fees?.toString() ?? '',
+          doctorData?.type ?? '',
+          '${selectedDate.value.toString()}T${selectedTT.value?.startTime ?? ''}');
 
       // 2. initialize the payment sheet
       if (bookingData?.paymentIntentClientSecret == null) {
@@ -104,10 +110,13 @@ class BookingController extends GetxController {
           style: ThemeMode.light,
         ),
       );
-      final PaymentSheetPaymentOption? paymentResult = await Stripe.instance.presentPaymentSheet();
+      final PaymentSheetPaymentOption? paymentResult =
+          await Stripe.instance.presentPaymentSheet();
       if (paymentResult != null) {
+        await Stripe.instance.confirmPaymentSheetPayment();
         await Future.delayed(Duration(seconds: 1));
-        final bookingDetails = await BookingRepo.getBookingDetails(bookingData?.booking_id.toString() ?? '');
+        final bookingDetails = await BookingRepo.getBookingDetails(
+            bookingData?.booking_id.toString() ?? '');
         LoaderController.instance.showLoader();
         if (bookingDetails?.isPaymentDone ?? false) {
           Get.snackbar('Success', 'Your booking done!');
@@ -117,7 +126,8 @@ class BookingController extends GetxController {
 
         HomeController.instance.selectedIndex.value = 0;
         HomeController.instance.dashboardData();
-        Get.until((routes) => routes.settings.name == NavigationScreen.routeName);
+        Get.until(
+            (routes) => routes.settings.name == NavigationScreen.routeName);
       }
     } catch (e) {
       Get.snackbar('Error', '$e');

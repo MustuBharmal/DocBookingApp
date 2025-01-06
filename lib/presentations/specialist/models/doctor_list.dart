@@ -37,6 +37,7 @@ class DoctorsList with _$DoctorsList {
     String? about,
     String? latitude,
     String? longitude,
+    @JsonKey(name: 'data_type') String? type,
     @JsonKey(name: 'address_data') String? address,
     @JsonKey(name: 'service_type') List<String>? serviceType,
     @JsonKey(name: 'serviceModelData') Service? serviceData,
