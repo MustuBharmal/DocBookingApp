@@ -177,13 +177,9 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                 // physics: NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10),
+                    crossAxisCount: 3, childAspectRatio: 3, crossAxisSpacing: 10, mainAxisSpacing: 10),
                 itemBuilder: (ctx, index) {
-                  final tt = controller.timeTable[controller.selectedDate.value]
-                      ?[index];
+                  final tt = controller.timeTable[controller.selectedDate.value]?[index];
                   if (tt == null) {
                     return Container();
                   }
@@ -194,21 +190,17 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                         borderRadius: BorderRadius.circular(100),
                         border: tt.id == controller.selectedTT.value?.id
                             ? Border.all(color: AppColors.primary, width: 2)
-                            : Border.all(
-                                color: AppColors.borderColorLight, width: 1),
+                            : Border.all(color: AppColors.borderColorLight, width: 1),
                       ),
                       child: Center(child: Text(tt.startTime ?? '')),
                     ).onClick(() {
                       controller.selectedTT.value = tt;
-                      LogUtil.debug(
-                          '${tt.id}||${controller.selectedTT.value?.id}');
+                      LogUtil.debug('${tt.id}||${controller.selectedTT.value?.id}');
                       // setState(() {});
                     }),
                   );
                 },
-                itemCount: controller
-                        .timeTable[controller.selectedDate.value]?.length ??
-                    0,
+                itemCount: controller.timeTable[controller.selectedDate.value]?.length ?? 0,
               ),
             )
           ],

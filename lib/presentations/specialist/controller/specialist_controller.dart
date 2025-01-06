@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/loader_controller.dart';
+import 'package:doc_booking_app/presentations/specialist/models/doctor_time_table.dart';
 import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class SpecialistController extends GetxController {
   Rx<DoctorsList?> selectedDoctor = Rx(null);
 
   @override
-  void onInit() async{
+  void onInit() async {
     super.onInit();
     Map<String, dynamic> data = {
       'specialization': Get.arguments['specializationId'],
@@ -119,6 +120,20 @@ class SpecialistController extends GetxController {
     } finally {}
   }
 
+  Future<List<DoctorTimeTable>> getDoctorTimeTable({int? doctorId, int? clinicId}) async {
+    try {
+      final result = await SpecialistRepo.getDoctorTimeTable(doctorId: doctorId, clinicId: clinicId);
+      return result;
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    }
+    return [];
+  }
+
   void searchList(String query) {
     query.toLowerCase();
     print(query);
@@ -127,10 +142,7 @@ class SpecialistController extends GetxController {
       searchDoctorList.addAll(doctorList);
     } else {
       searchDoctorList.clear();
-      searchDoctorList.addAll(doctorList
-          .where((item) =>
-          item!.name!.toLowerCase().startsWith(query.toLowerCase()))
-          .toList());
+      searchDoctorList.addAll(doctorList.where((item) => item!.name!.toLowerCase().startsWith(query.toLowerCase())).toList());
       LogUtil.debug(searchDoctorList.length);
       searchDoctorList.refresh();
     }

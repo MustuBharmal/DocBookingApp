@@ -3,6 +3,7 @@ import 'package:doc_booking_app/global/app_color.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/booking/views/book_time_slot_screen.dart';
+import 'package:doc_booking_app/presentations/specialist/controller/specialist_controller.dart';
 import 'package:doc_booking_app/presentations/specialist/models/doctor_list.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
@@ -10,12 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
-class SpecialistDetailScreen extends StatelessWidget {
+class SpecialistDetailScreen extends GetView<SpecialistController> {
   final DoctorsList doctor;
   final String serviceType;
 
-  const SpecialistDetailScreen(
-      {required this.doctor, this.serviceType = 'Clinic', super.key});
+  const SpecialistDetailScreen({required this.doctor, this.serviceType = 'Clinic', super.key});
 
   static const routeName = '/specialist_detail-screen';
 
@@ -202,10 +202,7 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   Text(
                     ConstantString.about,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textHeaderBlack),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textHeaderBlack),
                   ),
                   Container(
                     padding: EdgeInsets.only(top: 10, bottom: 20),
@@ -234,20 +231,14 @@ class SpecialistDetailScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomIconSizeBox(
-                          iconPath: AppImage.map,
-                          iconWidth: 25,
-                          iconHeight: 25),
+                      CustomIconSizeBox(iconPath: AppImage.map, iconWidth: 25, iconHeight: 25),
                       SizedBox(
                         width: 10,
                       ),
                       Expanded(
                         child: Text(
                           doctor.address ?? '',
-                          style: TextStyle(
-                              fontSize: 14,
-                              color: AppColors.textHeaderGray,
-                              fontWeight: FontWeight.w400),
+                          style: TextStyle(fontSize: 14, color: AppColors.textHeaderGray, fontWeight: FontWeight.w400),
                         ),
                       ),
                     ],
@@ -275,11 +266,14 @@ class SpecialistDetailScreen extends StatelessWidget {
                   ),
                   BlueButton(
                     label: ConstantString.bookAppointment,
-                    onPressed: () {
-                      Get.toNamed(BookTimeSlotScreen.routeName, arguments: {
-                        'doctor': doctor,
-                        'serviceType': serviceType
-                      });
+                    onPressed: () async {
+                      //todo get new timeslots from api
+                      final timetable = await controller.getDoctorTimeTable(
+                          doctorId: serviceType == 'clinic' ? null : doctor.id,
+                          clinicId: serviceType == 'clinic' ? doctor.id : null);
+
+                      Get.toNamed(BookTimeSlotScreen.routeName,
+                          arguments: {'doctor': doctor.copyWith(doctorTimeTable: timetable), 'serviceType': serviceType});
                       // Get.toNamed(BookSlotsConfirmScreen.routeName);
                     },
                   )

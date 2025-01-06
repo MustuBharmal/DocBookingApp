@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as dio;
+import 'package:doc_booking_app/presentations/specialist/models/doctor_time_table.dart';
 
 import '../../../exception/server_exception.dart';
 import '../../../global/apis.dart';
@@ -21,6 +22,33 @@ class SpecialistRepo {
       LogUtil.debug(result);
       if (result['isLive'] == true) {
         final response = DoctorListResponse.fromJson(result);
+        return response.data;
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        var errMessage = errData['message'];
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
+  static Future<List<DoctorTimeTable>> getDoctorTimeTable({int? doctorId, int? clinicId}) async {
+    try {
+      Map<String, dynamic> data = {
+        if (doctorId != null) 'doctor_id': doctorId,
+        if (clinicId != null) 'clinic_id': clinicId,
+      };
+      final result = await HttpService.post(Api.doctorTimetable, data, showLoader: true);
+      LogUtil.debug(result);
+      if (result['isLive'] == true) {
+        final response = DoctorTimeTableResponse.fromJson(result);
         return response.data;
       } else {
         throw Exception("Error: ${result['message']}");

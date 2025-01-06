@@ -31,5 +31,6 @@ class Api {
   static String bookingDetails = 'patient/booking-detail';
   static String notification = 'patient/notification';
   static String nearByDoctors = 'nearby-doctors';
+  static String doctorTimetable = 'doctor-time-table';
   static String markAsRead = 'patient/mark-as-read-notification';
 }
