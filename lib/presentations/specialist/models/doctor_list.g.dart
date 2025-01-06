@@ -46,8 +46,9 @@ _$DoctorsListImpl _$$DoctorsListImplFromJson(Map<String, dynamic> json) =>
       type: json['data_type'] as String?,
       address: json['address_data'] as String?,
       serviceType: (json['service_type'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       serviceData: json['serviceModelData'] == null
           ? null
           : Service.fromJson(json['serviceModelData'] as Map<String, dynamic>),

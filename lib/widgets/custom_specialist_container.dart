@@ -44,50 +44,54 @@ class CustomSpecialistContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                CachedNetworkImage(
-                  width: Get.width * 0.18,
-                  height: Get.height * 0.1,
-                  imageUrl: picPath,
-                  fit: BoxFit.contain,
-                  progressIndicatorBuilder: (context, val, pr) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: pr.progress,
-                      ),
-                    );
-                  },
-                  errorWidget: (context, val, obj) {
-                    return Image.asset(AppImage.serviceIcon1);
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name.capitalizeFirst ?? '',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.textHeaderBlack,
-                      ),
+            Expanded(
+              child: Row(
+                children: [
+                  CachedNetworkImage(
+                    width: Get.width * 0.18,
+                    height: Get.height * 0.1,
+                    imageUrl: picPath,
+                    fit: BoxFit.contain,
+                    progressIndicatorBuilder: (context, val, pr) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: pr.progress,
+                        ),
+                      );
+                    },
+                    errorWidget: (context, val, obj) {
+                      return Image.asset(AppImage.serviceIcon1);
+                    },
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name.capitalizeFirst ?? '',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.textHeaderBlack,
+                          ),
+                        ),
+                        Text(
+                          specialist,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: AppColors.textHeaderGray,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      specialist,
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: AppColors.textHeaderGray,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
             Text(
               '\$$charges/hr',

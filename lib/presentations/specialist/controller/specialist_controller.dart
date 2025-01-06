@@ -23,8 +23,13 @@ class SpecialistController extends GetxController {
   RxList<DoctorsList?> doctorList = RxList.empty();
   RxList<DoctorsList?> searchDoctorList = RxList.empty();
   Rx<Set<Marker>> markers = Rx({});
+  Set<Marker> homeMarkers = {};
+  Set<Marker> clinicMarkers = {};
 
   Rx<DoctorsList?> selectedDoctor = Rx(null);
+  BitmapDescriptor? locationIcon;
+  BitmapDescriptor? selectedLocationIcon;
+  int selectedTabIndex = 0;
 
   @override
   void onInit() async {
@@ -38,6 +43,21 @@ class SpecialistController extends GetxController {
     LogUtil.debug(doctorList.length);
     searchDoctorList.clear();
     searchDoctorList.addAll(doctorList);
+    BitmapDescriptor.asset(ImageConfiguration(size: Size(36, 36)), 'assets/icons/location.png').then((d) {
+      locationIcon = d;
+    });
+    BitmapDescriptor.asset(ImageConfiguration(size: Size(36, 36)), 'assets/icons/location_selected.png').then((d) {
+      selectedLocationIcon = d;
+    });
+  }
+
+  changeMapList(int index) {
+    if (index == 0) {
+      markers.value = homeMarkers;
+    } else {
+      markers.value = clinicMarkers;
+    }
+    selectedTabIndex = index;
   }
 
   @override
@@ -96,21 +116,106 @@ class SpecialistController extends GetxController {
     try {
       doctorList.clear();
       doctorList.addAll(await SpecialistRepo.getDoctorsBySpecialization(specializationId, lat, long));
-      Set<Marker> newMarkers = {};
+      LogUtil.debug(doctorList.length);
       for (var d in doctorList) {
         double? lat = double.tryParse(d?.latitude ?? '0');
         double? lng = double.tryParse(d?.longitude ?? '0');
         if (lat != null && lng != null) {
-          newMarkers.add(Marker(
-              markerId: MarkerId(d?.id?.toString() ?? '0'),
-              position: LatLng(lat, lng),
-              onTap: () {
-                LogUtil.debug(d?.name);
-                selectedDoctor.value = d;
-              }));
+          if (d?.serviceType.contains('home') == true) {
+            if (locationIcon != null) {
+              homeMarkers.add(
+                Marker(
+                  markerId: MarkerId(d?.id?.toString() ?? '0'),
+                  position: LatLng(lat, lng),
+                  icon: locationIcon!,
+                  onTap: () {
+                    selectedDoctor.value = d;
+                    final selectedMarker = homeMarkers.firstWhere((m) {
+                      return m.markerId.value == d?.id.toString();
+                    });
+                    homeMarkers.removeWhere((m) {
+                      return m.markerId.value == d?.id.toString();
+                    });
+                    if (selectedLocationIcon != null) {
+                      homeMarkers.add(
+                        Marker(
+                          markerId: selectedMarker.markerId,
+                          position: LatLng(lat, lng),
+                          icon: selectedLocationIcon!,
+                        ),
+                      );
+                    } else {
+                      homeMarkers.add(
+                        Marker(
+                          markerId: selectedMarker.markerId,
+                          position: LatLng(lat, lng),
+                        ),
+                      );
+                    }
+                    markers.value = homeMarkers;
+                  },
+                ),
+              );
+            } else {
+              homeMarkers.add(
+                Marker(
+                  markerId: MarkerId(d?.id?.toString() ?? '0'),
+                  position: LatLng(lat, lng),
+                  onTap: () {
+                    selectedDoctor.value = d;
+                  },
+                ),
+              );
+            }
+          }
+          if (d?.serviceType.contains('clinic') == true) {
+            if (locationIcon != null) {
+              clinicMarkers.add(
+                Marker(
+                  markerId: MarkerId(d?.id?.toString() ?? '0'),
+                  position: LatLng(lat, lng),
+                  icon: locationIcon!,
+                  onTap: () {
+                    selectedDoctor.value = d;
+                    final selectedMarker = clinicMarkers.firstWhere((m) {
+                      return m.markerId.value == d?.id.toString();
+                    });
+                    clinicMarkers.removeWhere((m) {
+                      return m.markerId.value == d?.id.toString();
+                    });
+                    if (selectedLocationIcon != null) {
+                      clinicMarkers.add(
+                        Marker(
+                          markerId: selectedMarker.markerId,
+                          position: LatLng(lat, lng),
+                          icon: selectedLocationIcon!,
+                        ),
+                      );
+                    } else {
+                      clinicMarkers.add(
+                        Marker(
+                          markerId: selectedMarker.markerId,
+                          position: LatLng(lat, lng),
+                        ),
+                      );
+                    }
+                    markers.value = clinicMarkers;
+                  },
+                ),
+              );
+            } else {
+              clinicMarkers.add(Marker(
+                  markerId: MarkerId(d?.id?.toString() ?? '0'),
+                  position: LatLng(lat, lng),
+                  onTap: () {
+                    selectedDoctor.value = d;
+                  }));
+            }
+            //23.220950, 72.610733
+          }
         }
       }
-      markers.value = newMarkers;
+      markers.value = homeMarkers;
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

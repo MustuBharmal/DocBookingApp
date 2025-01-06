@@ -16,8 +16,8 @@ class PrescriptionInsideScreen extends GetView<PrescriptionController> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: true,
-      onPopInvokedWithResult: (didPop,result){
-        if(didPop){
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
           controller.disconnectSocket();
         }
       },
@@ -31,9 +31,10 @@ class PrescriptionInsideScreen extends GetView<PrescriptionController> {
           ),
           body: Column(
             children: [
-              const CustomTabBar(
+              CustomTabBar(
                 tabText1: 'Notes',
                 tabText2: 'Forms',
+                onTap: (index) {},
               ),
               Expanded(
                 child: TabBarView(
