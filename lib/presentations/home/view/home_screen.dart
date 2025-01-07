@@ -382,7 +382,7 @@ class BookingOptions extends StatelessWidget {
         InkWell(
           onTap: () => Get.toNamed(PrescriptionScreen.routeName),
           child: CustomContainerWithText(
-            text: ConstantString.chatWSpeciaList,
+            text: ConstantString.chatWithSpecialist,
           ),
         ),
       ],

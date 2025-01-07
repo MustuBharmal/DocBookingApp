@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/global/images.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../presentations/home/view/home_screen.dart';
 import '../presentations/profile/view/about_us_screen.dart';
@@ -16,24 +15,6 @@ import '../presentations/specialist/view/specialist_screen.dart';
 import 'constant_string.dart';
 
 class ConstantValue {
-  static const textListForServices = [
-    ConstantString.phlebotomy,
-    ConstantString.vitaminIv,
-    ConstantString.vitaminBooster,
-    ConstantString.bloodletting,
-    ConstantString.trtAdministration,
-    ConstantString.fluShots,
-  ];
-
-  static List imagePathListForServices = [
-    AppImage.homeCategory1,
-    AppImage.homeCategory2,
-    AppImage.homeCategory3,
-    AppImage.homeCategory4,
-    AppImage.homeCategory5,
-    AppImage.homeCategory6,
-  ];
-
   static const detailList = [
     ConstantString.userInfo,
     ConstantString.paymentMng,
@@ -65,31 +46,10 @@ class ConstantValue {
     ProfileScreen.routeName,
   ];
 
-  static const textListForSpecialist = [
-    ConstantString.doctor,
-    ConstantString.nutritionalist,
-    ConstantString.fitnessCoach,
-    ConstantString.trtTreatment,
-    ConstantString.hrtTreatment,
-    ConstantString.mentalHealth,
-  ];
-
-  static List imagePathListForSpecialist = [
-    AppImage.specialistIcon1,
-    AppImage.specialistIcon2,
-    AppImage.specialistIcon4,
-    AppImage.specialistIcon5,
-    AppImage.specialistIcon6,
-    AppImage.specialistIcon3,
-  ];
   static final List<Widget> pages = const [
     HomeScreen(),
     ServiceScreen(),
     SpecialistScreen(),
     ProfileScreen(),
   ];
-
-  static double height = Get.height;
-  static double width = Get.width;
-
 }
