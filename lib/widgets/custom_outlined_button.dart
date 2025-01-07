@@ -18,7 +18,7 @@ class CustomOutlinedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           decoration: BoxDecoration(
             color: Colors.white,
             // border: Border.all(width: 2, color: ),

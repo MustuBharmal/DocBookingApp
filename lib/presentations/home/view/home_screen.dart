@@ -1,6 +1,7 @@
 import 'package:card_stack_widget/card_stack_widget.dart';
 import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
+import 'package:doc_booking_app/presentations/home/view/booking_history_detail.dart';
 import 'package:doc_booking_app/presentations/home/widget/custom_search_textfield.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_screen.dart';
 import 'package:doc_booking_app/presentations/services/view/list_services_doctor.dart';
@@ -72,8 +73,16 @@ class HomeScreen extends GetView<HomeController> {
                   dismissedCardDuration: const Duration(milliseconds: 150),
                   cardList: (controller.dashboard.value?.upcomingAppointments
                           .map((appointment) => CardModel(
-                                child: UpcomingAppointmentCard(
-                                    appointmentData: appointment),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.toNamed(BookingHistoryDetails.routeName,
+                                        arguments: {
+                                          'bookingDetails': appointment
+                                        });
+                                  },
+                                  child: UpcomingAppointmentCard(
+                                      appointmentData: appointment),
+                                ),
                                 gradient: LinearGradient(
                                   colors: [
                                     AppColors.blueGradient2,
@@ -250,8 +259,11 @@ class BookingOptions extends StatelessWidget {
           height: 10,
         ),
         InkWell(
-          onTap: () => Get.toNamed(ListOfSpecialistScreen.routeName,
-              arguments: {'doctorList': HomeController.instance.doctorList, 'specialist': 0,}),
+          onTap: () =>
+              Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+            'doctorList': HomeController.instance.doctorList,
+            'specialist': 0,
+          }),
           child: CustomContainerWithText(
             text: ConstantString.arrHomeVisit,
           ),

@@ -11,7 +11,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../exception/server_exception.dart';
+import '../../authentication/controller/loader_controller.dart';
 import '../../specialist/models/doctor_list.dart';
+import '../view/navigation_screen.dart';
 
 class HomeController extends GetxController {
   static HomeController get instance => Get.find<HomeController>();
@@ -54,10 +56,13 @@ class HomeController extends GetxController {
   }
 
   void categorizeNotifications() {
-    unreadNotifications.value = notificationList.where((n) => n?.isRead == '0').toList();
-    readNotifications.value = notificationList.where((n) => n?.isRead == '1').toList();
+    unreadNotifications.value =
+        notificationList.where((n) => n?.isRead == '0').toList();
+    readNotifications.value =
+        notificationList.where((n) => n?.isRead == '1').toList();
 
-    unreadNotificationIds.value = unreadNotifications.map((n) => n?.id).toList();
+    unreadNotificationIds.value =
+        unreadNotifications.map((n) => n?.id).toList();
     readNotificationIds.value = readNotifications.map((n) => n?.id).toList();
   }
 
@@ -84,15 +89,6 @@ class HomeController extends GetxController {
   void dashboardData() async {
     try {
       dashboard.value = await HomeRepo.dashboardApi();
-      // List<UpcomingAppointmentsData> appointments = dashboard.value?.upcomingAppointments ?? [];
-      // if (appointments.isNotEmpty && dashboard.value != null) {
-      //   dashboard.value = dashboard.value!.copyWith(upcomingAppointments: [
-      //     ...appointments,
-      //     ...appointments,
-      //     ...appointments,
-      //     ...appointments,
-      //   ]);
-      // }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
@@ -151,12 +147,33 @@ class HomeController extends GetxController {
     } finally {}
   }
 
+  void cancelBooking(int bookingId) async {
+    try {
+      await HomeRepo.cancelBooking(bookingId);
+
+      LoaderController.instance.showLoader();
+      HomeController.instance.selectedIndex.value = 0;
+      HomeController.instance.dashboardData();
+      Get.until(
+              (routes) => routes.settings.name == NavigationScreen.routeName);
+
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
   // Separate notifications into Today and Older
   List<NotificationModel?> get todayNotifications {
     final now = DateTime.now();
     return notificationList.where((notification) {
       final createdAt = DateTime.parse(notification!.createdAt!);
-      return createdAt.year == now.year && createdAt.month == now.month && createdAt.day == now.day;
+      return createdAt.year == now.year &&
+          createdAt.month == now.month &&
+          createdAt.day == now.day;
     }).toList();
   }
 

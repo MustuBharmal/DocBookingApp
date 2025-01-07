@@ -59,8 +59,9 @@ class BookingController extends GetxController {
 
   pay() async {
     Stripe.publishableKey =
-        'pk_test_51Qd3YTKXQInmSPzPKO11uJ7TrRcg7n9HXDxZNPmh7M39w4MEQVYvSISYm6SBhNT1UvL0Egrg15iacLtNcAfXmjTC00tAAJ44pu';
-    // 'pk_test_51IG3cNJAdLfZdFr6WbUo1H26tJfV9Hjo9Fh8QYfwCasaoR1qoVH4dNU0YX7Lo2jjS1uCdZ1PpirQlEyumsKed99n00njVKEQhY';
+        'pk_test_51IG3cNJAdLfZdFr6WbUo1H26tJfV9Hjo9Fh8QYfwCasaoR1qoVH4dNU0YX7Lo2jjS1uCdZ1PpirQlEyumsKed99n00njVKEQhY';
+
+    // testing key:- 'pk_test_51Qd3YTKXQInmSPzPKO11uJ7TrRcg7n9HXDxZNPmh7M39w4MEQVYvSISYm6SBhNT1UvL0Egrg15iacLtNcAfXmjTC00tAAJ44pu';
     await Stripe.instance.applySettings();
     try {
       // 1. create payment intent on the server
@@ -75,16 +76,19 @@ class BookingController extends GetxController {
 
       // 2. initialize the payment sheet
       if (bookingData?.paymentIntentClientSecret == null) {
+        LoaderController.instance.dismissLoader();
         LogUtil.error('Payment intent not found');
         Get.snackbar('Error', 'Payment intent not found');
         return;
       }
       if (bookingData?.ephemeralKey?['secret'] == null) {
+        LoaderController.instance.dismissLoader();
         LogUtil.error('Ephemeral Key not found');
         Get.snackbar('Error', 'Ephemeral Key not found');
         return;
       }
       if (bookingData?.stripeCustomerId == null) {
+        LoaderController.instance.dismissLoader();
         LogUtil.error('Customer id not found');
         Get.snackbar('Error', 'Customer id not found');
         return;

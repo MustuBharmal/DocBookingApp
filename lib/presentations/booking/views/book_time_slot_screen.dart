@@ -12,20 +12,7 @@ import '../../../global/styles.dart';
 class BookTimeSlotScreen extends GetView<BookingController> {
   static const String routeName = '/booking-time-slot';
 
-  const BookTimeSlotScreen(/*this.doctorData, */ {super.key});
-
-  /*@override
-  State<BookTimeSlotScreen> createState() => _BookTimeSlotScreenState();
-}
-
-class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
-
-  /* @override
-  void initState() {
-    super.initState();
-    fillData();
-  }
-*/
+  const BookTimeSlotScreen( {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -147,8 +134,6 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
                                 ],
                               ),
                             ).onClick(() {
-                              // if (!thisWeek[index].isBefore(today)) {
-                              // setState(() {
                               controller.selectedDate.value =
                                   controller.thisWeek[index];
                               // });
@@ -173,8 +158,6 @@ class _BookTimeSlotScreenState extends State<BookTimeSlotScreen> {*/
             SizedBox(height: 16),
             Expanded(
               child: GridView.builder(
-                // shrinkWrap: true,
-                // physics: NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3, childAspectRatio: 3, crossAxisSpacing: 10, mainAxisSpacing: 10),

@@ -34,6 +34,8 @@ import 'package:get/get.dart';
 
 import '../presentations/authentication/binding/otp_verification_binding.dart';
 import '../presentations/booking/views/book_slots_confirm_screen.dart';
+import '../presentations/home/models/dashboard.dart';
+import '../presentations/home/view/booking_history_detail.dart';
 import '../presentations/home/view/notification_screen.dart';
 import '../presentations/profile/binding/profile_binding.dart';
 import '../presentations/profile/view/user_info_edit_screen.dart';
@@ -150,8 +152,9 @@ class AppRoutes {
       page: () {
         DoctorsList doctor = Get.arguments['doctor'];
         String serviceType = Get.arguments['serviceType'];
-        return SpecialistDetailScreen(doctor: doctor, serviceType:serviceType);
+        return SpecialistDetailScreen(doctor: doctor, serviceType: serviceType);
       },
+      binding: SpecialistBinding()
     ),
     GetPage(
       name: PaymentScreen.routeName,
@@ -182,7 +185,8 @@ class AppRoutes {
     GetPage(
         name: BookTimeSlotScreen.routeName,
         page: () {
-          BookingController.instance.fillData(Get.arguments['doctor'],Get.arguments['serviceType'] );
+          BookingController.instance
+              .fillData(Get.arguments['doctor'], Get.arguments['serviceType']);
           return BookTimeSlotScreen();
         },
         binding: BookingBinding()),
@@ -193,6 +197,15 @@ class AppRoutes {
     GetPage(
       name: ResetPasswordScreen.routeName,
       page: () => ResetPasswordScreen(),
+    ),
+    GetPage(
+      name: BookingHistoryDetails.routeName,
+      page: () {
+        UpcomingAppointmentsData bookDetails = Get.arguments['bookingDetails'];
+        return BookingHistoryDetails(
+          appointmentData: bookDetails,
+        );
+      },
     )
   ];
 }
