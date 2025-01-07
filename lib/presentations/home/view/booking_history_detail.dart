@@ -1,7 +1,10 @@
+import 'package:doc_booking_app/global/theme.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../global/app_color.dart';
 import '../../../global/styles.dart';
@@ -19,8 +22,7 @@ class BookingHistoryDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-          title: 'Book Appointment', back: true, isNotificationVisible: false),
+      appBar: CustomAppBar(title: 'Book Appointment', back: true, isNotificationVisible: false),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -42,17 +44,12 @@ class BookingHistoryDetails extends StatelessWidget {
                     children: [
                       const Text(
                         'More Info',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Inter'),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'Inter'),
                       ),
                       const SizedBox(height: 20),
                       AppointmentDetails(
-                        patientName:
-                            AuthController.instance.user.value?.name ?? '',
-                        location:
-                            AuthController.instance.user.value?.address ?? '',
+                        patientName: AuthController.instance.user.value?.name ?? '',
+                        location: AuthController.instance.user.value?.address ?? '',
                         totalAmount: '\$ ${appointmentData.amount}',
                       ),
                     ],
@@ -62,7 +59,7 @@ class BookingHistoryDetails extends StatelessWidget {
             ),
             CustomOutlinedButton(
               onPressed: () {
-                HomeController.instance.cancelBooking(appointmentData.id ?? 0);
+                showCancelBookingAlert();
               },
               label: 'Cancel',
             ),
@@ -82,6 +79,47 @@ class BookingHistoryDetails extends StatelessWidget {
             //     const SizedBox(height: 40),
             //   ],
             // ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  showCancelBookingAlert() async {
+    Get.dialog(
+      Theme(
+        data: AppThemes.lightTheme.copyWith(
+            cupertinoOverrideTheme:
+                CupertinoThemeData(scaffoldBackgroundColor: AppColors.white, barBackgroundColor: AppColors.white)),
+        child: CupertinoAlertDialog(
+          title: Text(
+            'Cancel',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          content: Text(
+            'Are you sure you want to cancel this appointment?',
+          ),
+          actions: [
+            TextButton(
+                style: ButtonStyle(
+                    foregroundColor: WidgetStateProperty.all(AppColors.blue),
+                    overlayColor: WidgetStatePropertyAll(AppColors.transparent)),
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('No')),
+            TextButton(
+                style: ButtonStyle(
+                    foregroundColor: WidgetStateProperty.all(AppColors.blue),
+                    overlayColor: WidgetStatePropertyAll(AppColors.transparent)),
+                onPressed: () {
+                  Get.back();
+                  HomeController.instance.cancelBooking(appointmentData.id ?? 0);
+                },
+                child: Text('Yes')),
           ],
         ),
       ),
@@ -120,11 +158,7 @@ class AppointmentDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title, style: txtInterTextFieldHint),
-        Text(value,
-            style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: AppColors.activeBorderColor)),
+        Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.activeBorderColor)),
       ],
     );
   }

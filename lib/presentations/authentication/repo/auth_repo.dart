@@ -99,7 +99,7 @@ abstract class AuthRepo {
       final Map<String, dynamic> data = {
         _email: email,
         _otpCodeKey: otp,
-        'firebase_token': fcmToken
+        'firebase_token': 'dddd'
       };
       LogUtil.debug(Api.otpVerification);
       final result = await HttpService.post(Api.otpVerification, data);
