@@ -1,6 +1,5 @@
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/home/controller/home_controller.dart';
-import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -61,22 +60,28 @@ class BookingHistoryDetails extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              children: [
-                BlueButton(
-                  onPressed: () {},
-                  label: 'Reschedule',
-                ),
-                const SizedBox(height: 12),
-                CustomOutlinedButton(
-                  onPressed: () {
-                    HomeController.instance.cancelBooking(appointmentData.id ?? 0);
-                  },
-                  label: 'Cancel',
-                ),
-                const SizedBox(height: 40),
-              ],
+            CustomOutlinedButton(
+              onPressed: () {
+                HomeController.instance.cancelBooking(appointmentData.id ?? 0);
+              },
+              label: 'Cancel',
             ),
+            // Column(
+            //   children: [
+            //     BlueButton(
+            //       onPressed: () {},
+            //       label: 'Reschedule',
+            //     ),
+            //     const SizedBox(height: 12),
+            //     CustomOutlinedButton(
+            //       onPressed: () {
+            //         HomeController.instance.cancelBooking(appointmentData.id ?? 0);
+            //       },
+            //       label: 'Cancel',
+            //     ),
+            //     const SizedBox(height: 40),
+            //   ],
+            // ),
           ],
         ),
       ),

@@ -51,8 +51,9 @@ class OTPVerificationController extends GetxController {
 
   void verifyOtp(String email, String otp) async {
     try {
+      String? fcmToken = await AuthController.instance.getFcmToken();
       AuthController.instance.user.value =
-          await AuthRepo.otpVerification(email, otp);
+          await AuthRepo.otpVerification(email, otp, fcmToken!);
       Get.offAllNamed(NavigationScreen.routeName);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);

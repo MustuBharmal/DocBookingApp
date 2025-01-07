@@ -43,6 +43,7 @@ class SignupScreen extends GetView<AuthController> {
       onPopInvokedWithResult: (pop, result) {
         if (pop) {
           controller.signupError.clear();
+          controller.selectedImageSignup.value = null;
         }
       },
       child: Scaffold(

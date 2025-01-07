@@ -94,12 +94,12 @@ abstract class AuthRepo {
   }
 
   // otp verification
-  static Future<User> otpVerification(String email, String otp) async {
+  static Future<User> otpVerification(String email, String otp, String fcmToken) async {
     try {
       final Map<String, dynamic> data = {
         _email: email,
         _otpCodeKey: otp,
-        'firebase_token': 'dddd'
+        'firebase_token': fcmToken
       };
       LogUtil.debug(Api.otpVerification);
       final result = await HttpService.post(Api.otpVerification, data);
@@ -107,8 +107,8 @@ abstract class AuthRepo {
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         StorageUtil.writeToken(result['data']['access_token']);
-        // Get.snackbar('Success', result['message'].toString());
-        return User.fromJson(result['data']);
+        StorageUtil.writeUserId(result['data']['user']['id'].toString());
+        return User.fromJson(result['data']['user'] as Map<String, dynamic>);
       } else {
         throw Exception("Error: ${result['status']}");
       }

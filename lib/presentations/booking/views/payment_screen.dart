@@ -4,7 +4,7 @@ import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-
+/// not in used currently
 class PaymentScreen extends StatefulWidget {
   static const String routeName = '/payment_screen';
 

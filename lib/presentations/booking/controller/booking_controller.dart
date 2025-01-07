@@ -58,8 +58,12 @@ class BookingController extends GetxController {
   }
 
   pay() async {
+
     Stripe.publishableKey =
-        'pk_live_51IG3cNJAdLfZdFr6Rp5krFQwTZKzD3IFy2HwctpMFdbHLUqlD0azmvQm8HexJjLJ3D4wDiFShX56jsKbq6huSOtl00Fvzwb5TX';
+    'pk_test_51Qa9FDCZOlXlIF7JdQlAMtWcWo6UbTgGPGkX8i9TVH9e8fxVOYH4EvBrgxoMDOJ365tQwE325xeCs9GDOG6OdFEN002sxFNOYK';
+
+    // Stripe.publishableKey =
+    //     'pk_live_51IG3cNJAdLfZdFr6Rp5krFQwTZKzD3IFy2HwctpMFdbHLUqlD0azmvQm8HexJjLJ3D4wDiFShX56jsKbq6huSOtl00Fvzwb5TX';
 
     // testing key:- 'pk_test_51Qd3YTKXQInmSPzPKO11uJ7TrRcg7n9HXDxZNPmh7M39w4MEQVYvSISYm6SBhNT1UvL0Egrg15iacLtNcAfXmjTC00tAAJ44pu';
     await Stripe.instance.applySettings();
