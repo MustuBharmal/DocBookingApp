@@ -46,13 +46,20 @@ class HomeScreen extends GetView<HomeController> {
             const CustomSearchTextField(
               hintText: 'Search by service or location',
             ),
-            if (controller.dashboard.value?.upcomingAppointments.isNotEmpty == true) ...[
+            if (controller.dashboard.value?.upcomingAppointments.isNotEmpty ==
+                true) ...[
               const SizedBox(
                 height: 20,
               ),
-              SectionHeader(title: ConstantString.upcomingAppointments, spacing: 12, childWidget: Container()),
+              SectionHeader(
+                  title: ConstantString.upcomingAppointments,
+                  spacing: 12,
+                  childWidget: Container()),
               SizedBox(
-                height: controller.dashboard.value!.upcomingAppointments.length > 1 ? Get.height * 0.350 : Get.height * 0.250,
+                height:
+                    controller.dashboard.value!.upcomingAppointments.length > 1
+                        ? Get.height * 0.350
+                        : Get.height * 0.250,
                 child: CardStackWidget(
                   opacityChangeOnDrag: false,
                   swipeOrientation: CardOrientation.down,
@@ -65,9 +72,13 @@ class HomeScreen extends GetView<HomeController> {
                   dismissedCardDuration: const Duration(milliseconds: 150),
                   cardList: (controller.dashboard.value?.upcomingAppointments
                           .map((appointment) => CardModel(
-                                child: UpcomingAppointmentCard(appointmentData: appointment),
+                                child: UpcomingAppointmentCard(
+                                    appointmentData: appointment),
                                 gradient: LinearGradient(
-                                  colors: [AppColors.blueGradient2, AppColors.blueGradient3],
+                                  colors: [
+                                    AppColors.blueGradient2,
+                                    AppColors.blueGradient3
+                                  ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
@@ -97,7 +108,9 @@ class HomeScreen extends GetView<HomeController> {
                 ),
                 spacing: 20,
                 childWidget: GridView.builder(
-                  itemCount: controller.services.length > 3 ? 3 : controller.services.length,
+                  itemCount: controller.services.length > 3
+                      ? 3
+                      : controller.services.length,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -109,11 +122,16 @@ class HomeScreen extends GetView<HomeController> {
                     var servicesId = controller.services[index]?.id;
                     return ContainerWithIcon1(
                       onPressed: () {
-                        List<DoctorsList?> listOfDoc =
-                            controller.doctorList.where((doctor) => doctor.services == servicesId.toString()).toList();
+                        List<DoctorsList?> listOfDoc = controller.doctorList
+                            .where((doctor) =>
+                                doctor.services == servicesId.toString())
+                            .toList();
 
                         Get.toNamed(ListOfServicesDoctorScreen.routeName,
-                            arguments: {'doctorList': listOfDoc, 'serviceId': servicesId});
+                            arguments: {
+                              'doctorList': listOfDoc,
+                              'serviceId': servicesId
+                            });
                       },
                       iconPath: controller.services[index]!.icon!,
                       text: controller.services[index]?.name ?? '',
@@ -153,7 +171,11 @@ class HomeScreen extends GetView<HomeController> {
                           // rating: doctor.rating,
                           // review: doctor.review,
                           onPressed: () {
-                            Get.toNamed(SpecialistDetailScreen.routeName, arguments: {'doctor': doctor, 'serviceType': 'Clinic'});
+                            Get.toNamed(SpecialistDetailScreen.routeName,
+                                arguments: {
+                                  'doctor': doctor,
+                                  'serviceType': 'Clinic'
+                                });
                           },
                         ),
                         SizedBox(
@@ -162,7 +184,9 @@ class HomeScreen extends GetView<HomeController> {
                       ],
                     );
                   },
-                  itemCount: controller.doctorList.length >= 3 ? 3 : controller.doctorList.length,
+                  itemCount: controller.doctorList.length >= 3
+                      ? 3
+                      : controller.doctorList.length,
                 ),
               ),
             ),
@@ -206,150 +230,6 @@ class SectionHeader extends StatelessWidget {
   }
 }
 
-/*class AppointmentCard extends StatelessWidget {
-  const AppointmentCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            top: 10,
-            child: Container(
-              width: Get.width * 0.890,
-              height: Get.height * 0.215,
-              decoration: BoxDecoration(
-                color: Colors.blue[100],
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-          ),
-          Container(
-            width: Get.width * 0.890,
-            height: Get.height * 0.210,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12), // Rounded rectangle
-                        image: DecorationImage(
-                          image: AssetImage(AppImage.femaleDoctor2),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(width: 12),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Peater Parker',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          'Psychiatrist',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                          color: AppColors.blueGradient3
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.home, color: Colors.white, size: 20),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Home Visit',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: AppColors.blueGradient3
-                      ),
-                      child: const Row(
-                        children: [
-                          Icon(Icons.access_time, color: Colors.white, size: 20),
-                          SizedBox(width: 8),
-                          Text(
-                            '10:30pm',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: AppColors.blueGradient3
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.calendar_today, color: Colors.white, size: 20),
-                      SizedBox(width: 8),
-                      Text(
-                        'October 10, 2024',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}*/
-
 class BookingOptions extends StatelessWidget {
   const BookingOptions({super.key});
 
@@ -370,8 +250,8 @@ class BookingOptions extends StatelessWidget {
           height: 10,
         ),
         InkWell(
-          onTap: () =>
-              Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {'doctorList': HomeController.instance.doctorList}),
+          onTap: () => Get.toNamed(ListOfSpecialistScreen.routeName,
+              arguments: {'doctorList': HomeController.instance.doctorList, 'specialist': 0,}),
           child: CustomContainerWithText(
             text: ConstantString.arrHomeVisit,
           ),

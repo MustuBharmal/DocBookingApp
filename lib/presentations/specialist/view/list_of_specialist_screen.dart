@@ -32,8 +32,7 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
       },
       child: DefaultTabController(
         length: 2,
-        child: Obx(
-          () => Scaffold(
+        child: Scaffold(
             /*bottomNavigationBar: controller.isMapView.value && controller.selectedDoctor.value != null
                 ? SizedBox(
                     height: 75,
@@ -163,7 +162,6 @@ class ListOfSpecialistScreen extends GetView<SpecialistController> {
             ),
           ),
         ),
-      ),
     );
   }
 }
