@@ -134,6 +134,7 @@ class BookingController extends GetxController {
 
         HomeController.instance.selectedIndex.value = 0;
         HomeController.instance.dashboardData();
+        HomeController.instance.getNotification();
         Get.until(
             (routes) => routes.settings.name == NavigationScreen.routeName);
       }

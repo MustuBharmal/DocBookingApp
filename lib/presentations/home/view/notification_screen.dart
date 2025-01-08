@@ -24,6 +24,10 @@ class NotificationScreen extends GetView<HomeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              (controller.unreadNotifications.isEmpty && controller.readNotifications.isEmpty)?Center(
+                child: Text('No Notifications',style: TextStyle(fontSize: 20),),
+              ):SizedBox.shrink(),
+
               Obx(() => controller.unreadNotifications.isNotEmpty
                   ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
