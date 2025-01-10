@@ -52,12 +52,10 @@ class SpecialistController extends GetxController {
   }
 
   changeMapList(int index) {
-    if (index == 0) {
-      markers.value = homeMarkers;
-    } else {
-      markers.value = clinicMarkers;
+    if (index != selectedTabIndex) {
+      selectedTabIndex = index;
+      sortMarkers();
     }
-    selectedTabIndex = index;
   }
 
   @override
@@ -116,12 +114,44 @@ class SpecialistController extends GetxController {
     try {
       doctorList.clear();
       doctorList.addAll(await SpecialistRepo.getDoctorsBySpecialization(specializationId, lat, long));
-      LogUtil.debug(doctorList.length);
-      for (var d in doctorList) {
-        double? lat = double.tryParse(d?.latitude ?? '0');
-        double? lng = double.tryParse(d?.longitude ?? '0');
-        if (lat != null && lng != null) {
-          if (d?.serviceType.contains('home') == true) {
+      sortMarkers();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }sortMarkers({DoctorsList? doctor}) {
+    homeMarkers.clear();
+    clinicMarkers.clear();
+    for (var d in doctorList) {
+      double? lat = double.tryParse(d?.latitude ?? '0');
+      double? lng = double.tryParse(d?.longitude ?? '0');
+      if (lat != null && lng != null) {
+        if (d?.serviceType.contains('home') == true) {
+          if (doctor != null && doctor.id == d?.id) {
+            if (selectedLocationIcon != null) {
+              homeMarkers.add(
+                Marker(
+                    markerId: MarkerId(d?.id?.toString() ?? '0'),
+                    position: LatLng(lat, lng),
+                    icon: selectedLocationIcon!,
+                    onTap: () {
+                      sortMarkers();
+                    }),
+              );
+            } else {
+              homeMarkers.add(
+                Marker(
+                    markerId: MarkerId(d?.id?.toString() ?? '0'),
+                    position: LatLng(lat, lng),
+                    onTap: () {
+                      sortMarkers();
+                    }),
+              );
+            }
+          } else {
             if (locationIcon != null) {
               homeMarkers.add(
                 Marker(
@@ -129,30 +159,7 @@ class SpecialistController extends GetxController {
                   position: LatLng(lat, lng),
                   icon: locationIcon!,
                   onTap: () {
-                    selectedDoctor.value = d;
-                    final selectedMarker = homeMarkers.firstWhere((m) {
-                      return m.markerId.value == d?.id.toString();
-                    });
-                    homeMarkers.removeWhere((m) {
-                      return m.markerId.value == d?.id.toString();
-                    });
-                    if (selectedLocationIcon != null) {
-                      homeMarkers.add(
-                        Marker(
-                          markerId: selectedMarker.markerId,
-                          position: LatLng(lat, lng),
-                          icon: selectedLocationIcon!,
-                        ),
-                      );
-                    } else {
-                      homeMarkers.add(
-                        Marker(
-                          markerId: selectedMarker.markerId,
-                          position: LatLng(lat, lng),
-                        ),
-                      );
-                    }
-                    markers.value = homeMarkers;
+                    sortMarkers(doctor: d);
                   },
                 ),
               );
@@ -162,13 +169,36 @@ class SpecialistController extends GetxController {
                   markerId: MarkerId(d?.id?.toString() ?? '0'),
                   position: LatLng(lat, lng),
                   onTap: () {
-                    selectedDoctor.value = d;
+                    sortMarkers(doctor: d);
                   },
                 ),
               );
             }
           }
-          if (d?.serviceType.contains('clinic') == true) {
+        }
+        if (d?.serviceType.contains('clinic') == true) {
+          if (doctor != null && doctor.id == d?.id) {
+            if (selectedLocationIcon != null) {
+              clinicMarkers.add(
+                Marker(
+                    markerId: MarkerId(d?.id?.toString() ?? '0'),
+                    position: LatLng(lat, lng),
+                    icon: selectedLocationIcon!,
+                    onTap: () {
+                      sortMarkers();
+                    }),
+              );
+            } else {
+              clinicMarkers.add(
+                Marker(
+                    markerId: MarkerId(d?.id?.toString() ?? '0'),
+                    position: LatLng(lat, lng),
+                    onTap: () {
+                      sortMarkers();
+                    }),
+              );
+            }
+          } else {
             if (locationIcon != null) {
               clinicMarkers.add(
                 Marker(
@@ -176,30 +206,7 @@ class SpecialistController extends GetxController {
                   position: LatLng(lat, lng),
                   icon: locationIcon!,
                   onTap: () {
-                    selectedDoctor.value = d;
-                    final selectedMarker = clinicMarkers.firstWhere((m) {
-                      return m.markerId.value == d?.id.toString();
-                    });
-                    clinicMarkers.removeWhere((m) {
-                      return m.markerId.value == d?.id.toString();
-                    });
-                    if (selectedLocationIcon != null) {
-                      clinicMarkers.add(
-                        Marker(
-                          markerId: selectedMarker.markerId,
-                          position: LatLng(lat, lng),
-                          icon: selectedLocationIcon!,
-                        ),
-                      );
-                    } else {
-                      clinicMarkers.add(
-                        Marker(
-                          markerId: selectedMarker.markerId,
-                          position: LatLng(lat, lng),
-                        ),
-                      );
-                    }
-                    markers.value = clinicMarkers;
+                    sortMarkers(doctor: d);
                   },
                 ),
               );
@@ -208,21 +215,15 @@ class SpecialistController extends GetxController {
                   markerId: MarkerId(d?.id?.toString() ?? '0'),
                   position: LatLng(lat, lng),
                   onTap: () {
-                    selectedDoctor.value = d;
+                    sortMarkers(doctor: d);
                   }));
             }
-            //23.220950, 72.610733
           }
         }
       }
-      markers.value = homeMarkers;
-    } on ServerException catch (e) {
-      Get.snackbar('Error', e.message);
-    } on SocketException {
-      Get.snackbar('Error', 'No internet connection');
-    } catch (e) {
-      Get.snackbar('Login failed', '$e');
-    } finally {}
+    }
+    selectedDoctor.value = doctor;
+    markers.value = selectedTabIndex == 0 ? homeMarkers : clinicMarkers;
   }
 
   Future<List<DoctorTimeTable>> getDoctorTimeTable({int? doctorId, int? clinicId}) async {
