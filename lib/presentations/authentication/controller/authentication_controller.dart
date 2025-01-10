@@ -240,7 +240,7 @@ class AuthController extends GetxController {
         signupError['address'] = 'Please enter address!';
       }
       if (pinCode.isEmpty) {
-        signupError['pin_code'] = 'Please Postal Code!';
+        signupError['pin_code'] = 'Please enter postal Code!';
       }
       if (selectedImageSignup.value == null) {
         signupError['profile_pic'] = 'Please select image';

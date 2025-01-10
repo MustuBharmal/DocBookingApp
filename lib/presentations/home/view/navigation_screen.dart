@@ -19,7 +19,6 @@ class NavigationScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: AppColors.scaffoldBGColor,
         appBar: CustomAppBar(
           title: controller.appBarTitle[controller.selectedIndex.value],
           back: false,

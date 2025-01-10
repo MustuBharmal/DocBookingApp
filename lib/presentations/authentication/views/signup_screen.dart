@@ -312,7 +312,7 @@ class SignupScreen extends GetView<AuthController> {
                         showAsterisk: true,
                         controller: postCodeController,
                         hintStyle: txtInterTextFieldHint,
-                        inputType: TextInputType.number,
+                        inputType: TextInputType.text,
                         hintText: 'eg 12345',
                         errorText: controller.signupError['pin_code'],
                       ),

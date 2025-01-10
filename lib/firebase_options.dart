@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAw1rEMZFiKplUxWzZSg7r-w9zyhR0hinI',
-    appId: '1:940698519949:android:10361d2853a5aa085215c4',
+    appId: '1:940698519949:android:590a6e41c865549c5215c4',
     messagingSenderId: '940698519949',
     projectId: 'live-doctor-app',
     storageBucket: 'live-doctor-app.firebasestorage.app',
@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '940698519949',
     projectId: 'live-doctor-app',
     storageBucket: 'live-doctor-app.firebasestorage.app',
-    iosBundleId: 'com.example.docBookingApp',
+    iosBundleId: 'com.youthrevisited.doctorapp',
   );
+
 }
