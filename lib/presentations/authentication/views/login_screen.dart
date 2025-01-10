@@ -35,15 +35,7 @@ class LoginScreen extends GetView<AuthController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Image.asset(AppImage.appLogo),
-                      Text(
-                        ConstantString.doctorBooking,
-                        style: TextStyle(
-                          color: Color(0xFF2268FF),
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
+                      Expanded(flex: 4, child: Image.asset(AppImage.appLogo)),
                     ],
                   ),
                 ),

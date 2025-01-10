@@ -1,4 +1,4 @@
-package com.youth_revisited.doctor_app
+package com.youthrevisited.doctorapp
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

@@ -4,7 +4,7 @@ abstract class AppColors {
   static Color primary = Color(0xFF2268FF); //#2268FF
   static Color secondary = const Color(0xff262628); //#262628
   static Color transparent = const Color(0x00FFFFFF); //#FFFFFF
-  static Color scaffoldBGColor = const Color(0xffFBFBFD); //#FBFBFD
+  static Color scaffoldBGColor = const Color(0xff000000); //#FBFBFD
   static Color black = const Color(0xff262628); //#262628
   static Color white = const Color(0xffFFFFFF); //#FFFFFF
   static Color textFieldBackground = const Color(0xffE5E5E5); //#E5E5E5

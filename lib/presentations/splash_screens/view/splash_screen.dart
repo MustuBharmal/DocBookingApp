@@ -40,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SizedBox(
         height: Get.height,
         child: Center(
@@ -47,12 +48,15 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(AppImage.appLogo),
+              Image.asset(
+                AppImage.appLogo,
+                width: Get.width * .8,
+              ),
               SizedBox(
                 height: Get.height * 0.065,
               ),
               Text(
-                ConstantString.doctorBooking,
+                ConstantString.appName,
                 style: TextStyle(
                   color: AppColors.primary,
                   fontSize: 26,

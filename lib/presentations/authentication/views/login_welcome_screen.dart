@@ -4,6 +4,7 @@ import 'package:doc_booking_app/global/images.dart';
 import 'package:doc_booking_app/presentations/authentication/controller/authentication_controller.dart';
 import 'package:doc_booking_app/presentations/authentication/views/login_screen.dart';
 import 'package:doc_booking_app/presentations/authentication/views/signup_screen.dart';
+import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class LoginWelcomeScreen extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    LogUtil.debug(Get.height * 0.15);
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Padding(
@@ -39,14 +41,14 @@ class LoginWelcomeScreen extends GetView<AuthController> {
                       ),
                     ),
                     SizedBox(
-                      height: Get.height * 0.1,
+                      height: Get.height * 0.05,
                     ),
-                    Image.asset(AppImage.appLogo),
+                    Image.asset(AppImage.appLogo, width: Get.width * .8,),
                     SizedBox(
                       height: Get.height * 0.05,
                     ),
                     Text(
-                      ConstantString.doctorBooking,
+                      ConstantString.appName,
                       style: TextStyle(
                         color: AppColors.primary,
                         fontSize: 26,

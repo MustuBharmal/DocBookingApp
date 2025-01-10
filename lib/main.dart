@@ -1,3 +1,4 @@
+import 'package:doc_booking_app/global/constant_string.dart';
 import 'package:doc_booking_app/global/theme.dart';
 import 'package:doc_booking_app/presentations/authentication/binding/auth_binding.dart';
 import 'package:doc_booking_app/routes/app_routes.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Doctor Booking App',
+      title: ConstantString.appName,
       debugShowCheckedModeBanner: false,
       initialBinding: AuthBinding(),
       getPages: AppRoutes.pages,
