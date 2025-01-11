@@ -23,8 +23,8 @@ class BookingData with _$BookingData {
     @JsonKey(name: 'payment_intent_client_secret') String? paymentIntentClientSecret,
     @JsonKey(name: 'payment_intent_data') Map<String, dynamic>? paymentIntentData,
     @JsonKey(name: 'ephemeral_key_data') Map<String, dynamic>? ephemeralKey,
-    @JsonKey(name: 'booking_id') int? booking_id,
-    @JsonKey(name: 'booking_code') String? booking_code,
+    @JsonKey(name: 'booking_id') int? bookingId,
+    @JsonKey(name: 'booking_code') String? bookingCode,
     @JsonKey(name: 'amount') String? amount,
   }) = _BookingData;
 

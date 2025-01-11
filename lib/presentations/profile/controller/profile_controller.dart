@@ -164,7 +164,7 @@ class ProfileController extends GetxController {
       profileError['address'] = 'Please enter address!';
     }
     if (pinCodeController.text.isEmpty) {
-      profileError['pin_code'] = 'Please Postal Code!';
+      profileError['pin_code'] = 'Please enter Postal Code!';
     }
     if (imageUrl.isEmpty) {
       profileError['profile_pic'] = 'Please select image';

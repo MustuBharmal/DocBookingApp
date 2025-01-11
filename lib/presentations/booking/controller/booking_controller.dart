@@ -124,7 +124,7 @@ class BookingController extends GetxController {
         await Stripe.instance.confirmPaymentSheetPayment();
         await Future.delayed(Duration(seconds: 1));
         final bookingDetails = await BookingRepo.getBookingDetails(
-            bookingData?.booking_id.toString() ?? '');
+            bookingData?.bookingId.toString() ?? '');
         LoaderController.instance.showLoader();
         if (bookingDetails?.isPaymentDone ?? false) {
           Get.snackbar('Success', 'Your booking done!');

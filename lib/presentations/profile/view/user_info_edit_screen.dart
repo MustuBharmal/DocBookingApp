@@ -293,7 +293,7 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                       showAsterisk: true,
                       controller: controller.pinCodeController,
                       hintStyle: txtInterTextFieldHint,
-                      inputType: TextInputType.number,
+                      inputType: TextInputType.text,
                       hintText: 'eg 12345',
                       errorText: controller.profileError['pin_code'],
                     ),

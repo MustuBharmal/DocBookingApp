@@ -83,7 +83,7 @@ abstract class HomeRepo {
       } else {
         throw Exception("Error: ${result['message']}");
       }
-    } on ServerException catch (e) {
+    } on ServerException {
       // LogUtil.error(e);
       rethrow;
     } catch (e) {
