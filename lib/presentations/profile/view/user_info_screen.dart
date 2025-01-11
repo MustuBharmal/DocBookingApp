@@ -70,9 +70,9 @@ class UserInfoScreen extends GetView<ProfileController> {
               placeholder: (context, url) => Center(
                 child: CircularProgressIndicator(),
               ),
-              errorWidget: (context, url, error) => Icon(
-                Icons.error,
-                color: Colors.red,
+              errorWidget: (context, url, error) => Image.asset(
+                AppImage.companyLogo,
+                fit: BoxFit.contain,
               ),
             ),
           ),

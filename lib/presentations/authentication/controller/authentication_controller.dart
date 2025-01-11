@@ -159,7 +159,6 @@ class AuthController extends GetxController {
       if (fcmToken != null) {
         user.value = await AuthRepo.signIn(email, password, fcmToken);
       }
-
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
@@ -242,20 +241,24 @@ class AuthController extends GetxController {
       if (pinCode.isEmpty) {
         signupError['pin_code'] = 'Please enter Postal Code!';
       }
-      if (selectedImageSignup.value == null) {
-        signupError['profile_pic'] = 'Please select image';
-      }
+      // if (selectedImageSignup.value == null) {
+      //   signupError['profile_pic'] = 'Please select image';
+      // }
       if (signupError.isNotEmpty) {
         return;
       } else {
         LoaderController.instance.showLoader();
-        final String? profilePic = await AuthRepo.uploadProfilePic(
-            selectedImageSignup.value!,
-            showLoader: false);
-        if (profilePic == null) {
-          Get.snackbar('Error', 'Image Upload failed!');
-          return;
+        String? profilePic;
+        if (selectedImageSignup.value != null) {
+          profilePic = await AuthRepo.uploadProfilePic(
+              selectedImageSignup.value!,
+              showLoader: false);
+          if (profilePic == null) {
+            Get.snackbar('Error', 'Image Upload failed!');
+            return;
+          }
         }
+
         user.value = await AuthRepo.signUp(
             name: name,
             email: email,

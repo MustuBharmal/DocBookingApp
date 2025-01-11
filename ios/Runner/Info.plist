@@ -26,18 +26,18 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Camera Access to upload images</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need your location to get nearby Specialist</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to get nearby Specialist</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to get nearby Specialist</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow Photo library to upload images</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow Camera Access to upload images</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow Microphone Access to upload images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow Photo library to upload images</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

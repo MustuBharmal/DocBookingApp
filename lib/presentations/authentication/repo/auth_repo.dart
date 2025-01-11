@@ -94,7 +94,8 @@ abstract class AuthRepo {
   }
 
   // otp verification
-  static Future<User> otpVerification(String email, String otp, String fcmToken) async {
+  static Future<User> otpVerification(
+      String email, String otp, String fcmToken) async {
     try {
       final Map<String, dynamic> data = {
         _email: email,
@@ -206,7 +207,7 @@ abstract class AuthRepo {
     required String country,
     required String state,
     required String city,
-    required String profilePic,
+    String? profilePic,
     required String password,
     required String pinCode,
     // required double lat,
@@ -224,7 +225,7 @@ abstract class AuthRepo {
         'country': country,
         'state': state,
         'city': city,
-        'profile_pic': profilePic,
+        'profile_pic': profilePic ?? '/uploads/profile/2025-01-11T11-24-47.020Z-company_logo.png',
         'password': password,
         'pin_code': pinCode,
         // 'location_json': {'lat': lat, 'lng': long}

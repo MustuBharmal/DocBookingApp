@@ -60,65 +60,70 @@ class CustomTextField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Obx(
-              () => TextFormField(
-                onTap: onTap,
-                onChanged: (value) => onChanged!(value),
-                controller: controller,
-                keyboardType: inputType,
-                readOnly: readOnly,
-                style: txtInterDropDownValue,
-                maxLines: maxLines,
-                obscureText: isPassword.value
-                    ? AuthController.instance.isObscure.value
-                    : false,
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: hintStyle,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                      color: AppColors.activeBorderColor,
-                    ),
-                  ),
-                  suffixIconConstraints: showDropDownIcon
-                      ? BoxConstraints(maxHeight: 24, maxWidth: 30)
-                      : null,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                      color: AppColors.borderColor,
-                    ),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(color: Colors.red),
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 15, vertical: 17),
-                  suffixIcon: isPassword.value
-                      ? IconButton(
-                          icon: Icon(
-                            AuthController.instance.isObscure.value
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: Colors.grey,
-                          ),
-                          onPressed: () {
-                            AuthController.instance.isObscure.toggle();
-                          },
-                        )
-                      : showDropDownIcon
-                          ? Padding(
-                              padding: const EdgeInsets.only(right: 12.0),
-                              child: SvgPicture.asset(
-                                AppImage.arrowDown,
-                                height: 10,
-                                width: 10,
-                              ),
-                            )
+                  () =>
+                  TextFormField(
+                    onTap: onTap,
+                    onChanged: (value) {
+                      if(onChanged != null) {
+                        onChanged!(value);
+                      }
+                    },
+                    controller: controller,
+                    keyboardType: inputType,
+                    readOnly: readOnly,
+                    style: txtInterDropDownValue,
+                    maxLines: maxLines,
+                    obscureText: isPassword.value
+                        ? AuthController.instance.isObscure.value
+                        : false,
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      hintStyle: hintStyle,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                          color: AppColors.activeBorderColor,
+                        ),
+                      ),
+                      suffixIconConstraints: showDropDownIcon
+                          ? BoxConstraints(maxHeight: 24, maxWidth: 30)
                           : null,
-                ),
-              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                          color: AppColors.borderColor,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      contentPadding:
+                      EdgeInsets.symmetric(horizontal: 15, vertical: 17),
+                      suffixIcon: isPassword.value
+                          ? IconButton(
+                        icon: Icon(
+                          AuthController.instance.isObscure.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          AuthController.instance.isObscure.toggle();
+                        },
+                      )
+                          : showDropDownIcon
+                          ? Padding(
+                        padding: const EdgeInsets.only(right: 12.0),
+                        child: SvgPicture.asset(
+                          AppImage.arrowDown,
+                          height: 10,
+                          width: 10,
+                        ),
+                      )
+                          : null,
+                    ),
+                  ),
             ),
           ),
           if (errorText != null)
