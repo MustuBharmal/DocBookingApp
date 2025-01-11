@@ -10,7 +10,7 @@ flutter_launcher_icons:
   icon_size: 12
 
   ios: true
-  # image_path_ios: "assets/icon/icon.png"
+  image_path_ios: "assets/logos/company_logo.png"
   remove_alpha_channel_ios: true
 
   web:
