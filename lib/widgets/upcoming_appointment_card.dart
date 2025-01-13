@@ -68,7 +68,7 @@ class UpcomingAppointmentCard extends StatelessWidget {
             BadgeWidget(
               image: AppImage.calendar,
               color: AppColors.white,
-              text: CustomDateUtils.getDayAndDate(DateTime.tryParse(appointmentData.createdAt ?? '')),
+              text: CustomDateUtils.getDayAndDate(DateTime.tryParse(appointmentData.bookingDateTime?.split('T').first ?? '')),
             ),
           ],
         ),

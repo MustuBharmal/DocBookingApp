@@ -289,6 +289,8 @@ mixin _$UpcomingAppointmentsData {
   double? get amount => throw _privateConstructorUsedError;
   @JsonKey(name: 'booking_code')
   String? get bookingCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'booking_date_time')
+  String? get bookingDateTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'status')
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_payment_done')
@@ -330,6 +332,7 @@ abstract class $UpcomingAppointmentsDataCopyWith<$Res> {
       @JsonKey(name: 'clinic_id') int? clinicId,
       @JsonKey(name: 'amount') double? amount,
       @JsonKey(name: 'booking_code') String? bookingCode,
+      @JsonKey(name: 'booking_date_time') String? bookingDateTime,
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'is_payment_done') bool? isPaymentDone,
       @JsonKey(name: 'createdAt') String? createdAt,
@@ -368,6 +371,7 @@ class _$UpcomingAppointmentsDataCopyWithImpl<$Res,
     Object? clinicId = freezed,
     Object? amount = freezed,
     Object? bookingCode = freezed,
+    Object? bookingDateTime = freezed,
     Object? status = freezed,
     Object? isPaymentDone = freezed,
     Object? createdAt = freezed,
@@ -401,6 +405,10 @@ class _$UpcomingAppointmentsDataCopyWithImpl<$Res,
       bookingCode: freezed == bookingCode
           ? _value.bookingCode
           : bookingCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bookingDateTime: freezed == bookingDateTime
+          ? _value.bookingDateTime
+          : bookingDateTime // ignore: cast_nullable_to_non_nullable
               as String?,
       status: freezed == status
           ? _value.status
@@ -511,6 +519,7 @@ abstract class _$$UpcomingAppointmentsDataImplCopyWith<$Res>
       @JsonKey(name: 'clinic_id') int? clinicId,
       @JsonKey(name: 'amount') double? amount,
       @JsonKey(name: 'booking_code') String? bookingCode,
+      @JsonKey(name: 'booking_date_time') String? bookingDateTime,
       @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'is_payment_done') bool? isPaymentDone,
       @JsonKey(name: 'createdAt') String? createdAt,
@@ -552,6 +561,7 @@ class __$$UpcomingAppointmentsDataImplCopyWithImpl<$Res>
     Object? clinicId = freezed,
     Object? amount = freezed,
     Object? bookingCode = freezed,
+    Object? bookingDateTime = freezed,
     Object? status = freezed,
     Object? isPaymentDone = freezed,
     Object? createdAt = freezed,
@@ -585,6 +595,10 @@ class __$$UpcomingAppointmentsDataImplCopyWithImpl<$Res>
       bookingCode: freezed == bookingCode
           ? _value.bookingCode
           : bookingCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bookingDateTime: freezed == bookingDateTime
+          ? _value.bookingDateTime
+          : bookingDateTime // ignore: cast_nullable_to_non_nullable
               as String?,
       status: freezed == status
           ? _value.status
@@ -634,6 +648,7 @@ class _$UpcomingAppointmentsDataImpl
       @JsonKey(name: 'clinic_id') this.clinicId,
       @JsonKey(name: 'amount') this.amount,
       @JsonKey(name: 'booking_code') this.bookingCode,
+      @JsonKey(name: 'booking_date_time') this.bookingDateTime,
       @JsonKey(name: 'status') this.status,
       @JsonKey(name: 'is_payment_done') this.isPaymentDone,
       @JsonKey(name: 'createdAt') this.createdAt,
@@ -665,6 +680,9 @@ class _$UpcomingAppointmentsDataImpl
   @JsonKey(name: 'booking_code')
   final String? bookingCode;
   @override
+  @JsonKey(name: 'booking_date_time')
+  final String? bookingDateTime;
+  @override
   @JsonKey(name: 'status')
   final String? status;
   @override
@@ -691,7 +709,7 @@ class _$UpcomingAppointmentsDataImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UpcomingAppointmentsData(id: $id, patientId: $patientId, doctorId: $doctorId, clinicId: $clinicId, amount: $amount, bookingCode: $bookingCode, status: $status, isPaymentDone: $isPaymentDone, createdAt: $createdAt, doctorData: $doctorData, patientData: $patientData, doctorTimeTableData: $doctorTimeTableData, clinicData: $clinicData, typeData: $typeData)';
+    return 'UpcomingAppointmentsData(id: $id, patientId: $patientId, doctorId: $doctorId, clinicId: $clinicId, amount: $amount, bookingCode: $bookingCode, bookingDateTime: $bookingDateTime, status: $status, isPaymentDone: $isPaymentDone, createdAt: $createdAt, doctorData: $doctorData, patientData: $patientData, doctorTimeTableData: $doctorTimeTableData, clinicData: $clinicData, typeData: $typeData)';
   }
 
   @override
@@ -705,6 +723,7 @@ class _$UpcomingAppointmentsDataImpl
       ..add(DiagnosticsProperty('clinicId', clinicId))
       ..add(DiagnosticsProperty('amount', amount))
       ..add(DiagnosticsProperty('bookingCode', bookingCode))
+      ..add(DiagnosticsProperty('bookingDateTime', bookingDateTime))
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('isPaymentDone', isPaymentDone))
       ..add(DiagnosticsProperty('createdAt', createdAt))
@@ -730,6 +749,8 @@ class _$UpcomingAppointmentsDataImpl
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.bookingCode, bookingCode) ||
                 other.bookingCode == bookingCode) &&
+            (identical(other.bookingDateTime, bookingDateTime) ||
+                other.bookingDateTime == bookingDateTime) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.isPaymentDone, isPaymentDone) ||
                 other.isPaymentDone == isPaymentDone) &&
@@ -757,6 +778,7 @@ class _$UpcomingAppointmentsDataImpl
       clinicId,
       amount,
       bookingCode,
+      bookingDateTime,
       status,
       isPaymentDone,
       createdAt,
@@ -791,6 +813,7 @@ abstract class _UpcomingAppointmentsData implements UpcomingAppointmentsData {
           @JsonKey(name: 'clinic_id') final int? clinicId,
           @JsonKey(name: 'amount') final double? amount,
           @JsonKey(name: 'booking_code') final String? bookingCode,
+          @JsonKey(name: 'booking_date_time') final String? bookingDateTime,
           @JsonKey(name: 'status') final String? status,
           @JsonKey(name: 'is_payment_done') final bool? isPaymentDone,
           @JsonKey(name: 'createdAt') final String? createdAt,
@@ -823,6 +846,9 @@ abstract class _UpcomingAppointmentsData implements UpcomingAppointmentsData {
   @override
   @JsonKey(name: 'booking_code')
   String? get bookingCode;
+  @override
+  @JsonKey(name: 'booking_date_time')
+  String? get bookingDateTime;
   @override
   @JsonKey(name: 'status')
   String? get status;

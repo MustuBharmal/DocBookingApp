@@ -47,20 +47,13 @@ class HomeScreen extends GetView<HomeController> {
             const CustomSearchTextField(
               hintText: 'Search by service or location',
             ),
-            if (controller.dashboard.value?.upcomingAppointments.isNotEmpty ==
-                true) ...[
+            if (controller.dashboard.value?.upcomingAppointments.isNotEmpty == true) ...[
               const SizedBox(
                 height: 20,
               ),
-              SectionHeader(
-                  title: ConstantString.upcomingAppointments,
-                  spacing: 12,
-                  childWidget: Container()),
+              SectionHeader(title: ConstantString.upcomingAppointments, spacing: 12, childWidget: Container()),
               SizedBox(
-                height:
-                    controller.dashboard.value!.upcomingAppointments.length > 1
-                        ? Get.height * 0.350
-                        : Get.height * 0.250,
+                height: controller.dashboard.value!.upcomingAppointments.length > 1 ? Get.height * 0.350 : Get.height * 0.250,
                 child: CardStackWidget(
                   opacityChangeOnDrag: false,
                   swipeOrientation: CardOrientation.down,
@@ -75,19 +68,12 @@ class HomeScreen extends GetView<HomeController> {
                           .map((appointment) => CardModel(
                                 child: InkWell(
                                   onTap: () {
-                                    Get.toNamed(BookingHistoryDetails.routeName,
-                                        arguments: {
-                                          'bookingDetails': appointment
-                                        });
+                                    Get.toNamed(BookingHistoryDetails.routeName, arguments: {'bookingDetails': appointment});
                                   },
-                                  child: UpcomingAppointmentCard(
-                                      appointmentData: appointment),
+                                  child: UpcomingAppointmentCard(appointmentData: appointment),
                                 ),
                                 gradient: LinearGradient(
-                                  colors: [
-                                    AppColors.blueGradient2,
-                                    AppColors.blueGradient3
-                                  ],
+                                  colors: [AppColors.blueGradient2, AppColors.blueGradient3],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
@@ -117,9 +103,7 @@ class HomeScreen extends GetView<HomeController> {
                 ),
                 spacing: 20,
                 childWidget: GridView.builder(
-                  itemCount: controller.services.length > 3
-                      ? 3
-                      : controller.services.length,
+                  itemCount: controller.services.length > 3 ? 3 : controller.services.length,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -131,16 +115,11 @@ class HomeScreen extends GetView<HomeController> {
                     var servicesId = controller.services[index]?.id;
                     return ContainerWithIcon1(
                       onPressed: () {
-                        List<DoctorsList?> listOfDoc = controller.doctorList
-                            .where((doctor) =>
-                                doctor.services == servicesId.toString())
-                            .toList();
+                        List<DoctorsList?> listOfDoc =
+                            controller.doctorList.where((doctor) => doctor.services == servicesId.toString()).toList();
 
                         Get.toNamed(ListOfServicesDoctorScreen.routeName,
-                            arguments: {
-                              'doctorList': listOfDoc,
-                              'serviceId': servicesId
-                            });
+                            arguments: {'doctorList': listOfDoc, 'serviceId': servicesId});
                       },
                       iconPath: controller.services[index]!.icon!,
                       text: controller.services[index]?.name ?? '',
@@ -180,11 +159,7 @@ class HomeScreen extends GetView<HomeController> {
                           // rating: doctor.rating,
                           // review: doctor.review,
                           onPressed: () {
-                            Get.toNamed(SpecialistDetailScreen.routeName,
-                                arguments: {
-                                  'doctor': doctor,
-                                  'serviceType': 'Clinic'
-                                });
+                            Get.toNamed(SpecialistDetailScreen.routeName, arguments: {'doctor': doctor, 'serviceType': 'Clinic'});
                           },
                         ),
                         SizedBox(
@@ -193,9 +168,7 @@ class HomeScreen extends GetView<HomeController> {
                       ],
                     );
                   },
-                  itemCount: controller.doctorList.length >= 3
-                      ? 3
-                      : controller.doctorList.length,
+                  itemCount: controller.doctorList.length >= 3 ? 3 : controller.doctorList.length,
                 ),
               ),
             ),
@@ -259,8 +232,7 @@ class BookingOptions extends StatelessWidget {
           height: 10,
         ),
         InkWell(
-          onTap: () =>
-              Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
+          onTap: () => Get.toNamed(ListOfSpecialistScreen.routeName, arguments: {
             'doctorList': HomeController.instance.doctorList,
             'specialist': 0,
           }),

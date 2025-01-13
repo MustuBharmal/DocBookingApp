@@ -28,6 +28,7 @@ class UpcomingAppointmentsData with _$UpcomingAppointmentsData {
     @JsonKey(name: 'clinic_id') int? clinicId,
     @JsonKey(name: 'amount') double? amount,
     @JsonKey(name: 'booking_code') String? bookingCode,
+    @JsonKey(name: 'booking_date_time') String? bookingDateTime,
     @JsonKey(name: 'status') String? status,
     @JsonKey(name: 'is_payment_done') bool? isPaymentDone,
     @JsonKey(name: 'createdAt') String? createdAt,
