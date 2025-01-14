@@ -8,6 +8,7 @@ import '../../../util/log_utils.dart';
 import '../models/doctor_list.dart';
 
 class SpecialistRepo {
+
   static Future<List<DoctorsList>> getDoctorsBySpecialization(int serviceId, double lat, double long) async {
     try {
       Map<String, dynamic> data = {
@@ -45,6 +46,7 @@ class SpecialistRepo {
         if (doctorId != null) 'doctor_id': doctorId,
         if (clinicId != null) 'clinic_id': clinicId,
       };
+      LogUtil.debug(data);
       final result = await HttpService.post(Api.doctorTimetable, data, showLoader: true);
       LogUtil.debug(result);
       if (result['isLive'] == true) {

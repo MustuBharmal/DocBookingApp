@@ -36,7 +36,7 @@ class UpcomingAppointmentsData with _$UpcomingAppointmentsData {
     @JsonKey(name: 'patientData') PatientData? patientData,
     @JsonKey(name: 'doctorTimeTableData') DoctorTimeTableData? doctorTimeTableData,
     @JsonKey(name: 'clinicData') AppointmentDoctorsList? clinicData,
-    @JsonKey(name: 'type_data') String? typeData,
+    @JsonKey(name: 'booking_type') String? typeData,
   }) = _UpcomingAppointmentsData;
 
   factory UpcomingAppointmentsData.fromJson(Map<String, Object?> json) => _$UpcomingAppointmentsDataFromJson(json);

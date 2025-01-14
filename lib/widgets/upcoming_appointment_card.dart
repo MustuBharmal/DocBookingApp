@@ -55,7 +55,7 @@ class UpcomingAppointmentCard extends StatelessWidget {
                 BadgeWidget(
                   image: AppImage.firstAid,
                   color: Colors.white,
-                  text: '${appointmentData.typeData?.toUpperCase() ?? ''} Visit',
+                  text: appointmentData.typeData?.toUpperCase() ?? '',
                 ),
                 BadgeWidget(
                   image: AppImage.alarm,

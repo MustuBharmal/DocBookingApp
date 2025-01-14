@@ -306,7 +306,7 @@ mixin _$UpcomingAppointmentsData {
       throw _privateConstructorUsedError;
   @JsonKey(name: 'clinicData')
   AppointmentDoctorsList? get clinicData => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type_data')
+  @JsonKey(name: 'booking_type')
   String? get typeData => throw _privateConstructorUsedError;
 
   /// Serializes this UpcomingAppointmentsData to a JSON map.
@@ -341,7 +341,7 @@ abstract class $UpcomingAppointmentsDataCopyWith<$Res> {
       @JsonKey(name: 'doctorTimeTableData')
       DoctorTimeTableData? doctorTimeTableData,
       @JsonKey(name: 'clinicData') AppointmentDoctorsList? clinicData,
-      @JsonKey(name: 'type_data') String? typeData});
+      @JsonKey(name: 'booking_type') String? typeData});
 
   $AppointmentDoctorsListCopyWith<$Res>? get doctorData;
   $PatientDataCopyWith<$Res>? get patientData;
@@ -528,7 +528,7 @@ abstract class _$$UpcomingAppointmentsDataImplCopyWith<$Res>
       @JsonKey(name: 'doctorTimeTableData')
       DoctorTimeTableData? doctorTimeTableData,
       @JsonKey(name: 'clinicData') AppointmentDoctorsList? clinicData,
-      @JsonKey(name: 'type_data') String? typeData});
+      @JsonKey(name: 'booking_type') String? typeData});
 
   @override
   $AppointmentDoctorsListCopyWith<$Res>? get doctorData;
@@ -656,7 +656,7 @@ class _$UpcomingAppointmentsDataImpl
       @JsonKey(name: 'patientData') this.patientData,
       @JsonKey(name: 'doctorTimeTableData') this.doctorTimeTableData,
       @JsonKey(name: 'clinicData') this.clinicData,
-      @JsonKey(name: 'type_data') this.typeData});
+      @JsonKey(name: 'booking_type') this.typeData});
 
   factory _$UpcomingAppointmentsDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UpcomingAppointmentsDataImplFromJson(json);
@@ -704,7 +704,7 @@ class _$UpcomingAppointmentsDataImpl
   @JsonKey(name: 'clinicData')
   final AppointmentDoctorsList? clinicData;
   @override
-  @JsonKey(name: 'type_data')
+  @JsonKey(name: 'booking_type')
   final String? typeData;
 
   @override
@@ -822,7 +822,7 @@ abstract class _UpcomingAppointmentsData implements UpcomingAppointmentsData {
           @JsonKey(name: 'doctorTimeTableData')
           final DoctorTimeTableData? doctorTimeTableData,
           @JsonKey(name: 'clinicData') final AppointmentDoctorsList? clinicData,
-          @JsonKey(name: 'type_data') final String? typeData}) =
+          @JsonKey(name: 'booking_type') final String? typeData}) =
       _$UpcomingAppointmentsDataImpl;
 
   factory _UpcomingAppointmentsData.fromJson(Map<String, dynamic> json) =
@@ -871,7 +871,7 @@ abstract class _UpcomingAppointmentsData implements UpcomingAppointmentsData {
   @JsonKey(name: 'clinicData')
   AppointmentDoctorsList? get clinicData;
   @override
-  @JsonKey(name: 'type_data')
+  @JsonKey(name: 'booking_type')
   String? get typeData;
 
   /// Create a copy of UpcomingAppointmentsData

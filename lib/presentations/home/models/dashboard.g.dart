@@ -54,7 +54,7 @@ _$UpcomingAppointmentsDataImpl _$$UpcomingAppointmentsDataImplFromJson(
           ? null
           : AppointmentDoctorsList.fromJson(
               json['clinicData'] as Map<String, dynamic>),
-      typeData: json['type_data'] as String?,
+      typeData: json['booking_type'] as String?,
     );
 
 Map<String, dynamic> _$$UpcomingAppointmentsDataImplToJson(
@@ -74,7 +74,7 @@ Map<String, dynamic> _$$UpcomingAppointmentsDataImplToJson(
       'patientData': instance.patientData,
       'doctorTimeTableData': instance.doctorTimeTableData,
       'clinicData': instance.clinicData,
-      'type_data': instance.typeData,
+      'booking_type': instance.typeData,
     };
 
 _$PatientDataImpl _$$PatientDataImplFromJson(Map<String, dynamic> json) =>
