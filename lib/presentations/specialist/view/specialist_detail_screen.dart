@@ -9,6 +9,7 @@ import 'package:doc_booking_app/widgets/blue_button.dart';
 import 'package:doc_booking_app/widgets/custom_icon_sizebox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class SpecialistDetailScreen extends GetView<SpecialistController> {
@@ -47,7 +48,9 @@ class SpecialistDetailScreen extends GetView<SpecialistController> {
                         );
                       },
                       errorWidget: (context, val, obj) {
-                        return Image.asset(AppImage.serviceIcon1);
+                        return SvgPicture.asset(
+                          AppImage.specialistIcon1,
+                        );
                       },
                     ),
                   ),
@@ -198,22 +201,21 @@ class SpecialistDetailScreen extends GetView<SpecialistController> {
                     ),
                   ),*/
                   SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  Text(
+                    '${serviceType.toUpperCase()} Visit',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textHeaderBlack),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Text(
                     ConstantString.about,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textHeaderBlack),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 10, bottom: 20),
-                    // child: RichText(
-                    //   maxLines: 5,
-                    //   overflow: TextOverflow.ellipsis,
-                    //   text: TextSpan(
-                    //     text: doctor.about,
-                    //     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.textHeaderGray),
-                    //   ),
-                    // ),
+                    padding: EdgeInsets.only( bottom: 10),
                     child: Html(
                       data: doctor.about ?? '',
                     ),

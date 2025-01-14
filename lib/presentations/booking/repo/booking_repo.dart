@@ -8,6 +8,7 @@ import 'package:doc_booking_app/util/log_utils.dart';
 
 abstract class BookingRepo {
   static const String _patientId = 'patient_id';
+
   // static const String _doctorId = 'doctor_id';
   static const String _doctorTimeTableId = 'doctor_time_table_id';
   static const String _amount = 'amount';
@@ -24,12 +25,6 @@ abstract class BookingRepo {
       String bookingDate) async {
     try {
       final Map<String, dynamic> data = {
-        // "patient_id": "34",
-        // "doctor_id": "6",
-        // "doctor_time_table_id": "17",
-        // "amount": "100",
-        // "payment_type": "1",
-        // "payment_card_id": "1"
         _patientId: patientId,
         doctorType == 'doctor' ? 'doctor_id' : 'clinic_id': doctorId,
         _doctorTimeTableId: doctorTimeTableId,
@@ -38,9 +33,10 @@ abstract class BookingRepo {
         _paymentCardId: '1',
         'booking_date_time': bookingDate
       };
+      LogUtil.debug(data);
       final result =
           await HttpService.post(Api.booking, data, showLoader: false);
-      LogUtil.debug(data);
+
       LogUtil.debug(result);
       if (result['isLive'] == true) {
         final response = BookingResponse.fromJson(result);
