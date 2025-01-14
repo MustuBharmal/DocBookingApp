@@ -12,7 +12,7 @@ import '../../../global/styles.dart';
 class BookTimeSlotScreen extends GetView<BookingController> {
   static const String routeName = '/booking-time-slot';
 
-  const BookTimeSlotScreen( {super.key});
+  const BookTimeSlotScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +80,7 @@ class BookTimeSlotScreen extends GetView<BookingController> {
                           return Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: controller.selectedDate.value
-                                          .isAtSameMomentAs(
-                                              controller.thisWeek[index])
+                                  color: controller.selectedDate.value.isAtSameMomentAs(controller.thisWeek[index])
                                       ? AppColors.white
                                       : AppColors.transparent,
                                   borderRadius: BorderRadius.circular(12)),
@@ -90,28 +88,20 @@ class BookTimeSlotScreen extends GetView<BookingController> {
                               child: Column(
                                 children: [
                                   Text(
-                                    CustomDateUtils.getDay(
-                                        controller.thisWeek[index]),
+                                    CustomDateUtils.getDay(controller.thisWeek[index]),
                                     style: TextStyle(
-                                        color: controller.selectedDate.value
-                                                .isAtSameMomentAs(
-                                                    controller.thisWeek[index])
+                                        color: controller.selectedDate.value.isAtSameMomentAs(controller.thisWeek[index])
                                             ? AppColors.primary
-                                            : controller.thisWeek[index]
-                                                    .isBefore(controller.today)
+                                            : controller.thisWeek[index].isBefore(controller.today)
                                                 ? AppColors.grey
                                                 : AppColors.white),
                                   ),
                                   Text(
-                                    CustomDateUtils.getDate(
-                                        controller.thisWeek[index]),
+                                    CustomDateUtils.getDate(controller.thisWeek[index]),
                                     style: TextStyle(
-                                        color: controller.selectedDate.value
-                                                .isAtSameMomentAs(
-                                                    controller.thisWeek[index])
+                                        color: controller.selectedDate.value.isAtSameMomentAs(controller.thisWeek[index])
                                             ? AppColors.primary
-                                            : controller.thisWeek[index]
-                                                    .isBefore(controller.today)
+                                            : controller.thisWeek[index].isBefore(controller.today)
                                                 ? AppColors.grey
                                                 : AppColors.white,
                                         fontWeight: FontWeight.w600,
@@ -121,11 +111,7 @@ class BookTimeSlotScreen extends GetView<BookingController> {
                                   Container(
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: controller
-                                                    .timeTable[controller
-                                                        .thisWeek[index]]
-                                                    ?.isNotEmpty ??
-                                                false
+                                        color: controller.timeTable[controller.thisWeek[index]]?.isNotEmpty ?? false
                                             ? AppColors.selectedDotColor
                                             : AppColors.transparent),
                                     height: 6,
@@ -134,8 +120,10 @@ class BookTimeSlotScreen extends GetView<BookingController> {
                                 ],
                               ),
                             ).onClick(() {
-                              controller.selectedDate.value =
-                                  controller.thisWeek[index];
+                              if (controller.selectedDate.value != controller.thisWeek[index]) {
+                                controller.selectedTT.value = null;
+                                controller.selectedDate.value = controller.thisWeek[index];
+                              }
                               // });
                               // }
                             }),
@@ -168,6 +156,13 @@ class BookTimeSlotScreen extends GetView<BookingController> {
                   }
                   return Obx(
                     () => Container(
+                      foregroundDecoration: tt.isAvailable != true
+                          ? BoxDecoration(
+                              color: AppColors.gray600.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(color: AppColors.borderColorLight, width: 1),
+                            )
+                          : null,
                       decoration: BoxDecoration(
                         color: AppColors.white,
                         borderRadius: BorderRadius.circular(100),
@@ -177,8 +172,10 @@ class BookTimeSlotScreen extends GetView<BookingController> {
                       ),
                       child: Center(child: Text(tt.startTime ?? '')),
                     ).onClick(() {
-                      controller.selectedTT.value = tt;
-                      LogUtil.debug('${tt.id}||${controller.selectedTT.value?.id}');
+                      if (tt.isAvailable == true) {
+                        controller.selectedTT.value = tt;
+                        LogUtil.debug('${tt.id}||${controller.selectedTT.value?.id}');
+                      }
                       // setState(() {});
                     }),
                   );

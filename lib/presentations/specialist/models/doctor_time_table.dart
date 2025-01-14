@@ -26,8 +26,6 @@ class DoctorTimeTable with _$DoctorTimeTable {
     @JsonKey(name: 'doctor_id') String? doctorId,
     @JsonKey(name: 'type') String? type,
     @JsonKey(name: 'clinic_id') String? clinicId,
-    @JsonKey(name: 'is_book_on') String? isBookOn,
-    @JsonKey(name: 'is_book_available') bool? isBookAvailable,
     @JsonKey(name: 'is_available') bool? isAvailable,
   }) = _DoctorTimeTable;
 
