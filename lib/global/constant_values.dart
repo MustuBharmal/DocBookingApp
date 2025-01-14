@@ -6,6 +6,7 @@ import '../presentations/profile/view/about_us_screen.dart';
 import '../presentations/profile/view/contact_us_screen.dart';
 import '../presentations/profile/view/faq_screen.dart';
 import '../presentations/profile/view/how_to_be_partner_screen.dart';
+import '../presentations/profile/view/appointments_screen.dart';
 import '../presentations/profile/view/prescription_screen.dart';
 import '../presentations/profile/view/profile_screen.dart';
 import '../presentations/profile/view/user_info_screen.dart';
@@ -16,7 +17,7 @@ import 'constant_string.dart';
 class ConstantValue {
   static const detailList = [
     ConstantString.userInfo,
-    // ConstantString.paymentMng,
+    ConstantString.appointments,
     ConstantString.faq,
     ConstantString.contactUs,
     ConstantString.aboutUs,
@@ -26,7 +27,7 @@ class ConstantValue {
   ];
   static var imagePathDetailList = [
     AppImage.userMyProfile,
-    // AppImage.paymentCard,
+    AppImage.paymentCard,
     AppImage.faq,
     AppImage.contactUs,
     AppImage.aboutUs,
@@ -36,7 +37,7 @@ class ConstantValue {
   ];
   static const navigateDetailList = [
     UserInfoScreen.routeName,
-    // PaymentManagementScreen.routeName,
+    AppointmentList.routeName,
     FAQScreen.routeName,
     ContactUsScreen.routeName,
     AboutUsScreen.routeName,

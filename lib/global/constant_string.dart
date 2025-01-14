@@ -8,7 +8,7 @@ class ConstantString {
   static const arrHomeVisit = 'Arrange Home Visit';
   static const chatWithSpecialist = 'Chat With a Specialist';
   static const userInfo = 'User Info';
-  static const paymentMng = 'Payment Management';
+  static const appointments = 'Appointments';
   static const faq = 'FAQ';
   static const contactUs = 'Contact Us';
   static const aboutUs = 'About Us';

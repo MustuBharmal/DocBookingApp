@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' as dio;
+import 'package:doc_booking_app/presentations/booking/models/booking_response.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
 import 'package:get/get.dart';
@@ -10,8 +11,33 @@ import '../../../util/log_utils.dart';
 import '../../authentication/controller/authentication_controller.dart';
 import '../../authentication/controller/loader_controller.dart';
 import '../../authentication/repo/auth_repo.dart';
+import '../models/booking_list.dart';
 
 abstract class ProfileRepo {
+  static Future<BookingListResponse?> getBookingDetails() async {
+    try {
+      Map<String, dynamic> data = {};
+      LogUtil.debug(Api.myBooking);
+      final result =
+          await HttpService.post(Api.myBooking, data, showLoader: false);
+      if (result['isLive'] == true) {
+        return BookingListResponse.fromJson(result);
+      } else {
+        throw Exception("Error: ${result['message']}");
+      }
+    } on ServerException catch (e) {
+      LogUtil.error(e);
+      rethrow;
+    } catch (e) {
+      if (e is dio.DioException) {
+        var errData = (e).response!.data;
+        final String? errMessage = errData['message']?.toString();
+        throw errMessage ?? 'Please try again';
+      }
+      rethrow;
+    }
+  }
+
   static Future<List<FaqModels?>> getFaqs() async {
     try {
       List<FaqModels?> list = [];
@@ -69,8 +95,8 @@ abstract class ProfileRepo {
   static Future<bool> updateProfileApi(Map<String, dynamic> params) async {
     try {
       LogUtil.debug(params);
-      final result =
-          await HttpService.post(Api.updateProfile, params, token: true, showLoader: false);
+      final result = await HttpService.post(Api.updateProfile, params,
+          token: true, showLoader: false);
 
       if (result['isLive'] == true) {
         LogUtil.debug(result);

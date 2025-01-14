@@ -12,6 +12,7 @@ import '../../../exception/server_exception.dart';
 import '../../authentication/models/city_model.dart';
 import '../../authentication/models/country_model.dart';
 import '../../authentication/models/state_model.dart';
+import '../models/booking_list.dart';
 
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find<ProfileController>();
@@ -38,6 +39,7 @@ class ProfileController extends GetxController {
   Rx<CityModel?> selectCity = Rx(null);
   final ImagePicker _picker = ImagePicker();
   RxList<FaqModels?> listOfFaqs = RxList.empty();
+  Rx<BookingListResponse?> bookingList = Rx(BookingListResponse());
   final List<String> prefCommMethodList = ['Whatsapp', 'Telephone', 'Message'];
   final List<String> businessNamesList = [
     'Fitness First',
@@ -74,6 +76,7 @@ class ProfileController extends GetxController {
     super.onInit();
     initializeControllers();
     selectedImage = Rx<File?>(null);
+    getAppointment();
     getFaq();
   }
 
@@ -104,6 +107,19 @@ class ProfileController extends GetxController {
   void getFaq() async {
     try {
       listOfFaqs.value = await ProfileRepo.getFaqs();
+    } on ServerException catch (e) {
+      Get.snackbar('Error', e.message);
+    } on SocketException {
+      Get.snackbar('Error', 'No internet connection');
+    } catch (e) {
+      Get.snackbar('Login failed', '$e');
+    } finally {}
+  }
+
+  // get appointment
+  void getAppointment() async {
+    try {
+      bookingList.value = await ProfileRepo.getBookingDetails();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

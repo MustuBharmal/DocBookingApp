@@ -17,7 +17,7 @@ import 'package:doc_booking_app/presentations/profile/view/about_us_screen.dart'
 import 'package:doc_booking_app/presentations/profile/view/contact_us_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/faq_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/how_to_be_partner_screen.dart';
-import 'package:doc_booking_app/presentations/profile/view/payment_management_screen.dart';
+import 'package:doc_booking_app/presentations/profile/view/appointments_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_form_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_inside_screen.dart';
 import 'package:doc_booking_app/presentations/profile/view/prescription_screen.dart';
@@ -77,9 +77,9 @@ class AppRoutes {
       page: () => const BookSlotsConfirmScreen(),
     ),
     GetPage(
-      name: PaymentManagementScreen.routeName,
-      page: () => const PaymentManagementScreen(),
-    ),
+        name: AppointmentList.routeName,
+        page: () => const AppointmentList(),
+        binding: ProfileBinding()),
     GetPage(
         name: FAQScreen.routeName,
         page: () => const FAQScreen(),
@@ -148,14 +148,14 @@ class AppRoutes {
       binding: ServiceBinding(),
     ),
     GetPage(
-      name: SpecialistDetailScreen.routeName,
-      page: () {
-        DoctorsList doctor = Get.arguments['doctor'];
-        String serviceType = Get.arguments['serviceType'];
-        return SpecialistDetailScreen(doctor: doctor, serviceType: serviceType);
-      },
-      binding: SpecialistBinding()
-    ),
+        name: SpecialistDetailScreen.routeName,
+        page: () {
+          DoctorsList doctor = Get.arguments['doctor'];
+          String serviceType = Get.arguments['serviceType'];
+          return SpecialistDetailScreen(
+              doctor: doctor, serviceType: serviceType);
+        },
+        binding: SpecialistBinding()),
     GetPage(
       name: PaymentScreen.routeName,
       page: () => PaymentScreen(),

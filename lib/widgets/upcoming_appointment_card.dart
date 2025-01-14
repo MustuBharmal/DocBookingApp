@@ -136,7 +136,19 @@ class RoundedImage extends StatelessWidget {
         width: size,
         child: CachedNetworkImage(
           imageUrl: imagePath ?? '',
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
+          progressIndicatorBuilder: (context, val, pr) {
+            return Center(
+              child: CircularProgressIndicator(
+                value: pr.progress,
+              ),
+            );
+          },
+          errorWidget: (context, val, obj) {
+            return SvgPicture.asset(
+              AppImage.specialistIcon1,
+            );
+          },
         ),
       ),
     );

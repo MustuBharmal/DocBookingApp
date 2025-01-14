@@ -7,6 +7,7 @@ class Api {
   static String signIn = 'singin';
   static String otpVerification = 'verify-email';
   static String dashboard = 'patient/dashboard';
+  static String myBooking = 'patient/my-booking';
   static String services = 'service';
   static String specialistType = 'specialist';
   static String doctors = 'doctor';
