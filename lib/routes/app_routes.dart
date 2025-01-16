@@ -202,8 +202,11 @@ class AppRoutes {
       name: BookingHistoryDetails.routeName,
       page: () {
         UpcomingAppointmentsData bookDetails = Get.arguments['bookingDetails'];
+
+        bool isCancellable = Get.arguments['isCancellable'];
         return BookingHistoryDetails(
           appointmentData: bookDetails,
+          isCancellable: isCancellable,
         );
       },
     )

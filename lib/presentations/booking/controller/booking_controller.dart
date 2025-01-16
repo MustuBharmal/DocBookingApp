@@ -70,6 +70,7 @@ class BookingController extends GetxController {
       // 1. create payment intent on the server
       LoaderController.instance.showLoader();
       final BookingData? bookingData = await BookingRepo.getPaymentSecret(
+          doctorData!.type!,
           AuthController.instance.user.value?.id.toString() ?? '',
           doctorData?.id?.toString() ?? '',
           selectedTT.value?.id?.toString() ?? '',

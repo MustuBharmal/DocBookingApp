@@ -271,8 +271,8 @@ class SpecialistDetailScreen extends GetView<SpecialistController> {
                     onPressed: () async {
                       //todo get new timeslots from api
                       final timetable = await controller.getDoctorTimeTable(
-                          doctorId: serviceType == 'clinic' ? null : doctor.id,
-                          clinicId: serviceType == 'clinic' ? doctor.id : null);
+                          doctorId: doctor.type == 'doctor' ? doctor.id : null,
+                          clinicId: doctor.type == 'clinic' ? doctor.id : null);
 
                       Get.toNamed(BookTimeSlotScreen.routeName,
                           arguments: {'doctor': doctor.copyWith(doctorTimeTable: timetable), 'serviceType': serviceType});

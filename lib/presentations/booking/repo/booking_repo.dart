@@ -17,6 +17,7 @@ abstract class BookingRepo {
   static const String _bookingId = 'booking_id';
 
   static Future<BookingData?> getPaymentSecret(
+      String type,
       String patientId,
       String doctorId,
       String doctorTimeTableId,
@@ -26,12 +27,13 @@ abstract class BookingRepo {
     try {
       final Map<String, dynamic> data = {
         _patientId: patientId,
-        doctorType == 'doctor' ? 'doctor_id' : 'clinic_id': doctorId,
+        type == 'doctor' ? 'doctor_id' : 'clinic_id': doctorId,
         _doctorTimeTableId: doctorTimeTableId,
         _amount: amount,
         _paymentType: '1',
         _paymentCardId: '1',
-        'booking_date_time': bookingDate
+        'booking_date_time': bookingDate,
+        'booking_type': doctorType
       };
       LogUtil.debug(data);
       final result =

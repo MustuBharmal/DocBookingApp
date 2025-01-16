@@ -3,8 +3,8 @@ import 'package:doc_booking_app/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../widgets/custom_specialist_container.dart';
 import '../../home/view/booking_history_detail.dart';
+import '../widgets/custom_appointment_card.dart';
 
 class AppointmentList extends GetView<ProfileController> {
   static const String routeName = '/appointment-list-screen';
@@ -30,22 +30,25 @@ class AppointmentList extends GetView<ProfileController> {
                   itemBuilder: (context, index) {
                     final appointmentData =
                         controller.bookingList.value?.appointments[index];
-                    return CustomSpecialistContainer(
+                    return CustomAppointmentCard(
                       picPath: appointmentData?.doctorData?.profilePic ??
                           (appointmentData?.clinicData?.profilePic ?? ''),
                       name: appointmentData?.doctorData?.name ??
                           appointmentData?.clinicData?.name ??
                           '',
                       specialist:
-                          appointmentData?.doctorData?.serviceData?.name ??
-                              appointmentData?.clinicData?.serviceData?.name ??
-                              '',
+                      appointmentData?.doctorData?.serviceData?.name ??
+                          appointmentData?.clinicData?.serviceData?.name ??
+                          '',
                       charges: '',
+                      serviceType: appointmentData?.typeData,
+                      selectedTimeSlot: appointmentData?.doctorTimeTableData,
                       onPressed: () {
                         Get.toNamed(BookingHistoryDetails.routeName,
                             arguments: {
                               'bookingDetails': controller
-                                  .bookingList.value?.appointments[index]
+                                  .bookingList.value?.appointments[index],
+                              'isCancellable': false,
                             });
                       },
                     );

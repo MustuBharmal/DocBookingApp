@@ -56,8 +56,22 @@ class AuthController extends GetxController {
   Future<String?> getFcmToken() async {
     try {
       FirebaseMessaging messaging = FirebaseMessaging.instance;
-      String? token = await messaging.getToken();
-      print('FCM Token: $token');
+
+      String? token;
+      if (Platform.isIOS) {
+        token = await messaging.getAPNSToken();
+        if (token == null) {
+          await Future<void>.delayed(
+            const Duration(
+              seconds: 3,
+            ),
+          );
+          token = await messaging.getAPNSToken();
+        }
+      } else {
+        token = await messaging.getToken();
+        print('FCM Token: $token');
+      }
       return token;
     } catch (e) {
       print('Error getting FCM token: $e');
