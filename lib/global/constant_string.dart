@@ -23,7 +23,7 @@ class ConstantString {
       'Enter email address to receive a 4 \ndigit code for verification';
   static const emailAddress = 'Email Address';
   static const continueLabel = 'Continue';
-  static const appName = 'Youth';
+  static const appName = 'Youth Revisited Pro Services';
   static const signIn = 'Sign In';
   static const signUp = 'Sign Up';
   static const password = 'Password';

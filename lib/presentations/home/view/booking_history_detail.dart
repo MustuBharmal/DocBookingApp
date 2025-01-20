@@ -13,7 +13,7 @@ import '../../../widgets/upcoming_appointment_card.dart';
 import '../models/dashboard.dart';
 
 class BookingHistoryDetails extends StatelessWidget {
-  static const routeName = '/booking-history_detail-screen';
+  static const routeName = '/booking-history-detail-screen';
 
   final UpcomingAppointmentsData appointmentData;
   final bool isCancellable;

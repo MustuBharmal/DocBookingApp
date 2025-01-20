@@ -156,8 +156,8 @@ class AuthController extends GetxController {
   }
 
   // Function to pick an image from the gallery
-  Future<void> pickImageSignup() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+  Future<void> pickImageSignup(ImageSource source) async {
+    final XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
       selectedImageSignup.value = File(image.path);
     }

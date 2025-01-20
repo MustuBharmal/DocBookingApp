@@ -5,6 +5,7 @@ import 'package:doc_booking_app/presentations/authentication/controller/authenti
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../global/app_color.dart';
 import '../../../global/constant_string.dart';
@@ -90,9 +91,9 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                           ),
                           Positioned(
                             bottom: -1,
-                            left: 160,
+                            left: 165,
                             child: GestureDetector(
-                              onTap: () => controller.pickImage(),
+                              onTap: () => Get.bottomSheet(profileBottomSheet()),
                               // Trigger image picker
                               child: CircleAvatar(
                                 backgroundColor: AppColors.white,
@@ -343,6 +344,65 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                 ),
               )),
         ),
+      ),
+    );
+  }
+
+  Widget profileBottomSheet() {
+    return Container(
+      width: Get.width,
+      decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(15))),
+      padding: const EdgeInsets.only(
+        top: 20,
+        // vertical: 20,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const Text(
+            'Capture Image',
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton.icon(
+                onPressed: () async {
+                  Get.back();
+                  controller.pickImage(ImageSource.camera);
+                },
+                icon: const Icon(
+                  Icons.camera_alt_outlined,
+                ),
+                label: const Text(
+                  'Camera',
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () async {
+                  Get.back();
+                  controller.pickImage(ImageSource.gallery);
+                },
+                icon: const Icon(
+                  Icons.image_outlined,
+                ),
+                label: const Text(
+                  'Gallery',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
       ),
     );
   }

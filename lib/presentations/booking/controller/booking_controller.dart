@@ -127,9 +127,18 @@ class BookingController extends GetxController {
             bookingData?.bookingId.toString() ?? '');
         LoaderController.instance.showLoader();
         if (bookingDetails?.isPaymentDone ?? false) {
-          Get.snackbar('Success', 'Your booking done!');
+          if (serviceType == 'Home') {
+            Get.snackbar('Success',
+                'Your booking done!\nZoom link will be sent to your Email Address.');
+          } else {
+            Get.snackbar('Success', 'Your booking done!');
+          }
         } else {
           Get.snackbar('Error', 'Your booking failed!');
+          Get.until(
+                  (routes) => routes.settings.name == NavigationScreen.routeName);
+          return;
+
         }
 
         HomeController.instance.selectedIndex.value = 0;

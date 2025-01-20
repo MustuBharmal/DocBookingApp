@@ -1,6 +1,3 @@
-import 'package:doc_booking_app/presentations/services/models/service.dart';
-import 'package:doc_booking_app/presentations/specialist/models/doctor_time_table.dart';
-import 'package:doc_booking_app/presentations/specialist/models/specialist.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

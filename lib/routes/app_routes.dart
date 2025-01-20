@@ -203,7 +203,7 @@ class AppRoutes {
       page: () {
         UpcomingAppointmentsData bookDetails = Get.arguments['bookingDetails'];
 
-        bool isCancellable = Get.arguments['isCancellable'];
+        bool isCancellable = Get.arguments['isCancellable'] ?? true;
         return BookingHistoryDetails(
           appointmentData: bookDetails,
           isCancellable: isCancellable,

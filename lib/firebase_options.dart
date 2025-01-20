@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyChre4Xy4m9qewenthGxNshJX0Esf5a1Xo',
-    appId: '1:940698519949:ios:e9177177f9c643395215c4',
+    appId: '1:940698519949:ios:0b65b6350b89e48f5215c4',
     messagingSenderId: '940698519949',
     projectId: 'live-doctor-app',
     storageBucket: 'live-doctor-app.firebasestorage.app',

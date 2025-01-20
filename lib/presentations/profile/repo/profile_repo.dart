@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart' as dio;
-import 'package:doc_booking_app/presentations/booking/models/booking_response.dart';
 import 'package:doc_booking_app/presentations/profile/controller/profile_controller.dart';
 import 'package:doc_booking_app/presentations/profile/models/faq_model.dart';
 import 'package:get/get.dart';

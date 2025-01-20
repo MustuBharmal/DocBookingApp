@@ -68,6 +68,7 @@ abstract class BookingRepo {
   static Future<BookingDetailsData?> getBookingDetails(String bookingId) async {
     try {
       final Map<String, dynamic> data = {_bookingId: bookingId};
+      LogUtil.debug(data);
       final result =
           await HttpService.post(Api.bookingDetails, data, showLoader: false);
       if (result['isLive'] == true) {

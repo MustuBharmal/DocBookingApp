@@ -14,6 +14,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../global/styles.dart';
 import '../../../widgets/custom_dialogbox.dart';
@@ -34,7 +35,6 @@ class SignupScreen extends GetView<AuthController> {
   final TextEditingController stateController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,8 @@ class SignupScreen extends GetView<AuthController> {
                           ),
                         ),
                       ).onClick(() {
-                        controller.pickImageSignup();
+                        LogUtil.debug('hello');
+                        Get.bottomSheet(profileBottomSheet());
                       }),
                     ),
                     if (controller.signupError['profile_pic'] != null)
@@ -120,7 +121,7 @@ class SignupScreen extends GetView<AuthController> {
                       height: 25,
                     ),
                     Obx(
-                        () => CustomTextField(
+                      () => CustomTextField(
                         isPassword: RxBool(false),
                         label: ConstantString.fullName,
                         showAsterisk: true,
@@ -131,7 +132,7 @@ class SignupScreen extends GetView<AuthController> {
                       ),
                     ),
                     Obx(
-                        () => CustomTextField(
+                      () => CustomTextField(
                         isPassword: RxBool(false),
                         controller: emailController,
                         inputType: TextInputType.emailAddress,
@@ -150,7 +151,7 @@ class SignupScreen extends GetView<AuthController> {
                       ),
                     ),
                     Obx(
-                        () => CustomTextField(
+                      () => CustomTextField(
                         isPassword: RxBool(true),
                         controller: passController,
                         hintText: 'eg. 123',
@@ -172,7 +173,7 @@ class SignupScreen extends GetView<AuthController> {
                       ),
                     ),
                     Obx(
-                      ()=> CustomDropdown(
+                      () => CustomDropdown(
                         label: ConstantString.sex,
                         showAsterisk: true,
                         items: ['Male', 'Female', 'Other'],
@@ -187,7 +188,7 @@ class SignupScreen extends GetView<AuthController> {
                       ),
                     ),
                     Obx(
-                        () => CustomTextField(
+                      () => CustomTextField(
                         isPassword: RxBool(false),
                         label: ConstantString.address,
                         showAsterisk: true,
@@ -265,7 +266,7 @@ class SignupScreen extends GetView<AuthController> {
                       ),
                     ),
                     Obx(
-                          () => CustomTextField(
+                      () => CustomTextField(
                         isPassword: RxBool(false),
                         label: 'City',
                         showAsterisk: true,
@@ -306,7 +307,7 @@ class SignupScreen extends GetView<AuthController> {
                     //     // },
                     //   ),
                     Obx(
-                        ()=> CustomTextField(
+                      () => CustomTextField(
                         isPassword: RxBool(false),
                         label: ConstantString.postCode,
                         showAsterisk: true,
@@ -366,6 +367,65 @@ class SignupScreen extends GetView<AuthController> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget profileBottomSheet() {
+    return Container(
+      width: Get.width,
+      decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(15))),
+      padding: const EdgeInsets.only(
+        top: 20,
+        // vertical: 20,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const Text(
+            'Capture Image',
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton.icon(
+                onPressed: () async {
+                  Get.back();
+                  controller.pickImageSignup(ImageSource.camera);
+                },
+                icon: const Icon(
+                  Icons.camera_alt_outlined,
+                ),
+                label: const Text(
+                  'Camera',
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () async {
+                  Get.back();
+                  controller.pickImageSignup(ImageSource.gallery);
+                },
+                icon: const Icon(
+                  Icons.image_outlined,
+                ),
+                label: const Text(
+                  'Gallery',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
       ),
     );
   }

@@ -57,9 +57,9 @@ class ProfileController extends GetxController {
   Rx<File?> selectedImage = Rx<File?>(null);
 
   // Function to pick an image
-  Future<void> pickImage() async {
+  Future<void> pickImage(ImageSource source) async {
     final XFile? image = await _picker.pickImage(
-      source: ImageSource.camera,
+      source: source,
     );
     if (image != null) {
       selectedImage.value = File(image.path);

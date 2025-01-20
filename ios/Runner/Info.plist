@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow Camera Access to upload images</string>
+	<string>Allow Camera Access to upload your profile images</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need your location to get nearby Specialist</string>
 	<key>NSLocationAlwaysUsageDescription</key>
