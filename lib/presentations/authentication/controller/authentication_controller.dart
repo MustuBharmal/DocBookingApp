@@ -12,6 +12,7 @@ import 'package:doc_booking_app/util/log_utils.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../exception/server_exception.dart';
 import '../../home/view/navigation_screen.dart';
@@ -106,11 +107,8 @@ class AuthController extends GetxController {
   void searchCountry(String value) {
     if (value.isNotEmpty) {
       searchedCountries.clear();
-      searchedCountries.addAll(countries
-          .where((country) =>
-              country.name?.toLowerCase().startsWith(value.toLowerCase()) ??
-              false)
-          .toList());
+      searchedCountries
+          .addAll(countries.where((country) => country.name?.toLowerCase().startsWith(value.toLowerCase()) ?? false).toList());
     } else {
       searchedCountries.clear();
       searchedCountries.addAll(countries);
@@ -142,11 +140,9 @@ class AuthController extends GetxController {
 
   getStatesAndCountry(String countryName) async {
     try {
-      selectCountry.value =
-          countries.firstWhere((country) => country.name == countryName);
+      selectCountry.value = countries.firstWhere((country) => country.name == countryName);
       states.clear();
-      states
-          .addAll(await AuthRepo.getState(selectCountry.value!.id.toString()));
+      states.addAll(await AuthRepo.getState(selectCountry.value!.id.toString()));
       update(['state']);
       // searchState('');
       LogUtil.debug(states.length);
@@ -157,6 +153,18 @@ class AuthController extends GetxController {
 
   // Function to pick an image from the gallery
   Future<void> pickImageSignup(ImageSource source) async {
+    if (source == ImageSource.camera) {
+      if (!(await Permission.camera.request().isGranted)) {
+        Get.snackbar('Error', 'Permission Denied');
+        return;
+      }
+    }
+    if (source == ImageSource.gallery) {
+      if (!(await Permission.photos.request().isGranted)) {
+        Get.snackbar('Error', 'Permission Denied');
+        return;
+      }
+    }
     final XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
       selectedImageSignup.value = File(image.path);
@@ -264,9 +272,7 @@ class AuthController extends GetxController {
         LoaderController.instance.showLoader();
         String? profilePic;
         if (selectedImageSignup.value != null) {
-          profilePic = await AuthRepo.uploadProfilePic(
-              selectedImageSignup.value!,
-              showLoader: false);
+          profilePic = await AuthRepo.uploadProfilePic(selectedImageSignup.value!, showLoader: false);
           if (profilePic == null) {
             Get.snackbar('Error', 'Image Upload failed!');
             return;
@@ -292,8 +298,7 @@ class AuthController extends GetxController {
         LoaderController.instance.dismissLoader();
         if (user.value != null) {
           this.email = email;
-          Get.toNamed(AccountVerificationScreen.routeName,
-              arguments: {'condition': false});
+          Get.toNamed(AccountVerificationScreen.routeName, arguments: {'condition': false});
         }
       }
     } on CustomErrorMap catch (e) {
@@ -330,8 +335,7 @@ class AuthController extends GetxController {
     try {
       final isOtpSent = await AuthRepo.forgetPassword(email);
       if (isOtpSent) {
-        Get.toNamed(AccountVerificationScreen.routeName,
-            arguments: {'condition': true});
+        Get.toNamed(AccountVerificationScreen.routeName, arguments: {'condition': true});
       }
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);

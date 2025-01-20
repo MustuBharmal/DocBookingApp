@@ -27,14 +27,9 @@ abstract class AuthRepo {
   static const String _fcmTokenKey = 'firebase_token';
 
   // login is working
-  static Future<User?> signIn(
-      String email, String password, String fcmToken) async {
+  static Future<User?> signIn(String email, String password, String fcmToken) async {
     try {
-      final Map<String, dynamic> data = {
-        _email: email,
-        _passwordKey: password,
-        _fcmTokenKey: fcmToken
-      };
+      final Map<String, dynamic> data = {_email: email, _passwordKey: password, _fcmTokenKey: fcmToken};
       LogUtil.debug(Api.signIn);
       LogUtil.debug(data);
       final result = await HttpService.post(Api.signIn, data);
@@ -94,14 +89,9 @@ abstract class AuthRepo {
   }
 
   // otp verification
-  static Future<User> otpVerification(
-      String email, String otp, String fcmToken) async {
+  static Future<User> otpVerification(String email, String otp, String fcmToken) async {
     try {
-      final Map<String, dynamic> data = {
-        _email: email,
-        _otpCodeKey: otp,
-        'firebase_token': 'dddd'
-      };
+      final Map<String, dynamic> data = {_email: email, _otpCodeKey: otp, 'firebase_token': 'dddd'};
       LogUtil.debug(Api.otpVerification);
       final result = await HttpService.post(Api.otpVerification, data);
       LogUtil.debug(result);
@@ -232,8 +222,7 @@ abstract class AuthRepo {
       };
       LogUtil.debug('json: $data');
       LogUtil.debug(Api.signUp);
-      final result =
-          await HttpService.post(Api.signUp, data, showLoader: showLoader);
+      final result = await HttpService.post(Api.signUp, data, showLoader: showLoader);
       if (result['isLive'] == true) {
         LogUtil.debug(result);
         Get.snackbar('Success', result['message'].toString());
@@ -254,13 +243,10 @@ abstract class AuthRepo {
     }
   }
 
-  static Future<String?> uploadProfilePic(File picture,
-      {bool showLoader = true}) async {
+  static Future<String?> uploadProfilePic(File picture, {bool showLoader = true}) async {
     try {
-      final dio.FormData data = dio.FormData.fromMap(
-          {'files': await dio.MultipartFile.fromFile(picture.path)});
-      final result = await HttpService.picPost(Api.imageUpload, data,
-          showLoader: showLoader);
+      final dio.FormData data = dio.FormData.fromMap({'files': await dio.MultipartFile.fromFile(picture.path)});
+      final result = await HttpService.picPost(Api.imageUpload, data, showLoader: showLoader);
       if (result['isLive'] == true) {
         return result['data']['store_url'];
       } else {
@@ -308,9 +294,9 @@ abstract class AuthRepo {
   static Future<List<CountryModel>> getCountries() async {
     try {
       final result = await HttpService.post(Api.country, {}, showLoader: false);
+      LogUtil.debug(result);
       if (result['code'] == 200) {
-        final CountryResponse countryResponse =
-            CountryResponse.fromJson(result);
+        final CountryResponse countryResponse = CountryResponse.fromJson(result);
         if (countryResponse.success) {
           return countryResponse.data;
         } else {
@@ -334,9 +320,7 @@ abstract class AuthRepo {
   // get states
   static Future<List<StateModel>> getState(String countryId) async {
     try {
-      final result = await HttpService.post(
-          Api.state, {'country_id': countryId},
-          showLoader: false);
+      final result = await HttpService.post(Api.state, {'country_id': countryId}, showLoader: false);
       LogUtil.debug(result);
       if (result['code'] == 200) {
         final StateResponse stateResponse = StateResponse.fromJson(result);
@@ -363,8 +347,7 @@ abstract class AuthRepo {
   // get cities
   static Future<List<CityModel>> getCities(String stateId) async {
     try {
-      final result = await HttpService.post(Api.city, {'state_id': stateId},
-          showLoader: false);
+      final result = await HttpService.post(Api.city, {'state_id': stateId}, showLoader: false);
       LogUtil.debug(result);
       if (result['code'] == 200) {
         final CityResponse cityResponse = CityResponse.fromJson(result);

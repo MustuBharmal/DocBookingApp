@@ -64,17 +64,14 @@ class SignupScreen extends GetView<AuthController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0, bottom: 25),
-                      child: Text(ConstantString.createAccount,
-                          style: txtInterTextField),
+                      child: Text(ConstantString.createAccount, style: txtInterTextField),
                     ),
                     Obx(
                       () => Container(
                         height: 100,
                         width: 100,
                         padding: EdgeInsets.all(0),
-                        decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(21)),
+                        decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(21)),
                         child: DottedBorder(
                           color: AppColors.borderColor,
                           radius: Radius.circular(20),
@@ -83,23 +80,18 @@ class SignupScreen extends GetView<AuthController> {
                           dashPattern: [4, 3],
                           borderPadding: EdgeInsets.all(1),
                           child: Container(
-                            decoration:
-                                controller.selectedImageSignup.value != null
-                                    ? BoxDecoration(
-                                        borderRadius: BorderRadius.circular(19),
-                                        image: DecorationImage(
-                                            image: FileImage(controller
-                                                .selectedImageSignup.value!),
-                                            fit: BoxFit.cover))
-                                    : null,
+                            decoration: controller.selectedImageSignup.value != null
+                                ? BoxDecoration(
+                                    borderRadius: BorderRadius.circular(19),
+                                    image: DecorationImage(
+                                        image: FileImage(controller.selectedImageSignup.value!), fit: BoxFit.cover))
+                                : null,
                             child: controller.selectedImageSignup.value == null
-                                ? Center(
-                                    child: SvgPicture.asset(AppImage.icCamera))
+                                ? Center(child: SvgPicture.asset(AppImage.icCamera))
                                 : null,
                           ),
                         ),
                       ).onClick(() {
-                        LogUtil.debug('hello');
                         Get.bottomSheet(profileBottomSheet());
                       }),
                     ),
@@ -194,8 +186,7 @@ class SignupScreen extends GetView<AuthController> {
                         showAsterisk: true,
                         controller: addressController,
                         hintStyle: txtInterTextFieldHint,
-                        hintText:
-                            'eg 4517 Washington Ave. Manchester, Kentucky 39495',
+                        hintText: 'eg 4517 Washington Ave. Manchester, Kentucky 39495',
                         errorText: controller.signupError['address'],
                       ),
                     ),
@@ -251,10 +242,8 @@ class SignupScreen extends GetView<AuthController> {
                             TypeOfDialogs.showCommonBottomSheetDialog(
                               context,
                               'State',
-                              RxList.from(controller.states
-                                  .where((state) => state.name != null)
-                                  .map((state) => state.name!)
-                                  .toList()),
+                              RxList.from(
+                                  controller.states.where((state) => state.name != null).map((state) => state.name!).toList()),
                               RxList.empty(),
                               stateController,
                               controller.getCitiesAndState,
@@ -374,9 +363,7 @@ class SignupScreen extends GetView<AuthController> {
   Widget profileBottomSheet() {
     return Container(
       width: Get.width,
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(15))),
+      decoration: BoxDecoration(color: AppColors.white, borderRadius: const BorderRadius.vertical(top: Radius.circular(15))),
       padding: const EdgeInsets.only(
         top: 20,
         // vertical: 20,
