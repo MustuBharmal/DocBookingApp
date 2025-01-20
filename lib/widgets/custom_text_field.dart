@@ -61,7 +61,7 @@ class CustomTextField extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8.0),
             child: Obx(
               () => TextFormField(
-                onTap: () => onTap,
+                onTap: onTap,
                 onChanged: (value) {
                   if (onChanged != null) {
                     onChanged!(value);
