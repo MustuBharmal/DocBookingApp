@@ -30,25 +30,31 @@ class HttpService extends HttpOverrides {
     _dio = dio.Dio(_baseOptions);
   }
 
-  static Future<Map<String, dynamic>> get(String path, Map<String, dynamic> params,
+  static Future<Map<String, dynamic>> get(
+      String path, Map<String, dynamic> params,
       {bool token = false, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
       showLoader ? LoaderController.instance.showLoader() : null;
-      LogUtil.debug(StorageUtil.getToken());
       final dio.Response response = await _dio.get(
         path,
         queryParameters: params,
-        options: token ? dio.Options(headers: {'own-access-token': 'Bearer ${StorageUtil.getToken().toString()}'}) : null,
+        options: token
+            ? dio.Options(headers: {
+                'own-access-token':
+                    'Bearer ${StorageUtil.getToken().toString()}'
+              })
+            : null,
       );
       showLoader ? LoaderController.instance.dismissLoader() : null;
       result = response.data as Map<String, dynamic>;
       if (response.statusCode == 200) {
         result = response.data as Map<String, dynamic>;
-      }
-      else {
-        if (response.data != null && response.data['data'] is Map<String, String>) {
-          throw CustomErrorMap(response.data['message'] ?? '', errors: response.data['data']);
+      } else {
+        if (response.data != null &&
+            response.data['data'] is Map<String, String>) {
+          throw CustomErrorMap(response.data['message'] ?? '',
+              errors: response.data['data']);
         }
 
         LogUtil.error(response.data);
@@ -60,12 +66,12 @@ class HttpService extends HttpOverrides {
     return result;
   }
 
-  static Future<Map<String, dynamic>> post(String path, Map<String, dynamic> data,
+  static Future<Map<String, dynamic>> post(
+      String path, Map<String, dynamic> data,
       {bool token = true, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
       showLoader ? LoaderController.instance.showLoader() : null;
-      LogUtil.debug('Bearer ${StorageUtil.getToken().toString()}');
 
       final dio.Response response = await _dio.post(
         path,
@@ -73,7 +79,8 @@ class HttpService extends HttpOverrides {
         options: token
             ? dio.Options(
                 headers: {
-                  'own-access-token': 'Bearer ${StorageUtil.getToken().toString()}',
+                  'own-access-token':
+                      'Bearer ${StorageUtil.getToken().toString()}',
                 },
               )
             : null,
@@ -85,8 +92,10 @@ class HttpService extends HttpOverrides {
       }
       result = response.data as Map<String, dynamic>;
       LogUtil.error(response.statusCode);
-      if (response.data != null && response.data['data'] is Map<String, String>) {
-        throw CustomErrorMap(response.data['message'] ?? '', errors: response.data['data']);
+      if (response.data != null &&
+          response.data['data'] is Map<String, String>) {
+        throw CustomErrorMap(response.data['message'] ?? '',
+            errors: response.data['data']);
       }
       throw Exception(response.statusMessage);
     } catch (e) {
@@ -95,7 +104,8 @@ class HttpService extends HttpOverrides {
     return result;
   }
 
-  static Future<Map<String, dynamic>> picPost(String path, dio.FormData data, {bool token = true, bool showLoader = true}) async {
+  static Future<Map<String, dynamic>> picPost(String path, dio.FormData data,
+      {bool token = true, bool showLoader = true}) async {
     Map<String, dynamic> result = {};
     try {
       if (showLoader) LoaderController.instance.showLoader();
@@ -105,7 +115,8 @@ class HttpService extends HttpOverrides {
         data: data,
         options: token
             ? dio.Options(headers: {
-                'own-access-token': StorageUtil.getToken().toString(), // Ensure tokenString is used here
+                'own-access-token': StorageUtil.getToken().toString(),
+                // Ensure tokenString is used here
                 'Content-Type': 'multipart/form-data',
               })
             : null,

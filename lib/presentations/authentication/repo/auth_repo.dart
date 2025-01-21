@@ -14,7 +14,6 @@ import '../../../service/http_service.dart';
 import '../../../util/log_utils.dart';
 import '../../../util/storage_util.dart';
 import '../controller/authentication_controller.dart';
-import '../views/account_verification_screen.dart';
 
 abstract class AuthRepo {
   static const String _email = 'email';
@@ -41,12 +40,12 @@ abstract class AuthRepo {
         return User.fromJson(result['data']['user'] as Map<String, dynamic>);
       } else if (result['isLive'] == false) {
         LogUtil.debug(result);
-        StorageUtil.writeToken(result['data']['access_token'].toString());
-        StorageUtil.writeUserId(result['data']['user']['id'].toString());
-        Get.toNamed(AccountVerificationScreen.routeName);
-        throw Exception("${result['data']['error']}");
+        // StorageUtil.writeToken(result['data']['access_token'].toString());
+        // StorageUtil.writeUserId(result['data']['user']['id'].toString());
+        // Get.toNamed(AccountVerificationScreen.routeName);
+        throw Exception("${result['message']}");
       } else {
-        throw Exception("${result['data']['error']}");
+        throw Exception("${result['message']}");
       }
     } on ServerException catch (e) {
       LogUtil.error(e);

@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../exception/server_exception.dart';
 import '../../authentication/models/city_model.dart';
@@ -58,6 +59,12 @@ class ProfileController extends GetxController {
 
   // Function to pick an image
   Future<void> pickImage(ImageSource source) async {
+    if (source == ImageSource.camera) {
+      if (!(await Permission.camera.request().isGranted)) {
+        Get.snackbar('Error', 'Permission Denied');
+        return;
+      }
+    }
     final XFile? image = await _picker.pickImage(
       source: source,
     );

@@ -2,7 +2,7 @@ name: doc_booking_app
 description: "doctor's booking application"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # ios
-version: 1.0.2+3
+version: 1.0.2+4
 
 # android
 #version: 1.0.1+1

@@ -159,12 +159,6 @@ class AuthController extends GetxController {
         return;
       }
     }
-    if (source == ImageSource.gallery) {
-      if (!(await Permission.photos.request().isGranted)) {
-        Get.snackbar('Error', 'Permission Denied');
-        return;
-      }
-    }
     final XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
       selectedImageSignup.value = File(image.path);

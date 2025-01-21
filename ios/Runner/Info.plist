@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow Camera Access to upload your profile images</string>
+	<string>Allow Camera Access to upload your profile image</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>We need your location to get nearby Specialist</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -37,7 +37,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow Microphone Access to upload images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow Photo library to upload images</string>
+	<string>Allow Photo library to upload your profile image</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

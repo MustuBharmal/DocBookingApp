@@ -45,8 +45,8 @@ class HomeController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    selectedImagePath.value = AppImage.stethoscope;
     Future.delayed(Duration(seconds: 2), () {
-      selectedImagePath.value = AppImage.stethoscope;
       dashboardData();
       getServices();
       getSpecialist();
@@ -154,9 +154,7 @@ class HomeController extends GetxController {
       LoaderController.instance.showLoader();
       HomeController.instance.selectedIndex.value = 0;
       HomeController.instance.dashboardData();
-      Get.until(
-              (routes) => routes.settings.name == NavigationScreen.routeName);
-
+      Get.until((routes) => routes.settings.name == NavigationScreen.routeName);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
