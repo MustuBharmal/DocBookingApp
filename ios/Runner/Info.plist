@@ -34,6 +34,8 @@
 	<string>We need your location to get nearby Specialist</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to get nearby Specialist</string>
+	<key>NSAppleMusicUsageDescription</key>
+    <string>Play while you are hiking</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow Microphone Access to upload images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
