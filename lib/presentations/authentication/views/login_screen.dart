@@ -99,9 +99,11 @@ class LoginScreen extends GetView<AuthController> {
                       label: ConstantString.signIn,
                       onPressed: () {
                         if (!emailController.text.isEmail) {
+                          Get.snackbar('Error', 'Enter valid email.');
                           return;
                         }
                         if (passController.text.trim().length < 6) {
+                          Get.snackbar('Error', 'Password length should be at least 6 characters.');
                           return;
                         }
                         controller.email = emailController.text;

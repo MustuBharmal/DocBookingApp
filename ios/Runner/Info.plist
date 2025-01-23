@@ -26,6 +26,12 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAllowsArbitraryLoadsInWebContent</key>
+	<true/>
+	<key>NSAllowsLocalNetworking</key>
+	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Play while you are hiking</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Allow Camera Access to upload your profile image</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -34,8 +40,6 @@
 	<string>We need your location to get nearby Specialist</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to get nearby Specialist</string>
-	<key>NSAppleMusicUsageDescription</key>
-    <string>Play while you are hiking</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow Microphone Access to upload images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -48,6 +52,8 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIStatusBarHidden</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

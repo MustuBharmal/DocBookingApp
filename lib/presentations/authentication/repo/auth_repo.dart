@@ -149,13 +149,14 @@ abstract class AuthRepo {
     }
   }
 
-  // forget password
-  static Future<bool> resetPassword(String newPass, String confirmPass) async {
+  // reset password
+  static Future<User?> resetPassword(String newPass, String confirmPass, String fcmToken) async {
     try {
       final Map<String, dynamic> data = {
         _resetTokenKey: StorageUtil.getToken(),
         _newPassKey: newPass,
-        _confirmPassKey: confirmPass
+        _confirmPassKey: confirmPass,
+        _fcmTokenKey: fcmToken
       };
       LogUtil.debug(Api.resetPassword);
       final result = await HttpService.post(
@@ -165,8 +166,10 @@ abstract class AuthRepo {
       );
       if (result['isLive'] == true) {
         LogUtil.debug(result);
+        StorageUtil.writeToken(result['data']['access_token'].toString());
+        StorageUtil.writeUserId(result['data']['user']['id'].toString());
         Get.snackbar('Success', result['message'].toString());
-        return true;
+        return User.fromJson(result['data']['user'] as Map<String, dynamic>);
       } else if (result['isLive'] == false) {
         throw Exception("Error: ${result['message']}");
       } else {

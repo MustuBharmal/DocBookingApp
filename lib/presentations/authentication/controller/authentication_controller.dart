@@ -342,8 +342,9 @@ class AuthController extends GetxController {
 
   Future<void> resetPassword(String newPass, String confirmPass) async {
     try {
-      final isOtpSent = await AuthRepo.resetPassword(newPass, confirmPass);
-      if (isOtpSent) {
+      String? fcmToken = await getFcmToken();
+      if (fcmToken != null) {
+        user.value = await AuthRepo.resetPassword(newPass, confirmPass, fcmToken);
         Get.offAllNamed(NavigationScreen.routeName);
       }
     } on ServerException catch (e) {

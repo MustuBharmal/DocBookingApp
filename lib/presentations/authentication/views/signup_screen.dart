@@ -312,6 +312,14 @@ class SignupScreen extends GetView<AuthController> {
                       child: BlueButton(
                         label: ConstantString.save,
                         onPressed: () {
+                          if (!emailController.text.isEmail) {
+                            Get.snackbar('Error', 'Enter valid email.');
+                            return;
+                          }
+                          if (passController.text.trim().length < 6) {
+                            Get.snackbar('Error', 'Password length should be at least 6 characters.');
+                            return;
+                          }
                           controller.signUp(
                             name: fullNameController.text,
                             email: emailController.text,
