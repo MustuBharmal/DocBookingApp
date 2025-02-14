@@ -136,10 +136,10 @@ class HomeController extends GetxController {
 
   void markAsReadNotification() async {
     try {
-      HomeRepo.markAsReadNotificationApi(unreadNotificationIds);
-      getNotification();
+      await HomeRepo.markAsReadNotificationApi(unreadNotificationIds);
       Get.until(
               (routes) => routes.settings.name == NavigationScreen.routeName);
+      getNotification();
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {
