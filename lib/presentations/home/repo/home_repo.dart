@@ -48,8 +48,6 @@ abstract class HomeRepo {
           },
           token: true);
       if (result['isLive'] == true) {
-        // LogUtil.debug(result);
-        Get.back();
         Get.snackbar('Success', result['message'].toString());
         return true;
       } else {

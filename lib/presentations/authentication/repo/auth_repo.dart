@@ -247,6 +247,7 @@ abstract class AuthRepo {
 
   static Future<String?> uploadProfilePic(File picture, {bool showLoader = true}) async {
     try {
+      print(picture.path);
       final dio.FormData data = dio.FormData.fromMap({'files': await dio.MultipartFile.fromFile(picture.path)});
       final result = await HttpService.picPost(Api.imageUpload, data, showLoader: showLoader);
       if (result['isLive'] == true) {

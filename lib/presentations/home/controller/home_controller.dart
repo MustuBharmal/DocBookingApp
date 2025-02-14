@@ -138,6 +138,8 @@ class HomeController extends GetxController {
     try {
       HomeRepo.markAsReadNotificationApi(unreadNotificationIds);
       getNotification();
+      Get.until(
+              (routes) => routes.settings.name == NavigationScreen.routeName);
     } on ServerException catch (e) {
       Get.snackbar('Error', e.message);
     } on SocketException {

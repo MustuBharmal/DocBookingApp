@@ -109,7 +109,7 @@ class HttpService extends HttpOverrides {
     Map<String, dynamic> result = {};
     try {
       if (showLoader) LoaderController.instance.showLoader();
-      LogUtil.debug(data.files);
+      LogUtil.debug(data);
       final dio.Response response = await _dio.post(
         path,
         data: data,

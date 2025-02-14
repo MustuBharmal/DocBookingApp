@@ -72,10 +72,9 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                                         File(controller.imageUrl.value),
                                         fit: BoxFit.contain,
                                       ),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(
-                                        Icons.error,
-                                        color: Colors.red,
+                                      errorWidget: (context, url, error) => Image.asset(
+                                        AppImage.companyLogo,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   )
@@ -303,12 +302,10 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                       child: BlueButton(
                         label: 'Save',
                         onPressed: () async {
-                          if (!controller.userEditProfileValidation()) {
-                            return;
-                          }
                           LoaderController.instance.showLoader();
                           String? profilePic = '';
                           if (controller.selectedImage.value?.path != null) {
+                            LogUtil.debug(controller.selectedImage.value!);
                             profilePic = await AuthRepo.uploadProfilePic(
                                 controller.selectedImage.value!,
                                 showLoader: false);
@@ -316,6 +313,13 @@ class UserInfoEditScreen extends GetView<ProfileController> {
                               Get.snackbar('Error', 'Image Upload failed!');
                               return;
                             }
+                          }
+                          else{
+                            profilePic = controller.imageUrl.value;
+                          }
+                          controller.imageUrl.value = profilePic;
+                          if (!controller.userEditProfileValidation()) {
+                            return;
                           }
                           var params = {
                             'name': controller.nameController.text,
